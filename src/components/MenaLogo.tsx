@@ -1,5 +1,5 @@
 import React from 'react';
-import menaLogoSrc from '../assets/images/mena-logo.png';
+import menaLogoSrc from '../assets/images/Mena-logo.png';
 
 interface MenaLogoProps {
   className?: string;

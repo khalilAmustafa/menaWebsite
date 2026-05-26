@@ -1,0 +1,6 @@
+{
+  "name": "MENA Space Organization",
+  "description": "A futuristic, cinematic website for MENA ORG — a Jordan-based women-led space-tech and STEM organization focused on analog Mars missions in Wadi Rum.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

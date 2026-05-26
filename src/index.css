@@ -1,0 +1,261 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+}
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  /* Custom Orbiting/Glowing colors based on official MENA Brand Colors */
+  --color-mars-red: #C1442E;      /* Terracotta Red */
+  --color-mars-orange: #00A9A5;   /* Cyber Teal / Accent */
+  --color-brand-teal: #00A9A5;    /* Cyber Teal */
+  --color-brand-red: #C1442E;     /* Terracotta Red */
+  --color-sand: #D8C3A5;          /* Sandy Beige */
+  --color-brand-beige: #D8C3A5;   /* Sandy Beige */
+  --color-space-dark: #111111;    /* Deep Space Black */
+  --color-space-glow: #00A9A5;    /* Cyber Teal */
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #111111;
+}
+::-webkit-scrollbar-thumb {
+  background: #1f2937;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #00A9A5;
+}
+
+/* Glassmorphism custom styles */
+.glass-panel {
+  background: rgba(17, 24, 39, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-panel-glow {
+  background: rgba(17, 24, 39, 0.75);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(249, 115, 22, 0.2);
+  box-shadow: 0 0 20px rgba(249, 115, 22, 0.05);
+}
+
+/* Scanning effect */
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+.animate-scanline {
+  animation: scanline 8s linear infinite;
+}
+
+/* Infinite Sliding Marquee */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 35s linear infinite;
+}
+
+/* Light Mode overrides to seamlessly transform the experience */
+.light-mode {
+  color-scheme: light;
+  background-color: #f8fafc !important;
+  color: #1e293b !important;
+}
+
+/* Override sections, main, body in light mode */
+body.light-mode,
+div.light-mode {
+  background-color: #f8fafc !important;
+}
+
+.light-mode ::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+.light-mode ::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+}
+.light-mode ::-webkit-scrollbar-thumb:hover {
+  background: #00A9A5;
+}
+
+/* 1. FORCE THE LIGHT MODE BACKGROUND AND REMOVE HARDCODED GRADIENTS */
+.light-mode .from-\[\#111111\],
+.light-mode .via-\[\#111111\]\/90,
+.light-mode .to-\[\#111111\],
+.light-mode .from-transparent,
+.light-mode .to-transparent,
+.light-mode .bg-neutral-950,
+.light-mode .bg-neutral-900,
+.light-mode .bg-neutral-905,
+.light-mode footer.relative,
+.light-mode section.relative,
+.light-mode #telemetry-dashboard {
+  background-color: #ffffff !important;
+  background-image: none !important;
+}
+
+/* Selectively transform Hero section gradient overlay to white slate instead of black */
+.light-mode .from-neutral-950\/90,
+.light-mode .from-neutral-950\/95,
+.light-mode .to-neutral-950\/95,
+.light-mode .via-neutral-950\/45 {
+  --tw-gradient-from: rgba(248, 250, 252, 0.95) !important;
+  --tw-gradient-to: rgba(248, 250, 252, 0) !important;
+  --tw-gradient-stops: rgba(248, 250, 252, 0.95), rgba(248, 250, 252, 0.45), rgba(248, 250, 252, 0) !important;
+}
+
+.light-mode .bg-gradient-to-r,
+.light-mode .bg-gradient-to-t,
+.light-mode .bg-gradient-to-b {
+  background-image: none !important;
+}
+
+/* Ensure outer grid lines and borders are light gray */
+.light-mode .grid {
+  background-color: #f1f5f9 !important;
+}
+
+/* 2. BACKGROUND FOR SPECIFIC INTERACTIVE AND STATIC PANELS */
+.light-mode .bg-\[\#111111\]\/60,
+.light-mode .bg-neutral-900\/20,
+.light-mode .bg-neutral-900\/30,
+.light-mode .bg-neutral-900\/40,
+.light-mode .bg-neutral-900\/60,
+.light-mode .bg-neutral-900\/50,
+.light-mode .bg-neutral-950\/50,
+.light-mode .bg-neutral-900\/80,
+.light-mode .bg-neutral-950\/80,
+.light-mode .bg-\[\#151515\],
+.light-mode .bg-\[\#151515\]\/80,
+.light-mode .bg-\[\#1a1a1a\]\/40 {
+  background-color: #ffffff !important;
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.04), 0 2px 8px -1px rgba(0, 0, 0, 0.02) !important;
+}
+
+/* Ensure inner track background is clean light color */
+.light-mode .bg-\[\#111111\] {
+  background-color: #f1f5f9 !important;
+}
+
+/* 3. TEXT CONTRAST IMPROVEMENTS */
+.light-mode .text-white,
+.light-mode .text-neutral-100,
+.light-mode .text-neutral-200,
+.light-mode .text-neutral-300,
+.light-mode .text-slate-100,
+.light-mode .text-slate-200,
+.light-mode .text-slate-300 {
+  color: #0f172a !important;
+}
+
+.light-mode .text-neutral-400,
+.light-mode .text-slate-400,
+.light-mode .text-zinc-400 {
+  color: #334155 !important;
+}
+
+.light-mode .text-neutral-500,
+.light-mode .text-slate-500,
+.light-mode .text-zinc-500 {
+  color: #64748b !important;
+}
+
+.light-mode .text-neutral-600,
+.light-mode .text-slate-600 {
+  color: #475569 !important;
+}
+
+/* Cyber highlighted colors */
+.light-mode .text-brand-teal,
+.light-mode .text-\[\#00A9A5\] {
+  color: #00807d !important;
+}
+
+/* 4. SOLID LIGHT MODE BORDERS */
+.light-mode .border-neutral-900,
+.light-mode .border-neutral-850,
+.light-mode .border-neutral-800,
+.light-mode .border-neutral-900\/60,
+.light-mode .border-neutral-900\/40,
+.light-mode .border-neutral-900\/30,
+.light-mode .border-white\/\[0\.06\],
+.light-mode .border-neutral-800\/80 {
+  border-color: #e2e8f0 !important;
+}
+
+/* Hover effects */
+.light-mode .hover\:border-neutral-800\/80:hover,
+.light-mode .hover\:border-brand-teal\/40:hover {
+  border-color: #00a9a5 !important;
+}
+
+/* Interactive elements, input text, and dropdown fields */
+.light-mode input,
+.light-mode textarea,
+.light-mode select {
+  background-color: #ffffff !important;
+  border-color: #cbd5e1 !important;
+  color: #0f172a !important;
+}
+
+.light-mode input::placeholder,
+.light-mode textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+/* Interactive dashboard custom styles */
+.light-mode .bg-black {
+  background-color: #f8fafc !important;
+}
+
+.light-mode .bg-white\/5 {
+  background-color: rgba(0, 169, 165, 0.05) !important;
+}
+
+.light-mode .hover\:bg-neutral-900\/60:hover {
+  background-color: #f1f5f9 !important;
+}
+
+.light-mode .bg-neutral-900\/40 {
+  background-color: #f8fafc !important;
+  border-color: #e2e8f0 !important;
+}
+
+/* Ensure glass panels match the theme cleanly */
+.light-mode .glass-panel {
+  background: rgba(255, 255, 255, 0.8) !important;
+  border-color: rgba(0, 0, 0, 0.05) !important;
+  color: #0f172a !important;
+}
+
+.light-mode .glass-panel-glow {
+  background: rgba(255, 255, 255, 0.85) !important;
+  border-color: rgba(0, 169, 165, 0.2) !important;
+  box-shadow: 0 4px 20px rgba(0, 169, 165, 0.03) !important;
+}
+
+.light-mode .bg-brand-teal\/10 {
+  background-color: rgba(0, 169, 165, 0.08) !important;
+}
+
+.light-mode .bg-brand-teal\/5 {
+  background-color: rgba(0, 169, 165, 0.04) !important;
+}
+

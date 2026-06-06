@@ -16,6 +16,7 @@ import Advisory from './components/Advisory';
 import Partners from './components/Partners';
 import Donation from './components/Donation';
 import Contact from './components/Contact';
+import Chatbot from './components/Chatbot';
 
 export default function App() {
   const [isArabic, setIsArabic] = useState<boolean>(false);
@@ -302,7 +303,7 @@ export default function App() {
         </div>
 
       </footer>
-
+      <Chatbot isArabic={isArabic} />
     </div>
   );
 }

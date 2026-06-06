@@ -1,0 +1,25 @@
+node_modules/
+.next/
+dist/
+env.local
+*.log
+# Virtual environments
+venv/
+mena_env/
+
+# Environment variables
+.env
+
+# Python
+__pycache__/
+*.pyc
+
+# VS Code
+.vscode/
+
+# ChromaDB (if you created it)
+vectorstore/
+
+# OS files
+.DS_Store
+Thumbs.db

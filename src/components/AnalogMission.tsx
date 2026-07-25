@@ -33,8 +33,8 @@ export default function AnalogMission({ isArabic }: AnalogMissionProps) {
 
 
       {/* Visual accents in Brand Colors */}
-      <div className="absolute top-1/3 right-10 w-96 h-96 rounded-full bg-[#C1442E]/[0.04] blur-3xl pointer-events-none" />
-      <div className="absolute bottom-10 left-10 w-80 h-80 rounded-full bg-[#00A9A5]/[0.03] blur-3xl pointer-events-none" />
+      <div className="absolute top-1/3 right-10 w-96 h-96 rounded-full bg-brand-red/[0.04] blur-3xl pointer-events-none" />
+      <div className="absolute bottom-10 left-10 w-80 h-80 rounded-full bg-brand-teal/[0.03] blur-3xl pointer-events-none" />
 
       <div className="w-[90%] mx-auto relative z-10">
         
@@ -255,7 +255,7 @@ export default function AnalogMission({ isArabic }: AnalogMissionProps) {
                     <div className="mt-4 pt-4 border-t border-neutral-900/60">
                       <button
                         onClick={() => togglePhaseExpand(phase.id)}
-                        className="text-[10px] font-mono tracking-widest text-brand-teal hover:text-[#00c7c2] flex items-center cursor-pointer"
+                        className="text-[10px] font-mono tracking-widest text-brand-teal hover:text-brand-teal-bright flex items-center cursor-pointer"
                       >
                         {isOpen ? "[-] COLLAPSE MISSION SCOPE" : "[+] EXPAND MISSION SCOPE"}
                       </button>

@@ -70,8 +70,8 @@ export default function Programs({ isArabic }: ProgramsProps) {
     <section id="programs" className="relative bg-transparent py-12 sm:py-16">
       
       {/* Decorative starry layout highlights */}
-      <div className="absolute top-0 right-1/4 w-96 h-96 rounded-full bg-[#C1442E]/5 blur-3xl animate-pulse" />
-      <div className="absolute bottom-1/4 left-1/4 w-96 h-96 rounded-full bg-[#00A9A5]/5 blur-3xl" />
+      <div className="absolute top-0 right-1/4 w-96 h-96 rounded-full bg-brand-red/5 blur-3xl animate-pulse" />
+      <div className="absolute bottom-1/4 left-1/4 w-96 h-96 rounded-full bg-brand-teal/5 blur-3xl" />
 
       <div className="w-[90%] mx-auto relative z-10">
         
@@ -183,7 +183,7 @@ export default function Programs({ isArabic }: ProgramsProps) {
               initial={{ scale: 0.95, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 20 }}
-              className="glass-panel-glow border border-brand-teal/20 max-w-lg w-full rounded-2xl overflow-hidden relative z-10 p-6 sm:p-8 shadow-2xl bg-[#0d0d0d]"
+              className="glass-panel-glow border border-brand-teal/20 max-w-lg w-full rounded-2xl overflow-hidden relative z-10 p-6 sm:p-8 shadow-2xl bg-space-deep"
             >
               
               <button
@@ -261,7 +261,7 @@ export default function Programs({ isArabic }: ProgramsProps) {
               <div className="mt-8 pt-4 border-t border-neutral-900/60">
                 <button
                   onClick={() => setSelectedProgId(null)}
-                  className="w-full py-3 rounded bg-brand-teal hover:bg-[#00b5b1] text-white font-display font-medium text-xs tracking-widest uppercase cursor-pointer text-center block font-bold transition-colors"
+                  className="w-full py-3 rounded bg-brand-teal hover:bg-brand-teal-hover text-white font-display font-medium text-xs tracking-widest uppercase cursor-pointer text-center block font-bold transition-colors"
                 >
                   {isArabic ? "إغلاق التفاصيل" : "CLOSE INFORMATION DETAIL"}
                 </button>

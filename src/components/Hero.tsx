@@ -44,7 +44,7 @@ export default function Hero({ isArabic }: HeroProps) {
         }`} />
         
         {/* Bottom fade — goes to transparent so the shared starfield page background bleeds through seamlessly */}
-        <div className="absolute inset-x-0 bottom-0 h-72 bg-gradient-to-t from-[#111111] via-[#111111]/60 to-transparent z-10" />
+        <div className="absolute inset-x-0 bottom-0 h-72 bg-gradient-to-t from-space-dark via-space-dark/60 to-transparent z-10" />
       </div>
 
       {/* Main Container - Left-aligned content structure */}
@@ -113,7 +113,7 @@ export default function Hero({ isArabic }: HeroProps) {
           >
             <button
               onClick={() => handleScrollTo('mission')}
-              className="w-full sm:w-auto px-8 py-3.5 bg-brand-teal hover:bg-[#009390] text-white font-display font-bold text-xs tracking-widest uppercase rounded shadow-lg shadow-brand-teal/20 border-t border-white/10 transition-all cursor-pointer text-center"
+              className="w-full sm:w-auto px-8 py-3.5 bg-brand-teal hover:bg-brand-teal-hover text-white font-display font-bold text-xs tracking-widest uppercase rounded shadow-lg shadow-brand-teal/20 border-t border-white/10 transition-all cursor-pointer text-center"
             >
               {isArabic ? "استكشف مهام رم" : "Launch Mission Map"}
             </button>

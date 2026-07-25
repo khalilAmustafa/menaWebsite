@@ -12,7 +12,7 @@ export default function Advisory({ isArabic }: AdvisoryProps) {
     <section id="advisors" className="relative bg-transparent py-12 sm:py-16">
       
       {/* Background ambient red glow */}
-      <div className="absolute top-1/4 right-1/4 w-80 h-80 rounded-full bg-[#C1442E]/[0.03] blur-3xl pointer-events-none" />
+      <div className="absolute top-1/4 right-1/4 w-80 h-80 rounded-full bg-brand-red/[0.03] blur-3xl pointer-events-none" />
 
       <div className="w-[90%] mx-auto relative z-10">
         
@@ -82,7 +82,7 @@ export default function Advisory({ isArabic }: AdvisoryProps) {
               </div>
 
               {/* Specialization Pill footer */}
-              <div className="mt-5 pt-3.5 border-t border-neutral-900/60 flex items-center gap-1.5 font-mono text-[9px] text-[#D8C3A5] tracking-wider uppercase">
+              <div className="mt-5 pt-3.5 border-t border-neutral-900/60 flex items-center gap-1.5 font-mono text-[9px] text-brand-beige tracking-wider uppercase">
                 <GraduationCap className="w-3.5 h-3.5 text-neutral-500 flex-shrink-0" />
                 <span>{isArabic ? "البحث العلمي والأنالوج" : advisor.specialty}</span>
               </div>

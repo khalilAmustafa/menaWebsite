@@ -147,7 +147,7 @@ export default function Starfield() {
       const isLight = document.body.classList.contains('light-mode');
 
       if (mouse.x > -500) {
-        ctx.strokeStyle = isLight ? 'rgba(0, 169, 165, 0.15)' : 'rgba(0, 169, 165, 0.08)';
+        ctx.strokeStyle = isLight ? 'rgba(203, 173, 142, 0.15)' : 'rgba(203, 173, 142, 0.08)';
         ctx.lineWidth = 0.6;
         for (let i = 0; i < projectedStars.length; i++) {
           const p1 = projectedStars[i];
@@ -178,13 +178,13 @@ export default function Starfield() {
         ctx.beginPath();
         ctx.arc(p.drawX, p.drawY, p.radius, 0, Math.PI * 2);
         ctx.fillStyle = isLight 
-          ? `rgba(17, 24, 39, ${Math.min(0.75, p.alpha * 0.55)})`
+          ? `rgba(58, 44, 38, ${Math.min(0.75, p.alpha * 0.55)})`
           : `rgba(255, 255, 255, ${Math.min(0.95, p.alpha * 0.65)})`;
         
         // Brand teal cosmic atmosphere glow for active larger stars
         if (p.radius > 1.1) {
           ctx.shadowBlur = p.radius * 3.5;
-          ctx.shadowColor = isLight ? 'rgba(0, 169, 165, 0.25)' : 'rgba(0, 169, 165, 0.45)';
+          ctx.shadowColor = isLight ? 'rgba(203, 173, 142, 0.25)' : 'rgba(203, 173, 142, 0.45)';
         }
         
         ctx.fill();

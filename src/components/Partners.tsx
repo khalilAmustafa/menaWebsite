@@ -47,7 +47,7 @@ const PARTNERS: PartnerItem[] = [
     subtitle: "CPF Tech Initiative Liaison",
     arabicSubtitle: "مبادرة التقنية والتطوير",
     icon: Crown,
-    colorClass: "text-[#D8C3A5] group-hover:text-brand-red"
+    colorClass: "text-brand-beige group-hover:text-brand-red"
   },
   {
     id: "part-rum",
@@ -56,7 +56,7 @@ const PARTNERS: PartnerItem[] = [
     subtitle: "ASEZA Natural Fields",
     arabicSubtitle: "ميدان المحاكاة الطبيعي",
     icon: Compass,
-    colorClass: "text-brand-red group-hover:text-[#D8C3A5]"
+    colorClass: "text-brand-red group-hover:text-brand-beige"
   },
   {
     id: "part-ess",
@@ -65,7 +65,7 @@ const PARTNERS: PartnerItem[] = [
     subtitle: "Composite Carbon Materials R&D",
     arabicSubtitle: "أبحاث المواد وألياف الكربون",
     icon: Atom,
-    colorClass: "text-[#00A9A5] group-hover:text-brand-red"
+    colorClass: "text-brand-teal group-hover:text-brand-red"
   },
   {
     id: "part-iaas",
@@ -83,7 +83,7 @@ const PARTNERS: PartnerItem[] = [
     subtitle: "PSUT Applied Space Robotics",
     arabicSubtitle: "هندسة الروبوتات والبرمجيات",
     icon: Cpu,
-    colorClass: "text-[#C1442E] group-hover:text-brand-teal"
+    colorClass: "text-brand-red group-hover:text-brand-teal"
   },
   {
     id: "part-nasa",
@@ -129,7 +129,7 @@ export default function Partners({ isArabic }: PartnersProps) {
       </div>
 
       {/* Infinite slider marquee window */}
-      <div className="relative w-full overflow-hidden select-none py-4 before:absolute before:left-0 before:top-0 before:bottom-0 before:w-1/6 before:bg-gradient-to-r before:from-[#111111]/90 before:to-transparent before:z-10 after:absolute after:right-0 after:top-0 after:bottom-0 after:w-1/6 after:bg-gradient-to-l after:from-[#111111]/90 after:to-transparent after:z-10">
+      <div className="relative w-full overflow-hidden select-none py-4 before:absolute before:left-0 before:top-0 before:bottom-0 before:w-1/6 before:bg-gradient-to-r before:from-space-dark/90 before:to-transparent before:z-10 after:absolute after:right-0 after:top-0 after:bottom-0 after:w-1/6 after:bg-gradient-to-l after:from-space-dark/90 after:to-transparent after:z-10">
         
         {/* Dynamic sliding track containing two perfectly identical blocks */}
         <div className="flex w-max animate-marquee hover:[animation-play-state:paused]">

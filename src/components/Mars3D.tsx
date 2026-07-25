@@ -151,7 +151,7 @@ export default function Mars3D({ isArabic }: { isArabic: boolean }) {
       ctx.clearRect(0, 0, width, height);
 
       // 1. Draw outermost orbital radar ring
-      ctx.strokeStyle = 'rgba(0, 169, 165, 0.1)';
+      ctx.strokeStyle = 'rgba(203, 173, 142, 0.1)';
       ctx.lineWidth = 1;
       ctx.beginPath();
       ctx.arc(centerX, centerY, radius * 1.25, 0, Math.PI * 2);
@@ -170,19 +170,19 @@ export default function Mars3D({ isArabic }: { isArabic: boolean }) {
       const satY = centerY + Math.sin(satAngle) * radius * 1.25 * 0.45; // compressed for 3D tilt look
       
       // Draw satellite path
-      ctx.strokeStyle = 'rgba(0, 169, 165, 0.05)';
+      ctx.strokeStyle = 'rgba(203, 173, 142, 0.05)';
       ctx.beginPath();
       ctx.ellipse(centerX, centerY, radius * 1.25, radius * 0.5, -Math.PI / 8, 0, Math.PI * 2);
       ctx.stroke();
 
       // Satellite blinking blink signal node
-      ctx.fillStyle = '#00A9A5';
+      ctx.fillStyle = '#cbad8e';
       ctx.beginPath();
       ctx.arc(satX, satY, 4, 0, Math.PI * 2);
       ctx.fill();
 
       // satellite signal ping aura ring
-      ctx.strokeStyle = `rgba(0, 169, 165, ${Math.abs(Math.sin(elapsed * 4)) * 0.4})`;
+      ctx.strokeStyle = `rgba(203, 173, 142, ${Math.abs(Math.sin(elapsed * 4)) * 0.4})`;
       ctx.beginPath();
       ctx.arc(satX, satY, 10 + Math.sin(elapsed * 5) * 4, 0, Math.PI * 2);
       ctx.stroke();
@@ -190,8 +190,8 @@ export default function Mars3D({ isArabic }: { isArabic: boolean }) {
       // 2. Beautiful background glow representing atmosphere / corona
       const atmosphereGlow = ctx.createRadialGradient(centerX, centerY, radius * 0.95, centerX, centerY, radius * 1.15);
       atmosphereGlow.addColorStop(0, 'rgba(193, 68, 46, 0.25)'); // deep rust orange corona
-      atmosphereGlow.addColorStop(0.35, 'rgba(0, 169, 165, 0.12)'); // beautiful sci-fi teal atmospheric transition
-      atmosphereGlow.addColorStop(0.85, 'rgba(0, 169, 165, 0.01)');
+      atmosphereGlow.addColorStop(0.35, 'rgba(203, 173, 142, 0.12)'); // beautiful sci-fi teal atmospheric transition
+      atmosphereGlow.addColorStop(0.85, 'rgba(203, 173, 142, 0.01)');
       atmosphereGlow.addColorStop(1, 'rgba(0,0,0,0)');
       ctx.fillStyle = atmosphereGlow;
       ctx.beginPath();
@@ -219,7 +219,7 @@ export default function Mars3D({ isArabic }: { isArabic: boolean }) {
       ctx.fill();
 
       // Draw planet outline border limit
-      ctx.strokeStyle = 'rgba(216, 195, 165, 0.12)';
+      ctx.strokeStyle = 'rgba(209, 199, 188, 0.12)';
       ctx.lineWidth = 1.5;
       ctx.stroke();
 
@@ -276,7 +276,7 @@ export default function Mars3D({ isArabic }: { isArabic: boolean }) {
             first = true; // reset line segment to skip backside coordinates
           }
         }
-        ctx.strokeStyle = 'rgba(216, 195, 165, 0.045)';
+        ctx.strokeStyle = 'rgba(209, 199, 188, 0.045)';
         ctx.stroke();
       }
 
@@ -306,7 +306,7 @@ export default function Mars3D({ isArabic }: { isArabic: boolean }) {
             first = true;
           }
         }
-        ctx.strokeStyle = 'rgba(216, 195, 165, 0.045)';
+        ctx.strokeStyle = 'rgba(209, 199, 188, 0.045)';
         ctx.stroke();
       }
 
@@ -345,26 +345,26 @@ export default function Mars3D({ isArabic }: { isArabic: boolean }) {
 
       if (targetPt.z > 0.1) {
         // Red beacon light
-        ctx.fillStyle = '#00A9A5';
+        ctx.fillStyle = '#cbad8e';
         ctx.beginPath();
         ctx.arc(targetPt.x, targetPt.y, 3, 0, Math.PI * 2);
         ctx.fill();
 
         // Radiating pulse ring
         const targetPulse = (Date.now() % 1500) / 1500;
-        ctx.strokeStyle = `rgba(0, 169, 165, ${1 - targetPulse})`;
+        ctx.strokeStyle = `rgba(203, 173, 142, ${1 - targetPulse})`;
         ctx.lineWidth = 1;
         ctx.beginPath();
         ctx.arc(targetPt.x, targetPt.y, 4 + targetPulse * 24, 0, Math.PI * 2);
         ctx.stroke();
 
         // Scientific box labels
-        ctx.strokeStyle = 'rgba(0, 169, 165, 0.45)';
+        ctx.strokeStyle = 'rgba(203, 173, 142, 0.45)';
         ctx.lineWidth = 0.75;
         ctx.strokeRect(targetPt.x - 8, targetPt.y - 8, 16, 16);
 
         // Grid coordinate microtext
-        ctx.fillStyle = '#00A9A5';
+        ctx.fillStyle = '#cbad8e';
         ctx.font = '7px monospace';
         ctx.fillText("WADI RUM SITE", targetPt.x + 12, targetPt.y - 3);
         ctx.fillText("ANALOG ZONE", targetPt.x + 12, targetPt.y + 5);
@@ -450,14 +450,14 @@ export default function Mars3D({ isArabic }: { isArabic: boolean }) {
       <div className="absolute bottom-2 right-2 z-20 bg-neutral-950/85 border border-neutral-900/60 p-2.5 rounded backdrop-blur-sm pointer-events-auto flex gap-1.5">
         <button 
           onClick={() => setZoomFactor(prev => Math.min(1.3, prev + 0.1))}
-          className="p-1 hover:bg-neutral-900 border border-neutral-800 text-[#D8C3A5] rounded text-[9px] font-bold font-mono transition-colors cursor-pointer"
+          className="p-1 hover:bg-neutral-900 border border-neutral-800 text-brand-beige rounded text-[9px] font-bold font-mono transition-colors cursor-pointer"
           title="Zoom In Mars Orbiter Map"
         >
           [+]
         </button>
         <button 
           onClick={() => setZoomFactor(prev => Math.max(0.7, prev - 0.1))}
-          className="p-1 hover:bg-neutral-900 border border-neutral-800 text-[#D8C3A5] rounded text-[9px] font-bold font-mono transition-colors cursor-pointer"
+          className="p-1 hover:bg-neutral-900 border border-neutral-800 text-brand-beige rounded text-[9px] font-bold font-mono transition-colors cursor-pointer"
           title="Zoom Out Mars Orbiter Map"
         >
           [-]

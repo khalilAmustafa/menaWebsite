@@ -229,7 +229,7 @@ export default function Contact({ isArabic }: ContactProps) {
               <div className="pt-4">
                 <button
                   type="submit"
-                  className="w-full bg-brand-teal hover:bg-[#009390] text-white py-3.5 rounded font-display font-semibold text-xs font-bold tracking-widest uppercase flex items-center justify-center gap-1.5 cursor-pointer shadow-lg shadow-brand-teal/10 active:scale-[0.99] transition-all"
+                  className="w-full bg-brand-teal hover:bg-brand-teal-hover text-white py-3.5 rounded font-display font-semibold text-xs font-bold tracking-widest uppercase flex items-center justify-center gap-1.5 cursor-pointer shadow-lg shadow-brand-teal/10 active:scale-[0.99] transition-all"
                 >
                   <Send className="w-3.5 h-3.5" />
                   {isArabic ? "طرح وإرسال تفاصيل التوثيق" : "SUBMIT TELEMETRY REGISTRY"}
@@ -245,7 +245,7 @@ export default function Contact({ isArabic }: ContactProps) {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  className="absolute inset-0 bg-[#111111] flex flex-col items-center justify-center text-center p-8 rounded-2xl relative z-10"
+                  className="absolute inset-0 bg-space-dark flex flex-col items-center justify-center text-center p-8 rounded-2xl relative z-10"
                 >
                   <motion.div 
                     initial={{ scale: 0.8 }}

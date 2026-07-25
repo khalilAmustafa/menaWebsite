@@ -179,7 +179,7 @@ export default function MissionGallery({ isArabic }: MissionGalleryProps) {
       
       {/* Planetary Atmosphere Glow Backdrops */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-brand-teal/[0.02] blur-3xl pointer-events-none" />
-      <div className="absolute bottom-1/4 left-10 w-96 h-96 rounded-full bg-[#C1442E]/[0.015] blur-3xl pointer-events-none" />
+      <div className="absolute bottom-1/4 left-10 w-96 h-96 rounded-full bg-brand-red/[0.015] blur-3xl pointer-events-none" />
 
       <div className="w-[90%] mx-auto relative z-10">
         
@@ -269,7 +269,7 @@ export default function MissionGallery({ isArabic }: MissionGalleryProps) {
                     exit={{ opacity: 0, scale: 0.95 }}
                     transition={{ duration: 0.4 }}
                     onClick={() => setActiveItemIndex(globalIndex)}
-                    className="group relative bg-[#151515] border border-neutral-900 hover:border-neutral-800/80 rounded-xl overflow-hidden cursor-pointer shadow-md transition-all duration-300 transform hover:-translate-y-1 h-full"
+                    className="group relative bg-space-raised border border-neutral-900 hover:border-neutral-800/80 rounded-xl overflow-hidden cursor-pointer shadow-md transition-all duration-300 transform hover:-translate-y-1 h-full"
                   >
                     {/* Aspect Ratio Box Wrapper */}
                     <div className="relative aspect-md overflow-hidden">
@@ -286,7 +286,7 @@ export default function MissionGallery({ isArabic }: MissionGalleryProps) {
                       {/* Top right quick-tags */}
                       <div className="absolute top-3 right-3 flex items-center space-x-1.5 bg-neutral-950/75 border border-neutral-800 backdrop-blur-md px-2 py-1 rounded">
                         <span className="w-1.5 h-1.5 rounded-full bg-brand-teal animate-pulse" />
-                        <span className="font-mono text-[8px] tracking-widest text-[#00A9A5]">{item.mission}</span>
+                        <span className="font-mono text-[8px] tracking-widest text-brand-teal">{item.mission}</span>
                       </div>
 
                       {/* Left Center Hover Scale Icon Overlay */}
@@ -318,7 +318,7 @@ export default function MissionGallery({ isArabic }: MissionGalleryProps) {
                       </p>
 
                       <div className="flex items-center gap-1 font-mono text-[9px] text-neutral-500 pt-1.5 border-t border-neutral-900">
-                        <MapPin className="h-2.5 w-2.5 text-[#C1442E]" />
+                        <MapPin className="h-2.5 w-2.5 text-brand-red" />
                         <span className="truncate">{isArabic ? item.locationAR : item.locationEN}</span>
                       </div>
                     </div>
@@ -350,7 +350,7 @@ export default function MissionGallery({ isArabic }: MissionGalleryProps) {
             className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-md p-4 sm:p-6 md:p-10 select-none overflow-y-auto"
           >
             {/* Dark Starry background subtle details inside overlay */}
-            <div className="absolute inset-0 opacity-20 bg-[radial-gradient(ellipse_at_center,rgba(0,169,165,0.08),transparent_80%)] pointer-events-none" />
+            <div className="absolute inset-0 opacity-20 bg-[radial-gradient(ellipse_at_center,rgba(203,173,142,0.08),transparent_80%)] pointer-events-none" />
 
             {/* Header Telemetry Line across the top */}
             <div className="absolute top-4 inset-x-0 px-6 sm:px-10 flex items-center justify-between text-neutral-500 font-mono text-[10px] border-b border-neutral-900/30 pb-4">

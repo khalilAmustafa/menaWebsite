@@ -203,7 +203,7 @@ Assistant:`;
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 50, scale: 0.9 }}
             transition={{ duration: 0.3 }}
-            className="w-[360px] sm:w-[400px] h-[550px] bg-neutral-950/95 border border-brand-teal/20 rounded-2xl shadow-[0_12px_40px_rgba(0,0,0,0.8),0_0_20px_rgba(0,169,165,0.1)] flex flex-col overflow-hidden backdrop-blur-lg mb-4 text-left rtl:text-right"
+            className="w-[360px] sm:w-[400px] h-[550px] bg-neutral-950/95 border border-brand-teal/20 rounded-2xl shadow-[0_12px_40px_rgba(0,0,0,0.8),0_0_20px_rgba(203,173,142,0.1)] flex flex-col overflow-hidden backdrop-blur-lg mb-4 text-left rtl:text-right"
           >
             {/* Header */}
             <div className="bg-neutral-900 border-b border-brand-teal/10 px-4 py-3 flex items-center justify-between">
@@ -342,7 +342,7 @@ Assistant:`;
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         onClick={() => setIsOpen(!isOpen)}
-        className="w-14 h-14 bg-gradient-to-tr from-brand-teal to-teal-400 text-black rounded-full shadow-[0_4px_20px_rgba(0,169,165,0.4)] flex items-center justify-center cursor-pointer border border-teal-300/20 relative group"
+        className="w-14 h-14 bg-gradient-to-tr from-brand-teal to-brand-teal-hover text-black rounded-full shadow-[0_4px_20px_rgba(203,173,142,0.4)] flex items-center justify-center cursor-pointer border border-brand-teal/20 relative group"
         aria-label="Toggle Chatbot"
       >
         <AnimatePresence mode="wait">

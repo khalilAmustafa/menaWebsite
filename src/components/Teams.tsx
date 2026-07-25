@@ -178,7 +178,7 @@ export default function Teams({ isArabic }: TeamsProps) {
                   onClick={() => setActiveDeptId(dept.id)}
                   className={`w-full text-left p-4 sm:p-5 rounded-xl border transition-all duration-300 cursor-pointer ${
                     isActive 
-                    ? 'bg-[#1a1a1a] border-brand-teal/50 shadow-xl' 
+                    ? 'bg-space-raised border-brand-teal/50 shadow-xl' 
                     : 'bg-neutral-950/40 border-neutral-900/60 text-neutral-400 hover:text-neutral-200 hover:border-neutral-800'
                   }`}
                 >
@@ -354,7 +354,7 @@ export default function Teams({ isArabic }: TeamsProps) {
             <div className="w-full border-t border-neutral-900/40" />
           </div>
           <div className="relative flex justify-center">
-            <span className="bg-[#111111] px-4 font-mono text-[9px] text-neutral-600 tracking-widest uppercase">
+            <span className="bg-space-dark px-4 font-mono text-[9px] text-neutral-600 tracking-widest uppercase">
               {isArabic ? "الهيئة القيادية والتنفيذية للبعثة // SECURED ARCHIVE DATA" : "CORE EXPEDITION STAFF // SECURED ARCHIVE DATA"}
             </span>
           </div>
@@ -382,7 +382,7 @@ export default function Teams({ isArabic }: TeamsProps) {
             <div
               key={member.id}
               id={member.id}
-              className="group relative bg-[#151515]/80 border border-neutral-900 hover:border-brand-teal/40 rounded-2xl p-6 transition-all duration-300 flex flex-col justify-between hover:shadow-xl hover:shadow-brand-teal/[0.02]"
+              className="group relative bg-space-raised/80 border border-neutral-900 hover:border-brand-teal/40 rounded-2xl p-6 transition-all duration-300 flex flex-col justify-between hover:shadow-xl hover:shadow-brand-teal/[0.02]"
             >
               <div className="space-y-5">
                 
@@ -416,7 +416,7 @@ export default function Teams({ isArabic }: TeamsProps) {
                       {isArabic ? member.nameAR : member.nameEN}
                     </h4>
                     
-                    <span className="block font-mono text-[9px] text-[#00A9A5] uppercase tracking-wider truncate">
+                    <span className="block font-mono text-[9px] text-brand-teal uppercase tracking-wider truncate">
                       {isArabic ? member.roleAR : member.roleEN}
                     </span>
                   </div>
@@ -424,7 +424,7 @@ export default function Teams({ isArabic }: TeamsProps) {
                 </div>
 
                 {/* Micro specialty bar */}
-                <div className="flex items-center gap-1.5 font-mono text-[9.5px] text-neutral-500 px-3 py-1 bg-[#1a1a1a]/40 border border-neutral-900 rounded-lg">
+                <div className="flex items-center gap-1.5 font-mono text-[9.5px] text-neutral-500 px-3 py-1 bg-space-raised/40 border border-neutral-900 rounded-lg">
                   <Shield className="h-3 w-3 text-brand-teal" />
                   <span className="truncate uppercase">
                     {isArabic ? member.specialtyAR : member.specialtyEN}
@@ -446,14 +446,14 @@ export default function Teams({ isArabic }: TeamsProps) {
                   <a
                     href="#"
                     onClick={(e) => e.preventDefault()}
-                    className="p-1.5 rounded hover:bg-[#1a1a1a] text-neutral-500 hover:text-brand-teal border border-transparent hover:border-neutral-900 transition-all cursor-pointer"
+                    className="p-1.5 rounded hover:bg-space-raised text-neutral-500 hover:text-brand-teal border border-transparent hover:border-neutral-900 transition-all cursor-pointer"
                     aria-label="LinkedIn profile"
                   >
                     <Linkedin className="h-3.5 w-3.5" />
                   </a>
                   <a
                     href={`mailto:team@mena-space-analogue.org?subject=Inquiry to ${member.nameEN}`}
-                    className="p-1.5 rounded hover:bg-[#1a1a1a] text-neutral-500 hover:text-brand-teal border border-transparent hover:border-neutral-900 transition-all cursor-pointer"
+                    className="p-1.5 rounded hover:bg-space-raised text-neutral-500 hover:text-brand-teal border border-transparent hover:border-neutral-900 transition-all cursor-pointer"
                     aria-label="Email contact"
                   >
                     <Mail className="h-3.5 w-3.5" />

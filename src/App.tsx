@@ -73,10 +73,10 @@ export default function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#111111] text-neutral-100 selection:bg-brand-teal selection:text-black font-sans relative overflow-x-hidden" dir={isArabic ? 'rtl' : 'ltr'}>
+    <div className="min-h-screen bg-space-dark text-neutral-100 selection:bg-brand-teal selection:text-black font-sans relative overflow-x-hidden" dir={isArabic ? 'rtl' : 'ltr'}>
       
       {/* Absolute Ambient Background Starfield with brand accents */}
-      <div className={`absolute inset-0 ${isLightMode ? 'bg-[radial-gradient(ellipse_at_top,rgba(0,169,165,0.05),#f8fafc)]' : 'bg-[radial-gradient(ellipse_at_top,rgba(0,169,165,0.06),rgba(17,17,17,1))]'} pointer-events-none z-0`} />
+      <div className={`absolute inset-0 ${isLightMode ? 'bg-[radial-gradient(ellipse_at_top,rgba(203,173,142,0.05),#f9fafb)]' : 'bg-[radial-gradient(ellipse_at_top,rgba(203,173,142,0.06),rgba(58,44,38,1))]'} pointer-events-none z-0`} />
 
       {/* Scroll-aware background star field matching astronomy simulation ambient */}
       <Starfield />
@@ -159,7 +159,7 @@ export default function App() {
 
       {/* Cinematic Aero Startup Footer */}
       <footer className="relative bg-black py-16 scroll-mt-10 overflow-hidden text-center z-10 backdrop-blur-xs">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(0,169,165,0.025),transparent_35%)] pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(203,173,142,0.025),transparent_35%)] pointer-events-none" />
 
         <div className="w-[90%] mx-auto relative z-10">
           
@@ -168,7 +168,7 @@ export default function App() {
             {/* Logo */}
             <div className="flex flex-col items-center sm:items-start text-center sm:text-left gap-3">
               <div className="w-28 h-32 flex-shrink-0">
-                <MenaLogo color="#00A9A5" />
+                <MenaLogo color="var(--color-brand-teal)" />
               </div>
               <p className="max-w-xs font-sans text-[11px] text-neutral-500 leading-normal">
                 {isArabic ? "أول منظمة فضاء وأبحاث أنالوج بتمكين وأولويات قيادية نسائية عربية وتدريب للطلبة في الأردن." : "The leading independent Arab Aerospace & Analog Training incubator. Inspiring the youth of tomorrow with real sand sandbox missions in Wadi Rum."}
@@ -259,7 +259,7 @@ export default function App() {
 
             {/* Branded Social Media Connections */}
             <div className="flex flex-wrap items-center justify-center gap-3">
-              <span className="text-[9px] text-[#00A9A5] uppercase tracking-wider font-semibold">
+              <span className="text-[9px] text-brand-teal uppercase tracking-wider font-semibold">
                 {isArabic ? "قنوات الاتصال المفتوحة //" : "SECURED COMM LINKS //"}
               </span>
               <a

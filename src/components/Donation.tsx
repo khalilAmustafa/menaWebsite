@@ -24,7 +24,7 @@ export default function Donation({ isArabic }: DonationProps) {
     <section id="support" className="relative bg-transparent py-12 sm:py-16">
       
       {/* Absolute Ambient Background Stars */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(0,169,165,0.03),transparent_40%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(203,173,142,0.03),transparent_40%)]" />
 
       <div className="w-[90%] mx-auto relative z-10">
         
@@ -152,7 +152,7 @@ export default function Donation({ isArabic }: DonationProps) {
               <div>
                 <button
                   onClick={() => handleBackMission(tier.name)}
-                  className="w-full py-3 rounded bg-[#111111]/80 hover:bg-[#111111]/95 border border-neutral-800 hover:border-brand-teal/50 text-[10px] sm:text-xs font-mono tracking-widest text-[#D8C3A5] font-bold transition-all cursor-pointer"
+                  className="w-full py-3 rounded bg-space-dark/80 hover:bg-space-dark/95 border border-neutral-800 hover:border-brand-teal/50 text-[10px] sm:text-xs font-mono tracking-widest text-brand-beige font-bold transition-all cursor-pointer"
                 >
                   {isArabic ? "رعاية شارة المهمة" : "SPONSOR THIS BADGE"}
                 </button>

@@ -177,7 +177,7 @@ export default function DashboardInteractive({ isArabic }: { isArabic: boolean }
         <div className="flex items-center space-x-3 text-left">
           <div className="relative flex h-3 w-3">
             <span className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${controlState.isEvaActive ? 'bg-brand-red' : 'bg-brand-teal'}`}></span>
-            <span className={`relative inline-flex rounded-full h-3 w-3 ${controlState.isEvaActive ? 'bg-brand-red' : 'bg-[#00A9A5]'}`}></span>
+            <span className={`relative inline-flex rounded-full h-3 w-3 ${controlState.isEvaActive ? 'bg-brand-red' : 'bg-brand-teal'}`}></span>
           </div>
           <div>
             <h4 className="font-display font-bold tracking-wider text-xs uppercase text-neutral-300">
@@ -189,7 +189,7 @@ export default function DashboardInteractive({ isArabic }: { isArabic: boolean }
 
         {/* Dynamic Mission Clock */}
         <div className="flex items-center space-x-3 bg-neutral-900/40 border border-neutral-900 px-4 py-1.5 rounded text-right">
-          <div className="font-mono text-xs sm:text-sm font-bold tracking-widest text-[#00A9A5]">
+          <div className="font-mono text-xs sm:text-sm font-bold tracking-widest text-brand-teal">
             {controlState.missionClock}
           </div>
         </div>
@@ -215,7 +215,7 @@ export default function DashboardInteractive({ isArabic }: { isArabic: boolean }
                   </span>
                   <span className="text-brand-teal font-bold">{controlState.oxygenLevel}%</span>
                 </div>
-                <div className="w-full bg-[#111111] h-1.5 rounded-full overflow-hidden border border-neutral-900/60">
+                <div className="w-full bg-space-dark h-1.5 rounded-full overflow-hidden border border-neutral-900/60">
                   <motion.div 
                     initial={{ width: '0%' }}
                     animate={{ width: `${controlState.oxygenLevel}%` }}
@@ -234,7 +234,7 @@ export default function DashboardInteractive({ isArabic }: { isArabic: boolean }
                   </span>
                   <span className="text-brand-red font-bold">{controlState.batteryPower}%</span>
                 </div>
-                <div className="w-full bg-[#111111] h-1.5 rounded-full overflow-hidden border border-neutral-900/60">
+                <div className="w-full bg-space-dark h-1.5 rounded-full overflow-hidden border border-neutral-900/60">
                   <motion.div 
                     animate={{ width: `${controlState.batteryPower}%` }}
                     className="h-full bg-brand-red"
@@ -251,7 +251,7 @@ export default function DashboardInteractive({ isArabic }: { isArabic: boolean }
                   </span>
                   <span className="text-neutral-300 font-bold">{controlState.signalStrength}%</span>
                 </div>
-                <div className="w-full bg-[#111111] h-1.5 rounded-full overflow-hidden border border-neutral-900/60">
+                <div className="w-full bg-space-dark h-1.5 rounded-full overflow-hidden border border-neutral-900/60">
                   <motion.div 
                     animate={{ width: `${controlState.signalStrength}%` }}
                     className="h-full bg-brand-teal/80"
@@ -352,7 +352,7 @@ export default function DashboardInteractive({ isArabic }: { isArabic: boolean }
                   {selectedCrew.heartRate}
                 </span>
               </div>
-              <div className="flex justify-between p-2 rounded bg-neutral-950/40 border border-[#1e1e1e]">
+              <div className="flex justify-between p-2 rounded bg-neutral-950/40 border border-space-raised">
                 <span className="text-neutral-500 text-[9px]">SUIT PSI</span>
                 <span className="text-brand-teal font-bold">{selectedCrew.suitPressure}</span>
               </div>
@@ -374,7 +374,7 @@ export default function DashboardInteractive({ isArabic }: { isArabic: boolean }
               
               {/* Telemetry rows */}
               {controlState.telemetryLogs.map((log, i) => (
-                <div key={i} className={`leading-relaxed ${log.includes('[ALERT]') ? 'text-brand-red animate-pulse' : log.includes('[USER]') ? 'text-[#D8C3A5]' : 'text-brand-teal'}`}>
+                <div key={i} className={`leading-relaxed ${log.includes('[ALERT]') ? 'text-brand-red animate-pulse' : log.includes('[USER]') ? 'text-brand-beige' : 'text-brand-teal'}`}>
                   {log}
                 </div>
               ))}
@@ -400,7 +400,7 @@ export default function DashboardInteractive({ isArabic }: { isArabic: boolean }
               />
               <button
                 type="submit"
-                className="bg-brand-teal hover:bg-[#00b5b1] text-white transition-colors p-2 font-bold rounded cursor-pointer"
+                className="bg-brand-teal hover:bg-brand-teal-hover text-white transition-colors p-2 font-bold rounded cursor-pointer"
               >
                 <Send className="w-3.5 h-3.5" />
               </button>

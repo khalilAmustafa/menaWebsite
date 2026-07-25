@@ -38,11 +38,11 @@ export default function About({ isArabic }: AboutProps) {
     <section id="about" className="relative bg-transparent py-12 sm:py-16">
       
       {/* Dark overlay at top to bridge seamlessly with the Hero section */}
-      <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[#111111]/90 to-transparent pointer-events-none z-[1]" />
+      <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-space-dark/90 to-transparent pointer-events-none z-[1]" />
 
       {/* Absolute Ambient Background Lights in Brand Accent Tones */}
-      <div className="absolute top-1/2 left-0 w-80 h-80 rounded-full bg-[#00A9A5]/5 blur-3xl pointer-events-none" />
-      <div className="absolute top-1/4 right-0 w-96 h-96 rounded-full bg-[#C1442E]/3 blur-3xl pointer-events-none" />
+      <div className="absolute top-1/2 left-0 w-80 h-80 rounded-full bg-brand-teal/5 blur-3xl pointer-events-none" />
+      <div className="absolute top-1/4 right-0 w-96 h-96 rounded-full bg-brand-red/3 blur-3xl pointer-events-none" />
 
       <div className="w-[90%] mx-auto relative z-10">
         
@@ -91,7 +91,7 @@ export default function About({ isArabic }: AboutProps) {
             </p>
 
             {/* Quote Box in official brand scheme */}
-            <div className="p-5 rounded bg-neutral-900/45 border-l-4 border-brand-teal/80 font-mono text-xs tracking-wide text-neutral-300 leading-relaxed bg-[radial-gradient(ellipse_at_top_right,rgba(0,169,165,0.02),transparent)]">
+            <div className="p-5 rounded bg-neutral-900/45 border-l-4 border-brand-teal/80 font-mono text-xs tracking-wide text-neutral-300 leading-relaxed bg-[radial-gradient(ellipse_at_top_right,rgba(203,173,142,0.02),transparent)]">
               {isArabic ? (
                 "\"الصحراء الأردنية مهد خصب للتحديات والصمود. نعمل على تحويل الرمال إلى مركب فسيح للاكتشاف والأبحاث الريادية الموجهة لخدمة البشرية واستدامتها.\""
               ) : (

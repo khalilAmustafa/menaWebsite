@@ -115,7 +115,7 @@ export default function Header({ isArabic, setIsArabic, activeSection, isLightMo
           <div className={`flex-shrink-0 transition-all duration-300 group-hover:scale-105 ${
             scrolled ? 'w-14 h-16' : 'w-28 h-32'
           }`}>
-            <MenaLogo color="#00A9A5" />
+            <MenaLogo color="var(--color-brand-teal)" />
           </div>
         </div>
 
@@ -159,13 +159,13 @@ export default function Header({ isArabic, setIsArabic, activeSection, isLightMo
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 10, scale: 0.95 }}
                         transition={{ duration: 0.15 }}
-                        className="absolute left-1/2 -translate-x-1/2 mt-1 w-64 rounded-xl bg-[#0a0a0a] border border-neutral-900 shadow-2xl p-2 z-[60] overflow-hidden"
+                        className="absolute left-1/2 -translate-x-1/2 mt-1 w-64 rounded-xl bg-space-deep border border-neutral-900 shadow-2xl p-2 z-[60] overflow-hidden"
                       >
                         <div className="py-1 flex flex-col gap-0.5">
                           {/* Main Header acting as clickable link to center Programs */}
                           <button
                             onClick={() => handleProgramClick('overview')}
-                            className="w-full text-left rtl:text-right px-3 py-2 text-[10px] font-mono tracking-widest text-[#00A9A5] bg-neutral-900/45 hover:bg-neutral-900 uppercase font-bold transition-all rounded block border-b border-neutral-900/80 mb-1"
+                            className="w-full text-left rtl:text-right px-3 py-2 text-[10px] font-mono tracking-widest text-brand-teal bg-neutral-900/45 hover:bg-neutral-900 uppercase font-bold transition-all rounded block border-b border-neutral-900/80 mb-1"
                           >
                             {isArabic ? "البرامج والأنشطة" : "PROGRAMS & ACTIVITIES"}
                           </button>
@@ -179,7 +179,7 @@ export default function Header({ isArabic, setIsArabic, activeSection, isLightMo
                             <button
                               key={item.id}
                               onClick={() => handleProgramClick(item.id)}
-                              className="w-full text-left rtl:text-right px-3 py-2 text-xs text-neutral-400 hover:text-white hover:bg-[#111] hover:border-l-2 rtl:hover:border-l-0 rtl:hover:border-r-2 hover:border-brand-teal/80 transition-all rounded block font-sans"
+                              className="w-full text-left rtl:text-right px-3 py-2 text-xs text-neutral-400 hover:text-white hover:bg-space-dark hover:border-l-2 rtl:hover:border-l-0 rtl:hover:border-r-2 hover:border-brand-teal/80 transition-all rounded block font-sans"
                             >
                               {isArabic ? item.arabic : item.label}
                             </button>
@@ -227,13 +227,13 @@ export default function Header({ isArabic, setIsArabic, activeSection, isLightMo
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 10, scale: 0.95 }}
                         transition={{ duration: 0.15 }}
-                        className="absolute left-1/2 -translate-x-1/2 mt-1 w-72 rounded-xl bg-[#0a0a0a] border border-neutral-900 shadow-2xl p-2 z-[60] overflow-hidden"
+                        className="absolute left-1/2 -translate-x-1/2 mt-1 w-72 rounded-xl bg-space-deep border border-neutral-900 shadow-2xl p-2 z-[60] overflow-hidden"
                       >
                         <div className="py-1 flex flex-col gap-0.5">
                           {/* Main Header acting as clickable link to center Teams list */}
                           <button
                             onClick={() => handleTeamClick('overview')}
-                            className="w-full text-left rtl:text-right px-3 py-2 text-[10px] font-mono tracking-widest text-[#00A9A5] bg-neutral-900/45 hover:bg-neutral-900 uppercase font-bold transition-all rounded block border-b border-neutral-900/80 mb-1"
+                            className="w-full text-left rtl:text-right px-3 py-2 text-[10px] font-mono tracking-widest text-brand-teal bg-neutral-900/45 hover:bg-neutral-900 uppercase font-bold transition-all rounded block border-b border-neutral-900/80 mb-1"
                           >
                             {isArabic ? "الهيكل الإداري والأقسام" : "EXPLORE DEPARTMENTS"}
                           </button>
@@ -253,7 +253,7 @@ export default function Header({ isArabic, setIsArabic, activeSection, isLightMo
                             <button
                               key={item.id}
                               onClick={() => handleTeamClick(item.id)}
-                              className="w-full text-left rtl:text-right px-3 py-1.5 text-xs text-neutral-400 hover:text-white hover:bg-[#111] hover:border-l-2 rtl:hover:border-l-0 rtl:hover:border-r-2 hover:border-brand-teal/80 transition-all rounded block font-sans"
+                              className="w-full text-left rtl:text-right px-3 py-1.5 text-xs text-neutral-400 hover:text-white hover:bg-space-dark hover:border-l-2 rtl:hover:border-l-0 rtl:hover:border-r-2 hover:border-brand-teal/80 transition-all rounded block font-sans"
                             >
                               {isArabic ? item.arabic : item.label}
                             </button>
@@ -402,7 +402,7 @@ export default function Header({ isArabic, setIsArabic, activeSection, isLightMo
                                 handleScrollTo('programs');
                                 setMobileProgramsOpen(false);
                               }}
-                              className="block w-full text-left rtl:text-right py-2 px-3 rounded text-[11px] font-mono uppercase tracking-wider text-[#00A9A5] hover:text-white hover:bg-neutral-900/40 transition-all font-bold"
+                              className="block w-full text-left rtl:text-right py-2 px-3 rounded text-[11px] font-mono uppercase tracking-wider text-brand-teal hover:text-white hover:bg-neutral-900/40 transition-all font-bold"
                             >
                               • {isArabic ? "عرض الكل" : "VIEW OVERVIEW"}
                             </button>
@@ -455,7 +455,7 @@ export default function Header({ isArabic, setIsArabic, activeSection, isLightMo
                                 handleScrollTo('teams');
                                 setMobileTeamOpen(false);
                               }}
-                              className="block w-full text-left rtl:text-right py-2 px-3 rounded text-[11px] font-mono uppercase tracking-wider text-[#00A9A5] hover:text-white hover:bg-neutral-900/40 transition-all font-bold"
+                              className="block w-full text-left rtl:text-right py-2 px-3 rounded text-[11px] font-mono uppercase tracking-wider text-brand-teal hover:text-white hover:bg-neutral-900/40 transition-all font-bold"
                             >
                               • {isArabic ? "عرض الكل" : "EXPLORE DEPARTMENTS"}
                             </button>

@@ -254,7 +254,7 @@ Assistant:`;
                   className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
                 >
                   <div
-                    className={`max-w-[85%] rounded-xl px-3.5 py-2.5 text-xs leading-relaxed ${
+                    className={`max-w-[85%] rounded-2xl px-3.5 py-2.5 text-xs leading-relaxed ${
                       msg.sender === 'user'
                         ? 'bg-brand-teal text-black font-semibold rounded-tr-none'
                         : 'bg-neutral-900 border border-neutral-800 text-neutral-200 rounded-tl-none whitespace-pre-wrap'
@@ -295,7 +295,7 @@ Assistant:`;
               {/* Typing Indicator */}
               {isLoading && (
                 <div className="flex justify-start">
-                  <div className="bg-neutral-900 border border-neutral-800 text-neutral-400 rounded-xl rounded-tl-none px-3.5 py-3.5 text-xs flex items-center gap-1.5">
+                  <div className="bg-neutral-900 border border-neutral-800 text-neutral-400 rounded-2xl rounded-tl-none px-3.5 py-3.5 text-xs flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-brand-teal animate-bounce" style={{ animationDelay: '0ms' }} />
                     <span className="w-1.5 h-1.5 rounded-full bg-brand-teal animate-bounce" style={{ animationDelay: '150ms' }} />
                     <span className="w-1.5 h-1.5 rounded-full bg-brand-teal animate-bounce" style={{ animationDelay: '300ms' }} />
@@ -322,13 +322,13 @@ Assistant:`;
                     ? "اسأل عن مهام مِنا الفضائية..."
                     : "Ask about MENA missions..."
                 }
-                className="flex-1 bg-neutral-950 border border-neutral-850 hover:border-brand-teal/20 focus:border-brand-teal/60 focus:ring-0 focus:outline-none rounded-xl px-3 py-2 text-xs text-white placeholder-neutral-500 font-sans transition-all"
+                className="flex-1 bg-neutral-950 border border-neutral-850 hover:border-brand-teal/20 focus:border-brand-teal/60 focus:ring-0 focus:outline-none rounded-2xl px-3 py-2 text-xs text-white placeholder-neutral-500 font-sans transition-all"
                 disabled={isLoading}
               />
               <button
                 type="submit"
                 disabled={isLoading || !input.trim()}
-                className="p-2 rounded-xl bg-brand-teal text-black hover:bg-brand-teal/80 disabled:bg-neutral-800 disabled:text-neutral-600 transition-colors cursor-pointer"
+                className="p-2 rounded-2xl bg-brand-teal text-black hover:bg-brand-teal/80 disabled:bg-neutral-800 disabled:text-neutral-600 transition-colors cursor-pointer"
               >
                 <Send className="w-3.5 h-3.5" />
               </button>

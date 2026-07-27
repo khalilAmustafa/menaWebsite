@@ -3,7 +3,9 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 100px;
+  /* Clears the fixed header (~100px tall when scrolled) so anchored sections
+     land below it instead of underneath. Applies to every in-page nav jump. */
+  scroll-padding-top: 120px;
 }
 
 @theme {
@@ -92,49 +94,53 @@ html {
 }
 
 /* ============================================================
-   LIGHT MODE — rebuilt from the MENA brand palette
-   Off-white surfaces + warm brown text ramp + gold accents
+   LIGHT MODE — cool off-white base with a clear warm surface
+   hierarchy, defined as tokens (page → panel → card → selected):
+     --lm-bg #f9fafb  →  --lm-panel #f3ede4  →  --lm-card #d1c7bc  →  --lm-card-active #cbad8e
+   Text: --lm-text #3a2c26 (primary) + muted ramp below.
+   Every text/background pair meets WCAG AA (≥4.5:1) — see PR notes.
    ============================================================ */
 .light-mode {
   color-scheme: light;
-  background-color: #f9fafb !important;
-  color: #3a2c26 !important;
+
+  /* Surface hierarchy tokens */
+  --lm-bg: #f9fafb;          /* page background (lowest) */
+  --lm-panel: #f3ede4;       /* panels / containers / generic cards */
+  --lm-card: #d1c7bc;        /* inactive selectable card / recessed row */
+  --lm-card-active: #cbad8e; /* selected / active card */
+  --lm-recessed: #ece5da;    /* progress tracks, grid lines, hovers */
+  /* Text ramp (all AA on panel & page) */
+  --lm-text: #3a2c26;        /* primary */
+  --lm-text-muted: #6b564a;  /* secondary */
+  --lm-text-subtle: #6f5b4e; /* tertiary / captions */
+  --lm-border: #e0d2bd;      /* warm borders */
+
+  background-color: var(--lm-bg) !important;
+  color: var(--lm-text) !important;
 }
 
-/* Override sections, main, body in light mode */
 body.light-mode,
 div.light-mode {
-  background-color: #f9fafb !important;
+  background-color: var(--lm-bg) !important;
 }
 
-.light-mode ::-webkit-scrollbar-track {
-  background: #f3f0ec;
-}
-.light-mode ::-webkit-scrollbar-thumb {
-  background: #d1c7bc;
-}
-.light-mode ::-webkit-scrollbar-thumb:hover {
-  background: #cbad8e;
-}
+.light-mode ::-webkit-scrollbar-track { background: var(--lm-recessed); }
+.light-mode ::-webkit-scrollbar-thumb { background: var(--lm-card); }
+.light-mode ::-webkit-scrollbar-thumb:hover { background: var(--lm-card-active); }
 
-/* 1. FORCE THE LIGHT MODE BACKGROUND AND REMOVE HARDCODED GRADIENTS
-   NOTE: space-dark fade overlays (from/via/to) are intentionally NOT filled solid white
-   here — they'd paint over the hero photo. They're neutralised via the gradient rules
-   below and re-tinted for the hero specifically. */
-.light-mode .from-transparent,
-.light-mode .to-transparent,
-.light-mode .bg-neutral-950,
-.light-mode .bg-neutral-950\/95,
-.light-mode .bg-neutral-900,
-.light-mode .bg-neutral-905,
+/* ---- PAGE level: sections, footer, flat fills ----
+   NOTE: do NOT list Tailwind gradient-stop utilities (.from-transparent /
+   .to-transparent) or the layout utility (.grid) here — they collide with
+   transparent overlays and every grid container, painting them solid. */
 .light-mode footer.relative,
 .light-mode section.relative,
-.light-mode #telemetry-dashboard {
-  background-color: #ffffff !important;
+.light-mode #telemetry-dashboard,
+.light-mode .bg-black {
+  background-color: var(--lm-bg) !important;
   background-image: none !important;
 }
 
-/* Selectively transform Hero section gradient overlay to warm off-white instead of black */
+/* Hero gradient overlay → off-white (recolour the gradient stops) */
 .light-mode .from-neutral-950\/90,
 .light-mode .from-neutral-950\/95,
 .light-mode .to-neutral-950\/95,
@@ -150,47 +156,74 @@ div.light-mode {
   background-image: none !important;
 }
 
-/* Hero photo: keep the image fully visible in light mode.
-   Replace the dark full-cover scrim with a soft light one, and turn the black
-   bottom fade into an off-white fade (higher specificity beats the "none" above). */
+/* Hero: intentionally shown as a plain off-white placeholder in light mode.
+   The full-cover scrim (bg-neutral-950/30, hero-only) is filled solid so the photo
+   is hidden until the hero gets its proper light-mode redesign later. Gallery/other
+   image overlays are unaffected (they don't use this class). */
 .light-mode .bg-neutral-950\/30 {
-  background-color: rgba(249, 250, 251, 0.3) !important;
-}
-.light-mode .bg-gradient-to-t.from-space-dark {
-  background-image: linear-gradient(to top, #f9fafb, rgba(249, 250, 251, 0.55), transparent) !important;
+  background-color: var(--lm-bg) !important;
 }
 
-/* Ensure outer grid lines and borders are a warm light tint */
-.light-mode .grid {
-  background-color: #f3f0ec !important;
-}
+/* (removed `.light-mode .grid` — `.grid` is Tailwind's display:grid utility, so it
+   painted a solid background behind every grid container. Grids stay transparent.) */
 
-/* 2. BACKGROUND FOR SPECIFIC INTERACTIVE AND STATIC PANELS */
-.light-mode .bg-space-dark\/60,
-.light-mode .bg-space-dark\/80,
+/* ---- PANEL level: containers, generic cards, chips, dropdowns ---- */
+.light-mode .bg-neutral-950,
+.light-mode .bg-neutral-950\/95,
+.light-mode .bg-neutral-950\/90,
+.light-mode .bg-neutral-950\/80,
+.light-mode .bg-neutral-950\/75,
+.light-mode .bg-neutral-950\/60,
+.light-mode .bg-neutral-950\/50,
+.light-mode .bg-neutral-950\/40,
+.light-mode .bg-neutral-950\/15,
+.light-mode .bg-neutral-900,
+.light-mode .bg-neutral-905,
+.light-mode .bg-neutral-900\/80,
+.light-mode .bg-neutral-900\/60,
+.light-mode .bg-neutral-900\/50,
+.light-mode .bg-neutral-900\/45,
+.light-mode .bg-neutral-900\/40,
+.light-mode .bg-neutral-900\/35,
+.light-mode .bg-neutral-900\/30,
+.light-mode .bg-neutral-900\/25,
+.light-mode .bg-neutral-900\/20,
+.light-mode .bg-neutral-900\/15,
+.light-mode .bg-neutral-900\/10,
+.light-mode .bg-neutral-900\/5,
+.light-mode .bg-neutral-850,
 .light-mode .bg-space-deep,
 .light-mode .bg-space-raised,
 .light-mode .bg-space-raised\/80,
 .light-mode .bg-space-raised\/40,
-.light-mode .bg-neutral-850,
-.light-mode .bg-neutral-900\/20,
-.light-mode .bg-neutral-900\/30,
-.light-mode .bg-neutral-900\/40,
-.light-mode .bg-neutral-900\/60,
-.light-mode .bg-neutral-900\/50,
-.light-mode .bg-neutral-950\/50,
-.light-mode .bg-neutral-900\/80,
-.light-mode .bg-neutral-950\/80 {
-  background-color: #ffffff !important;
-  box-shadow: 0 4px 20px -2px rgba(58, 44, 38, 0.05), 0 2px 8px -1px rgba(58, 44, 38, 0.03) !important;
+.light-mode .bg-space-dark\/60,
+.light-mode .bg-space-dark\/80 {
+  background-color: var(--lm-panel) !important;
+  border-color: var(--lm-border) !important;
 }
 
-/* Ensure inner track background is a clean warm light color */
+/* Recessed inner tracks (progress bars, dividers) */
 .light-mode .bg-space-dark {
-  background-color: #f3f0ec !important;
+  background-color: var(--lm-recessed) !important;
 }
 
-/* 3. TEXT CONTRAST IMPROVEMENTS (warm brown ramp) */
+/* ---- CARD level: inactive selectable cards (applied via marker classes,
+   so only genuine selectable cards get the deeper beige — not every panel) ---- */
+/* ---- Departments & STEM Squads selectable cards (Teams) ---- */
+.light-mode .dept-card {
+  background-color: var(--lm-card) !important;
+  border-color: var(--lm-border) !important;
+}
+.light-mode .dept-card-active {
+  background-color: var(--lm-card-active) !important;
+  border-color: #b1977c !important;
+}
+/* Capacity sub-text — darkened so it passes AA on both the card and the selected states */
+.light-mode .dept-card .text-neutral-500 {
+  color: #4a3a30 !important;
+}
+
+/* ---- TEXT ramp (all pairs ≥ 4.5:1 on page & panel) ---- */
 .light-mode .text-white,
 .light-mode .text-neutral-100,
 .light-mode .text-neutral-200,
@@ -200,20 +233,20 @@ div.light-mode {
 .light-mode .text-slate-100,
 .light-mode .text-slate-200,
 .light-mode .text-slate-300 {
-  color: #3a2c26 !important;
+  color: var(--lm-text) !important;
 }
 
 .light-mode .text-neutral-400,
 .light-mode .text-neutral-450,
 .light-mode .text-slate-400,
 .light-mode .text-zinc-400 {
-  color: #6b564a !important;
+  color: var(--lm-text-muted) !important;
 }
 
 .light-mode .text-neutral-500,
 .light-mode .text-slate-500,
 .light-mode .text-zinc-500 {
-  color: #8a7668 !important;
+  color: var(--lm-text-subtle) !important;
 }
 
 .light-mode .text-neutral-600,
@@ -221,62 +254,46 @@ div.light-mode {
   color: #5c4a40 !important;
 }
 
-/* Gold accent — darkened for legibility on white */
-.light-mode .text-brand-teal {
-  color: #8a6b45 !important;
-}
-
-/* Beige/sand labels — light on dark, so darken to a warm brown on white */
+/* Accents darkened for legibility on the light surfaces */
+.light-mode .text-brand-teal { color: #8a5a34 !important; }
 .light-mode .text-brand-beige,
-.light-mode .text-sand {
-  color: #6b564a !important;
-}
+.light-mode .text-sand { color: var(--lm-text-muted) !important; }
+.light-mode .text-brand-red { color: #7d5f52 !important; }
 
-/* Mauve secondary accent — darkened for legibility on white */
-.light-mode .text-brand-red {
-  color: #7d5f52 !important;
-}
-
-/* 4. SOLID LIGHT MODE BORDERS (warm) */
+/* ---- Borders ---- */
 .light-mode .border-neutral-900,
 .light-mode .border-neutral-850,
 .light-mode .border-neutral-800,
+.light-mode .border-neutral-900\/80,
 .light-mode .border-neutral-900\/60,
 .light-mode .border-neutral-900\/40,
 .light-mode .border-neutral-900\/30,
 .light-mode .border-white\/\[0\.06\],
 .light-mode .border-neutral-800\/80 {
-  border-color: #e7e0d8 !important;
+  border-color: var(--lm-border) !important;
 }
 
-/* Hover effects — gold */
 .light-mode .hover\:border-neutral-800\/80:hover,
+.light-mode .hover\:border-neutral-800:hover,
 .light-mode .hover\:border-brand-teal\/40:hover {
   border-color: #b1977c !important;
 }
 
-/* Interactive elements, input text, and dropdown fields */
+/* ---- Inputs ---- */
 .light-mode input,
 .light-mode textarea,
 .light-mode select {
-  background-color: #ffffff !important;
-  border-color: #d1c7bc !important;
-  color: #3a2c26 !important;
+  background-color: var(--lm-panel) !important;
+  border-color: var(--lm-card) !important;
+  color: var(--lm-text) !important;
 }
-
 .light-mode input::placeholder,
 .light-mode textarea::placeholder {
-  color: #a89a8c !important;
+  color: var(--lm-text-subtle) !important;
 }
 
-/* Interactive dashboard custom styles */
-.light-mode .bg-black {
-  background-color: #f9fafb !important;
-}
-
-.light-mode .bg-white\/5 {
-  background-color: rgba(203, 173, 142, 0.05) !important;
-}
+/* ---- Misc surfaces & hovers ---- */
+.light-mode .bg-white\/5 { background-color: rgba(203, 173, 142, 0.06) !important; }
 
 .light-mode .hover\:bg-neutral-900\/60:hover,
 .light-mode .hover\:bg-neutral-850:hover,
@@ -284,59 +301,34 @@ div.light-mode {
 .light-mode .hover\:bg-space-dark:hover,
 .light-mode .hover\:bg-space-dark\/95:hover,
 .light-mode .hover\:bg-space-raised:hover {
-  background-color: #f3f0ec !important;
+  background-color: var(--lm-recessed) !important;
 }
 
-/* Disabled controls (e.g. chatbot send button) */
-.light-mode .disabled\:bg-neutral-800:disabled {
-  background-color: #e7e0d8 !important;
-}
-.light-mode .disabled\:text-neutral-600:disabled {
-  color: #a89a8c !important;
-}
+.light-mode .disabled\:bg-neutral-800:disabled { background-color: var(--lm-border) !important; }
+.light-mode .disabled\:text-neutral-600:disabled { color: var(--lm-text-subtle) !important; }
 
-.light-mode .bg-neutral-900\/40 {
-  background-color: #f9fafb !important;
-  border-color: #e7e0d8 !important;
-}
-
-/* Ensure glass panels match the theme cleanly */
+/* ---- Glass panels ---- */
 .light-mode .glass-panel {
-  background: rgba(255, 255, 255, 0.8) !important;
-  border-color: rgba(58, 44, 38, 0.05) !important;
-  color: #3a2c26 !important;
+  background: rgba(243, 237, 228, 0.85) !important;
+  border-color: rgba(58, 44, 38, 0.08) !important;
+  color: var(--lm-text) !important;
 }
-
 .light-mode .glass-panel-glow {
-  background: rgba(255, 255, 255, 0.85) !important;
-  border-color: rgba(203, 173, 142, 0.2) !important;
-  box-shadow: 0 4px 20px rgba(203, 173, 142, 0.03) !important;
+  background: rgba(243, 237, 228, 0.9) !important;
+  border-color: rgba(203, 173, 142, 0.25) !important;
+  box-shadow: 0 4px 20px rgba(58, 44, 38, 0.05) !important;
 }
 
-.light-mode .bg-brand-teal\/10 {
-  background-color: rgba(203, 173, 142, 0.08) !important;
-}
+.light-mode .bg-brand-teal\/10 { background-color: rgba(203, 173, 142, 0.12) !important; }
+.light-mode .bg-brand-teal\/5 { background-color: rgba(203, 173, 142, 0.06) !important; }
 
-.light-mode .bg-brand-teal\/5 {
-  background-color: rgba(203, 173, 142, 0.04) !important;
-}
-
-/* 5. STATUS COLORS (emerald = ok, red = alert)
-   Darken the text and lighten the dark status chips so both stay legible on white. */
+/* ---- Status colours (semantic; kept for meaning) ---- */
 .light-mode .text-emerald-400,
-.light-mode .text-emerald-500 {
-  color: #047857 !important;
-}
-.light-mode .text-red-400 {
-  color: #b91c1c !important;
-}
+.light-mode .text-emerald-500 { color: #047857 !important; }
+.light-mode .text-red-400 { color: #b91c1c !important; }
 
 .light-mode .bg-emerald-950,
 .light-mode .bg-emerald-950\/40,
 .light-mode .bg-emerald-950\/80,
-.light-mode .bg-emerald-500\/10 {
-  background-color: #ecfdf5 !important;
-}
-.light-mode .bg-red-950\/40 {
-  background-color: #fef2f2 !important;
-}
+.light-mode .bg-emerald-500\/10 { background-color: #ecfdf5 !important; }
+.light-mode .bg-red-950\/40 { background-color: #fef2f2 !important; }

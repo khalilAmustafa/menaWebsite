@@ -439,7 +439,7 @@ export default function Mars3D({ isArabic }: { isArabic: boolean }) {
       />
 
       {/* Floating Global Display Status Overlay */}
-      <div className="absolute top-2 left-2 z-20 bg-neutral-950/85 border border-neutral-900/60 p-2.5 rounded backdrop-blur-sm pointer-events-auto flex items-center gap-2">
+      <div className="absolute top-2 left-2 z-20 bg-neutral-950/85 border border-neutral-900/60 p-2.5 rounded-lg backdrop-blur-sm pointer-events-auto flex items-center gap-2">
         <Orbit className="w-4 h-4 text-brand-teal animate-spin" style={{ animationDuration: '6s' }} />
         <div className="text-left font-mono text-[8px] leading-none space-y-1">
           <div className="text-neutral-300 uppercase tracking-wider">{isArabic ? "زاوية الدوران" : "VIEWING ANGLE"}</div>
@@ -447,24 +447,24 @@ export default function Mars3D({ isArabic }: { isArabic: boolean }) {
         </div>
       </div>
 
-      <div className="absolute bottom-2 right-2 z-20 bg-neutral-950/85 border border-neutral-900/60 p-2.5 rounded backdrop-blur-sm pointer-events-auto flex gap-1.5">
+      <div className="absolute bottom-2 right-2 z-20 bg-neutral-950/85 border border-neutral-900/60 p-2.5 rounded-lg backdrop-blur-sm pointer-events-auto flex gap-1.5">
         <button 
           onClick={() => setZoomFactor(prev => Math.min(1.3, prev + 0.1))}
-          className="p-1 hover:bg-neutral-900 border border-neutral-800 text-brand-beige rounded text-[9px] font-bold font-mono transition-colors cursor-pointer"
+          className="p-1 hover:bg-neutral-900 border border-neutral-800 text-brand-beige rounded-lg text-[9px] font-bold font-mono transition-colors cursor-pointer"
           title="Zoom In Mars Orbiter Map"
         >
           [+]
         </button>
         <button 
           onClick={() => setZoomFactor(prev => Math.max(0.7, prev - 0.1))}
-          className="p-1 hover:bg-neutral-900 border border-neutral-800 text-brand-beige rounded text-[9px] font-bold font-mono transition-colors cursor-pointer"
+          className="p-1 hover:bg-neutral-900 border border-neutral-800 text-brand-beige rounded-lg text-[9px] font-bold font-mono transition-colors cursor-pointer"
           title="Zoom Out Mars Orbiter Map"
         >
           [-]
         </button>
         <button 
           onClick={() => setRotation({ x: 0.2, y: Math.random() * Math.PI * 2 })}
-          className="p-1 hover:bg-neutral-900 border border-neutral-800 text-brand-teal rounded text-[9px] font-bold font-mono transition-colors cursor-pointer"
+          className="p-1 hover:bg-neutral-900 border border-neutral-800 text-brand-teal rounded-lg text-[9px] font-bold font-mono transition-colors cursor-pointer"
           title="Manual Reset Sol orientation"
         >
           [RST]
@@ -472,7 +472,7 @@ export default function Mars3D({ isArabic }: { isArabic: boolean }) {
       </div>
 
       <div className="absolute bottom-2 left-2 z-20 pointer-events-none md:block hidden">
-        <div className="bg-neutral-950/80 border border-neutral-900/50 p-2 rounded text-[8px] font-mono text-neutral-500 text-left">
+        <div className="bg-neutral-950/80 border border-neutral-900/50 p-2 rounded-lg text-[8px] font-mono text-neutral-500 text-left">
           <span>{isArabic ? "اضغط واسحب لتدوير الكوكب" : "DRAG PLANET TO ROTATE"}</span>
         </div>
       </div>

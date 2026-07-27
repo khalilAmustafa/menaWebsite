@@ -175,7 +175,7 @@ export default function MissionGallery({ isArabic }: MissionGalleryProps) {
   };
 
   return (
-    <section id="gallery" className="relative bg-transparent py-12 sm:py-16 scroll-mt-10 z-10">
+    <section id="gallery" className="relative bg-transparent py-12 sm:py-16 z-10">
       
       {/* Planetary Atmosphere Glow Backdrops */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-brand-teal/[0.02] blur-3xl pointer-events-none" />
@@ -207,7 +207,7 @@ export default function MissionGallery({ isArabic }: MissionGalleryProps) {
           </div>
 
           {/* Quick Stats Grid */}
-          <div className="hidden lg:grid grid-cols-2 gap-4 font-mono text-[9px] text-neutral-500 bg-neutral-900/30 border border-neutral-900/60 p-4 rounded">
+          <div className="hidden lg:grid grid-cols-2 gap-4 font-mono text-[9px] text-neutral-500 bg-neutral-900/30 border border-neutral-900/60 p-4 rounded-lg">
             <div>
               <span className="block text-neutral-600 uppercase">{isArabic ? "إجمالي اللقطات النشطة:" : "ACTIVE CAPTURES:"}</span>
               <span className="text-brand-teal font-bold text-xs">08 INTERDISCIPLINARY</span>
@@ -232,7 +232,7 @@ export default function MissionGallery({ isArabic }: MissionGalleryProps) {
                 key={cat.id}
                 onClick={() => setSelectedCategory(cat.id)}
                 id={`cat-btn-${cat.id}`}
-                className={`px-3 sm:px-4 py-1.5 rounded font-mono text-[10px] sm:text-xs tracking-wider uppercase transition-all duration-300 cursor-pointer border ${
+                className={`px-3 sm:px-4 py-1.5 rounded-lg font-mono text-[10px] sm:text-xs tracking-wider uppercase transition-all duration-300 cursor-pointer border ${
                   selectedCategory === cat.id
                     ? 'bg-brand-teal/10 border-brand-teal/50 text-brand-teal shadow-sm shadow-brand-teal/5'
                     : 'bg-neutral-900/40 border-neutral-900 text-neutral-400 hover:text-white hover:bg-neutral-900 hover:border-neutral-800'
@@ -269,7 +269,7 @@ export default function MissionGallery({ isArabic }: MissionGalleryProps) {
                     exit={{ opacity: 0, scale: 0.95 }}
                     transition={{ duration: 0.4 }}
                     onClick={() => setActiveItemIndex(globalIndex)}
-                    className="group relative bg-space-raised border border-neutral-900 hover:border-neutral-800/80 rounded-xl overflow-hidden cursor-pointer shadow-md transition-all duration-300 transform hover:-translate-y-1 h-full"
+                    className="group relative bg-space-raised border border-neutral-900 hover:border-neutral-800/80 rounded-2xl overflow-hidden cursor-pointer shadow-md transition-all duration-300 transform hover:-translate-y-1 h-full"
                   >
                     {/* Aspect Ratio Box Wrapper */}
                     <div className="relative aspect-md overflow-hidden">
@@ -284,7 +284,7 @@ export default function MissionGallery({ isArabic }: MissionGalleryProps) {
                       <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/30 to-transparent opacity-75 group-hover:opacity-60 transition-opacity pointer-events-none" />
                       
                       {/* Top right quick-tags */}
-                      <div className="absolute top-3 right-3 flex items-center space-x-1.5 bg-neutral-950/75 border border-neutral-800 backdrop-blur-md px-2 py-1 rounded">
+                      <div className="absolute top-3 right-3 flex items-center space-x-1.5 bg-neutral-950/75 border border-neutral-800 backdrop-blur-md px-2 py-1 rounded-lg">
                         <span className="w-1.5 h-1.5 rounded-full bg-brand-teal animate-pulse" />
                         <span className="font-mono text-[8px] tracking-widest text-brand-teal">{item.mission}</span>
                       </div>
@@ -304,7 +304,7 @@ export default function MissionGallery({ isArabic }: MissionGalleryProps) {
                           <Calendar className="h-2.5 w-2.5 text-brand-teal" />
                           {item.date}
                         </span>
-                        <span className="px-1.5 py-0.5 bg-neutral-900 border border-neutral-800 text-[8px] text-brand-beige rounded uppercase">
+                        <span className="px-1.5 py-0.5 bg-neutral-900 border border-neutral-800 text-[8px] text-brand-beige rounded-lg uppercase">
                           {item.category}
                         </span>
                       </div>
@@ -331,7 +331,7 @@ export default function MissionGallery({ isArabic }: MissionGalleryProps) {
 
         {/* Empty state protection */}
         {filteredItems.length === 0 && (
-          <div className="text-center py-16 border border-dashed border-neutral-900 rounded-xl bg-neutral-900/10">
+          <div className="text-center py-16 border border-dashed border-neutral-900 rounded-2xl bg-neutral-900/10">
             <span className="font-mono text-xs text-neutral-500 block mb-2">TELEMETRY SECURE // NO MATCHES FOUND</span>
             <p className="text-xs text-neutral-400">{isArabic ? "يرجى اختيار فئة تصفية أخرى لاستعراض الأرشيف." : "Please select another catalog folder above."}</p>
           </div>
@@ -394,7 +394,7 @@ export default function MissionGallery({ isArabic }: MissionGalleryProps) {
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.35, ease: "easeOut" }}
-                  className="relative max-h-[60vh] sm:max-h-[70vh] rounded-xl overflow-hidden border border-neutral-800 shadow-2xl"
+                  className="relative max-h-[60vh] sm:max-h-[70vh] rounded-2xl overflow-hidden border border-neutral-800 shadow-2xl"
                 >
                   <img
                     src={GALLERY_DATA[activeItemIndex].image}
@@ -417,11 +417,11 @@ export default function MissionGallery({ isArabic }: MissionGalleryProps) {
               </div>
 
               {/* Informational Column */}
-              <div className="lg:col-span-4 p-5 sm:p-6 bg-neutral-900/60 border border-neutral-850 rounded-xl backdrop-blur-md space-y-4 self-center">
+              <div className="lg:col-span-4 p-5 sm:p-6 bg-neutral-900/60 border border-neutral-850 rounded-2xl backdrop-blur-md space-y-4 self-center">
                 
                 {/* Meta Header */}
                 <div className="pb-3 border-b border-neutral-800 space-y-1">
-                  <span className="px-2 py-0.5 bg-brand-teal/10 border border-brand-teal/20 text-[9px] font-mono text-brand-teal tracking-wider uppercase rounded inline-block">
+                  <span className="px-2 py-0.5 bg-brand-teal/10 border border-brand-teal/20 text-[9px] font-mono text-brand-teal tracking-wider uppercase rounded-lg inline-block">
                     {GALLERY_DATA[activeItemIndex].mission} // MISSION LOG
                   </span>
                   <div className="flex items-center justify-between text-[10px] font-mono text-neutral-500 pt-1">
@@ -473,7 +473,7 @@ export default function MissionGallery({ isArabic }: MissionGalleryProps) {
                 <button
                   onClick={() => setActiveItemIndex(null)}
                   id="lightbox-primary-exit-btn"
-                  className="w-full py-2 bg-neutral-950 hover:bg-neutral-900 text-neutral-300 hover:text-white font-mono text-[10px] tracking-wider uppercase border border-neutral-800 hover:border-neutral-700 rounded transition-all cursor-pointer"
+                  className="w-full py-2 bg-neutral-950 hover:bg-neutral-900 text-neutral-300 hover:text-white font-mono text-[10px] tracking-wider uppercase border border-neutral-800 hover:border-neutral-700 rounded-lg transition-all cursor-pointer"
                 >
                   {isArabic ? "إغلاق لوحة العرض" : "Close Viewport Window"}
                 </button>

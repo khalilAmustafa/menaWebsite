@@ -95,7 +95,7 @@ export default function Programs({ isArabic }: ProgramsProps) {
         </ScrollReveal>
 
         {/* Dynamic Interactive Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {ACTION_PROGRAMS.map((prog, i) => (
             <motion.div
               key={prog.id}
@@ -151,7 +151,7 @@ export default function Programs({ isArabic }: ProgramsProps) {
               <div className="border-t border-neutral-900 pt-4 mt-4">
                 <button
                   onClick={() => setSelectedProgId(prog.id)}
-                  className="w-full py-2.5 rounded bg-neutral-950 hover:bg-neutral-900 border border-neutral-800 text-[10px] sm:text-xs font-mono tracking-wider font-bold text-brand-teal flex items-center justify-center gap-1.5 transition-colors cursor-pointer hover:border-brand-teal/30"
+                  className="w-full py-2.5 rounded-lg bg-neutral-950 hover:bg-neutral-900 border border-neutral-800 text-[10px] sm:text-xs font-mono tracking-wider font-bold text-brand-teal flex items-center justify-center gap-1.5 transition-colors cursor-pointer hover:border-brand-teal/30"
                 >
                   <BookOpen className="w-3.5 h-3.5" />
                   {isArabic ? "عرض المنهج الدراسي الكامل" : "VIEW SYLLABUS DETAILS"}
@@ -208,7 +208,7 @@ export default function Programs({ isArabic }: ProgramsProps) {
               </div>
 
               {/* Timing Metadata stats */}
-              <div className="grid grid-cols-2 gap-3.5 mb-6 py-3 px-4 bg-neutral-900/40 rounded border border-neutral-900/80 font-mono text-[10px]">
+              <div className="grid grid-cols-2 gap-3.5 mb-6 py-3 px-4 bg-neutral-900/40 rounded-lg border border-neutral-900/80 font-mono text-[10px]">
                 <div>
                   <span className="text-neutral-500 block">PROGRAM PERIOD</span>
                   <span className="text-neutral-200 mt-1 block flex items-center"><Clock className="w-3.5 h-3.5 text-brand-teal mr-1" /> {extraInfo.timing}</span>
@@ -227,7 +227,7 @@ export default function Programs({ isArabic }: ProgramsProps) {
                 </h4>
                 <ul className="space-y-2.5">
                   {extraInfo.syllabus.map((item, idx) => (
-                    <li key={idx} className="p-3 bg-neutral-950/80 rounded border border-neutral-900/80 font-mono text-xs text-neutral-200 flex items-start gap-2">
+                    <li key={idx} className="p-3 bg-neutral-950/80 rounded-lg border border-neutral-900/80 font-mono text-xs text-neutral-200 flex items-start gap-2">
                       <span className="text-brand-teal font-bold block">[{idx + 1}]</span>
                       <span>
                         {isArabic ? (
@@ -261,7 +261,7 @@ export default function Programs({ isArabic }: ProgramsProps) {
               <div className="mt-8 pt-4 border-t border-neutral-900/60">
                 <button
                   onClick={() => setSelectedProgId(null)}
-                  className="w-full py-3 rounded bg-brand-teal hover:bg-brand-teal-hover text-white font-display font-medium text-xs tracking-widest uppercase cursor-pointer text-center block font-bold transition-colors"
+                  className="w-full py-3 rounded-lg bg-brand-teal hover:bg-brand-teal-hover text-white font-display font-medium text-xs tracking-widest uppercase cursor-pointer text-center block font-bold transition-colors"
                 >
                   {isArabic ? "إغلاق التفاصيل" : "CLOSE INFORMATION DETAIL"}
                 </button>

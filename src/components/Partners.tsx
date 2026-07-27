@@ -103,8 +103,8 @@ interface PartnersProps {
 export default function Partners({ isArabic }: PartnersProps) {
   return (
     <section 
-      id="partners" 
-      className="relative bg-transparent py-12 sm:py-16 scroll-mt-20"
+      id="partners"
+      className="relative bg-transparent py-12 sm:py-16"
     >
       
       {/* Decorative ambient background accent */}
@@ -142,7 +142,7 @@ export default function Partners({ isArabic }: PartnersProps) {
                 <div
                   key={`${partner.id}-a`}
                   id={`partner-card-${partner.id}-a`}
-                  className="group flex items-center gap-4 bg-neutral-900/15 hover:bg-neutral-900/40 border border-neutral-900/80 hover:border-brand-teal/30 rounded-xl px-6 py-4 transition-all duration-300 w-[240px] sm:w-[280px] shrink-0"
+                  className="group flex items-center gap-4 bg-neutral-900/15 hover:bg-neutral-900/40 border border-neutral-900/80 hover:border-brand-teal/30 rounded-2xl px-6 py-4 transition-all duration-300 w-[240px] sm:w-[280px] shrink-0"
                 >
                   <div className="p-2.5 bg-neutral-950/60 rounded-lg border border-neutral-900 group-hover:border-brand-teal/20 transition-colors flex-shrink-0">
                     <PartnerIcon className={`w-5 h-5 transition-transform duration-300 group-hover:scale-110 ${partner.colorClass}`} />
@@ -168,7 +168,7 @@ export default function Partners({ isArabic }: PartnersProps) {
                 <div
                   key={`${partner.id}-b`}
                   id={`partner-card-${partner.id}-b`}
-                  className="group flex items-center gap-4 bg-neutral-900/15 hover:bg-neutral-900/40 border border-neutral-900/80 hover:border-brand-teal/30 rounded-xl px-6 py-4 transition-all duration-300 w-[240px] sm:w-[280px] shrink-0"
+                  className="group flex items-center gap-4 bg-neutral-900/15 hover:bg-neutral-900/40 border border-neutral-900/80 hover:border-brand-teal/30 rounded-2xl px-6 py-4 transition-all duration-300 w-[240px] sm:w-[280px] shrink-0"
                 >
                   <div className="p-2.5 bg-neutral-950/60 rounded-lg border border-neutral-900 group-hover:border-brand-teal/20 transition-colors flex-shrink-0">
                     <PartnerIcon className={`w-5 h-5 transition-transform duration-300 group-hover:scale-110 ${partner.colorClass}`} />

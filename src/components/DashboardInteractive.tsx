@@ -188,7 +188,7 @@ export default function DashboardInteractive({ isArabic }: { isArabic: boolean }
         </div>
 
         {/* Dynamic Mission Clock */}
-        <div className="flex items-center space-x-3 bg-neutral-900/40 border border-neutral-900 px-4 py-1.5 rounded text-right">
+        <div className="flex items-center space-x-3 bg-neutral-900/40 border border-neutral-900 px-4 py-1.5 rounded-lg text-right">
           <div className="font-mono text-xs sm:text-sm font-bold tracking-widest text-brand-teal">
             {controlState.missionClock}
           </div>
@@ -263,11 +263,11 @@ export default function DashboardInteractive({ isArabic }: { isArabic: boolean }
 
           {/* Habitat Metrics Box */}
           <div className="grid grid-cols-2 gap-3.5 pt-4 border-t border-neutral-900/60">
-            <div className="bg-neutral-900/10 p-3 rounded border border-neutral-900/60">
+            <div className="bg-neutral-900/10 p-3 rounded-lg border border-neutral-900/60">
               <span className="font-mono text-[9px] text-neutral-500 block">BASE PRESS</span>
               <span className="font-mono text-xs font-bold text-neutral-200">{controlState.pressureLevel} kPa</span>
             </div>
-            <div className="bg-neutral-900/10 p-3 rounded border border-neutral-900/60">
+            <div className="bg-neutral-900/10 p-3 rounded-lg border border-neutral-900/60">
               <span className="font-mono text-[9px] text-neutral-500 block">INTERNAL TEMP</span>
               <span className="font-mono text-xs font-bold text-neutral-200">{controlState.interiorTemp} °C</span>
             </div>
@@ -276,7 +276,7 @@ export default function DashboardInteractive({ isArabic }: { isArabic: boolean }
           <div className="space-y-2 pt-2">
             <button
               onClick={handleToggleEva}
-              className={`w-full py-2.5 px-4 rounded font-display font-medium text-xs tracking-wider transition-all duration-300 cursor-pointer ${
+              className={`w-full py-2.5 px-4 rounded-lg font-display font-medium text-xs tracking-wider transition-all duration-300 cursor-pointer ${
                 controlState.isEvaActive 
                 ? 'bg-brand-red hover:bg-[#ae3823] text-white shadow-lg shadow-brand-red/10 font-bold border-t border-white/5' 
                 : 'bg-neutral-900 hover:bg-neutral-850 border border-neutral-800 text-neutral-200 hover:border-brand-teal/50'
@@ -303,7 +303,7 @@ export default function DashboardInteractive({ isArabic }: { isArabic: boolean }
                 <button
                   key={crew.id}
                   onClick={() => setActiveCrewId(crew.id)}
-                  className={`w-full text-left p-3 rounded flex items-center justify-between border transition-all cursor-pointer ${
+                  className={`w-full text-left p-3 rounded-lg flex items-center justify-between border transition-all cursor-pointer ${
                     activeCrewId === crew.id 
                     ? 'bg-neutral-900 border-brand-teal/40 text-neutral-100 shadow-sm shadow-brand-teal/5' 
                     : 'bg-transparent border-transparent text-neutral-500 hover:text-neutral-350 hover:bg-neutral-900/30'
@@ -325,12 +325,12 @@ export default function DashboardInteractive({ isArabic }: { isArabic: boolean }
           </div>
 
           {/* Vitals breakdown of active selected person */}
-          <div className="border-t border-neutral-900/60 pt-4 bg-neutral-900/5 p-4 rounded border border-neutral-900">
+          <div className="border-t border-neutral-900/60 pt-4 bg-neutral-900/5 p-4 rounded-lg border border-neutral-900">
             <div className="flex justify-between items-start mb-2.5">
               <span className="font-mono text-[9.5px] text-neutral-450 uppercase tracking-wider">
                 {isArabic ? "تفاصيل حالة رائد الفضاء" : "ANALOG BIOMETRICS SCAN"}
               </span>
-              <span className={`font-mono text-[9px] px-2 py-0.5 rounded uppercase font-bold ${
+              <span className={`font-mono text-[9px] px-2 py-0.5 rounded-lg uppercase font-bold ${
                 selectedCrew.status === 'Stable' 
                   ? 'bg-emerald-950/40 text-emerald-400 border border-emerald-500/10' 
                   : 'bg-brand-red/10 text-brand-red border border-brand-red/20'
@@ -345,14 +345,14 @@ export default function DashboardInteractive({ isArabic }: { isArabic: boolean }
             </div>
 
             <div className="grid grid-cols-2 gap-3 mb-1 font-mono text-xs">
-              <div className="flex justify-between p-2 rounded bg-neutral-950/40 border border-neutral-900/80">
+              <div className="flex justify-between p-2 rounded-lg bg-neutral-950/40 border border-neutral-900/80">
                 <span className="text-neutral-500 text-[9px]">PULSE</span>
                 <span className="text-brand-teal font-bold flex items-center">
                   <Activity className="w-3.5 h-3.5 text-brand-red mr-1 animate-pulse" />
                   {selectedCrew.heartRate}
                 </span>
               </div>
-              <div className="flex justify-between p-2 rounded bg-neutral-950/40 border border-space-raised">
+              <div className="flex justify-between p-2 rounded-lg bg-neutral-950/40 border border-space-raised">
                 <span className="text-neutral-500 text-[9px]">SUIT PSI</span>
                 <span className="text-brand-teal font-bold">{selectedCrew.suitPressure}</span>
               </div>
@@ -369,7 +369,7 @@ export default function DashboardInteractive({ isArabic }: { isArabic: boolean }
             </span>
 
             {/* Console Screen */}
-            <div className="bg-black/90 p-4 rounded border border-neutral-900 font-mono text-[10px] space-y-2 text-brand-teal shadow-inner h-44 overflow-y-auto relative">
+            <div className="bg-black/90 p-4 rounded-lg border border-neutral-900 font-mono text-[10px] space-y-2 text-brand-teal shadow-inner h-44 overflow-y-auto relative">
               <div className="absolute top-0 right-0 w-2 h-full bg-gradient-to-l from-neutral-900/10 to-transparent pointer-events-none" />
               
               {/* Telemetry rows */}
@@ -396,11 +396,11 @@ export default function DashboardInteractive({ isArabic }: { isArabic: boolean }
                 value={customCommand}
                 onChange={(e) => setCustomCommand(e.target.value)}
                 placeholder={isArabic ? "أدخل بارامترات التحكم..." : "Enter orbital flags (e.g. init-stabilize)..."}
-                className="flex-1 bg-black text-neutral-200 border border-neutral-900 hover:border-neutral-850 rounded px-2.5 py-1.5 font-mono text-[11px] focus:outline-none focus:border-brand-teal transition-all"
+                className="flex-1 bg-black text-neutral-200 border border-neutral-900 hover:border-neutral-850 rounded-lg px-2.5 py-1.5 font-mono text-[11px] focus:outline-none focus:border-brand-teal transition-all"
               />
               <button
                 type="submit"
-                className="bg-brand-teal hover:bg-brand-teal-hover text-white transition-colors p-2 font-bold rounded cursor-pointer"
+                className="bg-brand-teal hover:bg-brand-teal-hover text-white transition-colors p-2 font-bold rounded-lg cursor-pointer"
               >
                 <Send className="w-3.5 h-3.5" />
               </button>
@@ -410,7 +410,7 @@ export default function DashboardInteractive({ isArabic }: { isArabic: boolean }
               <button
                 onClick={runDiagnostics}
                 disabled={isCalibrating}
-                className="flex-1 flex items-center justify-center p-2 rounded bg-neutral-900 hover:bg-neutral-850 text-neutral-300 border border-neutral-800 font-mono text-[10px] tracking-wide transition-colors disabled:opacity-55 cursor-pointer"
+                className="flex-1 flex items-center justify-center p-2 rounded-lg bg-neutral-900 hover:bg-neutral-850 text-neutral-300 border border-neutral-800 font-mono text-[10px] tracking-wide transition-colors disabled:opacity-55 cursor-pointer"
               >
                 <Cpu className="w-3.5 h-3.5 mr-1.5 text-brand-teal" />
                 {isArabic ? "معايرة نظام الاتصال" : "RE-CALIBRATE SYSTEMS"}

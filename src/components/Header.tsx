@@ -96,8 +96,8 @@ export default function Header({ isArabic, setIsArabic, activeSection, isLightMo
   };
 
   const headerBg = isLightMode
-    ? (scrolled ? 'bg-white/92 border-slate-200/85 shadow-lg shadow-slate-200/20' : 'bg-transparent border-slate-200/0')
-    : (scrolled ? 'bg-neutral-950/85 backdrop-blur-md border-white/[0.08] shadow-2xl shadow-black/50' : 'bg-transparent border-white/0');
+    ? (scrolled ? 'bg-[#fbf4ea] border-[#e0d2bd] shadow-lg shadow-[#3a2c26]/10' : 'bg-transparent border-slate-200/0')
+    : (scrolled ? 'bg-neutral-950 border-white/[0.08] shadow-2xl shadow-black/50' : 'bg-transparent border-white/0');
 
   const headerLayout = scrolled
     ? 'top-4 w-[90%] max-w-none rounded-2xl py-2.5 border'
@@ -134,7 +134,7 @@ export default function Header({ isArabic, setIsArabic, activeSection, isLightMo
                 >
                   <button
                     onClick={() => handleScrollTo('programs')}
-                    className={`px-3 py-1.5 rounded-md font-display text-xs tracking-wider uppercase transition-all duration-200 relative cursor-pointer flex items-center gap-1 ${
+                    className={`px-3 py-1.5 rounded-lg font-display text-xs tracking-wider uppercase transition-all duration-200 relative cursor-pointer flex items-center gap-1 ${
                       isActive 
                       ? 'text-white font-bold' 
                       : 'text-neutral-400 hover:text-white'
@@ -159,13 +159,13 @@ export default function Header({ isArabic, setIsArabic, activeSection, isLightMo
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 10, scale: 0.95 }}
                         transition={{ duration: 0.15 }}
-                        className="absolute left-1/2 -translate-x-1/2 mt-1 w-64 rounded-xl bg-space-deep border border-neutral-900 shadow-2xl p-2 z-[60] overflow-hidden"
+                        className="absolute left-1/2 -translate-x-1/2 mt-1 w-64 rounded-2xl bg-space-deep border border-neutral-900 shadow-2xl p-2 z-[60] overflow-hidden"
                       >
                         <div className="py-1 flex flex-col gap-0.5">
                           {/* Main Header acting as clickable link to center Programs */}
                           <button
                             onClick={() => handleProgramClick('overview')}
-                            className="w-full text-left rtl:text-right px-3 py-2 text-[10px] font-mono tracking-widest text-brand-teal bg-neutral-900/45 hover:bg-neutral-900 uppercase font-bold transition-all rounded block border-b border-neutral-900/80 mb-1"
+                            className="w-full text-left rtl:text-right px-3 py-2 text-[10px] font-mono tracking-widest text-brand-teal bg-neutral-900/45 hover:bg-neutral-900 uppercase font-bold transition-all rounded-lg block border-b border-neutral-900/80 mb-1"
                           >
                             {isArabic ? "البرامج والأنشطة" : "PROGRAMS & ACTIVITIES"}
                           </button>
@@ -179,7 +179,7 @@ export default function Header({ isArabic, setIsArabic, activeSection, isLightMo
                             <button
                               key={item.id}
                               onClick={() => handleProgramClick(item.id)}
-                              className="w-full text-left rtl:text-right px-3 py-2 text-xs text-neutral-400 hover:text-white hover:bg-space-dark hover:border-l-2 rtl:hover:border-l-0 rtl:hover:border-r-2 hover:border-brand-teal/80 transition-all rounded block font-sans"
+                              className="w-full text-left rtl:text-right px-3 py-2 text-xs text-neutral-400 hover:text-white hover:bg-space-dark hover:border-l-2 rtl:hover:border-l-0 rtl:hover:border-r-2 hover:border-brand-teal/80 transition-all rounded-lg block font-sans"
                             >
                               {isArabic ? item.arabic : item.label}
                             </button>
@@ -202,7 +202,7 @@ export default function Header({ isArabic, setIsArabic, activeSection, isLightMo
                 >
                   <button
                     onClick={() => handleScrollTo('teams')}
-                    className={`px-3 py-1.5 rounded-md font-display text-xs tracking-wider uppercase transition-all duration-200 relative cursor-pointer flex items-center gap-1 ${
+                    className={`px-3 py-1.5 rounded-lg font-display text-xs tracking-wider uppercase transition-all duration-200 relative cursor-pointer flex items-center gap-1 ${
                       isActive 
                       ? 'text-white font-bold' 
                       : 'text-neutral-400 hover:text-white'
@@ -227,13 +227,13 @@ export default function Header({ isArabic, setIsArabic, activeSection, isLightMo
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 10, scale: 0.95 }}
                         transition={{ duration: 0.15 }}
-                        className="absolute left-1/2 -translate-x-1/2 mt-1 w-72 rounded-xl bg-space-deep border border-neutral-900 shadow-2xl p-2 z-[60] overflow-hidden"
+                        className="absolute left-1/2 -translate-x-1/2 mt-1 w-72 rounded-2xl bg-space-deep border border-neutral-900 shadow-2xl p-2 z-[60] overflow-hidden"
                       >
                         <div className="py-1 flex flex-col gap-0.5">
                           {/* Main Header acting as clickable link to center Teams list */}
                           <button
                             onClick={() => handleTeamClick('overview')}
-                            className="w-full text-left rtl:text-right px-3 py-2 text-[10px] font-mono tracking-widest text-brand-teal bg-neutral-900/45 hover:bg-neutral-900 uppercase font-bold transition-all rounded block border-b border-neutral-900/80 mb-1"
+                            className="w-full text-left rtl:text-right px-3 py-2 text-[10px] font-mono tracking-widest text-brand-teal bg-neutral-900/45 hover:bg-neutral-900 uppercase font-bold transition-all rounded-lg block border-b border-neutral-900/80 mb-1"
                           >
                             {isArabic ? "الهيكل الإداري والأقسام" : "EXPLORE DEPARTMENTS"}
                           </button>
@@ -253,7 +253,7 @@ export default function Header({ isArabic, setIsArabic, activeSection, isLightMo
                             <button
                               key={item.id}
                               onClick={() => handleTeamClick(item.id)}
-                              className="w-full text-left rtl:text-right px-3 py-1.5 text-xs text-neutral-400 hover:text-white hover:bg-space-dark hover:border-l-2 rtl:hover:border-l-0 rtl:hover:border-r-2 hover:border-brand-teal/80 transition-all rounded block font-sans"
+                              className="w-full text-left rtl:text-right px-3 py-1.5 text-xs text-neutral-400 hover:text-white hover:bg-space-dark hover:border-l-2 rtl:hover:border-l-0 rtl:hover:border-r-2 hover:border-brand-teal/80 transition-all rounded-lg block font-sans"
                             >
                               {isArabic ? item.arabic : item.label}
                             </button>
@@ -270,7 +270,7 @@ export default function Header({ isArabic, setIsArabic, activeSection, isLightMo
               <button
                 key={link.id}
                 onClick={() => handleScrollTo(link.id)}
-                className={`px-3 py-1.5 rounded-md font-display text-xs tracking-wider uppercase transition-all duration-200 relative cursor-pointer ${
+                className={`px-3 py-1.5 rounded-lg font-display text-xs tracking-wider uppercase transition-all duration-200 relative cursor-pointer ${
                   isActive 
                   ? 'text-white font-bold' 
                   : 'text-neutral-400 hover:text-white'
@@ -295,7 +295,7 @@ export default function Header({ isArabic, setIsArabic, activeSection, isLightMo
           {/* Language Selector Switch */}
           <button
             onClick={() => setIsArabic(!isArabic)}
-            className="flex items-center space-x-1.5 px-3 py-1.5 text-xs text-neutral-300 hover:text-white font-mono bg-neutral-950 border border-neutral-800 rounded-md transition-all cursor-pointer hover:border-brand-teal/50"
+            className="flex items-center space-x-1.5 px-3 py-1.5 text-xs text-neutral-300 hover:text-white font-mono bg-neutral-950 border border-neutral-800 rounded-lg transition-all cursor-pointer hover:border-brand-teal/50"
           >
             <Globe className="w-3.5 h-3.5 text-brand-teal" />
             <span>{isArabic ? "ENG" : "عربي"}</span>
@@ -305,7 +305,7 @@ export default function Header({ isArabic, setIsArabic, activeSection, isLightMo
           <button
             onClick={() => setIsLightMode(!isLightMode)}
             id="theme-mode-toggle"
-            className="flex items-center space-x-1.5 px-3 py-1.5 text-xs text-neutral-300 hover:text-white font-mono bg-neutral-950 border border-neutral-800 rounded-md transition-all cursor-pointer hover:border-brand-teal/50"
+            className="flex items-center space-x-1.5 px-3 py-1.5 text-xs text-neutral-300 hover:text-white font-mono bg-neutral-950 border border-neutral-800 rounded-lg transition-all cursor-pointer hover:border-brand-teal/50"
             title={isArabic ? "تبديل المظهر" : "Toggle Theme"}
           >
             {isLightMode ? (
@@ -327,7 +327,7 @@ export default function Header({ isArabic, setIsArabic, activeSection, isLightMo
           {/* Lang switcher on mobile */}
           <button
             onClick={() => setIsArabic(!isArabic)}
-            className="flex items-center space-x-1.5 px-2.5 py-1 text-[11px] text-neutral-300 font-mono bg-neutral-905 border border-neutral-800 rounded transition-all cursor-pointer hover:border-brand-teal"
+            className="flex items-center space-x-1.5 px-2.5 py-1 text-[11px] text-neutral-300 font-mono bg-neutral-905 border border-neutral-800 rounded-lg transition-all cursor-pointer hover:border-brand-teal"
           >
             <Globe className="w-3.5 h-3.5 text-brand-teal" />
             <span>{isArabic ? "ENG" : "عربي"}</span>
@@ -337,7 +337,7 @@ export default function Header({ isArabic, setIsArabic, activeSection, isLightMo
           <button
             onClick={() => setIsLightMode(!isLightMode)}
             id="theme-mode-toggle-mobile"
-            className="flex items-center space-x-1.5 px-2.5 py-1 text-[11px] text-neutral-300 font-mono bg-neutral-905 border border-neutral-800 rounded transition-all cursor-pointer hover:border-brand-teal"
+            className="flex items-center space-x-1.5 px-2.5 py-1 text-[11px] text-neutral-300 font-mono bg-neutral-905 border border-neutral-800 rounded-lg transition-all cursor-pointer hover:border-brand-teal"
             title={isArabic ? "تبديل المظهر" : "Toggle Theme"}
           >
             {isLightMode ? (
@@ -382,7 +382,7 @@ export default function Header({ isArabic, setIsArabic, activeSection, isLightMo
                     <div key={link.id} className="space-y-1 py-1">
                       <button
                         onClick={() => setMobileProgramsOpen(!mobileProgramsOpen)}
-                        className={`w-full text-left rtl:text-right py-2 px-3 rounded text-sm font-display tracking-widest uppercase transition-all font-bold text-brand-teal flex items-center justify-between cursor-pointer`}
+                        className={`w-full text-left rtl:text-right py-2 px-3 rounded-lg text-sm font-display tracking-widest uppercase transition-all font-bold text-brand-teal flex items-center justify-between cursor-pointer`}
                       >
                         <span>{isArabic ? "البرامج والأنشطة" : "PROGRAMS & ACTIVITIES"}</span>
                         <ChevronDown className={`w-4 h-4 transition-transform duration-200 text-neutral-400 ${mobileProgramsOpen ? 'rotate-180 text-brand-teal' : 'rotate-0'}`} />
@@ -402,7 +402,7 @@ export default function Header({ isArabic, setIsArabic, activeSection, isLightMo
                                 handleScrollTo('programs');
                                 setMobileProgramsOpen(false);
                               }}
-                              className="block w-full text-left rtl:text-right py-2 px-3 rounded text-[11px] font-mono uppercase tracking-wider text-brand-teal hover:text-white hover:bg-neutral-900/40 transition-all font-bold"
+                              className="block w-full text-left rtl:text-right py-2 px-3 rounded-lg text-[11px] font-mono uppercase tracking-wider text-brand-teal hover:text-white hover:bg-neutral-900/40 transition-all font-bold"
                             >
                               • {isArabic ? "عرض الكل" : "VIEW OVERVIEW"}
                             </button>
@@ -418,7 +418,7 @@ export default function Header({ isArabic, setIsArabic, activeSection, isLightMo
                                   handleProgramClick(item.id);
                                   setMobileProgramsOpen(false);
                                 }}
-                                className="block w-full text-left rtl:text-right py-2 px-3 rounded text-[11px] font-mono uppercase tracking-wider text-neutral-400 hover:text-white hover:bg-neutral-900/40 transition-all text-sm animate-fade-in"
+                                className="block w-full text-left rtl:text-right py-2 px-3 rounded-lg text-[11px] font-mono uppercase tracking-wider text-neutral-400 hover:text-white hover:bg-neutral-900/40 transition-all text-sm animate-fade-in"
                               >
                                 • {isArabic ? item.arabic : item.label}
                               </button>
@@ -435,7 +435,7 @@ export default function Header({ isArabic, setIsArabic, activeSection, isLightMo
                     <div key={link.id} className="space-y-1 py-1">
                       <button
                         onClick={() => setMobileTeamOpen(!mobileTeamOpen)}
-                        className={`w-full text-left rtl:text-right py-2 px-3 rounded text-sm font-display tracking-widest uppercase transition-all font-bold text-brand-teal flex items-center justify-between cursor-pointer`}
+                        className={`w-full text-left rtl:text-right py-2 px-3 rounded-lg text-sm font-display tracking-widest uppercase transition-all font-bold text-brand-teal flex items-center justify-between cursor-pointer`}
                       >
                         <span>{isArabic ? "أقسام وفريق العمل" : "TEAM & DEPARTMENTS"}</span>
                         <ChevronDown className={`w-4 h-4 transition-transform duration-200 text-neutral-400 ${mobileTeamOpen ? 'rotate-180 text-brand-teal' : 'rotate-0'}`} />
@@ -455,7 +455,7 @@ export default function Header({ isArabic, setIsArabic, activeSection, isLightMo
                                 handleScrollTo('teams');
                                 setMobileTeamOpen(false);
                               }}
-                              className="block w-full text-left rtl:text-right py-2 px-3 rounded text-[11px] font-mono uppercase tracking-wider text-brand-teal hover:text-white hover:bg-neutral-900/40 transition-all font-bold"
+                              className="block w-full text-left rtl:text-right py-2 px-3 rounded-lg text-[11px] font-mono uppercase tracking-wider text-brand-teal hover:text-white hover:bg-neutral-900/40 transition-all font-bold"
                             >
                               • {isArabic ? "عرض الكل" : "EXPLORE DEPARTMENTS"}
                             </button>
@@ -477,7 +477,7 @@ export default function Header({ isArabic, setIsArabic, activeSection, isLightMo
                                   handleTeamClick(item.id);
                                   setMobileTeamOpen(false);
                                 }}
-                                className="block w-full text-left rtl:text-right py-1.5 px-3 rounded text-[11px] font-mono uppercase tracking-wider text-neutral-400 hover:text-white hover:bg-neutral-900/40 transition-all"
+                                className="block w-full text-left rtl:text-right py-1.5 px-3 rounded-lg text-[11px] font-mono uppercase tracking-wider text-neutral-400 hover:text-white hover:bg-neutral-900/40 transition-all"
                               >
                                 • {isArabic ? item.arabic : item.label}
                               </button>
@@ -493,7 +493,7 @@ export default function Header({ isArabic, setIsArabic, activeSection, isLightMo
                   <button
                     key={link.id}
                     onClick={() => handleScrollTo(link.id)}
-                    className={`block w-full text-left rtl:text-right py-2 px-3 rounded text-sm font-display tracking-widest uppercase transition-colors ${
+                    className={`block w-full text-left rtl:text-right py-2 px-3 rounded-lg text-sm font-display tracking-widest uppercase transition-colors ${
                       isActive 
                       ? 'bg-neutral-900 text-white font-bold border-l-2 rtl:border-l-0 rtl:border-r-2 border-brand-teal' 
                       : 'text-neutral-400 hover:bg-neutral-900/60 hover:text-white'

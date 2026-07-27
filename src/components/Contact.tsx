@@ -77,23 +77,23 @@ export default function Contact({ isArabic }: ContactProps) {
             </div>
 
             <div className="space-y-4 font-mono text-xs text-neutral-300">
-              <div className="flex items-center space-x-3.5 p-3.5 bg-neutral-900/30 rounded border border-neutral-900/80">
+              <div className="flex items-center space-x-3.5 p-3.5 bg-neutral-900/30 rounded-lg border border-neutral-900/80">
                 <MapPin className="w-4 h-4 text-brand-teal flex-shrink-0" />
                 <span>
                   {isArabic ? "ميدان الأبحاث: وادي رم، العقبة، الأردن" : "FIELD: Wadi Rum Reserve, Aqaba, Jordan"}
                 </span>
               </div>
 
-              <div className="flex items-center space-x-3.5 p-3.5 bg-neutral-900/30 rounded border border-neutral-900/80">
+              <div className="flex items-center space-x-3.5 p-3.5 bg-neutral-900/30 rounded-lg border border-neutral-900/80">
                 <Mail className="w-4 h-4 text-brand-red flex-shrink-0" />
                 <span>INFO@MENASPACE.ORG / SECURE LINK</span>
               </div>
             </div>
 
             {/* WhatsApp Integration Shortcut with brand green balance or teal */}
-            <div className="p-5 rounded-xl border border-emerald-500/30 bg-emerald-950/20">
+            <div className="p-5 rounded-2xl border border-emerald-500/30 bg-emerald-950/20">
               <div className="flex items-start gap-3.5 mb-4">
-                <div className="p-2 bg-emerald-500/10 text-emerald-400 rounded border border-emerald-500/30 animate-pulse">
+                <div className="p-2 bg-emerald-500/10 text-emerald-400 rounded-lg border border-emerald-500/30 animate-pulse">
                   <MessageSquare className="w-5 h-5" />
                 </div>
                 <div>
@@ -117,7 +117,7 @@ export default function Contact({ isArabic }: ContactProps) {
                 target="_blank"
                 rel="noopener noreferrer"
                 referrerPolicy="no-referrer"
-                className="inline-flex items-center bg-emerald-500 hover:bg-emerald-600 font-display font-black text-[10px] sm:text-xs text-neutral-950 tracking-widest uppercase px-5 py-2.5 rounded transition-all shadow-lg"
+                className="inline-flex items-center bg-emerald-500 hover:bg-emerald-600 font-display font-black text-[10px] sm:text-xs text-neutral-950 tracking-widest uppercase px-5 py-2.5 rounded-lg transition-all shadow-lg"
               >
                 {isArabic ? "افتح محادثة واتساب" : "LAUNCH WHATSAPP COMM"}
               </a>
@@ -126,8 +126,8 @@ export default function Contact({ isArabic }: ContactProps) {
             {/* Social Medias */}
             <div className="flex items-center space-x-2">
               <span className="font-mono text-[9px] text-neutral-500 uppercase tracking-widest mr-2">SECURE NETWORKS:</span>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer" className="p-2 bg-neutral-900 hover:bg-neutral-850 text-neutral-450 hover:text-brand-teal rounded border border-neutral-850 transition-colors"><Linkedin className="w-4 h-4" /></a>
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer" className="p-2 bg-neutral-900 hover:bg-neutral-850 text-neutral-450 hover:text-brand-red rounded border border-neutral-850 transition-colors"><Globe2 className="w-4 h-4" /></a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer" className="p-2 bg-neutral-900 hover:bg-neutral-850 text-neutral-450 hover:text-brand-teal rounded-lg border border-neutral-850 transition-colors"><Linkedin className="w-4 h-4" /></a>
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer" className="p-2 bg-neutral-900 hover:bg-neutral-850 text-neutral-450 hover:text-brand-red rounded-lg border border-neutral-850 transition-colors"><Globe2 className="w-4 h-4" /></a>
             </div>
           </div>
 
@@ -144,7 +144,7 @@ export default function Contact({ isArabic }: ContactProps) {
                 <button
                   type="button"
                   onClick={() => setFormData({ ...formData, roleType: 'volunteer' })}
-                  className={`py-2 px-4 rounded font-mono text-[10px] tracking-widest uppercase cursor-pointer transition-all ${
+                  className={`py-2 px-4 rounded-lg font-mono text-[10px] tracking-widest uppercase cursor-pointer transition-all ${
                     formData.roleType === 'volunteer' 
                     ? 'bg-neutral-900 border border-neutral-800 text-white font-bold' 
                     : 'text-neutral-500 hover:text-neutral-300'
@@ -155,7 +155,7 @@ export default function Contact({ isArabic }: ContactProps) {
                 <button
                   type="button"
                   onClick={() => setFormData({ ...formData, roleType: 'partner' })}
-                  className={`py-2 px-4 rounded font-mono text-[10px] tracking-widest uppercase cursor-pointer transition-all ${
+                  className={`py-2 px-4 rounded-lg font-mono text-[10px] tracking-widest uppercase cursor-pointer transition-all ${
                     formData.roleType === 'partner' 
                     ? 'bg-neutral-900 border border-neutral-800 text-white font-bold' 
                     : 'text-neutral-500 hover:text-neutral-300'
@@ -176,7 +176,7 @@ export default function Contact({ isArabic }: ContactProps) {
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   placeholder={isArabic ? "مثال: م. سارة العبادي" : "e.g. Eng. Sarah Abbadi / Hashemite University"}
-                  className="w-full bg-black text-neutral-200 border border-neutral-900/80 hover:border-neutral-850 rounded px-3.5 py-3 font-mono text-[11px] focus:outline-none focus:border-brand-red transition-all"
+                  className="w-full bg-black text-neutral-200 border border-neutral-900/80 hover:border-neutral-850 rounded-lg px-3.5 py-3 font-mono text-[11px] focus:outline-none focus:border-brand-red transition-all"
                 />
               </div>
 
@@ -191,7 +191,7 @@ export default function Contact({ isArabic }: ContactProps) {
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   placeholder="name@aerospace.org"
-                  className="w-full bg-black text-neutral-200 border border-neutral-900/80 hover:border-neutral-850 rounded px-3.5 py-3 font-mono text-[11px] focus:outline-none focus:border-brand-teal transition-all"
+                  className="w-full bg-black text-neutral-200 border border-neutral-900/80 hover:border-neutral-850 rounded-lg px-3.5 py-3 font-mono text-[11px] focus:outline-none focus:border-brand-teal transition-all"
                 />
               </div>
 
@@ -203,7 +203,7 @@ export default function Contact({ isArabic }: ContactProps) {
                 <select
                   value={formData.interestDept}
                   onChange={(e) => setFormData({ ...formData, interestDept: e.target.value })}
-                  className="w-full bg-black text-neutral-400 border border-neutral-900/80 rounded px-3.5 py-3 font-mono text-[11px] focus:outline-none focus:border-neutral-800"
+                  className="w-full bg-black text-neutral-400 border border-neutral-900/80 rounded-lg px-3.5 py-3 font-mono text-[11px] focus:outline-none focus:border-neutral-800"
                 >
                   <option value="engineering">{isArabic ? "تطوير البدلات واللوجستيات الهندسية" : "Spacesuit Fabrications"}</option>
                   <option value="mission-control">{isArabic ? "أنظمة الاتصال في غرفة عمليات عمان" : "AMMAN Mission Controls"}</option>
@@ -222,14 +222,14 @@ export default function Contact({ isArabic }: ContactProps) {
                   value={formData.comments}
                   onChange={(e) => setFormData({ ...formData, comments: e.target.value })}
                   placeholder={isArabic ? "اخبرنا عن مهاراتك الهندسية أو رغبتك في توجيه عينات الأبحاث..." : "Briefly articulate details of your skills, student body count, or target material sponsorship scope."}
-                  className="w-full bg-black text-neutral-200 border border-neutral-900/80 hover:border-neutral-850 rounded px-3.5 py-3 font-mono text-[11px] focus:outline-none focus:border-neutral-800"
+                  className="w-full bg-black text-neutral-200 border border-neutral-900/80 hover:border-neutral-850 rounded-lg px-3.5 py-3 font-mono text-[11px] focus:outline-none focus:border-neutral-800"
                 />
               </div>
 
               <div className="pt-4">
                 <button
                   type="submit"
-                  className="w-full bg-brand-teal hover:bg-brand-teal-hover text-white py-3.5 rounded font-display font-semibold text-xs font-bold tracking-widest uppercase flex items-center justify-center gap-1.5 cursor-pointer shadow-lg shadow-brand-teal/10 active:scale-[0.99] transition-all"
+                  className="w-full bg-brand-teal hover:bg-brand-teal-hover text-white py-3.5 rounded-lg font-display font-semibold text-xs font-bold tracking-widest uppercase flex items-center justify-center gap-1.5 cursor-pointer shadow-lg shadow-brand-teal/10 active:scale-[0.99] transition-all"
                 >
                   <Send className="w-3.5 h-3.5" />
                   {isArabic ? "طرح وإرسال تفاصيل التوثيق" : "SUBMIT TELEMETRY REGISTRY"}
@@ -267,7 +267,7 @@ export default function Contact({ isArabic }: ContactProps) {
 
                   <button
                     onClick={() => setIsSubmitted(false)}
-                    className="px-6 py-2 bg-neutral-900 border border-neutral-800 rounded font-mono text-[10px] text-brand-teal tracking-widest uppercase transition-colors cursor-pointer hover:bg-neutral-850"
+                    className="px-6 py-2 bg-neutral-900 border border-neutral-800 rounded-lg font-mono text-[10px] text-brand-teal tracking-widest uppercase transition-colors cursor-pointer hover:bg-neutral-850"
                   >
                     {isArabic ? "تحرير وثيقة جديدة" : "NEW TRANSMISSION"}
                   </button>

@@ -91,7 +91,7 @@ export default function About({ isArabic }: AboutProps) {
             </p>
 
             {/* Quote Box in official brand scheme */}
-            <div className="p-5 rounded bg-neutral-900/45 border-l-4 border-brand-teal/80 font-mono text-xs tracking-wide text-neutral-300 leading-relaxed bg-[radial-gradient(ellipse_at_top_right,rgba(203,173,142,0.02),transparent)]">
+            <div className="p-5 rounded-lg bg-neutral-900/45 border-l-4 border-brand-teal/80 font-mono text-xs tracking-wide text-neutral-300 leading-relaxed bg-[radial-gradient(ellipse_at_top_right,rgba(203,173,142,0.02),transparent)]">
               {isArabic ? (
                 "\"الصحراء الأردنية مهد خصب للتحديات والصمود. نعمل على تحويل الرمال إلى مركب فسيح للاكتشاف والأبحاث الريادية الموجهة لخدمة البشرية واستدامتها.\""
               ) : (
@@ -108,9 +108,9 @@ export default function About({ isArabic }: AboutProps) {
                 <motion.div
                   key={i}
                   whileHover={{ scale: 1.015, x: 4 }}
-                  className="p-5 rounded-xl bg-neutral-900/60 border border-neutral-800/85 hover:border-brand-teal/30 transition-all duration-300 flex items-start gap-4"
+                  className="p-5 rounded-2xl bg-neutral-900/60 border border-neutral-800/85 hover:border-brand-teal/30 transition-all duration-300 flex items-start gap-4"
                 >
-                  <div className="p-3 bg-neutral-950 rounded border border-neutral-800 text-brand-teal">
+                  <div className="p-3 bg-neutral-950 rounded-lg border border-neutral-800 text-brand-teal">
                     <Icon className="w-5 h-5" />
                   </div>
                   <div>
@@ -138,7 +138,7 @@ export default function About({ isArabic }: AboutProps) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.15 }}
-                className="group relative p-6 bg-neutral-900/30 hover:bg-neutral-900/60 border border-neutral-900/60 rounded-xl transition-all duration-300 text-center flex flex-col justify-between"
+                className="group relative p-6 bg-neutral-900/30 hover:bg-neutral-900/60 border border-neutral-900/60 rounded-2xl transition-all duration-300 text-center flex flex-col justify-between"
               >
                 {/* Visual hover corner brackets mirroring our brand gradient */}
                 <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-brand-teal/20 group-hover:border-brand-teal/80 transition-colors" />

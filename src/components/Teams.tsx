@@ -176,9 +176,9 @@ export default function Teams({ isArabic }: TeamsProps) {
                 <button
                   key={dept.id}
                   onClick={() => setActiveDeptId(dept.id)}
-                  className={`w-full text-left p-4 sm:p-5 rounded-xl border transition-all duration-300 cursor-pointer ${
-                    isActive 
-                    ? 'bg-space-raised border-brand-teal/50 shadow-xl' 
+                  className={`dept-card w-full text-left p-4 sm:p-5 rounded-2xl border transition-all duration-300 cursor-pointer ${
+                    isActive
+                    ? 'dept-card-active bg-space-raised border-brand-teal/50 shadow-xl'
                     : 'bg-neutral-950/40 border-neutral-900/60 text-neutral-400 hover:text-neutral-200 hover:border-neutral-800'
                   }`}
                 >
@@ -216,7 +216,7 @@ export default function Teams({ isArabic }: TeamsProps) {
               >
                 {/* Header */}
                 <div>
-                  <span className="font-mono text-[9.5px] text-brand-teal tracking-widest uppercase bg-brand-teal/5 px-2.5 py-0.5 rounded border border-brand-teal/20 inline-block mb-3">
+                  <span className="font-mono text-[9.5px] text-brand-teal tracking-widest uppercase bg-brand-teal/5 px-2.5 py-0.5 rounded-lg border border-brand-teal/20 inline-block mb-3">
                     {selectedDept.id === 'dept-board' ? "GOVERNANCE BOARD" : 
                      selectedDept.id === 'dept-advisors' ? "SCIENTIFIC COUNCIL" :
                      selectedDept.id === 'dept-mission' ? "MISSION COMMAND" :
@@ -253,7 +253,7 @@ export default function Teams({ isArabic }: TeamsProps) {
 
                 {/* Team Lead Profile Display */}
                 {selectedDept.leadName && (
-                  <div className="p-4 bg-neutral-950/80 border border-neutral-900/60 rounded-xl flex items-center gap-4">
+                  <div className="p-4 bg-neutral-950/80 border border-neutral-900/60 rounded-2xl flex items-center gap-4">
                     <div className="p-3 bg-neutral-900/50 border border-neutral-800 rounded-lg text-brand-teal animate-pulse">
                       <User className="w-5 h-5" />
                     </div>
@@ -298,7 +298,7 @@ export default function Teams({ isArabic }: TeamsProps) {
                   </h4>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                     {selectedDept.coreFocus.map((focus, fIdx) => (
-                      <div key={fIdx} className="p-3 rounded bg-neutral-950/50 border border-neutral-900/60 flex items-center space-x-2 text-[10px] sm:text-xs text-neutral-200 font-mono">
+                      <div key={fIdx} className="p-3 rounded-lg bg-neutral-950/50 border border-neutral-900/60 flex items-center space-x-2 text-[10px] sm:text-xs text-neutral-200 font-mono">
                         <Check className="w-4 h-4 text-emerald-500 flex-shrink-0" />
                         <span>
                           {isArabic ? (
@@ -390,7 +390,7 @@ export default function Teams({ isArabic }: TeamsProps) {
                 <div className="flex items-center gap-4">
                   
                   {/* Avatar wrapper with custom animated glowing ring */}
-                  <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden border border-neutral-800 group-hover:border-brand-teal/60 transition-colors duration-300 flex-shrink-0">
+                  <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden border border-neutral-800 group-hover:border-brand-teal/60 transition-colors duration-300 flex-shrink-0">
                     <img
                       src={member.avatar}
                       alt={isArabic ? member.nameAR : member.nameEN}
@@ -403,7 +403,7 @@ export default function Teams({ isArabic }: TeamsProps) {
                   {/* Metadata and names block */}
                   <div className="space-y-1 flex-1 min-w-0">
                     <div className="flex items-center justify-between gap-1">
-                      <span className="font-mono text-[8px] text-neutral-500 uppercase tracking-widest bg-neutral-900/60 border border-neutral-800/80 px-2 py-0.5 rounded truncate">
+                      <span className="font-mono text-[8px] text-neutral-500 uppercase tracking-widest bg-neutral-900/60 border border-neutral-800/80 px-2 py-0.5 rounded-lg truncate">
                         {member.idCode}
                       </span>
                       <span className="inline-flex items-center space-x-1 text-[8px] font-mono text-emerald-400 flex-shrink-0">
@@ -446,14 +446,14 @@ export default function Teams({ isArabic }: TeamsProps) {
                   <a
                     href="#"
                     onClick={(e) => e.preventDefault()}
-                    className="p-1.5 rounded hover:bg-space-raised text-neutral-500 hover:text-brand-teal border border-transparent hover:border-neutral-900 transition-all cursor-pointer"
+                    className="p-1.5 rounded-lg hover:bg-space-raised text-neutral-500 hover:text-brand-teal border border-transparent hover:border-neutral-900 transition-all cursor-pointer"
                     aria-label="LinkedIn profile"
                   >
                     <Linkedin className="h-3.5 w-3.5" />
                   </a>
                   <a
                     href={`mailto:team@mena-space-analogue.org?subject=Inquiry to ${member.nameEN}`}
-                    className="p-1.5 rounded hover:bg-space-raised text-neutral-500 hover:text-brand-teal border border-transparent hover:border-neutral-900 transition-all cursor-pointer"
+                    className="p-1.5 rounded-lg hover:bg-space-raised text-neutral-500 hover:text-brand-teal border border-transparent hover:border-neutral-900 transition-all cursor-pointer"
                     aria-label="Email contact"
                   >
                     <Mail className="h-3.5 w-3.5" />

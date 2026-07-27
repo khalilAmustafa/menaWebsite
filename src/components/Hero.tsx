@@ -94,11 +94,11 @@ export default function Hero({ isArabic }: HeroProps) {
             transition={{ delay: 0.4, duration: 0.8 }}
             className="flex flex-wrap items-center gap-4 text-neutral-400 font-mono text-[10px] sm:text-xs tracking-wider justify-start rtl:justify-end"
           >
-            <div className="flex items-center gap-2 px-3 py-1.5 bg-neutral-900/40 border border-neutral-900/60 rounded">
+            <div className="flex items-center gap-2 px-3 py-1.5 bg-neutral-900/40 border border-neutral-900/60 rounded-lg">
               <span className="text-neutral-500">{isArabic ? "ميدان المحاكاة:" : "ANALOG SITE:"}</span>
               <span className="text-brand-teal font-bold">{isArabic ? "وادي رم" : "WADI RUM"}</span>
             </div>
-            <div className="flex items-center gap-2 px-3 py-1.5 bg-neutral-900/40 border border-neutral-900/60 rounded">
+            <div className="flex items-center gap-2 px-3 py-1.5 bg-neutral-900/40 border border-neutral-900/60 rounded-lg">
               <span className="text-neutral-500">{isArabic ? "مقر الابتكار:" : "INNOVATION HUB:"}</span>
               <span className="text-brand-beige font-bold">{isArabic ? "عمّان، الأردن" : "AMMAN, JORDAN"}</span>
             </div>
@@ -113,14 +113,14 @@ export default function Hero({ isArabic }: HeroProps) {
           >
             <button
               onClick={() => handleScrollTo('mission')}
-              className="w-full sm:w-auto px-8 py-3.5 bg-brand-teal hover:bg-brand-teal-hover text-white font-display font-bold text-xs tracking-widest uppercase rounded shadow-lg shadow-brand-teal/20 border-t border-white/10 transition-all cursor-pointer text-center"
+              className="w-full sm:w-auto px-8 py-3.5 bg-brand-teal hover:bg-brand-teal-hover text-white font-display font-bold text-xs tracking-widest uppercase rounded-lg shadow-lg shadow-brand-teal/20 border-t border-white/10 transition-all cursor-pointer text-center"
             >
               {isArabic ? "استكشف مهام رم" : "Launch Mission Map"}
             </button>
             
             <button
               onClick={() => handleScrollTo('contact')}
-              className="w-full sm:w-auto px-8 py-3.5 bg-transparent hover:bg-white/5 text-white font-display font-semibold text-xs tracking-widest uppercase rounded border border-neutral-800 hover:border-brand-teal/50 transition-all cursor-pointer text-center"
+              className="w-full sm:w-auto px-8 py-3.5 bg-transparent hover:bg-white/5 text-white font-display font-semibold text-xs tracking-widest uppercase rounded-lg border border-neutral-800 hover:border-brand-teal/50 transition-all cursor-pointer text-center"
             >
               {isArabic ? "سجل اهتمامك" : "Airlock Registration"}
             </button>

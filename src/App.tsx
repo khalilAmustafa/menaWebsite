@@ -73,10 +73,10 @@ export default function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-space-dark text-neutral-100 selection:bg-brand-teal selection:text-black font-sans relative overflow-x-hidden" dir={isArabic ? 'rtl' : 'ltr'}>
+    <div className="min-h-screen bg-black text-neutral-100 selection:bg-brand-teal selection:text-black font-sans relative overflow-x-hidden" dir={isArabic ? 'rtl' : 'ltr'}>
       
       {/* Absolute Ambient Background Starfield with brand accents */}
-      <div className={`absolute inset-0 ${isLightMode ? 'bg-[radial-gradient(ellipse_at_top,rgba(203,173,142,0.05),#f9fafb)]' : 'bg-[radial-gradient(ellipse_at_top,rgba(203,173,142,0.06),rgba(58,44,38,1))]'} pointer-events-none z-0`} />
+      <div className={`absolute inset-0 ${isLightMode ? 'bg-[radial-gradient(ellipse_at_top,rgba(203,173,142,0.10),#f9fafb)]' : 'bg-[radial-gradient(ellipse_at_top,rgba(203,173,142,0.06),transparent)]'} pointer-events-none z-0`} />
 
       {/* Scroll-aware background star field matching astronomy simulation ambient */}
       <Starfield />
@@ -119,7 +119,7 @@ export default function App() {
             </div>
 
             {/* Simulated server link badge */}
-            <div className="mt-4 md:mt-0 inline-flex items-center space-x-2 bg-brand-teal/5 border border-brand-teal/20 px-3.5 py-1.5 rounded font-mono text-[10px] text-brand-teal">
+            <div className="mt-4 md:mt-0 inline-flex items-center space-x-2 bg-brand-teal/5 border border-brand-teal/20 px-3.5 py-1.5 rounded-lg font-mono text-[10px] text-brand-teal">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-teal opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-teal"></span>

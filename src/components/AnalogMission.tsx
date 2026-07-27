@@ -28,7 +28,7 @@ export default function AnalogMission({ isArabic }: AnalogMissionProps) {
   };
 
   return (
-    <section ref={sectionRef} id="mission" className="relative bg-transparent py-12 sm:py-16 scroll-mt-10">
+    <section ref={sectionRef} id="mission" className="relative bg-transparent py-12 sm:py-16">
       
 
 
@@ -65,7 +65,7 @@ export default function AnalogMission({ isArabic }: AnalogMissionProps) {
         </ScrollReveal>
 
         {/* 1. Technical Showcase Tabs (Habitat, Rover, Spacesuits) */}
-        <ScrollReveal variant="fade-up" duration={0.8} className="mb-24 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-neutral-900/10 p-6 sm:p-8 rounded-2xl border border-neutral-900 absolute relative">
+        <ScrollReveal variant="fade-up" duration={0.8} className="mb-24 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-neutral-900/10 p-6 sm:p-8 rounded-2xl border border-neutral-900 relative">
           
           {/* Tabs header controller */}
           <div className="lg:col-span-4 flex flex-col gap-3">
@@ -75,7 +75,7 @@ export default function AnalogMission({ isArabic }: AnalogMissionProps) {
 
             <button
               onClick={() => setActiveTab('habitat')}
-              className={`text-left p-4 rounded-xl border font-display transition-all cursor-pointer ${
+              className={`text-left p-4 rounded-2xl border font-display transition-all cursor-pointer ${
                 activeTab === 'habitat' 
                 ? 'bg-neutral-900/40 border-brand-teal/50 text-white shadow-xl shadow-brand-teal/10' 
                 : 'bg-transparent border-transparent text-neutral-500 hover:text-neutral-300'
@@ -89,7 +89,7 @@ export default function AnalogMission({ isArabic }: AnalogMissionProps) {
 
             <button
               onClick={() => setActiveTab('rover')}
-              className={`text-left p-4 rounded-xl border font-display transition-all cursor-pointer ${
+              className={`text-left p-4 rounded-2xl border font-display transition-all cursor-pointer ${
                 activeTab === 'rover' 
                 ? 'bg-neutral-900/40 border-brand-red/50 text-white shadow-xl shadow-brand-red/10' 
                 : 'bg-transparent border-transparent text-neutral-500 hover:text-neutral-300'
@@ -103,7 +103,7 @@ export default function AnalogMission({ isArabic }: AnalogMissionProps) {
 
             <button
               onClick={() => setActiveTab('spacesuits')}
-              className={`text-left p-4 rounded-xl border font-display transition-all cursor-pointer ${
+              className={`text-left p-4 rounded-2xl border font-display transition-all cursor-pointer ${
                 activeTab === 'spacesuits' 
                 ? 'bg-neutral-900/40 border-brand-teal/50 text-white shadow-xl shadow-brand-teal/10' 
                 : 'bg-transparent border-transparent text-neutral-500 hover:text-neutral-300'
@@ -128,7 +128,7 @@ export default function AnalogMission({ isArabic }: AnalogMissionProps) {
                 className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center"
               >
                 {/* Visual rendering photo */}
-                <div className="relative aspect-video sm:aspect-square md:aspect-video lg:aspect-square rounded-xl overflow-hidden border border-neutral-850 shadow-2xl">
+                <div className="relative aspect-video sm:aspect-square md:aspect-video lg:aspect-square rounded-2xl overflow-hidden border border-neutral-850 shadow-2xl">
                   <motion.img
                     src={
                       activeTab === 'habitat' ? IMAGES.hero :
@@ -144,7 +144,7 @@ export default function AnalogMission({ isArabic }: AnalogMissionProps) {
 
                 {/* Technical textual info */}
                 <div className="space-y-4">
-                  <span className="font-mono text-[9.5px] text-brand-teal tracking-widest uppercase bg-brand-teal/5 px-2.5 py-0.5 rounded border border-brand-teal/20">
+                  <span className="font-mono text-[9.5px] text-brand-teal tracking-widest uppercase bg-brand-teal/5 px-2.5 py-0.5 rounded-lg border border-brand-teal/20">
                     {activeTab === 'habitat' ? "Rum Station Alpha" : activeTab === 'rover' ? "P-1 Exploration Gear" : "EVA Mark-III Jordan"}
                   </span>
 
@@ -220,7 +220,7 @@ export default function AnalogMission({ isArabic }: AnalogMissionProps) {
                       <Calendar className="w-3 h-3 mr-1" />
                       {phase.date}
                     </span>
-                    <span className={`font-mono text-[9px] px-2 py-0.5 rounded font-bold uppercase ${
+                    <span className={`font-mono text-[9px] px-2 py-0.5 rounded-lg font-bold uppercase ${
                       phase.status === 'completed' ? 'bg-emerald-950/40 text-emerald-400 border border-emerald-500/20' : 'bg-brand-beige/10 text-brand-beige border border-brand-beige/20'
                     }`}>
                       {phase.status}
@@ -228,7 +228,7 @@ export default function AnalogMission({ isArabic }: AnalogMissionProps) {
                   </div>
 
                   {/* Timeline Card */}
-                  <div className="glass-panel border border-neutral-900/80 hover:border-neutral-800 transition-all duration-300 p-6 sm:p-8 rounded-xl shadow-xl">
+                  <div className="glass-panel border border-neutral-900/80 hover:border-neutral-800 transition-all duration-300 p-6 sm:p-8 rounded-2xl shadow-xl">
                     <div className="flex justify-between items-start gap-4">
                       <div>
                         <h4 className="font-display font-bold text-base sm:text-lg text-white uppercase tracking-wider">

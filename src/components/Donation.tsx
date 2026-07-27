@@ -78,7 +78,7 @@ export default function Donation({ isArabic }: DonationProps) {
                 className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-500 filter brightness-90"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
-              <div className="absolute bottom-4 left-4 font-mono text-[10px] text-white/80 bg-black/75 px-3 py-1.5 rounded border border-neutral-850 flex items-center gap-1.5">
+              <div className="absolute bottom-4 left-4 font-mono text-[10px] text-white/80 bg-black/75 px-3 py-1.5 rounded-lg border border-neutral-850 flex items-center gap-1.5">
                 <Flame className="w-3.5 h-3.5 text-brand-teal" />
                 <span>Rum Dome Alpha Solar Grid</span>
               </div>
@@ -92,13 +92,13 @@ export default function Donation({ isArabic }: DonationProps) {
           {SUPPORT_TIERS.map((tier) => (
             <div
               key={tier.id}
-              className="p-6 sm:p-8 rounded-xl border border-neutral-900 bg-neutral-900/15 hover:border-brand-teal/40 transition-all duration-300 shadow-xl flex flex-col justify-between"
+              className="p-6 sm:p-8 rounded-2xl border border-neutral-900 bg-neutral-900/15 hover:border-brand-teal/40 transition-all duration-300 shadow-xl flex flex-col justify-between"
             >
               <div>
                 <div className="flex justify-between items-start mb-6">
                   <div>
                     <span className="font-mono text-[9px] text-neutral-500 block">BADGE INDEX</span>
-                    <span className="font-mono text-xs font-bold text-white tracking-widest bg-neutral-950 px-2.5 py-0.5 rounded border border-neutral-850">
+                    <span className="font-mono text-xs font-bold text-white tracking-widest bg-neutral-950 px-2.5 py-0.5 rounded-lg border border-neutral-850">
                       [{tier.badgeName}]
                     </span>
                   </div>
@@ -152,7 +152,7 @@ export default function Donation({ isArabic }: DonationProps) {
               <div>
                 <button
                   onClick={() => handleBackMission(tier.name)}
-                  className="w-full py-3 rounded bg-space-dark/80 hover:bg-space-dark/95 border border-neutral-800 hover:border-brand-teal/50 text-[10px] sm:text-xs font-mono tracking-widest text-brand-beige font-bold transition-all cursor-pointer"
+                  className="w-full py-3 rounded-lg bg-space-dark/80 hover:bg-space-dark/95 border border-neutral-800 hover:border-brand-teal/50 text-[10px] sm:text-xs font-mono tracking-widest text-brand-beige font-bold transition-all cursor-pointer"
                 >
                   {isArabic ? "رعاية شارة المهمة" : "SPONSOR THIS BADGE"}
                 </button>
@@ -171,7 +171,7 @@ export default function Donation({ isArabic }: DonationProps) {
             initial={{ opacity: 0, scale: 0.9, y: 30 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 30 }}
-            className="fixed bottom-6 right-6 z-50 p-5 rounded-xl border border-emerald-500/30 bg-neutral-950 max-w-sm shadow-2xl flex items-start gap-3.5"
+            className="fixed bottom-6 right-6 z-50 p-5 rounded-2xl border border-emerald-500/30 bg-neutral-950 max-w-sm shadow-2xl flex items-start gap-3.5"
           >
             <div className="p-2 bg-emerald-950/80 border border-emerald-500/20 text-emerald-400 rounded-lg">
               <Gift className="w-5 h-5 animate-bounce" />

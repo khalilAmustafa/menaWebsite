@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { Menu, X, Globe, Radio, Sun, Moon, ChevronDown } from 'lucide-react';
 import MenaLogo from './MenaLogo';
+import { scrollToSection } from '../lib/scrollToSection';
 
 interface HeaderProps {
   isArabic: boolean;
@@ -19,6 +21,9 @@ export default function Header({ isArabic, setIsArabic, activeSection, isLightMo
   const [teamDropdownOpen, setTeamDropdownOpen] = useState(false);
   const [mobileProgramsOpen, setMobileProgramsOpen] = useState(false);
   const [mobileTeamOpen, setMobileTeamOpen] = useState(false);
+
+  const navigate = useNavigate();
+  const routerLocation = useLocation();
 
   // Update UTC time indicator at top right
   useEffect(() => {
@@ -52,9 +57,14 @@ export default function Header({ isArabic, setIsArabic, activeSection, isLightMo
 
   const handleScrollTo = (id: string) => {
     setIsOpen(false);
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (routerLocation.pathname === '/') {
+      // Already on the homepage — scroll to the section (fixed-header clearance comes
+      // from the shared helper, which reads `scroll-padding-top`).
+      scrollToSection(id);
+    } else {
+      // On another route — navigate to the homepage with the target hash; HomePage
+      // scrolls to the section once it has rendered.
+      navigate(`/#${id}`);
     }
   };
 
@@ -108,8 +118,14 @@ export default function Header({ isArabic, setIsArabic, activeSection, isLightMo
       <div className="w-full px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         
         {/* Logo and Brand */}
-        <div 
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        <div
+          onClick={() => {
+            if (routerLocation.pathname === '/') {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+              navigate('/');
+            }
+          }}
           className="flex items-center cursor-pointer group select-none"
         >
           <div className={`flex-shrink-0 transition-all duration-300 group-hover:scale-105 ${

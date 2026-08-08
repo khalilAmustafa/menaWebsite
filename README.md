@@ -1,20 +1,32 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# MENA Space Organization
 
-# Run and deploy your AI Studio app
+A futuristic, cinematic website for MENA — a Jordan-based, women-led space-tech and STEM
+organization focused on analog Mars missions in Wadi Rum.
 
-This contains everything you need to run your app locally.
+Built with React 19, Vite, TypeScript, Tailwind CSS v4, and React Router.
 
-View your app in AI Studio: https://ai.studio/apps/c693782a-005b-4b95-8f1a-3a1db6fb9f8b
+## Run locally
 
-## Run Locally
-
-**Prerequisites:**  Node.js
-
+**Prerequisites:** Node.js
 
 1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+   ```
+   npm install
+   ```
+
+2. (Optional) To enable the AI chatbot, add your Gemini API key to a `.env.local` file:
+   ```
+   VITE_GEMINI_API_KEY=your_key_here
+   ```
+
+3. Start the dev server:
+   ```
+   npm run dev
+   ```
+
+## Scripts
+
+- `npm run dev` — start the Vite dev server
+- `npm run build` — production build to `dist/`
+- `npm run preview` — preview the production build
+- `npm run lint` — TypeScript type-check

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { Menu, X, Globe, Radio, Sun, Moon, ChevronDown } from 'lucide-react';
 import MenaLogo from './MenaLogo';
@@ -45,11 +45,13 @@ export default function Header({ isArabic, setIsArabic, activeSection, isLightMo
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navLinks = [
+  // `to` marks a routed page (React Router link) rather than an in-page anchor scroll.
+  const navLinks: { id: string; label: string; arabic: string; to?: string }[] = [
     { id: 'about', label: 'About', arabic: 'عن المؤسسة' },
     { id: 'mission', label: 'Analog Mars', arabic: 'مهمة مارز' },
     { id: 'gallery', label: 'Gallery', arabic: 'أرشيف الصور' },
     { id: 'programs', label: 'Programs', arabic: 'برامجنا التدريبية' },
+    { id: 'achievements', label: 'Achievements', arabic: 'الإنجازات', to: '/achievements' },
     { id: 'team', label: 'Team', arabic: 'فريق العمل' },
     { id: 'support', label: 'Support Tiers', arabic: 'ادعمنا' },
     { id: 'contact', label: 'Contact', arabic: 'تواصل معنا' }
@@ -105,11 +107,15 @@ export default function Header({ isArabic, setIsArabic, activeSection, isLightMo
     }
   };
 
-  const headerBg = isLightMode
-    ? (scrolled ? 'bg-[#fbf4ea] border-[#e0d2bd] shadow-lg shadow-[#3a2c26]/10' : 'bg-transparent border-slate-200/0')
-    : (scrolled ? 'bg-neutral-950 border-white/[0.08] shadow-2xl shadow-black/50' : 'bg-transparent border-white/0');
+  // On routed sub-pages the header stays in its compact state (like the scrolled state on
+  // the homepage) so the tall unscrolled logo doesn't overlap top-aligned page content.
+  const compact = scrolled || routerLocation.pathname !== '/';
 
-  const headerLayout = scrolled
+  const headerBg = isLightMode
+    ? (compact ? 'bg-[#fbf4ea] border-[#e0d2bd] shadow-lg shadow-[#3a2c26]/10' : 'bg-transparent border-slate-200/0')
+    : (compact ? 'bg-neutral-950 border-white/[0.08] shadow-2xl shadow-black/50' : 'bg-transparent border-white/0');
+
+  const headerLayout = compact
     ? 'top-4 w-[90%] max-w-none rounded-2xl py-2.5 border'
     : 'top-0 w-full max-w-none rounded-none py-5 border-b border-t-transparent border-x-transparent';
 
@@ -129,7 +135,7 @@ export default function Header({ isArabic, setIsArabic, activeSection, isLightMo
           className="flex items-center cursor-pointer group select-none"
         >
           <div className={`flex-shrink-0 transition-all duration-300 group-hover:scale-105 ${
-            scrolled ? 'w-14 h-16' : 'w-28 h-32'
+            compact ? 'w-14 h-16' : 'w-28 h-32'
           }`}>
             <MenaLogo color="var(--color-brand-teal)" />
           </div>
@@ -139,6 +145,18 @@ export default function Header({ isArabic, setIsArabic, activeSection, isLightMo
         <nav className="hidden lg:flex items-center space-x-1">
           {navLinks.map((link) => {
             const isActive = activeSection === link.id;
+
+            if (link.to) {
+              return (
+                <Link
+                  key={link.id}
+                  to={link.to}
+                  className="px-3 py-1.5 rounded-lg font-display text-xs tracking-wider uppercase transition-all duration-200 relative cursor-pointer text-neutral-400 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal/50"
+                >
+                  <span>{isArabic ? link.arabic : link.label}</span>
+                </Link>
+              );
+            }
 
             if (link.id === 'programs') {
               return (
@@ -246,6 +264,14 @@ export default function Header({ isArabic, setIsArabic, activeSection, isLightMo
                         className="absolute left-1/2 -translate-x-1/2 mt-1 w-72 rounded-2xl bg-space-deep border border-neutral-900 shadow-2xl p-2 z-[60] overflow-hidden"
                       >
                         <div className="py-1 flex flex-col gap-0.5">
+                          {/* Route link to the dedicated Team page */}
+                          <Link
+                            to="/team"
+                            onClick={() => setTeamDropdownOpen(false)}
+                            className="w-full text-left rtl:text-right px-3 py-2 text-[10px] font-mono tracking-widest text-brand-teal bg-neutral-900/45 hover:bg-neutral-900 uppercase font-bold transition-all rounded-lg block mb-1"
+                          >
+                            {isArabic ? 'صفحة الفريق' : 'OUR TEAM'}
+                          </Link>
                           {/* Main Header acting as clickable link to center Teams list */}
                           <button
                             onClick={() => handleTeamClick('overview')}
@@ -393,6 +419,19 @@ export default function Header({ isArabic, setIsArabic, activeSection, isLightMo
               {navLinks.map((link) => {
                 const isActive = activeSection === link.id;
 
+                if (link.to) {
+                  return (
+                    <Link
+                      key={link.id}
+                      to={link.to}
+                      onClick={() => setIsOpen(false)}
+                      className="block w-full text-left rtl:text-right py-2 px-3 rounded-lg text-sm font-display tracking-widest uppercase transition-colors text-neutral-400 hover:bg-neutral-900/60 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal/50"
+                    >
+                      {isArabic ? link.arabic : link.label}
+                    </Link>
+                  );
+                }
+
                 if (link.id === 'programs') {
                   return (
                     <div key={link.id} className="space-y-1 py-1">
@@ -466,6 +505,16 @@ export default function Header({ isArabic, setIsArabic, activeSection, isLightMo
                             transition={{ duration: 0.2, ease: "easeInOut" }}
                             className="overflow-hidden pl-4 rtl:pr-4 border-l rtl:border-l-0 rtl:border-r border-neutral-800/80 space-y-1 my-1 grid grid-cols-1 gap-0.5"
                           >
+                            <Link
+                              to="/team"
+                              onClick={() => {
+                                setMobileTeamOpen(false);
+                                setIsOpen(false);
+                              }}
+                              className="block w-full text-left rtl:text-right py-2 px-3 rounded-lg text-[11px] font-mono uppercase tracking-wider text-brand-teal hover:text-white hover:bg-neutral-900/40 transition-all font-bold"
+                            >
+                              • {isArabic ? "صفحة الفريق" : "OUR TEAM"}
+                            </Link>
                             <button
                               onClick={() => {
                                 handleScrollTo('teams');

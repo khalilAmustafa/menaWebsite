@@ -6,6 +6,11 @@ import ScrollToTop from './components/ScrollToTop';
 import HomePage from './pages/HomePage';
 import PlaceholderPage from './pages/PlaceholderPage';
 import NotFoundPage from './pages/NotFoundPage';
+import AchievementsPage from './pages/AchievementsPage';
+import ResearchPapersPage from './pages/ResearchPapersPage';
+import ResearchPaperPage from './pages/ResearchPaperPage';
+import TeamPage from './pages/TeamPage';
+import TeamMemberPage from './pages/TeamMemberPage';
 
 /**
  * App owns the shared theme + language state (unchanged from the previous single-page
@@ -54,19 +59,12 @@ export default function App() {
           {/* Existing complete homepage */}
           <Route path="/" element={<HomePage />} />
 
-          {/* Temporary Phase-1 placeholders (no final content) */}
-          <Route
-            path="/achievements"
-            element={<PlaceholderPage titleEN="Achievements" titleAR="الإنجازات" />}
-          />
-          <Route
-            path="/achievements/research"
-            element={<PlaceholderPage titleEN="Research Papers" titleAR="الأوراق البحثية" />}
-          />
-          <Route
-            path="/research/:slug"
-            element={<PlaceholderPage titleEN="Research Paper" titleAR="ورقة بحثية" showSlug />}
-          />
+          {/* Phase 3 — real Achievements + Research pages */}
+          <Route path="/achievements" element={<AchievementsPage />} />
+          <Route path="/achievements/research" element={<ResearchPapersPage />} />
+          <Route path="/research/:slug" element={<ResearchPaperPage />} />
+
+          {/* Temporary placeholders (later phases) */}
           <Route
             path="/events"
             element={<PlaceholderPage titleEN="Events" titleAR="الفعاليات" />}
@@ -90,14 +88,9 @@ export default function App() {
             path="/activities"
             element={<PlaceholderPage titleEN="Activities" titleAR="الأنشطة" />}
           />
-          <Route
-            path="/team"
-            element={<PlaceholderPage titleEN="Team" titleAR="الفريق" />}
-          />
-          <Route
-            path="/team/:slug"
-            element={<PlaceholderPage titleEN="Team Member" titleAR="عضو الفريق" showSlug />}
-          />
+          {/* Phase 4 — real Team pages */}
+          <Route path="/team" element={<TeamPage />} />
+          <Route path="/team/:slug" element={<TeamMemberPage />} />
 
           {/* Not Found */}
           <Route path="*" element={<NotFoundPage />} />

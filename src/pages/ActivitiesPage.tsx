@@ -1,0 +1,81 @@
+import PageContainer from '../components/PageContainer';
+import PageHeader from '../components/PageHeader';
+import ScrollReveal from '../components/ScrollReveal';
+import { useSiteContext } from '../components/SiteLayout';
+import { useDocumentTitle } from '../lib/useDocumentTitle';
+import { ACTIVITIES } from '../content/activities';
+
+/**
+ * Real /activities page — driven by confirmed Activity records only (the SYSTEM youth-STEM
+ * program and the ملتقى الصناع / Makers Forum gatherings). Content is intentionally modest:
+ * only confirmed identity, period/year, and a branded/representative image are shown.
+ * SYSTEM's activity photos of minors are deliberately not published (privacy).
+ */
+export default function ActivitiesPage() {
+  const { isArabic } = useSiteContext();
+  useDocumentTitle('Activities | MENA');
+
+  return (
+    <PageContainer className="pt-32 pb-20">
+      <ScrollReveal variant="clip">
+        <PageHeader
+          eyebrow={isArabic ? 'الأنشطة' : 'ACTIVITIES'}
+          title={isArabic ? 'الأنشطة والبرامج' : 'Activities & Programs'}
+          description={
+            isArabic
+              ? 'برامج وأنشطة مِنا المستمرة في مجالات العلوم والتقنية والمجتمع.'
+              : "MENA's ongoing programs and community activities in STEM and youth engagement."
+          }
+        />
+      </ScrollReveal>
+
+      <div className="mt-2 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {ACTIVITIES.map((activity) => {
+          const title = isArabic && activity.title.ar ? activity.title.ar : activity.title.en;
+          const summary = activity.summary
+            ? isArabic && activity.summary.ar
+              ? activity.summary.ar
+              : activity.summary.en
+            : '';
+          const period = activity.period ?? (activity.year ? String(activity.year) : '');
+          const imgAlt = activity.image
+            ? isArabic && activity.image.alt.ar
+              ? activity.image.alt.ar
+              : activity.image.alt.en
+            : title;
+
+          return (
+            <div
+              key={activity.id}
+              className="flex h-full flex-col overflow-hidden rounded-2xl border border-neutral-900/80 bg-neutral-900/25 shadow-xl"
+            >
+              {activity.image && (
+                <div className="aspect-[16/9] w-full overflow-hidden bg-neutral-900">
+                  <img
+                    src={activity.image.src}
+                    alt={imgAlt}
+                    loading="lazy"
+                    className="h-full w-full object-cover object-center"
+                  />
+                </div>
+              )}
+              <div className="flex flex-1 flex-col p-5">
+                {period && (
+                  <span className="mb-2 font-mono text-[10px] uppercase tracking-widest text-brand-teal">
+                    {period}
+                  </span>
+                )}
+                <h3 className="font-display text-base font-bold leading-tight tracking-tight text-white sm:text-lg">
+                  {title}
+                </h3>
+                {summary && (
+                  <p className="mt-2 font-sans text-xs leading-relaxed text-neutral-400">{summary}</p>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </PageContainer>
+  );
+}

@@ -18,6 +18,8 @@ export type ContentArea =
   | 'GALLERY'
   | 'SUPPORT'
   | 'ANALOG_MISSION'
+  | 'NASA'
+  | 'SYSTEM'
   | 'ORG';
 
 export interface ContentGap {
@@ -192,14 +194,24 @@ export const CONTENT_GAPS: ContentGap[] = [
   {
     area: 'SUPPORT',
     item: 'Support Tiers section HIDDEN from homepage + navigation (unverified).',
-    note: 'The $25 / $100 / $500 tiers and their perks (Petra-1 casing inscription, ARAV-III mission patch, etc.) were unverified and donation-adjacent. Removed from public rendering and the Header nav; Donation.tsx + SUPPORT_TIERS retained for later restoration. Real amounts/perks/payment flow still needed.',
+    note: 'The $25 / $100 / $500 tiers were unverified and donation-adjacent — removed from public rendering and the Header nav in Phase 4.5. Donation.tsx + SUPPORT_TIERS architecture retained for later restoration. Phase 6.1: the 3 fabricated Analog perks (Petra-1 casing inscription, ARAV-III mission patch, ARAV-III commander badge) and the "Rum Dome Alpha" image caption were DELETED; the surrounding tiers remain valid (no replacement perks invented). Real amounts/perks/payment flow still needed before any restoration.',
   },
 
   // ── PROGRAMS ────────────────────────────────────────────────────────────────
   {
     area: 'PROGRAMS',
-    item: 'Program content unverified (text left unchanged this pass).',
-    note: 'Program names/descriptions and stats (e.g. "1,200+ participants since 2022") are unverified. Kept as-is per instructions. Note: the picsum.photos bannerImage fields in ACTION_PROGRAMS (src/data.ts) are NOT rendered anywhere — dead placeholder data, safe to replace when real event imagery exists.',
+    item: 'Fabricated participant statistic REMOVED ("1,200+ … since 2022").',
+    note: 'Removed from the NASA program card (EN feature + AR "hundreds of youth" count). Remaining program descriptions/features are qualitative marketing that is still unverified — kept but flagged. picsum.photos bannerImage fields in ACTION_PROGRAMS remain dead (not rendered).',
+  },
+  {
+    area: 'PROGRAMS',
+    item: 'Homepage Programs "S.Y.S.T.E.M. Training Academy" card still unverified (Phase 7).',
+    note: 'Phase 6.1 corrected the data-layer invented acronym (subtitle → confirmed "Space for Youth Through STEM"). The RENDERED homepage Programs card (title/description/syllabus for id "system-prog") still contains unverified curriculum copy and is intentionally left for the Phase 7 Programs content audit (not rewritten here to avoid generated replacement copy). Confirmed SYSTEM identity lives on /activities.',
+  },
+  {
+    area: 'PROGRAMS',
+    item: 'Program ↔ real content mapping unconfirmed (Maker Collective / Jordan Mars Rover Challenge).',
+    note: 'Homepage "The Maker Collective" may or may not relate to ملتقى الصناع (now on /activities); "Jordan Mars Rover Challenge" has NO supporting assets. Titles kept; specifics remain unverified. Reconcile once official program descriptions are supplied.',
   },
 
   // ── GALLERY ─────────────────────────────────────────────────────────────────
@@ -212,13 +224,44 @@ export const CONTENT_GAPS: ContentGap[] = [
   // ── ANALOG MISSION ──────────────────────────────────────────────────────────
   {
     area: 'ANALOG_MISSION',
-    item: 'Analog mission timeline left UNCHANGED but unverified.',
-    note: 'ARAV-I/II/III names, dates (Nov 2024 / Mar 2025 / Oct 2026), detail bullets, and the "Rum Dome Alpha" / "Petra-1" specs (pressures, kW, km/h, payload) are unverified. Deliberately not rewritten — pending the external "MENA Analog Mission 2025" folder audit in the events phase.',
+    item: 'Fabricated ARAV / Rum Dome Alpha / Petra-1 content REMOVED.',
+    note: 'The homepage Analog section previously rendered fabricated "ARAV-I/II/III" (with Nov 2024 / Mar 2025 / Oct 2026 dates), a "Rum Dome Alpha" habitat, a "Petra-1" rover, and invented specs (pressure/kW/km-h/payload). NONE appear in the official assets → removed from public rendering. The homepage now shows the CONFIRMED MENA Mars Analog Mission in Wadi Rum (2025) and links to /events/analog-mission-2025. Phase 6.1: the fabricated MISSION_PHASES / MISSION_KNOWLEDGE constants (and the MissionPhase type) were DELETED from src/data.ts and src/types.ts, and the residual ARAV/Petra-1/"Rum Dome Alpha" strings inside the retained SUPPORT_TIERS data + Donation.tsx were also purged. No reusable/data-layer fabricated Analog claims remain; only removal-history comments and these content-gap notes still mention the old terms.',
+  },
+  {
+    area: 'ANALOG_MISSION',
+    item: 'Analog mission — CONFIRMED vs still-missing.',
+    note: 'CONFIRMED: name "MENA Mars Analog Mission in Wadi Rum" (patch code MENA-00-WR), Wadi Rum location, 2025 edition, and visible activities (spacesuit EVAs, dome habitat, field ops). MISSING: exact dates, crew names, official mission overview/objectives, any technical specs, partner/sponsor classification, impact metrics. A 27 MB MP4 exists in the folder (NOT imported — external hosting preferred); a HEIC and two 96×96 WhatsApp thumbnails were unusable and skipped.',
   },
   {
     area: 'ANALOG_MISSION',
     item: 'Telemetry Dashboard is an illustrative simulation (not real data).',
-    note: 'DashboardInteractive shows demo values (SOL time, O₂/PV/uplink %, logs). During the de-mock pass its 3 crew rows were anonymized from fabricated person names to generic "Analog Crew 01/02/03" positions. If any of it should reflect real mission data, that data is still needed.',
+    note: 'DashboardInteractive shows demo values (SOL time, O₂/PV/uplink %, logs). Its 3 crew rows are generic "Analog Crew 01/02/03" positions (anonymized in Phase 4.5). If any should reflect real mission data, that data is still needed.',
+  },
+
+  // ── NASA SPACE APPS ─────────────────────────────────────────────────────────
+  {
+    area: 'NASA',
+    item: 'NASA Space Apps — CONFIRMED vs still-missing.',
+    note: 'CONFIRMED: identity (NASA Space Apps Challenge, "SPACE APPS" branding + MENA), Amman location (readable on official winner checks), and hackathon/award activity. MISSING: exact year/date (folder has no year), winner identities (team/person/project names — checks show 1st/2nd/3rd "Amman" but names not legible; never inferred from faces), and partner/sponsor classification (Zain and Orange Jordan appear — Orange as "Event Planning Partner" — but not published as structured records). Modeled as an Event (/events/nasa-space-apps), not duplicated as a Program.',
+  },
+
+  // ── SYSTEM (Program / Activity) ─────────────────────────────────────────────
+  {
+    area: 'SYSTEM',
+    item: 'SYSTEM classified as a youth-STEM Program/Activity (not an event).',
+    note: 'CONFIRMED from the official banner: "SYSTEM — Space for Youth Through STEM, 2025-2026". Published as an Activity on /activities using ONLY the branded (cartoon) banner. MISSING: official program description, curriculum, outcomes, partners.',
+  },
+  {
+    area: 'SYSTEM',
+    item: 'SYSTEM activity photos show identifiable minors — NOT published (privacy).',
+    note: '7 of the 8 SYSTEM assets are photos of school-age children doing STEM activities. These were deliberately NOT imported/published. DECISION FOR USER: confirm whether (and with what consent) any minor photos may be shown before they are used anywhere.',
+  },
+
+  // ── MAKERS FORUM (ملتقى الصناع) ──────────────────────────────────────────────
+  {
+    area: 'EVENTS',
+    item: 'ملتقى الصناع (Makers Forum) — modeled as two Activities (2024 & 2025).',
+    note: 'Filenames (2024.png, 2025.jpg) establish two separate occurrences; the 2025 backdrop reads "ملتقى الصناع 2025". Published on /activities with the Arabic proper name preserved. MISSING: exact dates, location, official English name (if any), and descriptions. Only one image exists per year.',
   },
 
   // ── ORG ─────────────────────────────────────────────────────────────────────

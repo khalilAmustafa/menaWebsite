@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Radio, CheckCircle, Flame, Gift, Star } from 'lucide-react';
+import { Radio, CheckCircle, Gift, Star } from 'lucide-react';
 import { SUPPORT_TIERS, IMAGES } from '../data';
 
 interface DonationProps {
@@ -78,10 +78,6 @@ export default function Donation({ isArabic }: DonationProps) {
                 className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-500 filter brightness-90"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
-              <div className="absolute bottom-4 left-4 font-mono text-[10px] text-white/80 bg-black/75 px-3 py-1.5 rounded-lg border border-neutral-850 flex items-center gap-1.5">
-                <Flame className="w-3.5 h-3.5 text-brand-teal" />
-                <span>Rum Dome Alpha Solar Grid</span>
-              </div>
             </div>
           </div>
 
@@ -135,11 +131,8 @@ export default function Donation({ isArabic }: DonationProps) {
                       <span>
                         {isArabic ? (
                           perk.includes('Arabic Calligraphy') ? "شهادة مشاركة رقمية ممهورة بختم خط عربي تذكاري" :
-                          perk.includes('Petra-1 Rover') ? "تسجيل اسمك على هيكل روفر بترا-١ الخارجي" :
                           perk.includes('flight log') ? "تقارير ويوميات الطاقم العلمية من وادي رم" :
-                          perk.includes('Mission Patch') ? "رقعة قماشية رسمية موقعة من رواد مريخ الأردن" :
                           perk.includes('Finals') ? "دعوة كبار الشخصيات لحضور نهائيات مسابقة الروفر" :
-                          perk.includes('machined metal') ? "درع وبادج تذكاري معدني فاخر ١:١" :
                           perk.includes('sit in Mission') ? "دعوة للجلوس في غرفة عمليات عمان لتتبع الرصد المباشر للبعثة" :
                           "عرض اسمك وشعارك كجهة راعية رئيسية في الصفحة الرسمية للمنظمة"
                         ) : perk}
@@ -182,7 +175,7 @@ export default function Donation({ isArabic }: DonationProps) {
               </h5>
               <p className="font-sans text-[11px] text-neutral-400 mt-1">
                 {isArabic 
-                  ? `شكراً لدعمك مهمة ${selectedTierId}! تم ربط اسمك بنظام تتبع روفير بترا-١.`
+                  ? `شكراً لدعمك مهمة ${selectedTierId}! تم تخصيص شهادة شارة المهمة الخاصة بك.`
                   : `Thank you for backing ${selectedTierId}! A telemetry badge assignment certificate has been designated to your parameters.`
                 }
               </p>

@@ -1,14 +1,3 @@
-export interface MissionPhase {
-  id: string;
-  title: string;
-  arabicTitle: string;
-  date: string;
-  location: string;
-  description: string;
-  details: string[];
-  status: 'completed' | 'ongoing' | 'upcoming';
-}
-
 export interface ProgramItem {
   id: string;
   title: string;

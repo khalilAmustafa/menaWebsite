@@ -40,7 +40,10 @@ export default function Programs({ isArabic }: ProgramsProps) {
         "Habitability Psychology & communications constraints"
       ],
       timing: "12-WEEK CERTIFIED FIELD BOOTCAMP",
-      venue: "MENA JORDAN OFFICE + WADI RUM DOME ALPHA"
+      // No SYSTEM venue is supported by repository evidence (the official banner states only
+      // "SYSTEM · Space for Youth Through STEM · 2025-2026"). Left empty so the location block
+      // is not rendered for this program — no invented location.
+      venue: ""
     },
     'maker-collective': {
       syllabus: [
@@ -139,7 +142,7 @@ export default function Programs({ isArabic }: ProgramsProps) {
                           prog.id === 'maker-collective' ? (
                             idx === 0 ? "تصميم وطباعة ثلاثية الأبعاد متقدمة" : "ورشات تخطيط الدارات ومتحكمات أردوينو"
                           ) : (
-                            idx === 0 ? "توجيه علمي مباشر من الخبراء الدوليين" : "الوصول والمشاركة للمئات من شباب الأردن"
+                            idx === 0 ? "توجيه علمي مباشر من الخبراء الدوليين" : "احتضان النماذج الواعدة نحو مشاريع ناشئة"
                           )
                         ) : item}
                       </span>
@@ -213,10 +216,12 @@ export default function Programs({ isArabic }: ProgramsProps) {
                   <span className="text-neutral-500 block">PROGRAM PERIOD</span>
                   <span className="text-neutral-200 mt-1 block flex items-center"><Clock className="w-3.5 h-3.5 text-brand-teal mr-1" /> {extraInfo.timing}</span>
                 </div>
-                <div>
-                  <span className="text-neutral-500 block">LOCATION PLATFORM</span>
-                  <span className="text-neutral-200 mt-1 block flex items-center"><MapPin className="w-3.5 h-3.5 text-brand-teal mr-1" /> {isArabic ? "خيار هجين (عمان + رم)" : extraInfo.venue}</span>
-                </div>
+                {extraInfo.venue && (
+                  <div>
+                    <span className="text-neutral-500 block">LOCATION PLATFORM</span>
+                    <span className="text-neutral-200 mt-1 block flex items-center"><MapPin className="w-3.5 h-3.5 text-brand-teal mr-1" /> {isArabic ? "خيار هجين (عمان + رم)" : extraInfo.venue}</span>
+                  </div>
+                )}
               </div>
 
               {/* Syllabi syllabus bullet points */}

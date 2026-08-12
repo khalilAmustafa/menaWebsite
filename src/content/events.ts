@@ -150,6 +150,7 @@ export const SPACE_GAME_CHALLENGE: Event = {
   id: 'evt-space-game-challenge-2026',
   slug: 'space-game-challenge-2026',
   title: { en: 'MENA Space Game Challenge' },
+  year: 2026,
   summary: { en: 'A 48-hour space gaming hackathon where participants create, build, and compete.' },
   hero: SPACE_GAME_HERO,
   highlights: [],
@@ -160,5 +161,103 @@ export const SPACE_GAME_CHALLENGE: Event = {
   sponsorIds: [],
 };
 
-/** All events. Only the confirmed-identity Space Game record for now (no unverified events). */
-export const EVENTS: Event[] = [SPACE_GAME_CHALLENGE];
+/* ────────────────────────────────────────────────────────────────────────────
+ * MENA Mars Analog Mission — Wadi Rum (2025)
+ *
+ * CONFIRMED (from the official mission patch "MENA MARS ANALOG MISSIONS IN WADI RUM ·
+ * MENA-00-WR" and the recap imagery): identity, mission code, Wadi Rum location, 2025
+ * edition (folder name + WhatsApp asset dates 2025-10-09), and real activities visible in
+ * the photos (spacesuit EVAs, a desert dome habitat, crew, field operations).
+ *
+ * This REPLACES the previously fabricated homepage "ARAV-I/II/III", "Rum Dome Alpha", and
+ * "Petra-1" content — none of which appear anywhere in the official assets. Exact dates,
+ * crew names, and any technical specifications remain unconfirmed → absent (see contentGaps).
+ * ──────────────────────────────────────────────────────────────────────────── */
+const ANALOG_HERO: MediaItem = {
+  id: 'analog-hero',
+  type: 'image',
+  src: '/images/events/analog-mission-2025/analog-hero.jpg',
+  alt: { en: 'An analog astronaut with a Jordanian flag in the Wadi Rum desert' },
+  width: 1080,
+  height: 1350,
+  category: 'eva',
+};
+
+const ANALOG_GALLERY: MediaItem[] = [
+  { id: 'analog-crew', type: 'image', src: '/images/events/analog-mission-2025/analog-crew.jpg', alt: { en: 'Analog mission crew in the Wadi Rum desert' }, width: 1080, height: 1350, category: 'crew' },
+  { id: 'analog-group', type: 'image', src: '/images/events/analog-mission-2025/analog-group.jpg', alt: { en: 'Mission participants gathered in the Wadi Rum desert' }, width: 1080, height: 1350, category: 'group' },
+  { id: 'analog-eva-flag', type: 'image', src: '/images/events/analog-mission-2025/analog-eva-flag.jpg', alt: { en: 'An analog astronaut walking with a Jordanian flag in the desert' }, width: 1080, height: 1350, category: 'eva' },
+  { id: 'analog-habitat-certificates', type: 'image', src: '/images/events/analog-mission-2025/analog-habitat-certificates.jpg', alt: { en: 'Participants with certificates in front of the desert dome habitat' }, width: 1080, height: 1350, category: 'habitat' },
+  { id: 'analog-presentation', type: 'image', src: '/images/events/analog-mission-2025/analog-presentation.jpg', alt: { en: 'A presentation during the analog mission' }, width: 1080, height: 1350, category: 'presentation' },
+  { id: 'analog-habitat-group', type: 'image', src: '/images/events/analog-mission-2025/analog-habitat-group.jpg', alt: { en: 'Participants in front of the analog dome habitat in Wadi Rum' }, width: 1080, height: 1350, category: 'habitat' },
+  { id: 'analog-eva-dusk', type: 'image', src: '/images/events/analog-mission-2025/analog-eva-dusk.jpg', alt: { en: 'Analog astronauts in spacesuits at dusk in the desert' }, width: 1080, height: 1350, category: 'eva' },
+  { id: 'analog-habitat-interior', type: 'image', src: '/images/events/analog-mission-2025/analog-habitat-interior.jpg', alt: { en: 'Interior of the analog mission habitat' }, width: 1080, height: 1350, category: 'habitat' },
+  { id: 'analog-mockup', type: 'image', src: '/images/events/analog-mission-2025/analog-mockup.jpg', alt: { en: 'A participant presenting near mission equipment' }, width: 1080, height: 1350, category: 'presentation' },
+  { id: 'analog-mission-control', type: 'image', src: '/images/events/analog-mission-2025/analog-mission-control.jpg', alt: { en: 'Participants working during the analog mission' }, width: 1080, height: 1350, category: 'operations' },
+];
+
+export const ANALOG_MISSION_2025: Event = {
+  id: 'evt-analog-mission-2025',
+  slug: 'analog-mission-2025',
+  title: { en: 'MENA Mars Analog Mission — Wadi Rum' },
+  year: 2025,
+  location: { en: 'Wadi Rum, Jordan' },
+  summary: {
+    en: 'An analog Mars mission in the Wadi Rum desert, where a crew carried out spacesuit EVAs, habitat operations, and field activities in Mars-like terrain.',
+  },
+  hero: ANALOG_HERO,
+  highlights: [],
+  winners: [],
+  gallery: ANALOG_GALLERY,
+  partnerIds: [],
+  sponsorIds: [],
+};
+
+/* ────────────────────────────────────────────────────────────────────────────
+ * NASA Space Apps Challenge — MENA (Amman edition)
+ *
+ * CONFIRMED (from the official recap graphics: "SPACE APPS" branding + MENA, winner checks
+ * reading "…Place Winner · Amman", and an on-stage "Event Planning Partner" backdrop):
+ * identity as the NASA Space Apps Challenge hosted in Amman, and real hackathon activity
+ * (teams working, a VR demo, a speaker, an award ceremony). Exact date/year, winner
+ * identities, and partner/sponsor classification are NOT confirmed → absent (see contentGaps).
+ * ──────────────────────────────────────────────────────────────────────────── */
+const NASA_HERO: MediaItem = {
+  id: 'nasa-hero',
+  type: 'image',
+  src: '/images/events/nasa-space-apps/nasa-hero.jpg',
+  alt: { en: 'Group photo on stage at the NASA Space Apps Challenge in Amman' },
+  width: 1600,
+  height: 1067,
+  category: 'group',
+};
+
+const NASA_GALLERY: MediaItem[] = [
+  { id: 'nasa-group', type: 'image', src: '/images/events/nasa-space-apps/nasa-group.jpg', alt: { en: 'Participants and organizers at the NASA Space Apps Challenge' }, width: 1080, height: 1350, category: 'group' },
+  { id: 'nasa-awards-01', type: 'image', src: '/images/events/nasa-space-apps/nasa-awards-01.jpg', alt: { en: 'Award ceremony at the NASA Space Apps Challenge' }, width: 1080, height: 1350, category: 'award-ceremony' },
+  { id: 'nasa-awards-02', type: 'image', src: '/images/events/nasa-space-apps/nasa-awards-02.jpg', alt: { en: 'Award ceremony at the NASA Space Apps Challenge' }, width: 1080, height: 1350, category: 'award-ceremony' },
+  { id: 'nasa-vr', type: 'image', src: '/images/events/nasa-space-apps/nasa-vr.jpg', alt: { en: 'A participant using a VR headset at the hackathon' }, width: 1080, height: 1350, category: 'hackathon' },
+  { id: 'nasa-hackathon-01', type: 'image', src: '/images/events/nasa-space-apps/nasa-hackathon-01.jpg', alt: { en: 'Teams working during the NASA Space Apps hackathon' }, width: 1080, height: 1350, category: 'hackathon' },
+  { id: 'nasa-speaker', type: 'image', src: '/images/events/nasa-space-apps/nasa-speaker.jpg', alt: { en: 'A speaker presenting at the NASA Space Apps Challenge' }, width: 1080, height: 1350, category: 'speakers' },
+  { id: 'nasa-hackathon-02', type: 'image', src: '/images/events/nasa-space-apps/nasa-hackathon-02.jpg', alt: { en: 'Participants collaborating during the hackathon' }, width: 1080, height: 1350, category: 'hackathon' },
+  { id: 'nasa-hackathon-03', type: 'image', src: '/images/events/nasa-space-apps/nasa-hackathon-03.jpg', alt: { en: 'Participants working at laptops during the hackathon' }, width: 1080, height: 1350, category: 'hackathon' },
+];
+
+export const NASA_SPACE_APPS: Event = {
+  id: 'evt-nasa-space-apps',
+  slug: 'nasa-space-apps',
+  title: { en: 'NASA Space Apps Challenge — Amman' },
+  location: { en: 'Amman, Jordan' },
+  summary: {
+    en: "The global NASA Space Apps Challenge hackathon, hosted in Amman — teams build solutions over an intensive weekend, ending in an award ceremony.",
+  },
+  hero: NASA_HERO,
+  highlights: [],
+  winners: [],
+  gallery: NASA_GALLERY,
+  partnerIds: [],
+  sponsorIds: [],
+};
+
+/** All confirmed events (ordered newest-intent first for the /events grid). */
+export const EVENTS: Event[] = [SPACE_GAME_CHALLENGE, ANALOG_MISSION_2025, NASA_SPACE_APPS];

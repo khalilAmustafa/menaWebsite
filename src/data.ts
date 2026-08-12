@@ -1,4 +1,4 @@
-import { MissionPhase, ProgramItem, TeamDepartment, AdvisorItem, SupportTier } from './types';
+import { ProgramItem, TeamDepartment, AdvisorItem, SupportTier } from './types';
 
 // Let's use the exact paths returned by standard tool calls
 export const IMAGES = {
@@ -15,81 +15,20 @@ export const IMPACT_STATS = [
   { value: "15+", label: "International Aerospace Advisors", description: "Advisors from NASA, ESA, JAXA, and global analog astronaut circles." }
 ];
 
-export const MISSION_KNOWLEDGE = {
-  habitat: {
-    title: "Rum Dome Alpha Analog Habitat",
-    description: "Located in the secluded deep sands of Southern Jordan, mimicking Martian geological structure. Rum Dome Alpha provides a fully isolated environment including automated pressurized airlocks, hydro-labs for closed-loop farming, and power-grids driven by sand-resistant PV layers.",
-    specs: ["Pressure: 101.3 kPa standard", "Total Area: 180 sqm active dome space", "Life Support: Redundant sub-surface water loop", "Power: 25 kW solar array + storage"]
-  },
-  rover: {
-    title: "Petra-1 Multi-Terrain Exploration Rover",
-    description: "An advanced semi-autonomous exploration rover engineered by Jordanian youth. Petra-1 is fitted with ground-penetrating radar, custom pneumatic drilling tools for basalt core extraction, and multi-spectral sensors transmitting real-time tracking telemetry to base control.",
-    specs: ["Top Speed: 12 km/h on sand", "Payload Ability: 85kg science cargo", "Power source: Custom dual-redundant lithium-ion nodes", "Navigation: Deep-learning hazard detection module"]
-  }
-};
-
-export const MISSION_PHASES: MissionPhase[] = [
-  {
-    id: "phase-1",
-    title: "ARAV-I: Jordan Frontier",
-    arabicTitle: "مهمة رواد العرب الاولى",
-    date: "NOVEMBER 2024",
-    location: "Wadi Rum (Al-Disah Zone)",
-    description: "First localized analog mission testing spacesuit heat management, youth-engineered basalt sampling tools, and mental stress tests in isolated geodesic habitats.",
-    details: [
-      "120 hours of absolute crew isolation",
-      "Field test of the Jordan Spacesuit Mark-I prototype",
-      "Basalt rock core drill & multi-spectral geological analysis",
-      "Completed psychological crew feedback studies under 20-min communication delay simulation"
-    ],
-    status: 'completed'
-  },
-  {
-    id: "phase-2",
-    title: "ARAV-II: Aquaponics & Survival",
-    arabicTitle: "مشروع النظم الحيوية المغلقة",
-    date: "MARCH 2025",
-    location: "Wadi Rum Red Canyon Grid",
-    description: "Focus on biological sustainability, zero-waste food loops, and solar-operated micro-rovers. Simulating resource scarcity under strict Martian rationing rules.",
-    details: [
-      "In-situ resource utilization (ISRU) tests with Wadi Rum red sands for 3D construction",
-      "Closed-loop aquaponics container food production testing",
-      "Semi-autonomous mineral mapping using micro-rovers",
-      "Successful test of local satellite telemetry relays"
-    ],
-    status: 'completed'
-  },
-  {
-    id: "phase-3",
-    title: "ARAV-III: Lunar-Mars Expedition",
-    arabicTitle: "البوابة القادمة - قمر ومريخ",
-    date: "OCTOBER 2026",
-    location: "Wadi Rum Southern Valley Grid",
-    description: "The most ambitious simulation yet, including integrated international analog astronauts, high-fidelity EVA suites, and live VR mission-control telemetry from Amman.",
-    details: [
-      "Interdisciplinary youth research challenge on advanced EVA suit telemetry",
-      "Active volcanic magma tube habitat ingress simulation",
-      "Deployment of Jordan Rover Petra-1 with remote robotic drills",
-      "Establishment of the Arabic Analog Mission Archive (AAMA)"
-    ],
-    status: 'upcoming'
-  }
-];
-
 export const ACTION_PROGRAMS: ProgramItem[] = [
   {
     id: "nasa-apps",
     title: "NASA Space Apps Jordan Liaison",
     subtitle: "Solving Global Challenges in Amman",
     description: "MENA ORG proud host and liaison facilitating Jordan's biggest youth hackathon. Inspiring designers, engineers, and coders to solve NASA's open-source planetary challenges.",
-    features: ["Mentorship by active aerospace engineers", "1,200+ local participants reached since 2022", "Winning prototypes incubated toward real startups"],
+    features: ["Mentorship by active aerospace engineers", "Winning prototypes incubated toward real startups"],
     role: "National coordinator and academic youth mentor.",
     bannerImage: "https://picsum.photos/seed/nasaapps/800/600"
   },
   {
     id: "system-prog",
     title: "S.Y.S.T.E.M. Training Academy",
-    subtitle: "Space & Youth Science Technology Empowerment Mission",
+    subtitle: "Space for Youth Through STEM",
     description: "An intensive certificate program for Arab women and young innovators. Curriculum covers space exploration history, rocket propulsion principles, orbital dynamics, and analog habitats.",
     features: ["Hands-on engineering laboratories", "Interactive orbital math workshops", "Direct mentorship with professional analog astronauts"],
     role: "Proprietary design bootcamp designed for next-gen Arab aerospace engineers.",
@@ -266,7 +205,6 @@ export const SUPPORT_TIERS: SupportTier[] = [
     tagline: "Fuel the initial dunes navigation rover systems.",
     perks: [
       "Digital Mission Certificate with Arabic Calligraphy stamp",
-      "Your name digital-inscribed on Petra-1 Rover outer payload casing",
       "Monthly exclusive flight log email diaries from Wadi Rum"
     ],
     color: "from-amber-600/30 to-orange-500/10 border-orange-500/30 hover:border-orange-500"
@@ -278,7 +216,6 @@ export const SUPPORT_TIERS: SupportTier[] = [
     price: "$100",
     tagline: "Sponsor core thermal seals & hydroponics water loops.",
     perks: [
-      "Signed physical Mission Patch from the Jordan ARAV-III Analog Crew",
       "VIP Invitation to the annual Jordan Mars Rover Finals in Wadi Rum",
       "All benefits from the previous tier"
     ],
@@ -291,7 +228,6 @@ export const SUPPORT_TIERS: SupportTier[] = [
     price: "$500",
     tagline: "Fund spacesuit oxygen sensor packs and active training telemetry.",
     perks: [
-      "Official 1:1 machined metal replica of the ARAV-III Mission Commander Badge",
       "Invited to sit in Mission Control Jordan for a live EVA communication loop",
       "Sponsor logo/name prominently showcased on the official Jordan Mars Website",
       "Lifetime membership to the MENA Space Academy community"

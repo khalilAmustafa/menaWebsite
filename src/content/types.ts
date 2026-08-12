@@ -121,6 +121,8 @@ export interface Event {
   title: LocalizedText;
   summary?: LocalizedText;
   description?: LocalizedText;
+  /** Confirmed calendar year, when known (e.g. from an official folder/banner). */
+  year?: number;
   startDate?: string;
   endDate?: string;
   location?: LocalizedText;
@@ -145,6 +147,24 @@ export interface Partner {
   description?: LocalizedText;
   eventIds?: string[];
   featured?: boolean;
+  order?: number;
+}
+
+/**
+ * A recurring educational activity or program (distinct from a one-off Event). Used for
+ * things like the SYSTEM youth-STEM program and the ملتقى الصناع (Makers Forum) gatherings.
+ * Only confirmed fields are populated; unknowns stay absent.
+ */
+export interface Activity {
+  id: string;
+  slug: string;
+  title: LocalizedText;
+  summary?: LocalizedText;
+  /** A confirmed period label (e.g. "2025–2026") or a single year, when known. */
+  period?: string;
+  year?: number;
+  image?: MediaItem;
+  externalLinks?: ExternalLink[];
   order?: number;
 }
 

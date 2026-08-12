@@ -4,7 +4,6 @@ import { Routes, Route } from 'react-router-dom';
 import SiteLayout from './components/SiteLayout';
 import ScrollToTop from './components/ScrollToTop';
 import HomePage from './pages/HomePage';
-import PlaceholderPage from './pages/PlaceholderPage';
 import NotFoundPage from './pages/NotFoundPage';
 import AchievementsPage from './pages/AchievementsPage';
 import ResearchPapersPage from './pages/ResearchPapersPage';
@@ -12,6 +11,10 @@ import ResearchPaperPage from './pages/ResearchPaperPage';
 import TeamPage from './pages/TeamPage';
 import TeamMemberPage from './pages/TeamMemberPage';
 import SpaceGameChallengePage from './pages/SpaceGameChallengePage';
+import EventsPage from './pages/EventsPage';
+import AnalogMission2025Page from './pages/AnalogMission2025Page';
+import NasaSpaceAppsPage from './pages/NasaSpaceAppsPage';
+import ActivitiesPage from './pages/ActivitiesPage';
 
 /**
  * App owns the shared theme + language state (unchanged from the previous single-page
@@ -65,23 +68,14 @@ export default function App() {
           <Route path="/achievements/research" element={<ResearchPapersPage />} />
           <Route path="/research/:slug" element={<ResearchPaperPage />} />
 
-          {/* Temporary placeholders (later phases) */}
-          <Route
-            path="/events"
-            element={<PlaceholderPage titleEN="Events" titleAR="الفعاليات" />}
-          />
-          {/* Static route declared before the dynamic one for clarity (route ranking also
-              guarantees this specific path wins over /events/:slug). */}
-          {/* Phase 5 — real Space Game Challenge event page */}
+          {/* Phase 6 — real Events landing + Phase 5/6 event detail pages */}
+          <Route path="/events" element={<EventsPage />} />
           <Route path="/events/space-game-challenge-2026" element={<SpaceGameChallengePage />} />
-          <Route
-            path="/events/:slug"
-            element={<PlaceholderPage titleEN="Event" titleAR="فعالية" showSlug />}
-          />
-          <Route
-            path="/activities"
-            element={<PlaceholderPage titleEN="Activities" titleAR="الأنشطة" />}
-          />
+          <Route path="/events/analog-mission-2025" element={<AnalogMission2025Page />} />
+          <Route path="/events/nasa-space-apps" element={<NasaSpaceAppsPage />} />
+
+          {/* Phase 6 — real Activities page */}
+          <Route path="/activities" element={<ActivitiesPage />} />
           {/* Phase 4 — real Team pages */}
           <Route path="/team" element={<TeamPage />} />
           <Route path="/team/:slug" element={<TeamMemberPage />} />

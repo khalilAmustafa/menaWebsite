@@ -14,7 +14,7 @@ export default function DashboardInteractive({ isArabic }: { isArabic: boolean }
     signalStrength: 85,
     isEvaActive: false,
     telemetryLogs: [
-      "[SYSTEM] Remote link established with Wadi Rum Dome Alpha.",
+      "[SYSTEM] Remote link established with the Wadi Rum analog site.",
       "[SIGNAL] Current delay tuned to 4.2 seconds test mode.",
       "[BATTERY] PV Array tracking sun orientation safely.",
       "[BIOMETRIC] Crew vitals synced in standard band indices.",

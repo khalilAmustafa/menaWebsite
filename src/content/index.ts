@@ -10,7 +10,8 @@ export type { ContentArea, ContentGap } from './contentGaps';
 // Collections + values
 export { RESEARCH_PAPERS, IAC_2026 } from './researchPapers';
 export { ACHIEVEMENTS } from './achievements';
-export { EVENTS, SPACE_GAME_CHALLENGE } from './events';
+export { EVENTS, SPACE_GAME_CHALLENGE, ANALOG_MISSION_2025, NASA_SPACE_APPS } from './events';
+export { ACTIVITIES } from './activities';
 export { TEAM_MEMBERS } from './team';
 export { PARTNERS } from './partners';
 export { CONTENT_GAPS } from './contentGaps';

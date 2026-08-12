@@ -52,6 +52,7 @@ export default function Header({ isArabic, setIsArabic, activeSection, isLightMo
     { id: 'gallery', label: 'Gallery', arabic: 'أرشيف الصور' },
     { id: 'programs', label: 'Programs', arabic: 'برامجنا التدريبية' },
     { id: 'achievements', label: 'Achievements', arabic: 'الإنجازات', to: '/achievements' },
+    { id: 'events', label: 'Events', arabic: 'الفعاليات', to: '/events' },
     { id: 'team', label: 'Team', arabic: 'فريق العمل' },
     { id: 'contact', label: 'Contact', arabic: 'تواصل معنا' }
   ];

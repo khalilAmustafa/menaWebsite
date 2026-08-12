@@ -79,6 +79,11 @@ export default function Footer({ isArabic }: FooterProps) {
                   </Link>
                 </li>
                 <li>
+                  <Link to="/activities" className="hover:text-brand-teal transition-colors duration-200">
+                    // {isArabic ? "الأنشطة والبرامج" : "ACTIVITIES"}
+                  </Link>
+                </li>
+                <li>
                   <Link to="/#advisors" className="hover:text-brand-teal transition-colors duration-200">
                     // {isArabic ? "مجلس المستشارين" : "BOARD EXPERTS"}
                   </Link>

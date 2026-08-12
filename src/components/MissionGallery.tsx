@@ -17,71 +17,87 @@ interface GalleryItem {
   date: string;
 }
 
+// Phase 6: replaced the previous AI-render images + fabricated "ARAV-I/II/III" mission codes,
+// dates, and "Dome Alpha" naming with REAL photography from the MENA Mars Analog Mission in
+// Wadi Rum (2025). Metadata is confirmed only: mission code MENA-00-WR, year 2025, Wadi Rum.
 const GALLERY_DATA: GalleryItem[] = [
   {
     id: "gal-1",
-    image: "/images/mena_wadi_rum_eva_1779552903767.png",
-    titleEN: "Astronaut EVA Field Exploration",
-    titleAR: "مهمة الخروج الميداني لرواد الفضاء",
-    descEN: "Physiological strain evaluation under simulated sandstorm and high communication latency.",
-    descAR: "تقييم الإجهاد الفسيولوجي والمرونة النفسية للرواد تحت ظروف عاصفة غبارية افتراضية وتأخير اتصال.",
+    image: "/images/events/analog-mission-2025/analog-eva-flag.jpg",
+    titleEN: "Analog Astronaut EVA",
+    titleAR: "مهمة خروج ببدلة الفضاء",
+    descEN: "An analog astronaut with a Jordanian flag during a field EVA in the Wadi Rum desert.",
+    descAR: "رائد فضاء أنالوج يحمل العلم الأردني خلال مهمة خروج ميدانية في صحراء وادي رم.",
     category: "crew",
-    locationEN: "Wadi Rum Desert Basin",
-    locationAR: "حوض صحراء وادي رم",
-    mission: "ARAV-I",
-    date: "NOV 2024"
+    locationEN: "Wadi Rum, Jordan",
+    locationAR: "وادي رم، الأردن",
+    mission: "MENA-00-WR",
+    date: "2025"
   },
   {
     id: "gal-2",
-    image: "/images/mena_suit_engineering_1779552864607.png",
-    titleEN: "Suit Pressurization Check",
-    titleAR: "فحص ضغط واستقرار البدلات",
-    descEN: "Telemetry verification and helmet seal pressure testing at Amman fabrication warehouse.",
-    descAR: "معايرة أنظمة القياس عن بعد والضغط المغلق لخوذ البدلات في الحيز الصناعي بعمان.",
-    category: "equipment",
-    locationEN: "Amman Innovation Hub",
-    locationAR: "مقر الابتكار، عمان",
-    mission: "ARAV-I",
-    date: "OCT 2024"
+    image: "/images/events/analog-mission-2025/analog-crew.jpg",
+    titleEN: "Mission Crew",
+    titleAR: "طاقم البعثة",
+    descEN: "The analog mission crew in the Wadi Rum desert.",
+    descAR: "طاقم البعثة الأنالوج في صحراء وادي رم.",
+    category: "crew",
+    locationEN: "Wadi Rum, Jordan",
+    locationAR: "وادي رم، الأردن",
+    mission: "MENA-00-WR",
+    date: "2025"
   },
   {
     id: "gal-3",
-    image: "/images/mena_mission_control_1779552881676.png",
-    titleEN: "Amman Mission Control Uplink",
-    titleAR: "غرفة التحكم المركزي في عمان",
-    descEN: "Live parsing of crew bio-telemetry, habitability metrics, and active life support status.",
-    descAR: "التحليل الفوري للمؤشرات الحيوية لطاقم المهمة، وحسابات الدعم وعزل قمرة الصعود.",
+    image: "/images/events/analog-mission-2025/analog-habitat-group.jpg",
+    titleEN: "Desert Habitat",
+    titleAR: "الموئل الصحراوي",
+    descEN: "Participants in front of the analog dome habitat in Wadi Rum.",
+    descAR: "المشاركون أمام موئل القبة الأنالوج في وادي رم.",
     category: "habitat",
-    locationEN: "Command Center HQ",
-    locationAR: "مركز العمليات الفضائية",
-    mission: "ARAV-II",
-    date: "MAR 2025"
+    locationEN: "Wadi Rum, Jordan",
+    locationAR: "وادي رم، الأردن",
+    mission: "MENA-00-WR",
+    date: "2025"
   },
   {
     id: "gal-4",
-    image: "/images/mena_mars_hero_1779552846305.png",
-    titleEN: "Dome Alpha Sanctuary at Dusk",
-    titleAR: "مستوطنة القبة ألفا عند الغروب",
-    descEN: "Isolated geodesic structures designed to mitigate heavy dust accumulation and thermal swings.",
-    descAR: "الهيكل الجيوديسي المتقدم لعزل الحرارة الشديدة ومنع تغلغل دقائق الغبار الدقيقة بالصحراء.",
+    image: "/images/events/analog-mission-2025/analog-habitat-interior.jpg",
+    titleEN: "Habitat Interior",
+    titleAR: "داخل الموئل",
+    descEN: "Interior of the analog mission habitat.",
+    descAR: "المساحة الداخلية لموئل البعثة الأنالوج.",
     category: "habitat",
-    locationEN: "Al-Disah Martian Plain",
-    locationAR: "سهل رمال الديسة",
-    mission: "ARAV-I",
-    date: "NOV 2024"
+    locationEN: "Wadi Rum, Jordan",
+    locationAR: "وادي رم، الأردن",
+    mission: "MENA-00-WR",
+    date: "2025"
   },
   {
     id: "gal-5",
-    image: "/images/mars_astronaut_hero_1779558754887.png",
-    titleEN: "Sunset Landscape Survey",
-    titleAR: "مسح طبيعة المريخ عند الأفق",
-    descEN: "Analog commander scouting a geological trench during deep sunset EVA operations.",
-    descAR: "قائد المهمة في جولة رصد جيولوجي واستكشاف للطبقات الصخرية بوادي رم قبيل غسق المريخ.",
+    image: "/images/events/analog-mission-2025/analog-eva-dusk.jpg",
+    titleEN: "EVA at Dusk",
+    titleAR: "مهمة خروج عند الغروب",
+    descEN: "Analog astronauts in spacesuits at dusk in the Wadi Rum desert.",
+    descAR: "رواد فضاء أنالوج ببدلات الفضاء عند الغروب في صحراء وادي رم.",
     category: "crew",
-    locationEN: "Southern Valley Foothills",
-    locationAR: "سلسلة جبال الوادي الجنوبي",
-    mission: "ARAV-III",
-    date: "OCT 2026"
+    locationEN: "Wadi Rum, Jordan",
+    locationAR: "وادي رم، الأردن",
+    mission: "MENA-00-WR",
+    date: "2025"
+  },
+  {
+    id: "gal-6",
+    image: "/images/events/analog-mission-2025/analog-mission-control.jpg",
+    titleEN: "Mission Operations",
+    titleAR: "عمليات البعثة",
+    descEN: "Participants working during the analog mission.",
+    descAR: "المشاركون أثناء العمل خلال البعثة الأنالوج.",
+    category: "equipment",
+    locationEN: "Wadi Rum, Jordan",
+    locationAR: "وادي رم، الأردن",
+    mission: "MENA-00-WR",
+    date: "2025"
   }
 ];
 

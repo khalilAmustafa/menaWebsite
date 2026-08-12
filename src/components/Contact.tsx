@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Mail, MapPin, Send, CheckCircle2, MessageSquare, Linkedin, Globe2 } from 'lucide-react';
+import { Mail, MapPin, Send, CheckCircle2 } from 'lucide-react';
 
 interface ContactProps {
   isArabic: boolean;
@@ -86,48 +86,8 @@ export default function Contact({ isArabic }: ContactProps) {
 
               <div className="flex items-center space-x-3.5 p-3.5 bg-neutral-900/30 rounded-lg border border-neutral-900/80">
                 <Mail className="w-4 h-4 text-brand-red flex-shrink-0" />
-                <span>INFO@MENASPACE.ORG / SECURE LINK</span>
+                <span>INFO@MENASPACE.ORG</span>
               </div>
-            </div>
-
-            {/* WhatsApp Integration Shortcut with brand green balance or teal */}
-            <div className="p-5 rounded-2xl border border-emerald-500/30 bg-emerald-950/20">
-              <div className="flex items-start gap-3.5 mb-4">
-                <div className="p-2 bg-emerald-500/10 text-emerald-400 rounded-lg border border-emerald-500/30 animate-pulse">
-                  <MessageSquare className="w-5 h-5" />
-                </div>
-                <div>
-                  <h5 className="font-display font-bold text-xs text-white uppercase tracking-widest leading-none">
-                    {isArabic ? "تكامل الواتساب المباشر" : "INSTANT WHATSAPP CHANNELS"}
-                  </h5>
-                  <span className="font-mono text-[9px] text-neutral-400 block mt-1.5 uppercase">RESPONSE RATIO: UNDER 4 HOURS</span>
-                </div>
-              </div>
-              
-              <p className="font-sans text-[11px] text-neutral-300 leading-relaxed mb-4">
-                {isArabic ? (
-                  "تواصل مباشرة مع منسق علاقات الطاقم لتبادل الأفكار والاستفسارات السريعة بضغطة واحدة."
-                ) : (
-                  "Skip long forms and tap to connect directly with our Amman headquarters communications team."
-                )}
-              </p>
-
-              <a
-                href="https://wa.me/962770000000"
-                target="_blank"
-                rel="noopener noreferrer"
-                referrerPolicy="no-referrer"
-                className="inline-flex items-center bg-emerald-500 hover:bg-emerald-600 font-display font-black text-[10px] sm:text-xs text-neutral-950 tracking-widest uppercase px-5 py-2.5 rounded-lg transition-all shadow-lg"
-              >
-                {isArabic ? "افتح محادثة واتساب" : "LAUNCH WHATSAPP COMM"}
-              </a>
-            </div>
-
-            {/* Social Medias */}
-            <div className="flex items-center space-x-2">
-              <span className="font-mono text-[9px] text-neutral-500 uppercase tracking-widest mr-2">SECURE NETWORKS:</span>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer" className="p-2 bg-neutral-900 hover:bg-neutral-850 text-neutral-450 hover:text-brand-teal rounded-lg border border-neutral-850 transition-colors"><Linkedin className="w-4 h-4" /></a>
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer" className="p-2 bg-neutral-900 hover:bg-neutral-850 text-neutral-450 hover:text-brand-red rounded-lg border border-neutral-850 transition-colors"><Globe2 className="w-4 h-4" /></a>
             </div>
           </div>
 

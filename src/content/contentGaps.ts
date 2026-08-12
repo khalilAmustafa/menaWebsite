@@ -10,7 +10,15 @@ export type ContentArea =
   | 'SPACE_GAME'
   | 'ACHIEVEMENTS'
   | 'EVENTS'
-  | 'PARTNERS';
+  | 'PARTNERS'
+  | 'ADVISORS'
+  | 'ABOUT'
+  | 'CONTACT'
+  | 'PROGRAMS'
+  | 'GALLERY'
+  | 'SUPPORT'
+  | 'ANALOG_MISSION'
+  | 'ORG';
 
 export interface ContentGap {
   area: ContentArea;
@@ -123,4 +131,85 @@ export const CONTENT_GAPS: ContentGap[] = [
   { area: 'PARTNERS', item: 'Correct classification (partner vs sponsor) not supplied.' },
   { area: 'PARTNERS', item: 'Logo mappings not supplied.' },
   { area: 'PARTNERS', item: 'External URLs not supplied.' },
+  {
+    area: 'PARTNERS',
+    item: 'Homepage Partners marquee HIDDEN (not deleted) pending verification.',
+    note: 'The 8 partner entries in Partners.tsx (some plausibly real e.g. Hashemite University, Crown Prince Foundation; some invented e.g. Jordan Space Research Initiative, Eurasian Space Syndicate) used generic Lucide icons instead of real logos. Removed from public homepage rendering during the de-mock pass; component + data retained. Awaiting audit of the external LOGOS/ folder and confirmation of real relationships.',
+  },
+
+  // ── ADVISORS ────────────────────────────────────────────────────────────────
+  {
+    area: 'ADVISORS',
+    item: 'Scientific Advisory Board cards REMOVED from public UI (still unverified).',
+    note: 'The 4 previous advisors (Dr. Shelli R. Brunswick, Dr. Marc G. Hairapetian, Prof. Hanan Al-Huneidi, Dr. Benji Lawson) had unverified/invented names, organizations, bios, and Unsplash stock portraits. Section now shows only a restrained heading + placeholder. ADVISORS constant in src/data.ts retained but no longer rendered. Real advisor names/roles/orgs/bios/photos all still needed.',
+  },
+
+  // ── ABOUT ───────────────────────────────────────────────────────────────────
+  {
+    area: 'ABOUT',
+    item: 'Impact statistics REMOVED from public UI (still unverified).',
+    note: 'The 4 stat cards ("1st" Women-Led, "250+" STEM Alumni, "2" Analog Missions, "15+" International Advisors) were unverified. Removed from the About section; IMPACT_STATS constant retained in src/data.ts but no longer rendered. Real, authoritative figures still needed.',
+  },
+  {
+    area: 'ABOUT',
+    item: '"First Women-Led Space Organization in MENA" claim not verified.',
+    note: 'Still displayed in the About heading as the org\'s stated identity (not a numeric stat card). Flagged for verification; not removed pending user confirmation of the claim.',
+  },
+
+  // ── CONTACT ─────────────────────────────────────────────────────────────────
+  {
+    area: 'CONTACT',
+    item: 'Placeholder WhatsApp number and response-time claim REMOVED.',
+    note: 'Removed wa.me/962770000000, "RESPONSE RATIO: UNDER 4 HOURS", and the "Amman headquarters" claim. Real WhatsApp/phone and any response-time commitment still needed before re-adding.',
+  },
+  {
+    area: 'CONTACT',
+    item: 'Contact email INFO@MENASPACE.ORG retained but UNVERIFIED.',
+    note: 'Could not establish validity from repository/source material. Left visible per instructions (report rather than change). Confirm the real address.',
+  },
+  {
+    area: 'CONTACT',
+    item: 'Generic social links (linkedin.com / instagram.com) REMOVED from Contact panel.',
+    note: 'These pointed at bare domains, not real MENA handles. Real handles still needed.',
+  },
+
+  // ── SUPPORT ─────────────────────────────────────────────────────────────────
+  {
+    area: 'SUPPORT',
+    item: 'Support Tiers section HIDDEN from homepage + navigation (unverified).',
+    note: 'The $25 / $100 / $500 tiers and their perks (Petra-1 casing inscription, ARAV-III mission patch, etc.) were unverified and donation-adjacent. Removed from public rendering and the Header nav; Donation.tsx + SUPPORT_TIERS retained for later restoration. Real amounts/perks/payment flow still needed.',
+  },
+
+  // ── PROGRAMS ────────────────────────────────────────────────────────────────
+  {
+    area: 'PROGRAMS',
+    item: 'Program content unverified (text left unchanged this pass).',
+    note: 'Program names/descriptions and stats (e.g. "1,200+ participants since 2022") are unverified. Kept as-is per instructions. Note: the picsum.photos bannerImage fields in ACTION_PROGRAMS (src/data.ts) are NOT rendered anywhere — dead placeholder data, safe to replace when real event imagery exists.',
+  },
+
+  // ── GALLERY ─────────────────────────────────────────────────────────────────
+  {
+    area: 'GALLERY',
+    item: '3 Unsplash stock gallery items REMOVED; 5 local items remain.',
+    note: 'Removed gal-6/7/8 (Unsplash). Remaining gal-1..gal-5 use local /images/mena_*.png renders (verify these are documentary, not illustrative). The now-empty "Basalt Landscapes" (scenery) filter was also removed. Real event/mission photos to be integrated in a later assets phase.',
+  },
+
+  // ── ANALOG MISSION ──────────────────────────────────────────────────────────
+  {
+    area: 'ANALOG_MISSION',
+    item: 'Analog mission timeline left UNCHANGED but unverified.',
+    note: 'ARAV-I/II/III names, dates (Nov 2024 / Mar 2025 / Oct 2026), detail bullets, and the "Rum Dome Alpha" / "Petra-1" specs (pressures, kW, km/h, payload) are unverified. Deliberately not rewritten — pending the external "MENA Analog Mission 2025" folder audit in the events phase.',
+  },
+  {
+    area: 'ANALOG_MISSION',
+    item: 'Telemetry Dashboard is an illustrative simulation (not real data).',
+    note: 'DashboardInteractive shows demo values (SOL time, O₂/PV/uplink %, logs). During the de-mock pass its 3 crew rows were anonymized from fabricated person names to generic "Analog Crew 01/02/03" positions. If any of it should reflect real mission data, that data is still needed.',
+  },
+
+  // ── ORG ─────────────────────────────────────────────────────────────────────
+  {
+    area: 'ORG',
+    item: 'Canonical organization name ambiguous.',
+    note: 'Footer copyright reads "MENA SPACE & ANALOG ADVISORY" while the site title is "MENA Space Organization". Left unchanged pending confirmation of the official legal/brand name.',
+  },
 ];

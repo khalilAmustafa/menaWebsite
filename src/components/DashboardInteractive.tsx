@@ -19,10 +19,13 @@ export default function DashboardInteractive({ isArabic }: { isArabic: boolean }
       "[BATTERY] PV Array tracking sun orientation safely.",
       "[BIOMETRIC] Crew vitals synced in standard band indices.",
     ],
+    // De-mock: crew are generic simulated positions, NOT named individuals. The previous
+    // entries reused fabricated person names (Noor Al-Jaafari / Maya Toukan / Zein Obiedat);
+    // anonymized to non-person labels so this illustrative telemetry demo invents no identity.
     crewVitals: [
-      { id: 'crew-1', name: 'Noor Al-Jaafari', role: 'Spacesuit Lead & Commander', heartRate: 72, suitPressure: 32.4, status: 'Stable' },
-      { id: 'crew-2', name: 'Dr. Maya Toukan', role: 'Astrobiology Specialist', heartRate: 78, suitPressure: 31.8, status: 'Stable' },
-      { id: 'crew-3', name: 'Capt. Zein Obiedat', role: 'EVA Geophysics Officer', heartRate: 88, suitPressure: 32.1, status: 'Stable' }
+      { id: 'crew-1', name: 'Analog Crew 01', role: 'Spacesuit & Command Position', heartRate: 72, suitPressure: 32.4, status: 'Stable' },
+      { id: 'crew-2', name: 'Analog Crew 02', role: 'Astrobiology Position', heartRate: 78, suitPressure: 31.8, status: 'Stable' },
+      { id: 'crew-3', name: 'Analog Crew 03', role: 'EVA Geophysics Position', heartRate: 88, suitPressure: 32.1, status: 'Stable' }
     ]
   });
 

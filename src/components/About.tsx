@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { Target, Lightbulb, Users, Sparkles } from 'lucide-react';
-import { IMPACT_STATS } from '../data';
 import ScrollReveal from './ScrollReveal';
 
 interface AboutProps {
@@ -126,46 +125,6 @@ export default function About({ isArabic }: AboutProps) {
             })}
           </ScrollReveal>
 
-        </div>
-
-        {/* Dynamic Impact Stats Grid */}
-        <div className="pt-20 border-t border-neutral-900/40">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {IMPACT_STATS.map((stat, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.15 }}
-                className="group relative p-6 bg-neutral-900/30 hover:bg-neutral-900/60 border border-neutral-900/60 rounded-2xl transition-all duration-300 text-center flex flex-col justify-between"
-              >
-                {/* Visual hover corner brackets mirroring our brand gradient */}
-                <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-brand-teal/20 group-hover:border-brand-teal/80 transition-colors" />
-                <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-brand-red/10 group-hover:border-brand-red/80 transition-colors" />
-                
-                <div className="mb-4">
-                  <div className="font-display text-4xl sm:text-5xl font-black text-white hover:scale-105 transition-transform duration-300">
-                    {stat.value}
-                  </div>
-                  <div className="font-display font-bold text-xs text-brand-teal tracking-wider uppercase mt-4 mb-2">
-                    {isArabic ? (
-                      i === 0 ? "الأولى في المنطقة" : i === 1 ? "خريج ريادي" : i === 2 ? "مهام محاكاة منسقة" : "مستشار دولي"
-                    ) : stat.label}
-                  </div>
-                </div>
-
-                <p className="font-sans text-xs text-neutral-400 leading-relaxed max-w-xs mx-auto">
-                  {isArabic ? (
-                    i === 0 ? "منظمة رائدة للأبحاث وتقنيات الفضاء تقودها كفاءات نسائية عربية رفيعة." :
-                    i === 1 ? "طلاب وباحثين شباب شاركوا وأبهجونا ببدلات وفك ترميز روفيرات متميزة." :
-                    i === 2 ? "تجربتان علميتان متكاملتان داخل صحراء وادي رم في الأردن ومراقبة بيومترية دقيقة." :
-                    "خبراء وباحثون من كبرى كفاءات الفضاء ووكالات الفضاء العالمية."
-                  ) : stat.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
         </div>
 
       </div>

@@ -53,7 +53,6 @@ export default function Header({ isArabic, setIsArabic, activeSection, isLightMo
     { id: 'programs', label: 'Programs', arabic: 'برامجنا التدريبية' },
     { id: 'achievements', label: 'Achievements', arabic: 'الإنجازات', to: '/achievements' },
     { id: 'team', label: 'Team', arabic: 'فريق العمل' },
-    { id: 'support', label: 'Support Tiers', arabic: 'ادعمنا' },
     { id: 'contact', label: 'Contact', arabic: 'تواصل معنا' }
   ];
 

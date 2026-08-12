@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import { Linkedin, Instagram, Twitter } from 'lucide-react';
 import MenaLogo from './MenaLogo';
 
 interface FooterProps {
@@ -93,8 +92,8 @@ export default function Footer({ isArabic }: FooterProps) {
               </span>
               <ul className="space-y-1.5">
                 <li>
-                  <Link to="/#support" className="hover:text-brand-teal transition-colors duration-200">
-                    // {isArabic ? "رعاة المسيرة" : "SUPPORT PORTAL"}
+                  <Link to="/team" className="hover:text-brand-teal transition-colors duration-200">
+                    // {isArabic ? "فريق العمل" : "OUR TEAM"}
                   </Link>
                 </li>
                 <li>
@@ -113,46 +112,12 @@ export default function Footer({ isArabic }: FooterProps) {
             &copy; {new Date().getFullYear()} MENA SPACE & ANALOG ADVISORY. ALL TRANSMISSION CHANNELS PROTECTED.
           </div>
 
-          {/* Branded Social Media Connections */}
-          <div className="flex flex-wrap items-center justify-center gap-3">
-            <span className="text-[9px] text-brand-teal uppercase tracking-wider font-semibold">
-              {isArabic ? "قنوات الاتصال المفتوحة //" : "SECURED COMM LINKS //"}
-            </span>
-            <a
-              href="https://linkedin.com/company/mena-space-analog"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2 rounded-full bg-neutral-900/80 border border-neutral-800/80 text-neutral-400 hover:text-[#0A66C2] hover:bg-[#0A66C2]/10 hover:border-[#0A66C2]/30 transition-all duration-300 cursor-pointer"
-              aria-label="MENA LinkedIn"
-            >
-              <Linkedin className="h-3.5 w-3.5" />
-            </a>
-            <a
-              href="https://instagram.com/mena_space_analog"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2 rounded-full bg-neutral-900/80 border border-neutral-800/80 text-neutral-400 hover:text-[#E1306C] hover:bg-[#E1306C]/10 hover:border-[#E1306C]/30 transition-all duration-300 cursor-pointer"
-              aria-label="MENA Instagram"
-            >
-              <Instagram className="h-3.5 w-3.5" />
-            </a>
-            <a
-              href="https://twitter.com/mena_space"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2 rounded-full bg-neutral-900/80 border border-neutral-800/80 text-neutral-400 hover:text-[#1DA1F2] hover:bg-[#1DA1F2]/10 hover:border-[#1DA1F2]/30 transition-all duration-300 cursor-pointer"
-              aria-label="MENA Twitter / X"
-            >
-              <Twitter className="h-3.5 w-3.5" />
-            </a>
-          </div>
-
           <div className="flex items-center justify-center space-x-4">
             <Link to="/#about" className="hover:text-white transition-colors">VISION</Link>
             <span>/</span>
             <Link to="/#mission" className="hover:text-white transition-colors">TELEMETRY</Link>
             <span>/</span>
-            <Link to="/#support" className="hover:text-white transition-colors">SPONSOR</Link>
+            <Link to="/team" className="hover:text-white transition-colors">TEAM</Link>
           </div>
         </div>
 

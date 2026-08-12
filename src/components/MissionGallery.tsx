@@ -82,45 +82,6 @@ const GALLERY_DATA: GalleryItem[] = [
     locationAR: "سلسلة جبال الوادي الجنوبي",
     mission: "ARAV-III",
     date: "OCT 2026"
-  },
-  {
-    id: "gal-6",
-    image: "https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?q=80&w=1200&fit=crop",
-    titleEN: "Petra-1 System Calibration",
-    titleAR: "معايرة ريزرفور المسبار بترا-1",
-    descEN: "Micro-rover communications and sample acquisition system analysis on high angle slopes.",
-    descAR: "تحليل كفاءة القيادة وعقد الاتصال لمسبار بترا-1 على المنحدرات الصخرية الشديدة.",
-    category: "equipment",
-    locationEN: "Amman Robotics Base",
-    locationAR: "مقر الروبوتات والأنظمة",
-    mission: "ARAV-II",
-    date: "FEB 2025"
-  },
-  {
-    id: "gal-7",
-    image: "https://images.unsplash.com/photo-1547234935-80c7145ec969?q=80&w=1200&fit=crop",
-    titleEN: "Basalt Geological Indexing",
-    titleAR: "فهرسة وتصنيف صخور البازلت",
-    descEN: "Cataloging mineral compositions from iron-rich canyons and dusty ancient dry basins.",
-    descAR: "تصنيف المكونات المعدنية والخصائص الكيميائية للصخور الغنية بالحديد لربطها بالتربة المريخية.",
-    category: "scenery",
-    locationEN: "Wadi Rum Basalt Canyons",
-    locationAR: "أخاديد البازلت بوادي رم",
-    mission: "ARAV-I",
-    date: "NOV 2024"
-  },
-  {
-    id: "gal-8",
-    image: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=1200&fit=crop",
-    titleEN: "Closed-Loop Hydro-Systems",
-    titleAR: "أنظمة الزراعة المائية المعزولة",
-    descEN: "Testing automated water loops and bio-reclamation yield efficiency under strict rationing rules.",
-    descAR: "دراسة الدورة المائية الذاتية والمحاصيل الغذائية المعزولة داخل المختبر الحيوي التابع لـ ARAV-II.",
-    category: "habitat",
-    locationEN: "Dome Alpha Bio-lab",
-    locationAR: "مختبر غطاء الحياة، القبة م1",
-    mission: "ARAV-II",
-    date: "APR 2025"
   }
 ];
 
@@ -153,8 +114,7 @@ export default function MissionGallery({ isArabic }: MissionGalleryProps) {
     { id: 'all', nameEN: 'All Missions Archive', nameAR: 'كامل أرشيف المهام' },
     { id: 'crew', nameEN: 'Crew & EVA', nameAR: 'الرواد والطلعات الميدانية' },
     { id: 'habitat', nameEN: 'Habitat & Operations', nameAR: 'المستوطنة والمقرات' },
-    { id: 'equipment', nameEN: 'Systems & Equipment', nameAR: 'الأنظمة والبدلات المبتكرة' },
-    { id: 'scenery', nameEN: 'Basalt Landscapes', nameAR: 'الجيولوجيا والمناظر الطبيعية' }
+    { id: 'equipment', nameEN: 'Systems & Equipment', nameAR: 'الأنظمة والبدلات المبتكرة' }
   ];
 
   // Filtering list based on user selections
@@ -210,7 +170,7 @@ export default function MissionGallery({ isArabic }: MissionGalleryProps) {
           <div className="hidden lg:grid grid-cols-2 gap-4 font-mono text-[9px] text-neutral-500 bg-neutral-900/30 border border-neutral-900/60 p-4 rounded-lg">
             <div>
               <span className="block text-neutral-600 uppercase">{isArabic ? "إجمالي اللقطات النشطة:" : "ACTIVE CAPTURES:"}</span>
-              <span className="text-brand-teal font-bold text-xs">08 INTERDISCIPLINARY</span>
+              <span className="text-brand-teal font-bold text-xs">0{GALLERY_DATA.length} INTERDISCIPLINARY</span>
             </div>
             <div>
               <span className="block text-neutral-600 uppercase">{isArabic ? "ترميز الأرشيف:" : "ARCHIVE CLASSIF:"}</span>

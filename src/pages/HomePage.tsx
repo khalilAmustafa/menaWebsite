@@ -9,8 +9,6 @@ import MissionGallery from '../components/MissionGallery';
 import Programs from '../components/Programs';
 import Teams from '../components/Teams';
 import Advisory from '../components/Advisory';
-import Partners from '../components/Partners';
-import Donation from '../components/Donation';
 import Contact from '../components/Contact';
 
 /**
@@ -27,7 +25,7 @@ export default function HomePage() {
   // Monitor active scrolled section using an IntersectionObserver (moved verbatim from
   // App.tsx). Lives here so it (re)attaches whenever the homepage is actually mounted.
   useEffect(() => {
-    const sections = ['about', 'mission', 'gallery', 'programs', 'teams', 'advisors', 'support', 'contact'];
+    const sections = ['about', 'mission', 'gallery', 'programs', 'teams', 'advisors', 'contact'];
 
     const observerOptions = {
       root: null,
@@ -113,14 +111,15 @@ export default function HomePage() {
       {/* 8. Advisory board experts roster */}
       <Advisory isArabic={isArabic} />
 
-      {/* Partners & Strategic Liaisons infinite slider */}
-      <Partners isArabic={isArabic} />
-
-      {/* 9. Support Tiers representation badges */}
-      <Donation isArabic={isArabic} />
-
-      {/* 10. Contact application and partnerships register */}
+      {/* 9. Contact application and partnerships register */}
       <Contact isArabic={isArabic} />
+
+      {/*
+        De-mock pass: the Partners marquee (unverified partner names + generic Lucide icons)
+        and the Support Tiers section ($25/$100/$500 with unverified perks) were removed from
+        public homepage rendering. Their components/data (Partners.tsx, Donation.tsx) are kept
+        in the repo for later restoration once verified content/logos and real tiers exist.
+      */}
     </>
   );
 }

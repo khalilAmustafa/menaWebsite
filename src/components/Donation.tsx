@@ -132,7 +132,6 @@ export default function Donation({ isArabic }: DonationProps) {
                         {isArabic ? (
                           perk.includes('Arabic Calligraphy') ? "شهادة مشاركة رقمية ممهورة بختم خط عربي تذكاري" :
                           perk.includes('flight log') ? "تقارير ويوميات الطاقم العلمية من وادي رم" :
-                          perk.includes('Finals') ? "دعوة كبار الشخصيات لحضور نهائيات مسابقة الروفر" :
                           perk.includes('sit in Mission') ? "دعوة للجلوس في غرفة عمليات عمان لتتبع الرصد المباشر للبعثة" :
                           "عرض اسمك وشعارك كجهة راعية رئيسية في الصفحة الرسمية للمنظمة"
                         ) : perk}

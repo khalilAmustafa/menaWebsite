@@ -73,17 +73,10 @@ export default function Header({ isArabic, setIsArabic, activeSection, isLightMo
   const handleProgramClick = (action: string) => {
     setIsOpen(false);
     setProgramsDropdownOpen(false);
-
+    // Phase 7: the fabricated per-program modals were removed. The dropdown now only scrolls to
+    // the homepage Programs & Activities teaser; real activity detail lives on /activities.
     if (action === 'overview') {
       handleScrollTo('programs');
-    } else if (action === 'analog-2025') {
-      handleScrollTo('mission');
-    } else {
-      handleScrollTo('programs');
-      // Delay dispatching custom event slightly to let smooth scrolling complete
-      setTimeout(() => {
-        window.dispatchEvent(new CustomEvent('open-program', { detail: { programId: action } }));
-      }, 550);
     }
   };
 
@@ -204,20 +197,13 @@ export default function Header({ isArabic, setIsArabic, activeSection, isLightMo
                             {isArabic ? "البرامج والأنشطة" : "PROGRAMS & ACTIVITIES"}
                           </button>
 
-                          {[
-                            { id: 'analog-2025', label: 'Analog Mission 2025', arabic: 'مهمة المحاكاة لعام 2025' },
-                            { id: 'maker-collective', label: 'The Maker Collective', arabic: 'تجمع الصنّاع والابتكار' },
-                            { id: 'nasa-apps', label: 'NASA SPACE APP CHALLENGE', arabic: 'تحدي تطبيقات الفضاء ناسا' },
-                            { id: 'system-prog', label: 'SYSTEM Program', arabic: 'برنامج SYSTEM للأبحاث' }
-                          ].map((item) => (
-                            <button
-                              key={item.id}
-                              onClick={() => handleProgramClick(item.id)}
-                              className="w-full text-left rtl:text-right px-3 py-2 text-xs text-neutral-400 hover:text-white hover:bg-space-dark hover:border-l-2 rtl:hover:border-l-0 rtl:hover:border-r-2 hover:border-brand-teal/80 transition-all rounded-lg block font-sans"
-                            >
-                              {isArabic ? item.arabic : item.label}
-                            </button>
-                          ))}
+                          <Link
+                            to="/activities"
+                            onClick={() => setProgramsDropdownOpen(false)}
+                            className="w-full text-left rtl:text-right px-3 py-2 text-xs text-neutral-400 hover:text-white hover:bg-space-dark hover:border-l-2 rtl:hover:border-l-0 rtl:hover:border-r-2 hover:border-brand-teal/80 transition-all rounded-lg block font-sans"
+                          >
+                            {isArabic ? 'كل الأنشطة والبرامج' : 'All Activities & Programs'}
+                          </Link>
                         </div>
                       </motion.div>
                     )}
@@ -461,23 +447,16 @@ export default function Header({ isArabic, setIsArabic, activeSection, isLightMo
                             >
                               • {isArabic ? "عرض الكل" : "VIEW OVERVIEW"}
                             </button>
-                            {[
-                              { id: 'analog-2025', label: 'Analog Mission 2025', arabic: 'مهمة المحاكاة لعام 2025' },
-                              { id: 'maker-collective', label: 'The Maker Collective', arabic: 'تجمع الصنّاع والابتكار' },
-                              { id: 'nasa-apps', label: 'NASA SPACE APP CHALLENGE', arabic: 'تحدي تطبيقات الفضاء ناسا' },
-                              { id: 'system-prog', label: 'SYSTEM Program', arabic: 'برنامج SYSTEM للأبحاث' }
-                            ].map((item) => (
-                              <button
-                                key={item.id}
-                                onClick={() => {
-                                  handleProgramClick(item.id);
-                                  setMobileProgramsOpen(false);
-                                }}
-                                className="block w-full text-left rtl:text-right py-2 px-3 rounded-lg text-[11px] font-mono uppercase tracking-wider text-neutral-400 hover:text-white hover:bg-neutral-900/40 transition-all text-sm animate-fade-in"
-                              >
-                                • {isArabic ? item.arabic : item.label}
-                              </button>
-                            ))}
+                            <Link
+                              to="/activities"
+                              onClick={() => {
+                                setMobileProgramsOpen(false);
+                                setIsOpen(false);
+                              }}
+                              className="block w-full text-left rtl:text-right py-2 px-3 rounded-lg text-[11px] font-mono uppercase tracking-wider text-neutral-400 hover:text-white hover:bg-neutral-900/40 transition-all animate-fade-in"
+                            >
+                              • {isArabic ? 'كل الأنشطة والبرامج' : 'All Activities & Programs'}
+                            </Link>
                           </motion.div>
                         )}
                       </AnimatePresence>

@@ -53,11 +53,11 @@ export default function About({ isArabic }: AboutProps) {
           <h2 className="font-display font-medium text-3xl sm:text-5xl text-white tracking-tight uppercase">
             {isArabic ? (
               <>
-                المؤسسة الأولى من نوعها <span className="text-brand-teal italic font-extrabold">بتمكين أردني ريادي</span>
+                مؤسسة فضاء <span className="text-brand-teal italic font-extrabold">بقيادة نسائية وتمكين أردني</span>
               </>
             ) : (
               <>
-                The First Women-Led <span className="text-brand-teal font-extrabold">Space Organization</span> in MENA
+                A Women-Led <span className="text-brand-teal font-extrabold">Space Organization</span> in MENA
               </>
             )}
           </h2>

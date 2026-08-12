@@ -1,4 +1,4 @@
-import { ProgramItem, TeamDepartment, AdvisorItem, SupportTier } from './types';
+import { TeamDepartment, AdvisorItem, SupportTier } from './types';
 
 // Let's use the exact paths returned by standard tool calls
 export const IMAGES = {
@@ -13,45 +13,6 @@ export const IMPACT_STATS = [
   { value: "250+", label: "STEM Alumni & Youth Innovators", description: "Directly trained through our intensive bootcamps, Rover challenges, and labs." },
   { value: "2", label: "Analog Martian Missions Coordinated", description: "Direct engineering, life-support, and psychology simulations in Wadi Rum." },
   { value: "15+", label: "International Aerospace Advisors", description: "Advisors from NASA, ESA, JAXA, and global analog astronaut circles." }
-];
-
-export const ACTION_PROGRAMS: ProgramItem[] = [
-  {
-    id: "nasa-apps",
-    title: "NASA Space Apps Jordan Liaison",
-    subtitle: "Solving Global Challenges in Amman",
-    description: "MENA ORG proud host and liaison facilitating Jordan's biggest youth hackathon. Inspiring designers, engineers, and coders to solve NASA's open-source planetary challenges.",
-    features: ["Mentorship by active aerospace engineers", "Winning prototypes incubated toward real startups"],
-    role: "National coordinator and academic youth mentor.",
-    bannerImage: "https://picsum.photos/seed/nasaapps/800/600"
-  },
-  {
-    id: "system-prog",
-    title: "S.Y.S.T.E.M. Training Academy",
-    subtitle: "Space for Youth Through STEM",
-    description: "An intensive certificate program for Arab women and young innovators. Curriculum covers space exploration history, rocket propulsion principles, orbital dynamics, and analog habitats.",
-    features: ["Hands-on engineering laboratories", "Interactive orbital math workshops", "Direct mentorship with professional analog astronauts"],
-    role: "Proprietary design bootcamp designed for next-gen Arab aerospace engineers.",
-    bannerImage: "https://picsum.photos/seed/system/800/600"
-  },
-  {
-    id: "maker-collective",
-    title: "The Maker Collective",
-    subtitle: "Open-Source Orbital Hardware Labs",
-    description: "A highly collaborative prototyping program built around hardware engineering. Promotes building environmental telemetry kits, open-source cubesat modules, and model atmospheric rockets.",
-    features: ["Advanced 3D habitability design lab", "KiCad PCB schema workshops & microcontrollers", "Open hardware aerospace repository access"],
-    role: "Proprietary design bootcamp for orbital maker integration.",
-    bannerImage: "https://picsum.photos/seed/maker/800/600"
-  },
-  {
-    id: "stem-labs",
-    title: "Jordan Mars Rover Challenge",
-    subtitle: "Youth Applied Robotics in Severe Climates",
-    description: "An annual inter-university design-build-test competition. Student squads create Martian payload rovers matching severe sand and heat metrics in simulated terrain.",
-    features: ["Obstacle navigation tests in Wadi Rum-like sandy pits", "Payload release and soil collection hardware review", "Academic and industry judges panel"],
-    role: "Engineering challenge and design evaluation board.",
-    bannerImage: "https://picsum.photos/seed/rover/800/600"
-  }
 ];
 
 export const DEPARTMENTS: TeamDepartment[] = [
@@ -216,7 +177,6 @@ export const SUPPORT_TIERS: SupportTier[] = [
     price: "$100",
     tagline: "Sponsor core thermal seals & hydroponics water loops.",
     perks: [
-      "VIP Invitation to the annual Jordan Mars Rover Finals in Wadi Rum",
       "All benefits from the previous tier"
     ],
     color: "from-red-600/30 to-rose-500/10 border-red-500/30 hover:border-red-500"

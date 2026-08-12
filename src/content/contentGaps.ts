@@ -169,8 +169,8 @@ export const CONTENT_GAPS: ContentGap[] = [
   },
   {
     area: 'ABOUT',
-    item: '"First Women-Led Space Organization in MENA" claim not verified.',
-    note: 'Still displayed in the About heading as the org\'s stated identity (not a numeric stat card). Flagged for verification; not removed pending user confirmation of the claim.',
+    item: 'Unverifiable "First" superlative SOFTENED in the About heading.',
+    note: 'Phase 7: "The First Women-Led Space Organization in MENA" → "A Women-Led Space Organization in MENA" (EN + AR), removing the unverifiable "first"/"الأولى من نوعها" claim while keeping the org\'s women-led self-identification. Verify if any "first"/ranking claim can be officially substantiated before re-adding.',
   },
 
   // ── CONTACT ─────────────────────────────────────────────────────────────────
@@ -200,25 +200,30 @@ export const CONTENT_GAPS: ContentGap[] = [
   // ── PROGRAMS ────────────────────────────────────────────────────────────────
   {
     area: 'PROGRAMS',
-    item: 'Fabricated participant statistic REMOVED ("1,200+ … since 2022").',
-    note: 'Removed from the NASA program card (EN feature + AR "hundreds of youth" count). Remaining program descriptions/features are qualitative marketing that is still unverified — kept but flagged. picsum.photos bannerImage fields in ACTION_PROGRAMS remain dead (not rendered).',
+    item: 'Homepage "Programs" section rebuilt on confirmed data (Phase 7).',
+    note: 'The four fabricated ACTION_PROGRAMS cards + their picsum banners and syllabus modals were DELETED (data.ts ACTION_PROGRAMS + the ProgramItem type). The homepage "Programs & Activities" section now previews only the confirmed ACTIVITIES (SYSTEM + ملتقى الصناع) and links to /activities. NASA Space Apps is represented under Events (not duplicated as a Program).',
   },
   {
     area: 'PROGRAMS',
-    item: 'Homepage Programs "S.Y.S.T.E.M. Training Academy" card still unverified (Phase 7).',
-    note: 'Phase 6.1 corrected the data-layer invented acronym (subtitle → confirmed "Space for Youth Through STEM"). The RENDERED homepage Programs card (title/description/syllabus for id "system-prog") still contains unverified curriculum copy and is intentionally left for the Phase 7 Programs content audit (not rewritten here to avoid generated replacement copy). Confirmed SYSTEM identity lives on /activities.',
+    item: 'The Maker Collective — no evidence it is a real MENA program.',
+    note: 'Verify: is "The Maker Collective" an actual MENA initiative, its official name, purpose, dates, and whether it relates to ملتقى الصناع (Makers Forum)? No repository evidence exists, so the fabricated card was removed. Do NOT assume it equals Makers Forum. Impact: no Programs card until confirmed.',
   },
   {
     area: 'PROGRAMS',
-    item: 'Program ↔ real content mapping unconfirmed (Maker Collective / Jordan Mars Rover Challenge).',
-    note: 'Homepage "The Maker Collective" may or may not relate to ملتقى الصناع (now on /activities); "Jordan Mars Rover Challenge" has NO supporting assets. Titles kept; specifics remain unverified. Reconcile once official program descriptions are supplied.',
+    item: 'Jordan Mars Rover Challenge — initiative unverified.',
+    note: 'Verify: does MENA run a "Jordan Mars Rover Challenge"? Need official name, organizer, year, location, structure, and any rover/competition assets. No supporting assets exist, so the fabricated card was removed. Impact: no Programs card until confirmed.',
+  },
+  {
+    area: 'PROGRAMS',
+    item: 'SYSTEM program details still needed for a richer card.',
+    note: 'Verify: official SYSTEM program description, curriculum scope, delivery locations/venue, participant profile, partners, outcomes, and photo-consent status. Confirmed so far: name "SYSTEM", tagline "Space for Youth Through STEM", period 2025–2026. Currently shown restrained on /activities (branded banner only).',
   },
 
   // ── GALLERY ─────────────────────────────────────────────────────────────────
   {
     area: 'GALLERY',
-    item: '3 Unsplash stock gallery items REMOVED; 5 local items remain.',
-    note: 'Removed gal-6/7/8 (Unsplash). Remaining gal-1..gal-5 use local /images/mena_*.png renders (verify these are documentary, not illustrative). The now-empty "Basalt Landscapes" (scenery) filter was also removed. Real event/mission photos to be integrated in a later assets phase.',
+    item: 'Homepage gallery now uses real Wadi Rum mission photos (RESOLVED).',
+    note: 'Phase 6 replaced the Unsplash stock + the AI-render /images/mena_*.png items with 6 real photos from the Wadi Rum analog mission (metadata MENA-00-WR · 2025). The unused mena_*.png render files still sit in /public/images but are no longer referenced by any rendered component (IMAGES.engineering/eva unused; IMAGES.missionControl only in the unrendered Donation.tsx). They can be deleted in a later asset-cleanup pass.',
   },
 
   // ── ANALOG MISSION ──────────────────────────────────────────────────────────
@@ -267,7 +272,7 @@ export const CONTENT_GAPS: ContentGap[] = [
   // ── ORG ─────────────────────────────────────────────────────────────────────
   {
     area: 'ORG',
-    item: 'Canonical organization name ambiguous.',
-    note: 'Footer copyright reads "MENA SPACE & ANALOG ADVISORY" while the site title is "MENA Space Organization". Left unchanged pending confirmation of the official legal/brand name.',
+    item: 'Official long-form / legal organization name unconfirmed.',
+    note: 'Phase 7: the footer legacy variant "MENA SPACE & ANALOG ADVISORY" was reconciled to the consistent public brand "MENA Space Organization" (matches the logo alt + routed pages). Remaining variants still in the repo: shorthand "MENA ORG" (About copy) and the Chatbot prompt\'s expansion "Middle East and North Africa Engineering Education and Training Organization" (backend/AI prompt — NOT touched this phase). Verify the official long-form/legal name and the intended acronym expansion, then standardize.',
   },
 ];

@@ -114,7 +114,7 @@ export default function Footer({ isArabic }: FooterProps) {
 
         <div className="flex flex-col lg:flex-row items-center justify-between gap-6 font-mono text-[10px] text-neutral-600">
           <div className="text-center lg:text-left">
-            &copy; {new Date().getFullYear()} MENA SPACE & ANALOG ADVISORY. ALL TRANSMISSION CHANNELS PROTECTED.
+            &copy; {new Date().getFullYear()} MENA Space Organization. ALL TRANSMISSION CHANNELS PROTECTED.
           </div>
 
           <div className="flex items-center justify-center space-x-4">

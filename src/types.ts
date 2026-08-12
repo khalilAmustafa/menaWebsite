@@ -1,13 +1,3 @@
-export interface ProgramItem {
-  id: string;
-  title: string;
-  subtitle: string;
-  description: string;
-  features: string[];
-  role: string;
-  bannerImage: string;
-}
-
 export interface TeamDepartment {
   id: string;
   name: string;

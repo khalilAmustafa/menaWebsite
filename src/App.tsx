@@ -11,6 +11,7 @@ import ResearchPapersPage from './pages/ResearchPapersPage';
 import ResearchPaperPage from './pages/ResearchPaperPage';
 import TeamPage from './pages/TeamPage';
 import TeamMemberPage from './pages/TeamMemberPage';
+import SpaceGameChallengePage from './pages/SpaceGameChallengePage';
 
 /**
  * App owns the shared theme + language state (unchanged from the previous single-page
@@ -71,15 +72,8 @@ export default function App() {
           />
           {/* Static route declared before the dynamic one for clarity (route ranking also
               guarantees this specific path wins over /events/:slug). */}
-          <Route
-            path="/events/space-game-challenge-2026"
-            element={
-              <PlaceholderPage
-                titleEN="MENA Space Game Challenge 2026"
-                titleAR="تحدي مِنا لألعاب الفضاء 2026"
-              />
-            }
-          />
+          {/* Phase 5 — real Space Game Challenge event page */}
+          <Route path="/events/space-game-challenge-2026" element={<SpaceGameChallengePage />} />
           <Route
             path="/events/:slug"
             element={<PlaceholderPage titleEN="Event" titleAR="فعالية" showSlug />}

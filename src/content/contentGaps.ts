@@ -97,17 +97,32 @@ export const CONTENT_GAPS: ContentGap[] = [
   { area: 'TEAM', item: 'Final department structure requires verification.' },
 
   // ── SPACE GAME ──────────────────────────────────────────────────────────────
-  { area: 'SPACE_GAME', item: 'Date not supplied.' },
-  { area: 'SPACE_GAME', item: 'Location not supplied.' },
-  { area: 'SPACE_GAME', item: 'Final overview copy not supplied.' },
-  { area: 'SPACE_GAME', item: 'Approved statistics not supplied.' },
-  { area: 'SPACE_GAME', item: 'Winners not supplied.' },
-  { area: 'SPACE_GAME', item: 'Winning categories not supplied.' },
-  { area: 'SPACE_GAME', item: 'Gallery selections not supplied.' },
-  { area: 'SPACE_GAME', item: 'Video / aftermovie not supplied.' },
-  { area: 'SPACE_GAME', item: 'Partners not supplied.' },
-  { area: 'SPACE_GAME', item: 'Sponsors not supplied.' },
-  { area: 'SPACE_GAME', item: 'Impact statement not supplied.' },
+  {
+    area: 'SPACE_GAME',
+    item: 'Exact event date not supplied (year 2026 confirmed by folder name only).',
+    note: 'The asset folder is "MENA Space Game Challenge 2026"; no day/month is legible in any asset. Hero shows a "2026" label from the folder/slug; no fabricated month/day.',
+  },
+  { area: 'SPACE_GAME', item: 'Location / venue not supplied.', note: 'Interior venue visible but no readable location text; not published.' },
+  {
+    area: 'SPACE_GAME',
+    item: 'Full official overview / objectives copy not supplied.',
+    note: 'PARTIALLY RESOLVED: the official welcome banner confirms the format — "48-Hour Space Gaming Hackathon · CREATE · BUILD · COMPETE" — now used in the About/summary. A fuller official overview and explicit objectives are still needed.',
+  },
+  { area: 'SPACE_GAME', item: 'Approved statistics/highlights not supplied.', note: 'No participant/team/country/project counts confirmed. Highlights grid omitted (no fabricated numbers).' },
+  {
+    area: 'SPACE_GAME',
+    item: 'Winner identities not confirmed (team/person/project names, placements).',
+    note: 'Award-ceremony recap images show checks with legible AWARD CATEGORIES/amounts ("1st Place Winner 500 JOD", "2nd Place Winner", "Best Storytelling Award 200 JOD", "In-Kind Training Award"), but NO team/person/project names are legible and none were inferred from faces. Winners section shows a restrained pending state. DECISION FOR USER: whether to publish the award categories (without names) and/or supply the actual winners.',
+  },
+  { area: 'SPACE_GAME', item: 'Winning team/project names not supplied.' },
+  { area: 'SPACE_GAME', item: 'Gallery selections — RESOLVED.', note: 'Curated 11-image gallery + 1 hero imported from the official recap graphics into public/images/events/space-game-2026/. Alt text describes scenes only; no winner/identity claims.' },
+  { area: 'SPACE_GAME', item: 'Video / aftermovie not supplied.', note: 'No video files in the asset folder; no external video link supplied. Field left ready (unused).' },
+  {
+    area: 'SPACE_GAME',
+    item: 'Partner / sponsor list + classification not confirmed.',
+    note: 'Organizations VISIBLE on the official event frame: MANZEL (Technologies) top-branding; bottom strip "ZINC — powered by Zain", "Supported by Unity, Autodesk", plus one Jordanian org (Arabic text, not legibly readable). Their ASSOCIATION with the event is documented, but exact partner-vs-sponsor CLASSIFICATION is not stated, so none are published as structured Partner records. Partners & Sponsors section shows a restrained pending state. DECISION FOR USER: confirm the list + each org’s classification (and whether to pull logos from the LOGOS/ folder).',
+  },
+  { area: 'SPACE_GAME', item: 'Impact statement / narrative not supplied.', note: 'Impact section shows a restrained pending state; no promotional outcome copy invented.' },
   { area: 'SPACE_GAME', item: 'Impact statistics not supplied.' },
 
   // ── ACHIEVEMENTS ────────────────────────────────────────────────────────────

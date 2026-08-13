@@ -6,6 +6,9 @@ interface ContactProps {
   isArabic: boolean;
 }
 
+/** Single source of truth for the address shown in the panel and used by the mailto: hand-off. */
+const CONTACT_EMAIL = 'INFO@MENASPACE.ORG';
+
 export default function Contact({ isArabic }: ContactProps) {
   const [formData, setFormData] = useState({
     name: '',
@@ -16,15 +19,33 @@ export default function Contact({ isArabic }: ContactProps) {
   });
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
+  /**
+   * Phase 8 — TRUTHFULNESS FIX. This form previously sent nothing at all: handleSubmit only
+   * flipped a boolean, then displayed a success panel claiming the message had been "synced
+   * to Amman Center core" with a promised response time. Nothing was ever transmitted, so
+   * every submission silently vanished while telling the visitor it had arrived.
+   *
+   * There is no backend in this project and Phase 8 must not add one, so the form now hands
+   * off to the visitor's own mail client via a mailto: link built from the fields they filled
+   * in. That is a real, working delivery path, and the confirmation copy below describes only
+   * what actually happened — the message is NOT sent until the visitor sends it themselves.
+   */
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.email) return;
 
+    const subject = `Website inquiry — ${formData.roleType} — ${formData.name}`;
+    const body = [
+      `Name: ${formData.name}`,
+      `Email: ${formData.email}`,
+      `Inquiry type: ${formData.roleType}`,
+      `Area of interest: ${formData.interestDept}`,
+      '',
+      formData.comments,
+    ].join('\n');
+
+    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     setIsSubmitted(true);
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({ name: '', email: '', roleType: 'volunteer', interestDept: 'engineering', comments: '' });
-    }, 4500);
   };
 
   return (
@@ -68,10 +89,18 @@ export default function Contact({ isArabic }: ContactProps) {
                 {isArabic ? "معلومات التواصل والربط" : "MISSION COORDINATES"}
               </h3>
               <p className="font-sans text-xs text-neutral-400 leading-relaxed">
+                {/*
+                  Arabic copy review: the AR text invited universities to take part in
+                  "تحدي روفر بترا" (the "Petra Rover Challenge") — a fabricated programme, kin to
+                  the "Petra-1" rover and "Jordan Mars Rover Challenge" already deleted as
+                  invented. It survived because it existed ONLY in Arabic. The EN text separately
+                  offered to "book analog trials in Wadi Rum", implying a bookable service that
+                  is not established anywhere. Both replaced with a neutral, accurate invitation.
+                */}
                 {isArabic ? (
-                  "يسعدنا الإجابة على استفسارات الجامعات والمعاهد التكنولوجية الراغبة بالمشاركة في تحدي روفر بترا والفرق البحثية."
+                  'يسعدنا تلقّي استفسارات الجامعات والفرق البحثية والطلبة المهتمين ببعثات مِنا وبرامجها.'
                 ) : (
-                  "Have research requests, space payload inquiries, or university student squads wanting to book analog trials in Wadi Rum?"
+                  'We welcome inquiries from universities, research teams, and students interested in MENA’s missions and programs.'
                 )}
               </p>
             </div>
@@ -86,7 +115,9 @@ export default function Contact({ isArabic }: ContactProps) {
 
               <div className="flex items-center space-x-3.5 p-3.5 bg-neutral-900/30 rounded-lg border border-neutral-900/80">
                 <Mail className="w-4 h-4 text-brand-red flex-shrink-0" />
-                <span>INFO@MENASPACE.ORG</span>
+                <a href={`mailto:${CONTACT_EMAIL}`} className="hover:text-brand-teal transition-colors">
+                  {CONTACT_EMAIL}
+                </a>
               </div>
             </div>
           </div>
@@ -166,7 +197,15 @@ export default function Contact({ isArabic }: ContactProps) {
                   className="w-full bg-black text-neutral-400 border border-neutral-900/80 rounded-lg px-3.5 py-3 font-mono text-[11px] focus:outline-none focus:border-neutral-800"
                 >
                   <option value="engineering">{isArabic ? "تطوير البدلات واللوجستيات الهندسية" : "Spacesuit Fabrications"}</option>
-                  <option value="mission-control">{isArabic ? "أنظمة الاتصال في غرفة عمليات عمان" : "AMMAN Mission Controls"}</option>
+                  {/*
+                    Phase 8.2: was "AMMAN Mission Controls" / "أنظمة الاتصال في غرفة عمليات عمان",
+                    which implied MENA operates a mission-control/operations room in Amman — an
+                    unverified facility claim. Replaced with a neutral description of the KIND of
+                    inquiry, naming no facility.
+                  */}
+                  <option value="mission-operations">
+                    {isArabic ? 'استفسارات تقنية وعمليات البعثات' : 'Technical & Mission Operations Inquiry'}
+                  </option>
                   <option value="astrobiology">{isArabic ? "أبحاث الأحيائية والتربة البركانية" : "Astrobiology R&D labs"}</option>
                   <option value="donation">{isArabic ? "بوابة الرعاية والشراكة التمويلية" : "Donation & Sponsorship Channels"}</option>
                 </select>
@@ -175,7 +214,9 @@ export default function Contact({ isArabic }: ContactProps) {
               {/* Message Comments */}
               <div className="space-y-1.5">
                 <label className="font-mono text-neutral-500 text-[10px] uppercase block tracking-wider">
-                  {isArabic ? "التفاصيل وأوجه التعاون في عقيدتكم" : "PROPOSED ENGAGEMENT SCOPE"}
+                  {/* Arabic copy review: was "…في عقيدتكم" — "in your creed/doctrine", a
+                      machine-translation artefact that made no sense in context. */}
+                  {isArabic ? 'تفاصيل التعاون المقترح' : 'PROPOSED ENGAGEMENT SCOPE'}
                 </label>
                 <textarea
                   rows={4}
@@ -215,14 +256,20 @@ export default function Contact({ isArabic }: ContactProps) {
                     <CheckCircle2 className="w-8 h-8 animate-pulse" />
                   </motion.div>
                   
+                  {/*
+                    Phase 8: this panel used to announce a successful transmission that never
+                    happened, name a coordinator ("م. العبادي") who exists nowhere in any
+                    source material, and promise a response time. All three were removed. The
+                    copy now states only the verifiable fact: the visitor's mail client was
+                    opened, and the message is not sent until they send it.
+                  */}
                   <h4 className="font-display font-black text-base sm:text-lg text-white uppercase tracking-widest mb-2">
-                    {isArabic ? "تم توثيق الإرسالية بنجاح!" : "TELEMETRY LINK SECURED!"}
+                    {isArabic ? 'تم فتح بريدك الإلكتروني' : 'YOUR EMAIL APP IS OPEN'}
                   </h4>
                   <p className="font-mono text-xs text-neutral-400 max-w-sm mb-6 leading-relaxed">
-                    {isArabic 
-                      ? "رابط التسجيل مؤمن كلياً. تم إشعار وحدة عمليات الاتصالات في عمان. ستجيب منسقتنا م. العبادي قريبًا بمفردات رائد الفضاء."
-                      : "Your registry transmission parameters has been locked and synced to Amman Center core. One of our specialists will reach back inside a 4.2-second delay threshold."
-                    }
+                    {isArabic
+                      ? `فتحنا رسالة جاهزة في تطبيق البريد لديك. لن تصلنا رسالتك حتى ترسلها من هناك. إذا لم يفتح أي تطبيق، راسلنا مباشرة على ${CONTACT_EMAIL}`
+                      : `We've opened a pre-filled message in your email app. Your message isn't sent until you send it from there. If nothing opened, write to us directly at ${CONTACT_EMAIL}`}
                   </p>
 
                   <button

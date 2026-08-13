@@ -143,9 +143,10 @@ div.light-mode {
    NOTE: do NOT list Tailwind gradient-stop utilities (.from-transparent /
    .to-transparent) or the layout utility (.grid) here — they collide with
    transparent overlays and every grid container, painting them solid. */
+/* (#telemetry-dashboard selector removed — the fabricated telemetry dashboard it targeted
+   was deleted from the homepage.) */
 .light-mode footer.relative,
 .light-mode section.relative,
-.light-mode #telemetry-dashboard,
 .light-mode .bg-black {
   background-color: var(--lm-bg) !important;
   background-image: none !important;
@@ -167,12 +168,17 @@ div.light-mode {
   background-image: none !important;
 }
 
-/* Hero: intentionally shown as a plain off-white placeholder in light mode.
-   The full-cover scrim (bg-neutral-950/30, hero-only) is filled solid so the photo
-   is hidden until the hero gets its proper light-mode redesign later. Gallery/other
-   image overlays are unaffected (they don't use this class). */
-.light-mode .bg-neutral-950\/30 {
-  background-color: var(--lm-bg) !important;
+/* Hero, light mode — FIXED.
+   This rule used to fill the hero scrim with SOLID `--lm-bg`, which hid the hero image
+   completely: light-mode visitors saw an empty off-white band where the homepage hero
+   should be. The hero image is very dark (night sky over red terrain) and light-mode body
+   text is dark (--lm-text), so the image cannot simply be revealed as-is — the headline
+   would sit dark-on-dark.
+   Instead the scrim becomes a translucent cream veil: the image stays visible but is
+   lightened enough for the dark light-mode headline and body text to read over it.
+   Scoped to `.hero-scrim` so no other overlay on the site is affected. */
+.light-mode .hero-scrim {
+  background-color: rgba(249, 250, 251, 0.82) !important;
 }
 
 /* (removed `.light-mode .grid` — `.grid` is Tailwind's display:grid utility, so it

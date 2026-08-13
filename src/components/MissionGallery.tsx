@@ -175,10 +175,16 @@ export default function MissionGallery({ isArabic }: MissionGalleryProps) {
             </h2>
             
             <p className="max-w-2xl text-xs sm:text-sm text-neutral-400 font-sans leading-relaxed">
-              {isArabic 
-                ? "سجل مرئي لمهام رواد الفضاء العرب ومحاكاة الاستكشاف الجيولوجي وأنظمة دعم الحياة في صحاري وادي رم ومختبر التكنولوجيا بتقديم أسلوب سينمائي."
-                : "A visual deep-dive and archived log capturing real analog astronaut EVAs, basalt excavation protocols, spaceship interior mocks, and youth aerospace training programs in Jordan."
-              }
+              {/*
+                Arabic copy review: AR asserted "أنظمة دعم الحياة" (life-support systems) and a
+                "مختبر التكنولوجيا" (technology laboratory); EN asserted "basalt excavation
+                protocols" and "spaceship interior mocks". None of that is evidenced — the six
+                photos in this gallery show spacesuit EVAs, the dome habitat inside and out, the
+                crew, and field work. Both languages now describe exactly that.
+              */}
+              {isArabic
+                ? 'سجلّ مرئي من بعثة محاكاة المريخ في وادي رم: مهام خروج ببدلات الفضاء، والموئل من الداخل والخارج، والطاقم أثناء العمل الميداني.'
+                : 'A visual log from the Mars analog mission in Wadi Rum: spacesuit EVAs, the dome habitat inside and out, and the crew during field work.'}
             </p>
           </div>
 
@@ -436,13 +442,12 @@ export default function MissionGallery({ isArabic }: MissionGalleryProps) {
                     <span className="text-neutral-200">{GALLERY_DATA[activeItemIndex].date}</span>
                   </div>
 
-                  <div className="flex justify-between items-center py-1">
-                    <span className="text-neutral-500 flex items-center gap-1">
-                      <Camera className="h-3 w-3 text-brand-teal" />
-                      {isArabic ? "المستشعر ونظام الكاميرا" : "IMAGING SENSOR"}
-                    </span>
-                    <span className="text-neutral-200">DOME_EYE_REPROx4</span>
-                  </div>
+                  {/*
+                    Arabic copy review / factual sweep: an "IMAGING SENSOR" row printed
+                    "DOME_EYE_REPROx4" on EVERY gallery photo — an invented camera/sensor model
+                    presented as capture metadata. No such equipment is documented anywhere.
+                    Row removed; the remaining rows (location, date) carry confirmed values.
+                  */}
                 </div>
 
                 {/* Action button inside lightbox to exit */}

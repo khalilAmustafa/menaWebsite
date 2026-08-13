@@ -13,7 +13,11 @@ import { EVENTS } from '../content/events';
  */
 export default function EventsPage() {
   const { isArabic } = useSiteContext();
-  useDocumentTitle('Events | MENA');
+  // Description reuses the page's own published intro copy — no new claims.
+  useDocumentTitle(
+    'Events | MENA',
+    'Hackathons, missions, and events organized or hosted by MENA Space Organization.',
+  );
 
   return (
     <PageContainer className="pt-32 pb-20">

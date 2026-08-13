@@ -18,7 +18,10 @@ import { getEventBySlug } from '../lib/events';
  */
 export default function SpaceGameChallengePage() {
   const { isArabic } = useSiteContext();
-  useDocumentTitle('MENA Space Game Challenge | MENA');
+  useDocumentTitle(
+    'MENA Space Game Challenge | MENA',
+    'A 48-hour space gaming hackathon where participants create, build, and compete.',
+  );
 
   const event = getEventBySlug('space-game-challenge-2026');
   if (!event) return null; // record is guaranteed to exist; guard for type-safety only

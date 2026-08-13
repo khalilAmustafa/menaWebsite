@@ -14,9 +14,10 @@ import { getEventBySlug } from '../lib/events';
  */
 export default function NasaSpaceAppsPage() {
   const { isArabic } = useSiteContext();
-  useDocumentTitle('NASA Space Apps Challenge — Amman | MENA');
-
   const event = getEventBySlug('nasa-space-apps');
+  // Description is the event record's own confirmed summary — single source of truth.
+  useDocumentTitle('NASA Space Apps Challenge — Amman | MENA', event?.summary?.en);
+
   if (!event) return null;
 
   const gallery = event.gallery ?? [];

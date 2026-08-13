@@ -25,9 +25,18 @@ export default function Footer({ isArabic }: FooterProps) {
             <div className="w-28 h-32 flex-shrink-0">
               <MenaLogo color="var(--color-brand-teal)" />
             </div>
-            <p className="max-w-xs font-sans text-[11px] text-neutral-500 leading-normal">
-              {isArabic ? "أول منظمة فضاء وأبحاث أنالوج بتمكين وأولويات قيادية نسائية عربية وتدريب للطلبة في الأردن." : "The leading independent Arab Aerospace & Analog Training incubator. Inspiring the youth of tomorrow with real sand sandbox missions in Wadi Rum."}
-            </p>
+            {/*
+              The footer strapline is REMOVED entirely rather than rewritten again.
+
+              Its history is the reason: it began as "THE FIRST space organization…" (AR) /
+              "The leading independent… incubator" (EN) — unverifiable rankings; was softened to
+              a "women-led" description — an unverified claim; then to "An independent Arab
+              aerospace and analog training organization" — which I wrote during cleanup and
+              which still asserts independence and an organizational classification nothing
+              authoritative supports. Each rewrite substituted a new unsupported claim for the
+              last. A footer does not need a strapline, so there is now none: the logo alone
+              identifies the organization, and nothing is asserted about what it is.
+            */}
           </div>
 
           {/* Quick telemetry indicators replaced with "Fast Links" */}
@@ -37,11 +46,7 @@ export default function Footer({ isArabic }: FooterProps) {
                 {isArabic ? "منصة الاستكشاف" : "EXPLORATION"}
               </span>
               <ul className="space-y-1.5">
-                <li>
-                  <Link to="/#about" className="hover:text-brand-teal transition-colors duration-200">
-                    // {isArabic ? "عن المنظمة" : "ABOUT ANALOG"}
-                  </Link>
-                </li>
+                {/* "ABOUT ANALOG" removed — pointed at /#about, a section that no longer exists. */}
                 <li>
                   <Link to="/#mission" className="hover:text-brand-teal transition-colors duration-200">
                     // {isArabic ? "محاكاة وادي رم" : "WADI RUM TRACK"}
@@ -135,9 +140,10 @@ export default function Footer({ isArabic }: FooterProps) {
           </div>
 
           <div className="flex items-center justify-center space-x-4">
-            <Link to="/#about" className="hover:text-white transition-colors">VISION</Link>
-            <span>/</span>
-            <Link to="/#mission" className="hover:text-white transition-colors">TELEMETRY</Link>
+            {/* "VISION" removed — it linked to /#about, now deleted. */}
+            {/* Phase 8.1: was labelled "TELEMETRY", a leftover from the deleted fabricated
+                dashboard. It points at the Analog Mission section, so it now says so. */}
+            <Link to="/#mission" className="hover:text-white transition-colors">ANALOG</Link>
             <span>/</span>
             <Link to="/team" className="hover:text-white transition-colors">TEAM</Link>
           </div>

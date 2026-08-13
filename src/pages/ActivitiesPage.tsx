@@ -13,7 +13,10 @@ import { ACTIVITIES } from '../content/activities';
  */
 export default function ActivitiesPage() {
   const { isArabic } = useSiteContext();
-  useDocumentTitle('Activities | MENA');
+  useDocumentTitle(
+    'Activities | MENA',
+    "MENA's ongoing programs and community activities in STEM and youth engagement.",
+  );
 
   return (
     <PageContainer className="pt-32 pb-20">

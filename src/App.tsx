@@ -21,11 +21,14 @@ import ActivitiesPage from './pages/ActivitiesPage';
  * implementation) and defines the route table. All routes render inside a single
  * <SiteLayout/> so there is exactly one Header, Footer, Chatbot, and <main> landmark.
  *
- * Phase 1 note: every non-`/` route is a temporary <PlaceholderPage/>. No final content.
+ * Every route below now renders real content; the Phase 1 <PlaceholderPage/> scaffold has been
+ * deleted, so any future unbuilt route should get a real page rather than a placeholder.
  */
 export default function App() {
   const [isArabic, setIsArabic] = useState<boolean>(false);
-  const [activeSection, setActiveSection] = useState<string>('about');
+  // Default was 'about'; that section no longer exists, so the header would have highlighted a
+  // nav item that isn't there. 'mission' is now the first homepage section.
+  const [activeSection, setActiveSection] = useState<string>('mission');
   const [isLightMode, setIsLightMode] = useState<boolean>(() => {
     if (typeof window !== 'undefined') {
       return localStorage.getItem('theme-mode') === 'light';

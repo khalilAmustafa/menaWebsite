@@ -14,9 +14,10 @@ import { getEventBySlug } from '../lib/events';
  */
 export default function AnalogMission2025Page() {
   const { isArabic } = useSiteContext();
-  useDocumentTitle('MENA Mars Analog Mission — Wadi Rum | MENA');
-
   const event = getEventBySlug('analog-mission-2025');
+  // Description is the event record's own confirmed summary — single source of truth.
+  useDocumentTitle('MENA Mars Analog Mission — Wadi Rum | MENA', event?.summary?.en);
+
   if (!event) return null;
 
   const gallery = event.gallery ?? [];

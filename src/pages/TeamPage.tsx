@@ -66,17 +66,17 @@ export default function TeamPage() {
           <h2 className="mb-2 font-display text-lg font-bold uppercase tracking-tight text-white">
             {isArabic ? 'الهيئة الاستشارية العلمية' : 'Scientific Advisory Board'}
           </h2>
-          <p className="mb-4 font-sans text-sm leading-relaxed text-neutral-400">
+          {/*
+            Phase 8: this invited visitors to "meet the advisors on the homepage" and linked to
+            /#advisors — but that section has held no advisor content since the Phase 4.5 de-mock
+            removed the four fabricated advisors. The promise and the link were both empty, so
+            the card now states the honest position instead of sending people to a blank anchor.
+          */}
+          <p className="font-sans text-sm leading-relaxed text-neutral-400">
             {isArabic
-              ? 'تعرّف على المستشارين العلميين للمنظمة على الصفحة الرئيسية.'
-              : "Meet the organization's scientific advisors on the homepage."}
+              ? 'لم تُنشر بعد أسماء أعضاء الهيئة الاستشارية العلمية. سيتم إضافتها فور تأكيدها.'
+              : 'The scientific advisory board members have not been published yet. They will be added once confirmed.'}
           </p>
-          <Link
-            to="/#advisors"
-            className="inline-block rounded font-mono text-[11px] uppercase tracking-widest text-brand-teal transition-colors hover:text-brand-teal-bright focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal/50"
-          >
-            {isArabic ? 'عرض المستشارين ←' : 'View advisors →'}
-          </Link>
         </div>
       </section>
     </PageContainer>

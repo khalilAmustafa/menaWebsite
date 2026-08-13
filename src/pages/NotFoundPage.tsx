@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import PageContainer from '../components/PageContainer';
 import PageHeader from '../components/PageHeader';
 import { useSiteContext } from '../components/SiteLayout';
+import { useDocumentTitle } from '../lib/useDocumentTitle';
 
 /**
  * `*` route — proper Not Found page. Uses an <h1>, matches the site identity, and
@@ -9,6 +10,9 @@ import { useSiteContext } from '../components/SiteLayout';
  */
 export default function NotFoundPage() {
   const { isArabic } = useSiteContext();
+  // Phase 8: unknown routes kept the generic site title, so a 404 was indistinguishable
+  // from the homepage in the tab bar and in browser history.
+  useDocumentTitle('Page not found | MENA');
 
   return (
     <PageContainer className="min-h-[70vh] pt-32 pb-20 flex flex-col items-center justify-center text-center">

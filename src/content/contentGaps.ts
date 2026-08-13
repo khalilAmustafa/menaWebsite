@@ -163,7 +163,7 @@ export const CONTENT_GAPS: ContentGap[] = [
   {
     area: 'ADVISORS',
     item: 'Scientific Advisory Board cards REMOVED from public UI (still unverified).',
-    note: 'The 4 previous advisors (Dr. Shelli R. Brunswick, Dr. Marc G. Hairapetian, Prof. Hanan Al-Huneidi, Dr. Benji Lawson) had unverified/invented names, organizations, bios, and Unsplash stock portraits. Section now shows only a restrained heading + placeholder. ADVISORS constant in src/data.ts retained but no longer rendered. Real advisor names/roles/orgs/bios/photos all still needed.',
+    note: 'The 4 previous advisors (Dr. Shelli R. Brunswick, Dr. Marc G. Hairapetian, Prof. Hanan Al-Huneidi, Dr. Benji Lawson) had unverified/invented names, organizations, bios, and Unsplash stock portraits. Section now shows only a restrained heading + placeholder. Phase 8: the ADVISORS constant and the AdvisorItem type were DELETED from src/data.ts / src/types.ts (they were dead but kept re-inviting reintroduction). Real advisor names/roles/orgs/bios/photos all still needed; recoverable from git history if ever wanted.',
   },
 
   // ── ABOUT ───────────────────────────────────────────────────────────────────
@@ -174,7 +174,12 @@ export const CONTENT_GAPS: ContentGap[] = [
   },
   {
     area: 'ABOUT',
-    item: 'Unverifiable "First" superlative SOFTENED in the About heading.',
+    item: 'ENTIRE homepage About section DELETED — "women-led" claim still UNVERIFIED.',
+    note: 'The About block (About.tsx) was removed wholesale, not rewritten: it asserted MENA is an "independent, high-standard space research powerhouse", "globally recognized" Wadi Rum geology, a quote about preparing humanity for "interstellar travel", and three pillar cards (Analog Simulations / Women-Led STEM Leadership / Youth Tech Incubator). NOTE CAREFULLY: removing it does NOT resolve anything — it only stops the site asserting unverified things. The "women-led" self-identification in particular is STILL UNCONFIRMED and has now been stripped from every public surface (About heading, footer strapline EN+AR, and the index.html description/og:description metadata). Do not reintroduce it anywhere — page copy, metadata, or social previews — until the organization confirms it. Also still needed: any officially approved About / mission / vision copy, since none exists and none may be invented.',
+  },
+  {
+    area: 'ABOUT',
+    item: 'Unverifiable "First" superlative SOFTENED in the About heading (section since deleted).',
     note: 'Phase 7: "The First Women-Led Space Organization in MENA" → "A Women-Led Space Organization in MENA" (EN + AR), removing the unverifiable "first"/"الأولى من نوعها" claim while keeping the org\'s women-led self-identification. Verify if any "first"/ranking claim can be officially substantiated before re-adding.',
   },
 
@@ -299,6 +304,28 @@ export const CONTENT_GAPS: ContentGap[] = [
     area: 'ORG',
     item: 'Official assets available in LOGOS but deliberately NOT imported.',
     note: 'Left in the external folder rather than added to the repo, since placing them would require redesigning existing cards/heroes (out of scope this phase) and unused assets should not be imported: the MENA Space Game Challenge event logo (LOGOS/LogoMENA.GAME 3.png — 1024×1024, genuinely transparent) and the SYSTEM program patch (LOGOS/System Logo.png — 1563×1563, white plate). DECISION FOR USER: whether to add an event-logo slot to the Space Game page and/or swap the /activities SYSTEM card image from the cartoon banner to the official patch.',
+  },
+
+  // ── PHASE 8 — FINAL RELEASE QA ──────────────────────────────────────────────
+  {
+    area: 'ORG',
+    item: 'Legacy fabricated datasets DELETED (anti-regression).',
+    note: 'Phase 8 removed dead-but-present fabricated data so it can never be re-rendered by accident: IMPACT_STATS, ADVISORS + AdvisorItem, SUPPORT_TIERS + SupportTier and its only consumer Donation.tsx, the whole Partners.tsx component (which held invented orgs such as "Jordan Space Research Initiative", "Eurasian Space Syndicate", "International Analog Network"), and every narrative field on DEPARTMENTS (leadName/leadRole/teamSize/description/coreFocus — fake people such as "Dr. Raed Kawar", fake head counts). DEPARTMENTS now carries id + name + arabicName only, which is all getDepartmentName() renders. All recoverable from git history.',
+  },
+  {
+    area: 'CONTACT',
+    item: 'Contact form now hands off to the visitor\'s mail client — it has no backend.',
+    note: 'Phase 8 BLOCKER FIX: the form previously sent nothing at all (handleSubmit only set a boolean) while displaying "TELEMETRY LINK SECURED!", claiming the message was synced to an Amman operations centre, promising a response time, and — in Arabic — naming a coordinator "م. العبادي" who appears in no source material. Every submission was silently discarded. It now opens a pre-filled mailto: to INFO@MENASPACE.ORG and says plainly that the message is not sent until the visitor sends it. STILL NEEDED: a real form backend (out of scope — no backend work permitted) and verification of the INFO@MENASPACE.ORG address itself.',
+  },
+  {
+    area: 'ORG',
+    item: 'Chatbot requires VITE_GEMINI_API_KEY; key is exposed client-side.',
+    note: 'Phase 8: with no key configured every message failed with "please verify your internet connection", blaming the visitor for a missing-configuration problem. The assistant now states honestly that it is unavailable and points to email. SEPARATE PRE-EXISTING CONCERN FOR USER: the Gemini key is read via import.meta.env and called directly from the browser, so any key shipped this way is publicly readable in the bundle and can be extracted and billed to you. Fixing that properly needs a server-side proxy — deliberately NOT built here (no backend work permitted).',
+  },
+  {
+    area: 'ORG',
+    item: 'Per-route Open Graph previews not possible in this client-only SPA.',
+    note: 'Phase 8 added baseline description/OG/Twitter tags to index.html plus runtime per-route title/description updates. Crawlers and social unfurlers that do not run JavaScript will only see the static index.html tags, so every shared link previews as the site-level card. Per-route previews would require pre-rendering or SSR — a build-architecture change, not a QA fix. og:image uses the official MENA logo; no share imagery was invented.',
   },
 
   // ── ORG ─────────────────────────────────────────────────────────────────────

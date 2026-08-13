@@ -47,8 +47,12 @@ export default function Header({ isArabic, setIsArabic, activeSection, isLightMo
 
   // `to` marks a routed page (React Router link) rather than an in-page anchor scroll.
   const navLinks: { id: string; label: string; arabic: string; to?: string }[] = [
-    { id: 'about', label: 'About', arabic: 'عن المؤسسة' },
-    { id: 'mission', label: 'Analog Mars', arabic: 'مهمة مارز' },
+    // 'About' removed — the homepage About section was deleted (unsupported institutional
+    // claims), so this nav item had no destination left to scroll to.
+    // Arabic copy review: was 'مهمة مارز' — "مارز" is a bare transliteration of "Mars" where
+    // every other Arabic string on the site correctly uses "المريخ" (Hero, Analog section,
+    // gallery). Aligned to the site's own terminology.
+    { id: 'mission', label: 'Analog Mars', arabic: 'محاكاة المريخ' },
     { id: 'gallery', label: 'Gallery', arabic: 'أرشيف الصور' },
     { id: 'programs', label: 'Programs', arabic: 'برامجنا التدريبية' },
     { id: 'achievements', label: 'Achievements', arabic: 'الإنجازات', to: '/achievements' },
@@ -80,23 +84,14 @@ export default function Header({ isArabic, setIsArabic, activeSection, isLightMo
     }
   };
 
+  // Phase 8: the per-department branches were removed along with the fabricated department
+  // menu entries. They dispatched an 'open-team' CustomEvent that nothing in the app has ever
+  // subscribed to, so they were dead code behind dead navigation.
   const handleTeamClick = (action: string) => {
     setIsOpen(false);
     setTeamDropdownOpen(false);
-
     if (action === 'overview') {
       handleScrollTo('teams');
-    } else if (action === 'advisors') {
-      handleScrollTo('advisors');
-      setTimeout(() => {
-        window.dispatchEvent(new CustomEvent('open-team', { detail: { departmentId: 'dept-advisors' } }));
-      }, 550);
-    } else {
-      handleScrollTo('teams');
-      // Delay dispatching custom event slightly to let smooth scrolling complete
-      setTimeout(() => {
-        window.dispatchEvent(new CustomEvent('open-team', { detail: { departmentId: action } }));
-      }, 550);
     }
   };
 
@@ -259,35 +254,21 @@ export default function Header({ isArabic, setIsArabic, activeSection, isLightMo
                             {isArabic ? 'صفحة الفريق' : 'OUR TEAM'}
                           </Link>
                           {/* Main Header acting as clickable link to center Teams list */}
+                          {/*
+                            Phase 8: the 9 remaining department entries were REMOVED. They came
+                            from the fabricated DEPARTMENTS org-chart that Phase 4.5 already
+                            deleted from the homepage, and each one dispatched an 'open-team'
+                            CustomEvent that NO component has ever listened for — so they only
+                            scrolled to #teams while appearing to open a specific department.
+                            Dead navigation over invented data. The dropdown now offers the two
+                            real destinations only.
+                          */}
                           <button
                             onClick={() => handleTeamClick('overview')}
-                            className="w-full text-left rtl:text-right px-3 py-2 text-[10px] font-mono tracking-widest text-brand-teal bg-neutral-900/45 hover:bg-neutral-900 uppercase font-bold transition-all rounded-lg block border-b border-neutral-900/80 mb-1"
+                            className="w-full text-left rtl:text-right px-3 py-2 text-[10px] font-mono tracking-widest text-brand-teal bg-neutral-900/45 hover:bg-neutral-900 uppercase font-bold transition-all rounded-lg block"
                           >
-                            {isArabic ? "الهيكل الإداري والأقسام" : "EXPLORE DEPARTMENTS"}
+                            {isArabic ? 'رؤساء الفرق' : 'TEAM HEADS'}
                           </button>
-
-                          {[
-                            { id: 'dept-board', label: 'BOARD MEMBERS', arabic: 'مجلس الأمناء والمؤسسين' },
-                            /* Phase 7: 'Advisors' removed — it scrolled to the /#advisors
-                               placeholder that has held no content since the Phase 4.5
-                               de-mock. Re-add once real advisor records exist. */
-                            { id: 'dept-mission', label: 'Management & Operations', arabic: 'الإدارة والعمليات البعثية' },
-                            { id: 'dept-marketing', label: 'Marketing & Social Media', arabic: 'عمليات الإعلام والتسويق' },
-                            { id: 'dept-eng', label: 'Design & Engineering Team', arabic: 'التصميم وتجهيز بدلات رواد الفضاء' },
-                            { id: 'dept-spacefood', label: 'Space Food Team', arabic: 'أبحاث ومطابخ أغذية الفضاء' },
-                            { id: 'dept-rd', label: 'R&D - Sc. & Exp. Team', arabic: 'البحوث والبيئات والمقومات الجيولوجية' },
-                            { id: 'dept-med', label: 'Medical & Safety Team', arabic: 'الفريق الطبي والرصد الصحي' },
-                            { id: 'dept-tech', label: 'Tech & Innovation Team', arabic: 'التكنولوجيا والحلول البرمجية' },
-                            { id: 'dept-training', label: 'Astronaut Training Team', arabic: 'مدربو وتأهيل رواد الفضاء الأنالوج' }
-                          ].map((item) => (
-                            <button
-                              key={item.id}
-                              onClick={() => handleTeamClick(item.id)}
-                              className="w-full text-left rtl:text-right px-3 py-1.5 text-xs text-neutral-400 hover:text-white hover:bg-space-dark hover:border-l-2 rtl:hover:border-l-0 rtl:hover:border-r-2 hover:border-brand-teal/80 transition-all rounded-lg block font-sans"
-                            >
-                              {isArabic ? item.arabic : item.label}
-                            </button>
-                          ))}
                         </div>
                       </motion.div>
                     )}
@@ -473,7 +454,7 @@ export default function Header({ isArabic, setIsArabic, activeSection, isLightMo
                         onClick={() => setMobileTeamOpen(!mobileTeamOpen)}
                         className={`w-full text-left rtl:text-right py-2 px-3 rounded-lg text-sm font-display tracking-widest uppercase transition-all font-bold text-brand-teal flex items-center justify-between cursor-pointer`}
                       >
-                        <span>{isArabic ? "أقسام وفريق العمل" : "TEAM & DEPARTMENTS"}</span>
+                        <span>{isArabic ? 'فريق العمل' : 'TEAM'}</span>
                         <ChevronDown className={`w-4 h-4 transition-transform duration-200 text-neutral-400 ${mobileTeamOpen ? 'rotate-180 text-brand-teal' : 'rotate-0'}`} />
                       </button>
 
@@ -496,38 +477,18 @@ export default function Header({ isArabic, setIsArabic, activeSection, isLightMo
                             >
                               • {isArabic ? "صفحة الفريق" : "OUR TEAM"}
                             </Link>
+                            {/* Phase 8: kept in lock-step with the desktop dropdown above —
+                                same two real destinations, no fabricated departments. */}
                             <button
                               onClick={() => {
                                 handleScrollTo('teams');
                                 setMobileTeamOpen(false);
+                                setIsOpen(false);
                               }}
                               className="block w-full text-left rtl:text-right py-2 px-3 rounded-lg text-[11px] font-mono uppercase tracking-wider text-brand-teal hover:text-white hover:bg-neutral-900/40 transition-all font-bold"
                             >
-                              • {isArabic ? "عرض الكل" : "EXPLORE DEPARTMENTS"}
+                              • {isArabic ? 'رؤساء الفرق' : 'TEAM HEADS'}
                             </button>
-                            {[
-                              { id: 'dept-board', label: 'BOARD MEMBERS', arabic: 'مجلس الأمناء والمؤسسين' },
-                              { id: 'advisors', label: 'Advisors', arabic: 'مجلس المستشارين الأكاديمي' },
-                              { id: 'dept-mission', label: 'Management & Operations', arabic: 'الإدارة والعمليات البعثية' },
-                              { id: 'dept-marketing', label: 'Marketing & Social Media', arabic: 'عمليات الإعلام والتسويق' },
-                              { id: 'dept-eng', label: 'Design & Engineering Team', arabic: 'التصميم وتجهيز بدلات رواد الفضاء' },
-                              { id: 'dept-spacefood', label: 'Space Food Team', arabic: 'أبحاث ومطابخ أغذية الفضاء' },
-                              { id: 'dept-rd', label: 'R&D - Sc. & Exp. Team', arabic: 'البحوث والبيئات والمقومات الجيولوجية' },
-                              { id: 'dept-med', label: 'Medical & Safety Team', arabic: 'الفريق الطبي والرصد الصحي' },
-                              { id: 'dept-tech', label: 'Tech & Innovation Team', arabic: 'التكنولوجيا والحلول البرمجية' },
-                              { id: 'dept-training', label: 'Astronaut Training Team', arabic: 'مدربو وتأهيل رواد الفضاء الأنالوج' }
-                            ].map((item) => (
-                              <button
-                                key={item.id}
-                                onClick={() => {
-                                  handleTeamClick(item.id);
-                                  setMobileTeamOpen(false);
-                                }}
-                                className="block w-full text-left rtl:text-right py-1.5 px-3 rounded-lg text-[11px] font-mono uppercase tracking-wider text-neutral-400 hover:text-white hover:bg-neutral-900/40 transition-all"
-                              >
-                                • {isArabic ? item.arabic : item.label}
-                              </button>
-                            ))}
                           </motion.div>
                         )}
                       </AnimatePresence>

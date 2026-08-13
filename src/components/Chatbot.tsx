@@ -14,6 +14,14 @@ interface Message {
 }
 
 const API_KEY = (import.meta as any).env?.VITE_GEMINI_API_KEY || "";
+/**
+ * Phase 8: whether the assistant can actually work in this build. Without a key every send
+ * failed with "please verify your internet connection", which blamed the visitor's network
+ * for a missing-configuration problem. When the key is absent we now say so plainly and point
+ * to email instead. (Deploying with VITE_GEMINI_API_KEY set restores normal behaviour — this
+ * is a truthfulness guard, not a removal of the feature.)
+ */
+const AI_ENABLED = API_KEY.length > 0;
 const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`;
 
 export default function Chatbot({ isArabic }: ChatbotProps) {
@@ -94,6 +102,24 @@ export default function Chatbot({ isArabic }: ChatbotProps) {
 
     setMessages((prev) => [...prev, userMsg]);
     setInput('');
+
+    // Phase 8: fail honestly when the assistant is not configured, instead of firing a request
+    // that is guaranteed to 400 and then blaming the visitor's internet connection.
+    if (!AI_ENABLED) {
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: Math.random().toString(),
+          sender: 'bot',
+          text: isArabic
+            ? 'المساعد الذكي غير متاح حالياً. يسعدنا تلقي سؤالك عبر البريد الإلكتروني: INFO@MENASPACE.ORG'
+            : "The AI assistant isn't available right now. We'd be glad to answer your question by email: INFO@MENASPACE.ORG",
+          timestamp: new Date(),
+        },
+      ]);
+      return;
+    }
+
     setIsLoading(true);
 
     try {
@@ -168,9 +194,10 @@ Assistant:`;
         {
           id: Math.random().toString(),
           sender: 'bot',
+          // Phase 8: no longer asserts the cause is the visitor's connection — we don't know that.
           text: isArabic
-            ? "عذراً، واجهت مشكلة في الاتصال بنظام الذكاء الاصطناعي. يرجى التحقق من اتصالك بالإنترنت."
-            : "Sorry, I encountered a connection issue with the AI system. Please verify your internet connection.",
+            ? 'عذراً، تعذّر الوصول إلى المساعد الذكي حالياً. يمكنك مراسلتنا على INFO@MENASPACE.ORG'
+            : "Sorry, I couldn't reach the AI service just now. You can email us at INFO@MENASPACE.ORG",
           timestamp: new Date()
         }
       ]);
@@ -215,9 +242,15 @@ Assistant:`;
                   <h4 className="text-xs font-mono font-bold tracking-wider text-white uppercase">
                     {isArabic ? "مساعد مِنا الذكي" : "MENA Space AI Assistant"}
                   </h4>
+                  {/*
+                    Phase 8.1: this always claimed an active link, even when the assistant has
+                    no API key and cannot answer at all. It now reflects the real state.
+                  */}
                   <span className="text-[9px] font-mono text-brand-teal flex items-center gap-1">
-                    <span className="w-1.5 h-1.5 rounded-full bg-brand-teal animate-ping" />
-                    {isArabic ? "متصل بالنظام" : "TELEMETRY LINK ACTIVE"}
+                    {AI_ENABLED && <span className="w-1.5 h-1.5 rounded-full bg-brand-teal animate-ping" />}
+                    {AI_ENABLED
+                      ? isArabic ? 'متصل' : 'ONLINE'
+                      : isArabic ? 'غير متاح' : 'UNAVAILABLE'}
                   </span>
                 </div>
               </div>

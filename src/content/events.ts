@@ -19,17 +19,38 @@ const SPACE_GAME_JOURNEY: EventJourneyStep[] = [
  * never inferred from faces). Award-ceremony images document that an award ceremony took
  * place — they do NOT assert who won. Source: public/images/events/space-game-2026/.
  */
+/**
+ * Featured image for BOTH `/events` (card) and `/events/space-game-challenge-2026` (hero) —
+ * they read this one record, so there is no duplicated path to keep in sync.
+ *
+ * Alt text note: the scene is described by what is visibly happening (a team presenting their
+ * game project to a seated judge, with the project on screen behind them). No ages, names,
+ * schools, team names or placements are asserted — the participants' ages are not established
+ * by any source, and estimating them from appearance is exactly the face-based inference this
+ * project avoids everywhere else.
+ */
 const SPACE_GAME_HERO: MediaItem = {
   id: 'sgc-hero',
   type: 'image',
-  src: '/images/events/space-game-2026/space-game-hero.jpg',
-  alt: { en: 'Participants at the MENA Space Game Challenge gaming hackathon' },
+  src: '/images/events/space-game-2026/space-game-presenting.jpg',
+  alt: { en: 'Young participants presenting their game project to a judge at the MENA Space Game Challenge' },
   width: 1080,
   height: 1350,
-  category: 'hackathon',
+  category: 'presentations',
 };
 
 const SPACE_GAME_GALLERY: MediaItem[] = [
+  {
+    // Previously the featured/hero image; demoted to a normal gallery item rather than deleted,
+    // since it is legitimate event photography and still belongs in the recap.
+    id: 'sgc-gaming-stations',
+    type: 'image',
+    src: '/images/events/space-game-2026/space-game-hero.jpg',
+    alt: { en: 'Participants at gaming stations during the MENA Space Game Challenge' },
+    width: 1080,
+    height: 1350,
+    category: 'hackathon',
+  },
   {
     id: 'sgc-group',
     type: 'image',

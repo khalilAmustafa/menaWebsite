@@ -278,15 +278,15 @@ export const CONTENT_GAPS: ContentGap[] = [
   },
   {
     area: 'SYSTEM',
-    item: 'SYSTEM activity photos show identifiable minors — NOT published (privacy).',
-    note: '7 of the 8 SYSTEM assets are photos of school-age children doing STEM activities. These were deliberately NOT imported/published. Phase 7: the /activities SYSTEM card also stopped using the cartoon banner (which itself pictured identifiable children) in favour of the official SYSTEM program logo, and the orphaned banner file was deleted from public/ so it is no longer served — recoverable from git history if wanted. No photograph of any minor is published anywhere on the site. STILL OPEN FOR USER: whether (and with what consent) any minor photos may be shown before they are used in future.',
+    item: 'SYSTEM activity photos — NOW PUBLISHED with owner approval (was withheld for privacy).',
+    note: 'The 7 SYSTEM photos show school-age participants doing STEM activities. Earlier phases withheld them pending a consent decision; the owner has now explicitly approved their use, so a curated 7 (1 hero + 6 gallery) are published on /activities/system. SAFEGUARDS APPLIED: alt text describes only the visible activity — no names, ages, school, team or outcome. Readable text visible in the photos was deliberately NOT transcribed into published copy (a school uniform crest identifying the school, and an instructor name patch), since naming minors or their school is personal information. NASA educational worksheets are visible on a table in two frames; this is NOT published as a NASA relationship. REMAINING OWNER RESPONSIBILITY: confirm that photo-release/consent is on file for the individuals shown — approval to publish was given, but the underlying consent status was not evidenced to me.',
   },
 
   // ── MAKERS FORUM (ملتقى الصناع) ──────────────────────────────────────────────
   {
     area: 'EVENTS',
     item: 'ملتقى الصناع (Makers Forum) — modeled as two Activities (2024 & 2025).',
-    note: 'Filenames (2024.png, 2025.jpg) establish two separate occurrences; the 2025 backdrop reads "ملتقى الصناع 2025". Published on /activities with the Arabic proper name preserved. MISSING: exact dates, location, official English name (if any), and descriptions. Only one image exists per year.',
+    note: 'Filenames (2024.png, 2025.jpg) establish two separate occurrences; the 2025 backdrop reads "ملتقى الصناع 2025". Both now have detail pages (/activities/makers-forum-2024, /activities/makers-forum-2025) with the Arabic proper name preserved — "Makers Forum" is used only as an internal slug, never as a published English name, because no source provides one. RE-AUDITED: the folder contains exactly TWO files total, one per year, so each detail page is a single-image page with NO gallery (nothing was padded). The 2024 source is only 600×451 — low resolution, and no higher-resolution original exists. STILL MISSING: exact dates, location, descriptions, any second photograph for either year, and an official English name if one exists.',
   },
 
   // ── BRANDING / LOGOS ────────────────────────────────────────────────────────

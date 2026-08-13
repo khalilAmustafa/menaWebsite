@@ -170,6 +170,15 @@ export interface Activity {
    * crop; the card then shows the mark whole on a neutral plate.
    */
   imageFit?: 'cover' | 'contain';
+  /**
+   * Detail-page hero. When absent the detail page falls back to `image`, so an activity with
+   * only a single picture still renders correctly rather than showing an empty hero slot.
+   */
+  hero?: MediaItem;
+  /** Curated detail-page gallery. Omit entirely when there is no second image — never pad it. */
+  gallery?: MediaItem[];
+  /** Official program mark, shown as branding on the detail page when one exists. */
+  logo?: MediaItem;
   externalLinks?: ExternalLink[];
   order?: number;
 }

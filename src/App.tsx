@@ -15,6 +15,7 @@ import EventsPage from './pages/EventsPage';
 import AnalogMission2025Page from './pages/AnalogMission2025Page';
 import NasaSpaceAppsPage from './pages/NasaSpaceAppsPage';
 import ActivitiesPage from './pages/ActivitiesPage';
+import ActivityDetailPage from './pages/ActivityDetailPage';
 
 /**
  * App owns the shared theme + language state (unchanged from the previous single-page
@@ -79,6 +80,7 @@ export default function App() {
 
           {/* Phase 6 — real Activities page */}
           <Route path="/activities" element={<ActivitiesPage />} />
+          <Route path="/activities/:slug" element={<ActivityDetailPage />} />
           {/* Phase 4 — real Team pages */}
           <Route path="/team" element={<TeamPage />} />
           <Route path="/team/:slug" element={<TeamMemberPage />} />

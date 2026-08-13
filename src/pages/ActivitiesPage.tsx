@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import PageContainer from '../components/PageContainer';
 import PageHeader from '../components/PageHeader';
 import ScrollReveal from '../components/ScrollReveal';
@@ -48,9 +49,11 @@ export default function ActivitiesPage() {
             : title;
 
           return (
-            <div
+            /* Now a real <Link> — semantic, keyboard-focusable, with a visible focus ring. */
+            <Link
               key={activity.id}
-              className="flex h-full flex-col overflow-hidden rounded-2xl border border-neutral-900/80 bg-neutral-900/25 shadow-xl"
+              to={`/activities/${activity.slug}`}
+              className="group flex h-full flex-col overflow-hidden rounded-2xl border border-neutral-900/80 bg-neutral-900/25 shadow-xl transition-all duration-300 hover:border-brand-teal/40 hover:bg-neutral-900/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal/50"
             >
               {activity.image && (
                 /*
@@ -79,14 +82,14 @@ export default function ActivitiesPage() {
                     {period}
                   </span>
                 )}
-                <h3 className="font-display text-base font-bold leading-tight tracking-tight text-white sm:text-lg">
+                <h2 className="font-display text-base font-bold leading-tight tracking-tight text-white transition-colors group-hover:text-brand-teal sm:text-lg">
                   {title}
-                </h3>
+                </h2>
                 {summary && (
                   <p className="mt-2 font-sans text-xs leading-relaxed text-neutral-400">{summary}</p>
                 )}
               </div>
-            </div>
+            </Link>
           );
         })}
       </div>

@@ -62,16 +62,28 @@ export default function Programs({ isArabic }: ProgramsProps) {
             return (
               <Link
                 key={activity.id}
-                to="/activities"
+                /* Each card now links to its own detail page instead of all landing on the
+                   listing. Mirrors ActivitiesPage so the two surfaces behave identically. */
+                to={`/activities/${activity.slug}`}
                 className="group flex h-full flex-col overflow-hidden rounded-2xl border border-neutral-900/80 bg-neutral-900/25 shadow-xl transition-all duration-300 hover:border-brand-teal/40 hover:bg-neutral-900/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal/50"
               >
                 {activity.image && (
-                  <div className="aspect-[16/9] w-full overflow-hidden bg-neutral-900">
+                  /* Honours `imageFit` like the listing page — without it the square SYSTEM
+                     logo was being crop-filled instead of shown whole. */
+                  <div
+                    className={`aspect-[16/9] w-full overflow-hidden ${
+                      activity.imageFit === 'contain' ? 'bg-white' : 'bg-neutral-900'
+                    }`}
+                  >
                     <img
                       src={activity.image.src}
                       alt={imgAlt}
                       loading="lazy"
-                      className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.04]"
+                      className={`h-full w-full object-center transition-transform duration-500 ${
+                        activity.imageFit === 'contain'
+                          ? 'object-contain p-3'
+                          : 'object-cover group-hover:scale-[1.04]'
+                      }`}
                     />
                   </div>
                 )}

@@ -5,6 +5,12 @@ import type { Event } from '../../content/types';
 interface EventCardProps {
   event: Event;
   isArabic?: boolean;
+  /**
+   * Heading level for the card title. Defaults to 'h2' so a grid of cards sitting directly
+   * under a page 'h1' forms a valid hierarchy (h1 → h2). Pass 'h3' when the cards are nested
+   * under their own 'h2' section heading.
+   */
+  headingLevel?: 'h2' | 'h3';
   // Declared to match this project's convention (see ScrollReveal/ResearchCard).
   key?: string | number;
 }
@@ -14,7 +20,8 @@ interface EventCardProps {
  * title, year and location when present, and a short summary. Unknown metadata is simply
  * omitted (no "TBD"/"Coming Soon"). Matches the shared MENA card language + theme tokens.
  */
-export default function EventCard({ event, isArabic = false }: EventCardProps) {
+export default function EventCard({ event, isArabic = false, headingLevel = 'h2' }: EventCardProps) {
+  const Heading = headingLevel;
   const title = isArabic && event.title.ar ? event.title.ar : event.title.en;
   const summary = event.summary ? (isArabic && event.summary.ar ? event.summary.ar : event.summary.en) : '';
   const location = event.location ? (isArabic && event.location.ar ? event.location.ar : event.location.en) : '';
@@ -52,9 +59,14 @@ export default function EventCard({ event, isArabic = false }: EventCardProps) {
             )}
           </div>
         )}
-        <h3 className="font-display text-base font-bold leading-tight tracking-tight text-white transition-colors group-hover:text-brand-teal sm:text-lg">
+        {/*
+          Phase 6.2: was an <h3> directly under the page <h1>, skipping h2. The tag is now
+          driven by `headingLevel` (default h2). Styling is unchanged — this is a semantics-only
+          fix, so the card looks identical.
+        */}
+        <Heading className="font-display text-base font-bold leading-tight tracking-tight text-white transition-colors group-hover:text-brand-teal sm:text-lg">
           {title}
-        </h3>
+        </Heading>
         {summary && (
           <p className="mt-2 line-clamp-3 font-sans text-xs leading-relaxed text-neutral-400">{summary}</p>
         )}

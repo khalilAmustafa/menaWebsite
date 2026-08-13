@@ -39,10 +39,17 @@ export default function NasaSpaceAppsPage() {
         <h2 className="mb-4 font-display text-xl font-medium uppercase tracking-tight text-white sm:text-2xl">
           {sectionLabel('About the Event', 'عن الفعالية')}
         </h2>
+        {/*
+          Phase 6.2: the previous copy claimed MENA "hosted the Amman edition" and that teams
+          worked "over an intensive weekend". Neither MENA's organizational role nor the event
+          duration is established by the audited assets, so both were removed rather than
+          softened into another unverified form. What remains is only what the recap imagery
+          shows: MENA's involvement, the Amman location, teams building, and an award ceremony.
+        */}
         <p className="font-sans text-sm leading-relaxed text-neutral-300 sm:text-base">
           {isArabic
-            ? 'تحدي ناسا للتطبيقات الفضائية هو أكبر هاكاثون دولي، واستضافته مِنا في عمّان حيث عملت الفرق على بناء حلول خلال عطلة أسبوع مكثفة، واختُتم بحفل جوائز.'
-            : 'NASA Space Apps Challenge is the world’s largest global hackathon. MENA hosted the Amman edition, where teams built solutions over an intensive weekend, culminating in an award ceremony.'}
+            ? 'شاركت مِنا في تحدي ناسا للتطبيقات الفضائية في عمّان، حيث عملت الفرق على بناء حلول واختُتمت الفعالية بحفل جوائز.'
+            : 'MENA took part in the NASA Space Apps Challenge in Amman, where teams built solutions and the event concluded with an award ceremony.'}
         </p>
       </section>
 

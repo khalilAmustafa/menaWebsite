@@ -249,6 +249,16 @@ export const CONTENT_GAPS: ContentGap[] = [
     item: 'NASA Space Apps — CONFIRMED vs still-missing.',
     note: 'CONFIRMED: identity (NASA Space Apps Challenge, "SPACE APPS" branding + MENA), Amman location (readable on official winner checks), and hackathon/award activity. MISSING: exact year/date (folder has no year), winner identities (team/person/project names — checks show 1st/2nd/3rd "Amman" but names not legible; never inferred from faces), and partner/sponsor classification (Zain and Orange Jordan appear — Orange as "Event Planning Partner" — but not published as structured records). Modeled as an Event (/events/nasa-space-apps), not duplicated as a Program.',
   },
+  {
+    area: 'NASA',
+    item: "MENA's organizational ROLE at the Amman edition is unconfirmed.",
+    note: 'Phase 6.2: the page previously stated "MENA hosted the Amman edition". The assets establish MENA branding and MENA presence at the event, but NOT whether MENA was the host / official Local Lead / co-organizer / partner / participating team. The claim was REMOVED (not softened into another guess); copy now says only that MENA "took part in" the event. Verify the exact role and restore precise wording.',
+  },
+  {
+    area: 'NASA',
+    item: 'Event DURATION unconfirmed.',
+    note: 'Phase 6.2: "teams built solutions over an intensive weekend" was REMOVED. No asset establishes the length of the Amman edition. The global NASA Space Apps programme is generally a weekend hackathon, but that was outside-knowledge, not repository evidence, so it is not asserted. Supply the actual dates/duration.',
+  },
 
   // ── SYSTEM (Program / Activity) ─────────────────────────────────────────────
   {

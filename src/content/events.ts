@@ -218,8 +218,9 @@ export const ANALOG_MISSION_2025: Event = {
  *
  * CONFIRMED (from the official recap graphics: "SPACE APPS" branding + MENA, winner checks
  * reading "…Place Winner · Amman", and an on-stage "Event Planning Partner" backdrop):
- * identity as the NASA Space Apps Challenge hosted in Amman, and real hackathon activity
- * (teams working, a VR demo, a speaker, an award ceremony). Exact date/year, winner
+ * identity as the NASA Space Apps Challenge in Amman, and real hackathon activity
+ * (teams working, a VR demo, a speaker, an award ceremony). Exact date/year, event DURATION,
+ * MENA's organizational ROLE (host / local organizer / participant / partner), winner
  * identities, and partner/sponsor classification are NOT confirmed → absent (see contentGaps).
  * ──────────────────────────────────────────────────────────────────────────── */
 const NASA_HERO: MediaItem = {
@@ -248,8 +249,11 @@ export const NASA_SPACE_APPS: Event = {
   slug: 'nasa-space-apps',
   title: { en: 'NASA Space Apps Challenge — Amman' },
   location: { en: 'Amman, Jordan' },
+  // Phase 6.2: dropped "over an intensive weekend" (event duration is not established by the
+  // assets) and the host-role framing. Only MENA's participation, the Amman location, and the
+  // award ceremony — all visible in the recap imagery — are asserted.
   summary: {
-    en: "The global NASA Space Apps Challenge hackathon, hosted in Amman — teams build solutions over an intensive weekend, ending in an award ceremony.",
+    en: 'The NASA Space Apps Challenge in Amman — teams building solutions, concluding with an award ceremony.',
   },
   hero: NASA_HERO,
   highlights: [],

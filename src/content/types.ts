@@ -164,6 +164,12 @@ export interface Activity {
   period?: string;
   year?: number;
   image?: MediaItem;
+  /**
+   * How `image` should sit in the card's fixed 16/9 frame. Photos use the default 'cover'.
+   * Use 'contain' for square/round brand marks (e.g. a logo or patch), which 'cover' would
+   * crop; the card then shows the mark whole on a neutral plate.
+   */
+  imageFit?: 'cover' | 'contain';
   externalLinks?: ExternalLink[];
   order?: number;
 }

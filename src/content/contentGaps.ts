@@ -143,6 +143,11 @@ export const CONTENT_GAPS: ContentGap[] = [
   { area: 'EVENTS', item: 'Event relationships not supplied.' },
 
   // ── PARTNERS ────────────────────────────────────────────────────────────────
+  {
+    area: 'PARTNERS',
+    item: 'BLOCKER — the LOGOS folder contains NO third-party organization logos.',
+    note: 'Phase 7 audited all 10 files in the external LOGOS folder. Every one is MENA-owned branding: 6 MENA master-logo variants (1–5, 7), 3 MENA Space Game Challenge event logos (logo.png, LogoMENA.GAME 3.png, IMG_20260420_191839_054), and the SYSTEM program patch ("S.Y.S.T.E.M — SPACE FOR YOUTH THROUGH STEM — BY MENA"). There is NO logo for MANZEL, Zain/ZINC, Unity, Autodesk, Orange Jordan, or the Jordanian ministry seen on event material. Therefore NO partner/sponsor records could be created, the homepage Partners section stays hidden, and the Space Game + NASA "Partners & Sponsors" pending states are unchanged. UNBLOCK BY SUPPLYING: each organization\'s logo file, its exact legal name, and its relationship type (partner / sponsor / supporter / technology / organizer / venue / government).',
+  },
   { area: 'PARTNERS', item: 'Official partner list not supplied.' },
   { area: 'PARTNERS', item: 'Official sponsor list not supplied.' },
   { area: 'PARTNERS', item: 'Correct classification (partner vs sponsor) not supplied.' },
@@ -216,7 +221,7 @@ export const CONTENT_GAPS: ContentGap[] = [
   {
     area: 'PROGRAMS',
     item: 'SYSTEM program details still needed for a richer card.',
-    note: 'Verify: official SYSTEM program description, curriculum scope, delivery locations/venue, participant profile, partners, outcomes, and photo-consent status. Confirmed so far: name "SYSTEM", tagline "Space for Youth Through STEM", period 2025–2026. Currently shown restrained on /activities (branded banner only).',
+    note: 'Verify: official SYSTEM program description, curriculum scope, delivery locations/venue, participant profile, partners, outcomes, and photo-consent status. Confirmed so far: name "SYSTEM", tagline "Space for Youth Through STEM", the "BY MENA" attribution on the official logo, and period 2025–2026. Currently shown restrained on /activities (official program logo only — no added claims).',
   },
 
   // ── GALLERY ─────────────────────────────────────────────────────────────────
@@ -269,7 +274,7 @@ export const CONTENT_GAPS: ContentGap[] = [
   {
     area: 'SYSTEM',
     item: 'SYSTEM activity photos show identifiable minors — NOT published (privacy).',
-    note: '7 of the 8 SYSTEM assets are photos of school-age children doing STEM activities. These were deliberately NOT imported/published. DECISION FOR USER: confirm whether (and with what consent) any minor photos may be shown before they are used anywhere.',
+    note: '7 of the 8 SYSTEM assets are photos of school-age children doing STEM activities. These were deliberately NOT imported/published. Phase 7: the /activities SYSTEM card also stopped using the cartoon banner (which itself pictured identifiable children) in favour of the official SYSTEM program logo, and the orphaned banner file was deleted from public/ so it is no longer served — recoverable from git history if wanted. No photograph of any minor is published anywhere on the site. STILL OPEN FOR USER: whether (and with what consent) any minor photos may be shown before they are used in future.',
   },
 
   // ── MAKERS FORUM (ملتقى الصناع) ──────────────────────────────────────────────
@@ -279,10 +284,27 @@ export const CONTENT_GAPS: ContentGap[] = [
     note: 'Filenames (2024.png, 2025.jpg) establish two separate occurrences; the 2025 backdrop reads "ملتقى الصناع 2025". Published on /activities with the Arabic proper name preserved. MISSING: exact dates, location, official English name (if any), and descriptions. Only one image exists per year.',
   },
 
+  // ── BRANDING / LOGOS ────────────────────────────────────────────────────────
+  {
+    area: 'ORG',
+    item: 'Light-mode logo contrast — RESOLVED with the official light-background variant.',
+    note: 'Phase 7: the header/footer mark is near-white (#f6f6f7) and was effectively invisible on the light-mode cream page. The official brand sheet (LOGOS/7.png) shows the white-on-dark and tan-on-light lock-ups side by side, confirming BOTH are sanctioned. The tan-on-light stacked variant (LOGOS/4.png, flat brand tan #DBB58F on a white plate) was imported as Mena-logo-light.png: the white plate was keyed to alpha and the mark colour left untouched — a variant swap, NOT a recolor. Framing matches Mena-logo-web.png exactly so the themes render identically.',
+  },
+  {
+    area: 'ORG',
+    item: 'Official logo source files (vector / transparent masters) not supplied.',
+    note: 'Every MENA logo in LOGOS is a flat raster export (PNG, 2500×1875 or larger) with a baked-in solid background — no SVG, EPS, AI, or transparent master. The web assets are therefore derived from rasters. Request the vector masters for crisp scaling and clean per-theme variants.',
+  },
+  {
+    area: 'ORG',
+    item: 'Official assets available in LOGOS but deliberately NOT imported.',
+    note: 'Left in the external folder rather than added to the repo, since placing them would require redesigning existing cards/heroes (out of scope this phase) and unused assets should not be imported: the MENA Space Game Challenge event logo (LOGOS/LogoMENA.GAME 3.png — 1024×1024, genuinely transparent) and the SYSTEM program patch (LOGOS/System Logo.png — 1563×1563, white plate). DECISION FOR USER: whether to add an event-logo slot to the Space Game page and/or swap the /activities SYSTEM card image from the cartoon banner to the official patch.',
+  },
+
   // ── ORG ─────────────────────────────────────────────────────────────────────
   {
     area: 'ORG',
     item: 'Official long-form / legal organization name unconfirmed.',
-    note: 'Phase 7: the footer legacy variant "MENA SPACE & ANALOG ADVISORY" was reconciled to the consistent public brand "MENA Space Organization" (matches the logo alt + routed pages). Remaining variants still in the repo: shorthand "MENA ORG" (About copy) and the Chatbot prompt\'s expansion "Middle East and North Africa Engineering Education and Training Organization" (backend/AI prompt — NOT touched this phase). Verify the official long-form/legal name and the intended acronym expansion, then standardize.',
+    note: 'Phase 7: the footer legacy variant "MENA SPACE & ANALOG ADVISORY" was reconciled to the consistent public brand "MENA Space Organization" (matches the logo alt + routed pages). Remaining variants still in the repo: shorthand "MENA ORG" (About copy) and the Chatbot prompt\'s expansion "Middle East and North Africa Engineering Education and Training Organization" (backend/AI prompt — NOT touched this phase). Verify the official long-form/legal name and the intended acronym expansion, then standardize. Phase 7: the LOGOS audit did NOT resolve this — every official logo carries only the mark plus "مينا / MENA", with no long-form or legal name anywhere, so the current "MENA Space Organization" representation was left unchanged rather than guessed at.',
   },
 ];

@@ -50,12 +50,23 @@ export default function ActivitiesPage() {
               className="flex h-full flex-col overflow-hidden rounded-2xl border border-neutral-900/80 bg-neutral-900/25 shadow-xl"
             >
               {activity.image && (
-                <div className="aspect-[16/9] w-full overflow-hidden bg-neutral-900">
+                /*
+                  Same 16/9 frame for every card. Brand marks opt into `contain` so they are
+                  shown whole rather than cropped, on a neutral white plate that reads the
+                  same in light and dark mode (the mark itself has a white background).
+                */
+                <div
+                  className={`aspect-[16/9] w-full overflow-hidden ${
+                    activity.imageFit === 'contain' ? 'bg-white' : 'bg-neutral-900'
+                  }`}
+                >
                   <img
                     src={activity.image.src}
                     alt={imgAlt}
                     loading="lazy"
-                    className="h-full w-full object-cover object-center"
+                    className={`h-full w-full object-center ${
+                      activity.imageFit === 'contain' ? 'object-contain p-3' : 'object-cover'
+                    }`}
                   />
                 </div>
               )}

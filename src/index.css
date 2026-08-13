@@ -94,6 +94,17 @@ html {
 }
 
 /* ============================================================
+   BRAND LOGO — official variant swap by theme (Phase 7)
+   The master mark is near-white (#f6f6f7), so on the light-mode
+   cream page it was effectively invisible. The official brand sheet
+   provides a tan-on-light lock-up for exactly this case; both files
+   share one canvas and framing, so swapping them changes no layout.
+   ============================================================ */
+.mena-logo--light { display: none; }
+.light-mode .mena-logo--dark { display: none; }
+.light-mode .mena-logo--light { display: block; }
+
+/* ============================================================
    LIGHT MODE — cool off-white base with a clear warm surface
    hierarchy, defined as tokens (page → panel → card → selected):
      --lm-bg #f9fafb  →  --lm-panel #f3ede4  →  --lm-card #d1c7bc  →  --lm-card-active #cbad8e

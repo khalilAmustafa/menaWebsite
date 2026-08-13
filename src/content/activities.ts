@@ -3,10 +3,12 @@ import type { Activity } from './types';
 /**
  * Confirmed recurring activities / programs (distinct from one-off Events).
  *
- * SYSTEM — CONFIRMED from the official banner ("SYSTEM · SPACE FOR YOUTH THROUGH STEM ·
- * 2025-2026"). It is a youth STEM program, not an event. The program's activity photos show
- * identifiable minors and are deliberately NOT published; only the branded (cartoon) banner
- * graphic is used. Detailed curriculum/outcomes are unconfirmed → absent (see contentGaps).
+ * SYSTEM — CONFIRMED from the official branding ("S.Y.S.T.E.M · SPACE FOR YOUTH THROUGH
+ * STEM · BY MENA" on the official program logo, and the 2025-2026 period on the banner).
+ * It is a youth STEM program, not an event. Phase 7: the card image was switched from the
+ * cartoon banner (which pictured identifiable children) to the official program LOGO from
+ * the audited LOGOS folder — no photograph of any minor is published anywhere for SYSTEM.
+ * Detailed curriculum/outcomes remain unconfirmed → absent (see contentGaps).
  *
  * ملتقى الصناع (Makers Forum) — filenames establish two separate occurrences (2024, 2025).
  * The Arabic proper name is preserved (not translated authoritatively). Exact dates, location,
@@ -20,11 +22,12 @@ export const ACTIVITIES: Activity[] = [
     summary: { en: 'Space for Youth Through STEM — a youth STEM program.' },
     period: '2025–2026',
     image: {
-      id: 'system-banner',
+      id: 'system-logo',
       type: 'image',
-      src: '/images/activities/system-banner.jpg',
-      alt: { en: 'SYSTEM — Space for Youth Through STEM program banner' },
+      src: '/images/activities/system-logo.png',
+      alt: { en: 'SYSTEM — Space for Youth Through STEM official program logo' },
     },
+    imageFit: 'contain',
     order: 1,
   },
   {

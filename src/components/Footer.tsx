@@ -47,6 +47,12 @@ export default function Footer({ isArabic }: FooterProps) {
                     // {isArabic ? "محاكاة وادي رم" : "WADI RUM TRACK"}
                   </Link>
                 </li>
+                {/* Phase 7: the completed /events area had no footer entry at all. */}
+                <li>
+                  <Link to="/events" className="hover:text-brand-teal transition-colors duration-200">
+                    // {isArabic ? "الفعاليات" : "EVENTS"}
+                  </Link>
+                </li>
               </ul>
             </div>
 
@@ -83,9 +89,20 @@ export default function Footer({ isArabic }: FooterProps) {
                     // {isArabic ? "الأنشطة والبرامج" : "ACTIVITIES"}
                   </Link>
                 </li>
+                {/*
+                  Phase 7: "BOARD EXPERTS" pointed at /#advisors, which has been an empty
+                  placeholder since the Phase 4.5 de-mock — a link to nothing. Replaced with
+                  the two completed, real routes this column had no entry for. Restore an
+                  advisors link once real advisor content exists.
+                */}
                 <li>
-                  <Link to="/#advisors" className="hover:text-brand-teal transition-colors duration-200">
-                    // {isArabic ? "مجلس المستشارين" : "BOARD EXPERTS"}
+                  <Link to="/achievements" className="hover:text-brand-teal transition-colors duration-200">
+                    // {isArabic ? "الإنجازات" : "ACHIEVEMENTS"}
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/achievements/research" className="hover:text-brand-teal transition-colors duration-200">
+                    // {isArabic ? "الأوراق البحثية" : "RESEARCH PAPERS"}
                   </Link>
                 </li>
               </ul>

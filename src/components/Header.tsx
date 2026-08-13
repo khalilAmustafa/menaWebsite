@@ -268,7 +268,9 @@ export default function Header({ isArabic, setIsArabic, activeSection, isLightMo
 
                           {[
                             { id: 'dept-board', label: 'BOARD MEMBERS', arabic: 'مجلس الأمناء والمؤسسين' },
-                            { id: 'advisors', label: 'Advisors', arabic: 'مجلس المستشارين الأكاديمي' },
+                            /* Phase 7: 'Advisors' removed — it scrolled to the /#advisors
+                               placeholder that has held no content since the Phase 4.5
+                               de-mock. Re-add once real advisor records exist. */
                             { id: 'dept-mission', label: 'Management & Operations', arabic: 'الإدارة والعمليات البعثية' },
                             { id: 'dept-marketing', label: 'Marketing & Social Media', arabic: 'عمليات الإعلام والتسويق' },
                             { id: 'dept-eng', label: 'Design & Engineering Team', arabic: 'التصميم وتجهيز بدلات رواد الفضاء' },

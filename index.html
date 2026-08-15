@@ -6,6 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MENA Space Organization</title>
 
+    <!-- Moved out of src/index.css: Lightning CSS cannot inline a remote @import, and a
+         <link> lets the font request start in parallel with the stylesheet download. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap"
+    />
+
     <!--
       Baseline SEO / social metadata. Deliberately conservative: drawn only from confirmed
       content — the Wadi Rum Mars analog mission, the youth STEM programmes, and the events and
@@ -42,6 +51,49 @@
   </head>
   <body>
     <div id="root"></div>
+
+    <!--
+      Below the supported floor the page previously rendered as a blank white screen: a
+      `type="module"` script is silently ignored by browsers that cannot parse it, and
+      Tailwind v4's output is wrapped in @layer, which browsers without cascade-layer
+      support drop wholesale. Either way the visitor saw nothing and had no idea why.
+
+      This notice is deliberately written in ES5 with inline styles and no Tailwind class,
+      because it has to run in exactly the browsers where the module bundle and the
+      stylesheet do not. CSSLayerBlockRule is the precise feature test — it exists in the
+      same versions that support @layer (Safari/iOS 15.4+, Chrome 99+, Firefox 97+).
+    -->
+    <div id="unsupported-browser" style="display: none"></div>
+    <script>
+      (function () {
+        var supported =
+          typeof window.CSSLayerBlockRule !== 'undefined' &&
+          typeof window.Promise !== 'undefined';
+        if (supported) return;
+
+        var el = document.getElementById('unsupported-browser');
+        el.setAttribute(
+          'style',
+          'display:block;position:fixed;top:0;left:0;right:0;bottom:0;z-index:9999;' +
+            'background:#3a2c26;color:#f3ede4;font-family:-apple-system,BlinkMacSystemFont,' +
+            'Helvetica,Arial,sans-serif;padding:32px 24px;text-align:center;overflow:auto;' +
+            '-webkit-box-sizing:border-box;box-sizing:border-box;'
+        );
+        el.innerHTML =
+          '<div style="max-width:420px;margin:15vh auto 0">' +
+          '<h1 style="font-size:20px;line-height:1.4;margin:0 0 16px;color:#cbad8e">' +
+          'Please update your browser</h1>' +
+          '<p style="font-size:15px;line-height:1.6;margin:0 0 20px">' +
+          'This site needs a newer browser than the one on this device. ' +
+          'On iPhone or iPad, open <strong>Settings &rsaquo; General &rsaquo; ' +
+          'Software Update</strong> and install the latest iOS, then try again.</p>' +
+          '<p style="font-size:15px;line-height:1.6;margin:0">' +
+          'If your device cannot update, please reach us by email at ' +
+          '<a href="mailto:info@menaspace.org" style="color:#cbad8e">info@menaspace.org</a>' +
+          '.</p></div>';
+      })();
+    </script>
+
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

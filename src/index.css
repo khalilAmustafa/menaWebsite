@@ -1,4 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
+/* The Google Fonts @import that used to sit here now lives as a <link> in index.html.
+   Lightning CSS (which we run to down-level modern CSS for older iOS — see vite.config.ts)
+   resolves @import at build time and cannot fetch a remote URL, so the build failed on it.
+   A <link rel="preconnect"> + <link rel="stylesheet"> is also faster: an @import inside the
+   bundled stylesheet serialises the font request behind the CSS download. */
 @import "tailwindcss";
 
 html {

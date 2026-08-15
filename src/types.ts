@@ -1,70 +1,18 @@
-export interface MissionPhase {
-  id: string;
-  title: string;
-  arabicTitle: string;
-  date: string;
-  location: string;
-  description: string;
-  details: string[];
-  status: 'completed' | 'ongoing' | 'upcoming';
-}
-
-export interface ProgramItem {
-  id: string;
-  title: string;
-  subtitle: string;
-  description: string;
-  features: string[];
-  role: string;
-  bannerImage: string;
-}
-
+/**
+ * Phase 8: narrowed to the three fields the site renders. The removed fields (description,
+ * coreFocus, leadName, leadRole, teamSize) only ever held fabricated data, and keeping them on
+ * the type invited it back. `AdvisorItem` and `SupportTier` were deleted outright along with
+ * their fabricated constants — see the note in src/data.ts.
+ */
 export interface TeamDepartment {
   id: string;
   name: string;
   arabicName: string;
-  description: string;
-  coreFocus: string[];
-  leadName?: string;
-  leadRole?: string;
-  teamSize: number;
 }
 
-export interface AdvisorItem {
-  id: string;
-  name: string;
-  role: string;
-  organization: string;
-  biography: string;
-  avatarUrl: string;
-  specialty: string;
-}
-
-export interface SupportTier {
-  id: string;
-  name: string;
-  badgeName: string;
-  price: string;
-  tagline: string;
-  perks: string[];
-  color: string;
-}
-
-export interface MissionControlState {
-  missionClock: string; // Elapsed time
-  oxygenLevel: number; // %
-  batteryPower: number; // %
-  pressureLevel: number; // kPa
-  interiorTemp: number; // °C
-  signalStrength: number; // %
-  isEvaActive: boolean;
-  telemetryLogs: string[];
-  crewVitals: {
-    id: string;
-    name: string;
-    role: string;
-    heartRate: number;
-    suitPressure: number;
-    status: 'Stable' | 'Elevated' | 'Caution';
-  }[];
-}
+/*
+ * `MissionControlState` was DELETED here. It was the shape of the fabricated homepage telemetry
+ * dashboard (mission clock, O₂/battery/pressure/temperature/signal, EVA state, mission-control
+ * logs, and per-crew heart rate / suit pressure / status). The component that rendered it is
+ * gone, and leaving the type behind would only make it easy to rebuild the same invented feed.
+ */

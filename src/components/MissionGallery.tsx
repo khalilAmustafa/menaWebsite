@@ -17,110 +17,87 @@ interface GalleryItem {
   date: string;
 }
 
+// Phase 6: replaced the previous AI-render images + fabricated "ARAV-I/II/III" mission codes,
+// dates, and "Dome Alpha" naming with REAL photography from the MENA Mars Analog Mission in
+// Wadi Rum (2025). Metadata is confirmed only: mission code MENA-00-WR, year 2025, Wadi Rum.
 const GALLERY_DATA: GalleryItem[] = [
   {
     id: "gal-1",
-    image: "/images/mena_wadi_rum_eva_1779552903767.png",
-    titleEN: "Astronaut EVA Field Exploration",
-    titleAR: "مهمة الخروج الميداني لرواد الفضاء",
-    descEN: "Physiological strain evaluation under simulated sandstorm and high communication latency.",
-    descAR: "تقييم الإجهاد الفسيولوجي والمرونة النفسية للرواد تحت ظروف عاصفة غبارية افتراضية وتأخير اتصال.",
+    image: "/images/events/analog-mission-2025/analog-eva-flag.jpg",
+    titleEN: "Analog Astronaut EVA",
+    titleAR: "مهمة خروج ببدلة الفضاء",
+    descEN: "An analog astronaut with a Jordanian flag during a field EVA in the Wadi Rum desert.",
+    descAR: "رائد فضاء أنالوج يحمل العلم الأردني خلال مهمة خروج ميدانية في صحراء وادي رم.",
     category: "crew",
-    locationEN: "Wadi Rum Desert Basin",
-    locationAR: "حوض صحراء وادي رم",
-    mission: "ARAV-I",
-    date: "NOV 2024"
+    locationEN: "Wadi Rum, Jordan",
+    locationAR: "وادي رم، الأردن",
+    mission: "MENA-00-WR",
+    date: "2025"
   },
   {
     id: "gal-2",
-    image: "/images/mena_suit_engineering_1779552864607.png",
-    titleEN: "Suit Pressurization Check",
-    titleAR: "فحص ضغط واستقرار البدلات",
-    descEN: "Telemetry verification and helmet seal pressure testing at Amman fabrication warehouse.",
-    descAR: "معايرة أنظمة القياس عن بعد والضغط المغلق لخوذ البدلات في الحيز الصناعي بعمان.",
-    category: "equipment",
-    locationEN: "Amman Innovation Hub",
-    locationAR: "مقر الابتكار، عمان",
-    mission: "ARAV-I",
-    date: "OCT 2024"
+    image: "/images/events/analog-mission-2025/analog-crew.jpg",
+    titleEN: "Mission Crew",
+    titleAR: "طاقم البعثة",
+    descEN: "The analog mission crew in the Wadi Rum desert.",
+    descAR: "طاقم البعثة الأنالوج في صحراء وادي رم.",
+    category: "crew",
+    locationEN: "Wadi Rum, Jordan",
+    locationAR: "وادي رم، الأردن",
+    mission: "MENA-00-WR",
+    date: "2025"
   },
   {
     id: "gal-3",
-    image: "/images/mena_mission_control_1779552881676.png",
-    titleEN: "Amman Mission Control Uplink",
-    titleAR: "غرفة التحكم المركزي في عمان",
-    descEN: "Live parsing of crew bio-telemetry, habitability metrics, and active life support status.",
-    descAR: "التحليل الفوري للمؤشرات الحيوية لطاقم المهمة، وحسابات الدعم وعزل قمرة الصعود.",
+    image: "/images/events/analog-mission-2025/analog-habitat-group.jpg",
+    titleEN: "Desert Habitat",
+    titleAR: "الموئل الصحراوي",
+    descEN: "Participants in front of the analog dome habitat in Wadi Rum.",
+    descAR: "المشاركون أمام موئل القبة الأنالوج في وادي رم.",
     category: "habitat",
-    locationEN: "Command Center HQ",
-    locationAR: "مركز العمليات الفضائية",
-    mission: "ARAV-II",
-    date: "MAR 2025"
+    locationEN: "Wadi Rum, Jordan",
+    locationAR: "وادي رم، الأردن",
+    mission: "MENA-00-WR",
+    date: "2025"
   },
   {
     id: "gal-4",
-    image: "/images/mena_mars_hero_1779552846305.png",
-    titleEN: "Dome Alpha Sanctuary at Dusk",
-    titleAR: "مستوطنة القبة ألفا عند الغروب",
-    descEN: "Isolated geodesic structures designed to mitigate heavy dust accumulation and thermal swings.",
-    descAR: "الهيكل الجيوديسي المتقدم لعزل الحرارة الشديدة ومنع تغلغل دقائق الغبار الدقيقة بالصحراء.",
+    image: "/images/events/analog-mission-2025/analog-habitat-interior.jpg",
+    titleEN: "Habitat Interior",
+    titleAR: "داخل الموئل",
+    descEN: "Interior of the analog mission habitat.",
+    descAR: "المساحة الداخلية لموئل البعثة الأنالوج.",
     category: "habitat",
-    locationEN: "Al-Disah Martian Plain",
-    locationAR: "سهل رمال الديسة",
-    mission: "ARAV-I",
-    date: "NOV 2024"
+    locationEN: "Wadi Rum, Jordan",
+    locationAR: "وادي رم، الأردن",
+    mission: "MENA-00-WR",
+    date: "2025"
   },
   {
     id: "gal-5",
-    image: "/images/mars_astronaut_hero_1779558754887.png",
-    titleEN: "Sunset Landscape Survey",
-    titleAR: "مسح طبيعة المريخ عند الأفق",
-    descEN: "Analog commander scouting a geological trench during deep sunset EVA operations.",
-    descAR: "قائد المهمة في جولة رصد جيولوجي واستكشاف للطبقات الصخرية بوادي رم قبيل غسق المريخ.",
+    image: "/images/events/analog-mission-2025/analog-eva-dusk.jpg",
+    titleEN: "EVA at Dusk",
+    titleAR: "مهمة خروج عند الغروب",
+    descEN: "Analog astronauts in spacesuits at dusk in the Wadi Rum desert.",
+    descAR: "رواد فضاء أنالوج ببدلات الفضاء عند الغروب في صحراء وادي رم.",
     category: "crew",
-    locationEN: "Southern Valley Foothills",
-    locationAR: "سلسلة جبال الوادي الجنوبي",
-    mission: "ARAV-III",
-    date: "OCT 2026"
+    locationEN: "Wadi Rum, Jordan",
+    locationAR: "وادي رم، الأردن",
+    mission: "MENA-00-WR",
+    date: "2025"
   },
   {
     id: "gal-6",
-    image: "https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?q=80&w=1200&fit=crop",
-    titleEN: "Petra-1 System Calibration",
-    titleAR: "معايرة ريزرفور المسبار بترا-1",
-    descEN: "Micro-rover communications and sample acquisition system analysis on high angle slopes.",
-    descAR: "تحليل كفاءة القيادة وعقد الاتصال لمسبار بترا-1 على المنحدرات الصخرية الشديدة.",
+    image: "/images/events/analog-mission-2025/analog-mission-control.jpg",
+    titleEN: "Mission Operations",
+    titleAR: "عمليات البعثة",
+    descEN: "Participants working during the analog mission.",
+    descAR: "المشاركون أثناء العمل خلال البعثة الأنالوج.",
     category: "equipment",
-    locationEN: "Amman Robotics Base",
-    locationAR: "مقر الروبوتات والأنظمة",
-    mission: "ARAV-II",
-    date: "FEB 2025"
-  },
-  {
-    id: "gal-7",
-    image: "https://images.unsplash.com/photo-1547234935-80c7145ec969?q=80&w=1200&fit=crop",
-    titleEN: "Basalt Geological Indexing",
-    titleAR: "فهرسة وتصنيف صخور البازلت",
-    descEN: "Cataloging mineral compositions from iron-rich canyons and dusty ancient dry basins.",
-    descAR: "تصنيف المكونات المعدنية والخصائص الكيميائية للصخور الغنية بالحديد لربطها بالتربة المريخية.",
-    category: "scenery",
-    locationEN: "Wadi Rum Basalt Canyons",
-    locationAR: "أخاديد البازلت بوادي رم",
-    mission: "ARAV-I",
-    date: "NOV 2024"
-  },
-  {
-    id: "gal-8",
-    image: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=1200&fit=crop",
-    titleEN: "Closed-Loop Hydro-Systems",
-    titleAR: "أنظمة الزراعة المائية المعزولة",
-    descEN: "Testing automated water loops and bio-reclamation yield efficiency under strict rationing rules.",
-    descAR: "دراسة الدورة المائية الذاتية والمحاصيل الغذائية المعزولة داخل المختبر الحيوي التابع لـ ARAV-II.",
-    category: "habitat",
-    locationEN: "Dome Alpha Bio-lab",
-    locationAR: "مختبر غطاء الحياة، القبة م1",
-    mission: "ARAV-II",
-    date: "APR 2025"
+    locationEN: "Wadi Rum, Jordan",
+    locationAR: "وادي رم، الأردن",
+    mission: "MENA-00-WR",
+    date: "2025"
   }
 ];
 
@@ -153,8 +130,7 @@ export default function MissionGallery({ isArabic }: MissionGalleryProps) {
     { id: 'all', nameEN: 'All Missions Archive', nameAR: 'كامل أرشيف المهام' },
     { id: 'crew', nameEN: 'Crew & EVA', nameAR: 'الرواد والطلعات الميدانية' },
     { id: 'habitat', nameEN: 'Habitat & Operations', nameAR: 'المستوطنة والمقرات' },
-    { id: 'equipment', nameEN: 'Systems & Equipment', nameAR: 'الأنظمة والبدلات المبتكرة' },
-    { id: 'scenery', nameEN: 'Basalt Landscapes', nameAR: 'الجيولوجيا والمناظر الطبيعية' }
+    { id: 'equipment', nameEN: 'Systems & Equipment', nameAR: 'الأنظمة والبدلات المبتكرة' }
   ];
 
   // Filtering list based on user selections
@@ -199,10 +175,16 @@ export default function MissionGallery({ isArabic }: MissionGalleryProps) {
             </h2>
             
             <p className="max-w-2xl text-xs sm:text-sm text-neutral-400 font-sans leading-relaxed">
-              {isArabic 
-                ? "سجل مرئي لمهام رواد الفضاء العرب ومحاكاة الاستكشاف الجيولوجي وأنظمة دعم الحياة في صحاري وادي رم ومختبر التكنولوجيا بتقديم أسلوب سينمائي."
-                : "A visual deep-dive and archived log capturing real analog astronaut EVAs, basalt excavation protocols, spaceship interior mocks, and youth aerospace training programs in Jordan."
-              }
+              {/*
+                Arabic copy review: AR asserted "أنظمة دعم الحياة" (life-support systems) and a
+                "مختبر التكنولوجيا" (technology laboratory); EN asserted "basalt excavation
+                protocols" and "spaceship interior mocks". None of that is evidenced — the six
+                photos in this gallery show spacesuit EVAs, the dome habitat inside and out, the
+                crew, and field work. Both languages now describe exactly that.
+              */}
+              {isArabic
+                ? 'سجلّ مرئي من بعثة محاكاة المريخ في وادي رم: مهام خروج ببدلات الفضاء، والموئل من الداخل والخارج، والطاقم أثناء العمل الميداني.'
+                : 'A visual log from the Mars analog mission in Wadi Rum: spacesuit EVAs, the dome habitat inside and out, and the crew during field work.'}
             </p>
           </div>
 
@@ -210,7 +192,7 @@ export default function MissionGallery({ isArabic }: MissionGalleryProps) {
           <div className="hidden lg:grid grid-cols-2 gap-4 font-mono text-[9px] text-neutral-500 bg-neutral-900/30 border border-neutral-900/60 p-4 rounded-lg">
             <div>
               <span className="block text-neutral-600 uppercase">{isArabic ? "إجمالي اللقطات النشطة:" : "ACTIVE CAPTURES:"}</span>
-              <span className="text-brand-teal font-bold text-xs">08 INTERDISCIPLINARY</span>
+              <span className="text-brand-teal font-bold text-xs">0{GALLERY_DATA.length} INTERDISCIPLINARY</span>
             </div>
             <div>
               <span className="block text-neutral-600 uppercase">{isArabic ? "ترميز الأرشيف:" : "ARCHIVE CLASSIF:"}</span>
@@ -460,13 +442,12 @@ export default function MissionGallery({ isArabic }: MissionGalleryProps) {
                     <span className="text-neutral-200">{GALLERY_DATA[activeItemIndex].date}</span>
                   </div>
 
-                  <div className="flex justify-between items-center py-1">
-                    <span className="text-neutral-500 flex items-center gap-1">
-                      <Camera className="h-3 w-3 text-brand-teal" />
-                      {isArabic ? "المستشعر ونظام الكاميرا" : "IMAGING SENSOR"}
-                    </span>
-                    <span className="text-neutral-200">DOME_EYE_REPROx4</span>
-                  </div>
+                  {/*
+                    Arabic copy review / factual sweep: an "IMAGING SENSOR" row printed
+                    "DOME_EYE_REPROx4" on EVERY gallery photo — an invented camera/sensor model
+                    presented as capture metadata. No such equipment is documented anywhere.
+                    Row removed; the remaining rows (location, date) carry confirmed values.
+                  */}
                 </div>
 
                 {/* Action button inside lightbox to exit */}

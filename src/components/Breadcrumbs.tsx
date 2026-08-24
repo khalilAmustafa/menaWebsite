@@ -15,7 +15,7 @@ export interface Crumb {
 export default function Breadcrumbs({ items }: { items: Crumb[] }) {
   return (
     <nav aria-label="Breadcrumb" className="mb-8">
-      <ol className="flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-[11px] tracking-wider uppercase text-neutral-500">
+      <ol className="flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-[11px] tracking-wider uppercase text-[var(--page-subtle)]">
         {items.map((item, index) => {
           const isLast = index === items.length - 1;
           return (
@@ -30,13 +30,13 @@ export default function Breadcrumbs({ items }: { items: Crumb[] }) {
               ) : (
                 <span
                   aria-current={isLast ? 'page' : undefined}
-                  className="text-neutral-300 truncate max-w-[70vw] sm:max-w-[42ch]"
+                  className="max-w-[70vw] truncate text-[var(--page-muted)] sm:max-w-[42ch]"
                 >
                   {item.label}
                 </span>
               )}
               {!isLast && (
-                <span aria-hidden="true" className="text-neutral-600">
+                <span aria-hidden="true" className="text-[var(--page-subtle)]">
                   /
                 </span>
               )}

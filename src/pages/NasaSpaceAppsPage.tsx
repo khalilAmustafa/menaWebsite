@@ -1,4 +1,3 @@
-import { Trophy, Users } from 'lucide-react';
 import PageContainer from '../components/PageContainer';
 import Breadcrumbs from '../components/Breadcrumbs';
 import EventHero from '../components/events/EventHero';
@@ -16,7 +15,10 @@ export default function NasaSpaceAppsPage() {
   const { isArabic } = useSiteContext();
   const event = getEventBySlug('nasa-space-apps');
   // Description is the event record's own confirmed summary — single source of truth.
-  useDocumentTitle('NASA Space Apps Challenge — Amman | MENA', event?.summary?.en);
+  useDocumentTitle(
+    isArabic ? 'تحدي ناسا لتطبيقات الفضاء — عمّان | مِنا' : 'NASA Space Apps Challenge — Amman | MENA',
+    event?.summary ? (isArabic && event.summary.ar ? event.summary.ar : event.summary.en) : undefined,
+  );
 
   if (!event) return null;
 
@@ -64,34 +66,15 @@ export default function NasaSpaceAppsPage() {
         </section>
       )}
 
-      {/* Winners — restrained pending (categories visible, identities not confirmed) */}
-      <section className="mb-16">
-        <h2 className="mb-6 font-display text-xl font-medium uppercase tracking-tight text-white sm:text-2xl">
-          {sectionLabel('Winners', 'الفائزون')}
+      <section className="pending-record">
+        <h2 className="font-display text-3xl font-semibold uppercase text-[var(--page-ink)] sm:text-4xl">
+          {sectionLabel('Records pending confirmation', 'سجلات قيد التأكيد')}
         </h2>
-        <div className="rounded-2xl border border-neutral-900/80 bg-neutral-900/20 px-6 py-10 text-center">
-          <Trophy className="mx-auto mb-4 h-8 w-8 text-brand-teal/70" />
-          <p className="mx-auto max-w-xl font-sans text-sm leading-relaxed text-neutral-400">
-            {isArabic
-              ? 'اختُتمت الفعالية بحفل جوائز. سيتم نشر السجلات الرسمية للفائزين (أسماء الفرق والمشاريع والمراكز) بمجرد تأكيدها.'
-              : 'The event concluded with an award ceremony. Official winner records — team names, projects, and placements — will be published once confirmed.'}
-          </p>
-        </div>
-      </section>
-
-      {/* Partners & Sponsors — restrained pending */}
-      <section>
-        <h2 className="mb-6 font-display text-xl font-medium uppercase tracking-tight text-white sm:text-2xl">
-          {sectionLabel('Partners & Sponsors', 'الشركاء والرعاة')}
-        </h2>
-        <div className="rounded-2xl border border-neutral-900/80 bg-neutral-900/20 px-6 py-10 text-center">
-          <Users className="mx-auto mb-4 h-8 w-8 text-brand-teal/70" />
-          <p className="mx-auto max-w-xl font-sans text-sm leading-relaxed text-neutral-400">
-            {isArabic
-              ? 'تفاصيل الشركاء والرعاة الرسميين لهذه الفعالية قيد التأكيد وسيتم نشرها قريبًا.'
-              : 'The official partners and sponsors for this event are being confirmed and will be published soon.'}
-          </p>
-        </div>
+        <p>
+          {isArabic
+            ? 'ستُنشر أسماء الفرق والمشاريع والمراكز الفائزة، وقائمة الشركاء والرعاة بعد تأكيد السجلات الرسمية.'
+            : 'Winning teams, projects and placements, and the partner and sponsor list will be published after the official records are confirmed.'}
+        </p>
       </section>
     </PageContainer>
   );

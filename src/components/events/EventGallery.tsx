@@ -19,6 +19,11 @@ export default function EventGallery({ images, isArabic = false }: EventGalleryP
   const triggerRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
   const alt = (m: MediaItem) => (isArabic && m.alt.ar ? m.alt.ar : m.alt.en);
+  // Prefer the richer descriptive caption where the content layer supplies one (the
+  // captions migrated from the retired homepage field-archive gallery); otherwise the
+  // alt text, which every media item has, stands in.
+  const caption = (m: MediaItem) =>
+    m.caption ? (isArabic && m.caption.ar ? m.caption.ar : m.caption.en) : alt(m);
 
   const close = useCallback(() => {
     setActiveIndex((current) => {
@@ -37,20 +42,34 @@ export default function EventGallery({ images, isArabic = false }: EventGalleryP
 
   useEffect(() => {
     if (activeIndex === null) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') close();
       else if (e.key === 'ArrowRight') next();
       else if (e.key === 'ArrowLeft') prev();
+      else if (e.key === 'Tab') {
+        const dialog = document.querySelector<HTMLElement>('[role="dialog"]');
+        const focusable = dialog?.querySelectorAll<HTMLElement>('button:not([disabled]), a[href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+        if (!focusable?.length) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
     };
     window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener('keydown', onKey);
+    };
   }, [activeIndex, close, next, prev]);
 
   if (images.length === 0) return null;
 
   return (
     <>
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
+      <div className="grid grid-cols-2 auto-rows-[42vw] gap-3 sm:grid-cols-3 sm:auto-rows-[28vw] sm:gap-4 lg:grid-cols-4 lg:auto-rows-[22vw]">
         {images.map((image, i) => (
           <button
             key={image.id}
@@ -62,11 +81,13 @@ export default function EventGallery({ images, isArabic = false }: EventGalleryP
             aria-label={
               isArabic ? `تكبير الصورة: ${alt(image)}` : `Open image: ${alt(image)}`
             }
-            className="group relative aspect-[4/5] overflow-hidden rounded-2xl border border-neutral-900/80 bg-neutral-900 transition-all duration-300 hover:border-brand-teal/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal/50"
+            className={`group relative overflow-hidden rounded-xl border border-[var(--page-border)] bg-[var(--page-surface-raised)] transition-[border-color,transform] duration-300 hover:border-brand-teal/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal/50 ${i === 0 ? 'col-span-2 row-span-2' : ''}`}
           >
             <img
               src={image.src}
               alt={alt(image)}
+              width={image.width}
+              height={image.height}
               loading="lazy"
               className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
             />
@@ -84,14 +105,15 @@ export default function EventGallery({ images, isArabic = false }: EventGalleryP
             role="dialog"
             aria-modal="true"
             aria-label={isArabic ? 'عارض الصور' : 'Image viewer'}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 p-4 backdrop-blur-md sm:p-8"
+            className="fixed inset-0 z-[100] flex items-center justify-center overflow-hidden overscroll-contain bg-black/95 p-2 backdrop-blur-md sm:p-8"
             onClick={close}
           >
             <button
               type="button"
+              autoFocus
               onClick={close}
               aria-label={isArabic ? 'إغلاق' : 'Close'}
-              className="absolute right-4 top-4 z-10 rounded-full border border-neutral-800 bg-neutral-900/80 p-2 text-neutral-300 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal/50"
+              className="absolute right-3 top-3 z-10 grid h-11 w-11 place-items-center rounded-full border border-neutral-800 bg-neutral-900/80 text-neutral-300 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal/50 sm:right-4 sm:top-4"
             >
               <X className="h-5 w-5" />
             </button>
@@ -104,20 +126,22 @@ export default function EventGallery({ images, isArabic = false }: EventGalleryP
                   prev();
                 }}
                 aria-label={isArabic ? 'الصورة السابقة' : 'Previous image'}
-                className="absolute left-3 z-10 rounded-full border border-neutral-800 bg-neutral-900/70 p-2 text-white transition-colors hover:bg-brand-teal/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal/50 sm:left-6"
+                className="absolute left-2 z-10 grid h-11 w-11 place-items-center rounded-full border border-neutral-800 bg-neutral-900/70 text-white transition-colors hover:bg-brand-teal/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal/50 sm:left-6"
               >
                 <ChevronLeft className="h-5 w-5" />
               </button>
             )}
 
-            <figure className="flex max-h-[85vh] max-w-3xl flex-col items-center" onClick={(e) => e.stopPropagation()}>
+            <figure className="flex max-h-[88dvh] w-full max-w-3xl flex-col items-center px-10 sm:px-0" onClick={(e) => e.stopPropagation()}>
               <img
                 src={images[activeIndex].src}
                 alt={alt(images[activeIndex])}
-                className="max-h-[78vh] w-auto rounded-2xl border border-neutral-800 object-contain"
+                width={images[activeIndex].width}
+                height={images[activeIndex].height}
+                className="max-h-[76dvh] max-w-full rounded-xl border border-neutral-800 object-contain sm:rounded-2xl"
               />
               <figcaption className="mt-3 max-w-xl text-center font-sans text-xs text-neutral-400">
-                {alt(images[activeIndex])}
+                {caption(images[activeIndex])}
                 <span className="ml-2 font-mono text-[10px] text-neutral-600">
                   {activeIndex + 1} / {images.length}
                 </span>
@@ -132,7 +156,7 @@ export default function EventGallery({ images, isArabic = false }: EventGalleryP
                   next();
                 }}
                 aria-label={isArabic ? 'الصورة التالية' : 'Next image'}
-                className="absolute right-3 z-10 rounded-full border border-neutral-800 bg-neutral-900/70 p-2 text-white transition-colors hover:bg-brand-teal/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal/50 sm:right-6"
+                className="absolute right-2 z-10 grid h-11 w-11 place-items-center rounded-full border border-neutral-800 bg-neutral-900/70 text-white transition-colors hover:bg-brand-teal/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal/50 sm:right-6"
               >
                 <ChevronRight className="h-5 w-5" />
               </button>

@@ -12,8 +12,9 @@ export default function ResearchPaperPage() {
   const { slug } = useParams();
   const { isArabic } = useSiteContext();
   const paper = slug ? getResearchPaperBySlug(slug) : undefined;
+  const paperTitle = paper ? (isArabic && paper.title.ar ? paper.title.ar : paper.title.en) : '';
 
-  useDocumentTitle(paper ? `${paper.title.en} | MENA` : 'Research paper not found | MENA');
+  useDocumentTitle(paper ? `${paperTitle} | MENA` : (isArabic ? 'الورقة البحثية غير موجودة | مِنا' : 'Research paper not found | MENA'));
 
   // ── Research-specific not-found state (stays inside SiteLayout) ───────────────
   if (!paper) {
@@ -22,7 +23,7 @@ export default function ResearchPaperPage() {
         <span className="mb-3 block font-mono text-xs font-bold uppercase tracking-widest text-brand-teal">
           404
         </span>
-        <h1 className="font-display text-3xl font-medium uppercase tracking-tight text-white sm:text-4xl">
+        <h1 className="font-display text-4xl font-medium uppercase tracking-tight text-[var(--page-ink)] sm:text-5xl">
           {isArabic ? 'الورقة البحثية غير موجودة' : 'Research paper not found'}
         </h1>
         <p className="mb-8 mt-4 max-w-md font-sans text-sm text-neutral-400">
@@ -48,14 +49,17 @@ export default function ResearchPaperPage() {
   }
 
   const conf = paper.conference;
+  const conferenceName = conf ? (isArabic && conf.nameAr ? conf.nameAr : conf.name) : '';
+  const conferenceLocation = conf?.location ? (isArabic && conf.locationAr ? conf.locationAr : conf.location) : '';
+  const authorNames = paper.authors.map((author) => isArabic && author.nameAr ? author.nameAr : author.name);
   const year = paper.year ?? conf?.year;
   const more = RESEARCH_PAPERS.filter((item) => item.id !== paper.id).slice(0, 3);
 
   // Research-information rows: only fields that actually exist are shown (missing → omitted).
   const metaRows: { label: string; value: string }[] = [];
-  if (conf?.name) metaRows.push({ label: isArabic ? 'المؤتمر' : 'Conference', value: conf.name });
+  if (conferenceName) metaRows.push({ label: isArabic ? 'المؤتمر' : 'Conference', value: conferenceName });
   if (conf?.edition) metaRows.push({ label: isArabic ? 'النسخة' : 'Edition', value: conf.edition });
-  if (conf?.location) metaRows.push({ label: isArabic ? 'الموقع' : 'Location', value: conf.location });
+  if (conferenceLocation) metaRows.push({ label: isArabic ? 'الموقع' : 'Location', value: conferenceLocation });
   if (year) metaRows.push({ label: isArabic ? 'السنة' : 'Year', value: String(year) });
   if (paper.category) metaRows.push({ label: isArabic ? 'التصنيف' : 'Category', value: paper.category });
   if (paper.publicationStatus)
@@ -67,26 +71,26 @@ export default function ResearchPaperPage() {
         items={[
           { label: isArabic ? 'الإنجازات' : 'Achievements', to: '/achievements' },
           { label: isArabic ? 'الأوراق البحثية' : 'Research Papers', to: '/achievements/research' },
-          { label: paper.title.en },
+          { label: paperTitle },
         ]}
       />
 
       {/* B. Research header (a <div>, not <header>, so the nav remains the only banner) */}
       <ScrollReveal variant="clip">
-        <div className="mb-10 max-w-3xl">
-          <span className="mb-3 block font-mono text-xs font-bold uppercase tracking-widest text-brand-teal">
+        <div className="page-intro">
+          <span className="section-index mb-5">
             {isArabic ? 'ورقة بحثية' : 'RESEARCH PAPER'}
           </span>
-          <h1 className="font-display text-2xl font-medium leading-tight tracking-tight text-white sm:text-4xl">
-            {paper.title.en}
+          <h1 className="research-paper-title">
+            {paperTitle}
           </h1>
-          <p className="mt-5 font-sans text-sm leading-relaxed text-neutral-400">
-            {paper.authors.map((author) => author.name).join(', ')}
+          <p className="mt-6 font-sans text-sm leading-relaxed text-[var(--page-muted)]">
+            {authorNames.join(isArabic ? '، ' : ', ')}
           </p>
           {conf && (
-            <p className="mt-2 font-mono text-[11px] tracking-wide text-neutral-500">
-              {conf.name}
-              {conf.location ? ` — ${conf.location}` : ''}
+            <p className="mt-2 font-mono text-[11px] tracking-wide text-[var(--page-subtle)]">
+              {conferenceName}
+              {conferenceLocation ? ` — ${conferenceLocation}` : ''}
               {year ? ` · ${year}` : ''}
             </p>
           )}
@@ -125,7 +129,7 @@ export default function ResearchPaperPage() {
                   key={author.name}
                   className="rounded-lg border border-neutral-900/80 bg-neutral-900/40 px-3 py-1.5 font-sans text-xs text-neutral-300"
                 >
-                  {author.name}
+                  {isArabic && author.nameAr ? author.nameAr : author.name}
                 </li>
               ))}
             </ul>
@@ -143,6 +147,8 @@ export default function ResearchPaperPage() {
                     key={media.id}
                     src={media.src}
                     alt={isArabic && media.alt.ar ? media.alt.ar : media.alt.en}
+                    width={media.width}
+                    height={media.height}
                     className="w-full rounded-lg border border-neutral-900/80 object-cover"
                   />
                 ))}
@@ -192,7 +198,7 @@ export default function ResearchPaperPage() {
 
         {/* D. Research information side panel (only present fields) */}
         <aside className="lg:col-span-1">
-          <div className="rounded-2xl border border-neutral-900/80 bg-neutral-900/20 p-6">
+          <div className="rounded-xl border border-[var(--page-border)] bg-[var(--page-surface)] p-6">
             <h2 className="mb-4 font-display text-sm font-bold uppercase tracking-widest text-neutral-200">
               {isArabic ? 'معلومات البحث' : 'Research Information'}
             </h2>
@@ -214,7 +220,7 @@ export default function ResearchPaperPage() {
           <h2 className="mb-6 font-display text-xl font-medium uppercase tracking-tight text-white">
             {isArabic ? 'المزيد من الأبحاث' : 'More Research'}
           </h2>
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="research-list">
             {more.map((item) => (
               <ResearchCard key={item.id} paper={item} isArabic={isArabic} />
             ))}

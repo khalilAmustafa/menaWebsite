@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="150" viewBox="0 0 560 150" role="img" aria-labelledby="title description">
+  <title id="title">MENA Space Organization</title>
+  <desc id="description">MENA wordmark with an orbital arc</desc>
+  <rect width="560" height="150" rx="18" fill="#100c0a"/>
+  <path d="M38 92C102 22 210 17 290 54" fill="none" stroke="#d2ad83" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="291" cy="54" r="7" fill="#e5c49e"/>
+  <text x="42" y="102" fill="#f1ebe4" font-family="Arial, sans-serif" font-size="72" font-weight="700" letter-spacing="9">MENA</text>
+  <text x="346" y="82" fill="#d8cbbd" font-family="Arial, sans-serif" font-size="18" font-weight="600" letter-spacing="4">SPACE</text>
+  <text x="346" y="108" fill="#d8cbbd" font-family="Arial, sans-serif" font-size="18" font-weight="600" letter-spacing="4">ORGANIZATION</text>
+</svg>

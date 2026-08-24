@@ -20,7 +20,7 @@ const ACHIEVEMENT_AREAS: { en: string; ar: string }[] = [
 
 export default function AchievementsPage() {
   const { isArabic } = useSiteContext();
-  useDocumentTitle('Achievements | MENA');
+  useDocumentTitle(isArabic ? 'الإنجازات | مِنا' : 'Achievements | MENA');
 
   // Real content only: the confirmed research papers are the page's initial visible value.
   const featured = RESEARCH_PAPERS.slice(0, 3);
@@ -41,8 +41,8 @@ export default function AchievementsPage() {
 
       {/* Featured Research (real ResearchPaper records) */}
       <section className="mt-2">
-        <div className="mb-8 flex items-end justify-between gap-4">
-          <h2 className="font-display text-xl font-medium uppercase tracking-tight text-white sm:text-2xl">
+        <div className="mb-8 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
+          <h2 className="font-display text-3xl font-semibold uppercase tracking-tight text-[var(--page-ink)] sm:text-4xl">
             {isArabic ? 'أبحاث مختارة' : 'Featured Research'}
           </h2>
           <Link
@@ -52,7 +52,7 @@ export default function AchievementsPage() {
             {isArabic ? 'عرض كل الأبحاث ←' : 'View all research papers →'}
           </Link>
         </div>
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="research-list">
           {featured.map((paper) => (
             <ResearchCard key={paper.id} paper={paper} isArabic={isArabic} />
           ))}
@@ -61,21 +61,21 @@ export default function AchievementsPage() {
 
       {/* Future achievement areas — labels only, no fabricated entries or counts */}
       <section className="mt-20">
-        <h2 className="mb-3 font-display text-xl font-medium uppercase tracking-tight text-white sm:text-2xl">
+        <h2 className="mb-3 font-display text-3xl font-semibold uppercase tracking-tight text-[var(--page-ink)] sm:text-4xl">
           {isArabic ? 'مجالات الإنجاز' : 'Achievement Areas'}
         </h2>
-        <p className="mb-8 max-w-2xl font-sans text-sm leading-relaxed text-neutral-400">
+        <p className="mb-8 max-w-2xl font-sans text-sm leading-relaxed text-[var(--page-muted)]">
           {isArabic
             ? 'ستُضاف المزيد من الإنجازات في هذه المجالات مع تأكيد السجلّات الرسمية.'
             : 'More achievements will be added across these areas as official records are confirmed.'}
         </p>
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+        <div className="grid grid-cols-1 border-t border-[var(--page-border)] sm:grid-cols-2">
           {ACHIEVEMENT_AREAS.map((area) => (
             <div
               key={area.en}
-              className="rounded-2xl border border-neutral-900/80 bg-neutral-900/20 px-5 py-6 text-center"
+              className="border-b border-[var(--page-border)] px-2 py-5 text-start sm:odd:border-e sm:px-5"
             >
-              <span className="font-display text-sm font-bold uppercase leading-tight tracking-wide text-neutral-200">
+              <span className="font-display text-lg font-semibold uppercase leading-tight tracking-wide text-[var(--page-ink)]">
                 {isArabic ? area.ar : area.en}
               </span>
             </div>

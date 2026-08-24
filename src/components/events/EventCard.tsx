@@ -30,13 +30,15 @@ export default function EventCard({ event, isArabic = false, headingLevel = 'h2'
   return (
     <Link
       to={`/events/${event.slug}`}
-      className="group flex h-full flex-col overflow-hidden rounded-2xl border border-neutral-900/80 bg-neutral-900/25 shadow-xl transition-all duration-300 hover:border-brand-teal/40 hover:bg-neutral-900/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal/50"
+      className="event-entry group flex h-full flex-col overflow-hidden border transition-[background-color,border-color,color,transform] duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal/50"
     >
-      <div className="aspect-[4/3] w-full overflow-hidden bg-neutral-900">
+      <div className="aspect-[4/3] w-full overflow-hidden bg-[var(--page-surface-raised)]">
         {event.hero ? (
           <img
             src={event.hero.src}
             alt={heroAlt}
+            width={event.hero.width}
+            height={event.hero.height}
             loading="lazy"
             className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.04]"
           />
@@ -52,7 +54,7 @@ export default function EventCard({ event, isArabic = false, headingLevel = 'h2'
           <div className="mb-2 flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[10px] uppercase tracking-widest text-brand-teal">
             {event.year && <span>{event.year}</span>}
             {location && (
-              <span className="inline-flex items-center gap-1 text-neutral-500">
+              <span className="inline-flex items-center gap-1 text-[var(--page-subtle)]">
                 <MapPin className="h-3 w-3" />
                 {location}
               </span>
@@ -64,11 +66,11 @@ export default function EventCard({ event, isArabic = false, headingLevel = 'h2'
           driven by `headingLevel` (default h2). Styling is unchanged — this is a semantics-only
           fix, so the card looks identical.
         */}
-        <Heading className="font-display text-base font-bold leading-tight tracking-tight text-white transition-colors group-hover:text-brand-teal sm:text-lg">
+        <Heading className="font-display text-2xl font-semibold uppercase leading-none tracking-tight text-[var(--page-ink)] transition-colors group-hover:text-brand-teal sm:text-3xl">
           {title}
         </Heading>
         {summary && (
-          <p className="mt-2 line-clamp-3 font-sans text-xs leading-relaxed text-neutral-400">{summary}</p>
+          <p className="mt-3 line-clamp-3 font-sans text-sm leading-7 text-[var(--page-muted)]">{summary}</p>
         )}
         <span className="mt-auto pt-4 inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-widest text-brand-teal">
           {isArabic ? 'عرض الفعالية' : 'View Event'}

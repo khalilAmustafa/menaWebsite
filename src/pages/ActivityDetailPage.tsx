@@ -23,14 +23,14 @@ export default function ActivityDetailPage() {
 
   const title = activity ? (isArabic && activity.title.ar ? activity.title.ar : activity.title.en) : '';
   useDocumentTitle(
-    activity ? `${title} | MENA` : 'Activity not found | MENA',
-    activity?.summary?.en,
+    activity ? `${title} | MENA` : (isArabic ? 'النشاط غير موجود | مِنا' : 'Activity not found | MENA'),
+    activity?.summary ? (isArabic && activity.summary.ar ? activity.summary.ar : activity.summary.en) : undefined,
   );
 
   if (!activity) {
     return (
       <PageContainer className="min-h-[60vh] pt-32 pb-20 text-center">
-        <h1 className="font-display text-2xl font-medium uppercase tracking-tight text-white sm:text-3xl">
+        <h1 className="font-display text-4xl font-medium uppercase tracking-tight text-[var(--page-ink)] sm:text-5xl">
           {isArabic ? 'النشاط غير موجود' : 'Activity not found'}
         </h1>
         <p className="mx-auto mt-4 max-w-md font-sans text-sm leading-relaxed text-neutral-400">
@@ -70,17 +70,17 @@ export default function ActivityDetailPage() {
       />
 
       <ScrollReveal variant="clip">
-        <section className="mb-16 grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-12">
-          <div>
-            <span className="mb-3 block font-mono text-xs font-bold uppercase tracking-widest text-brand-teal">
+        <section className="mb-16 grid items-stretch overflow-hidden border-y border-[var(--page-border)] lg:grid-cols-12">
+          <div className="flex flex-col justify-end py-10 lg:col-span-5 lg:pe-12 lg:py-16">
+            <span className="section-index">
               {isArabic ? 'نشاط' : 'ACTIVITY'}
               {period && ` · ${period}`}
             </span>
-            <h1 className="font-display text-3xl font-medium leading-tight tracking-tight text-white sm:text-5xl">
+            <h1 className="event-detail-title mt-6 font-display font-medium uppercase tracking-[-0.03em] text-[var(--page-ink)]">
               {title}
             </h1>
             {summary && (
-              <p className="mt-5 max-w-md font-sans text-sm leading-relaxed text-neutral-300 sm:text-base">
+              <p className="mt-6 max-w-xl font-sans text-sm leading-7 text-[var(--page-muted)] sm:text-base">
                 {summary}
               </p>
             )}
@@ -88,16 +88,17 @@ export default function ActivityDetailPage() {
               <img
                 src={activity.logo.src}
                 alt={isArabic && activity.logo.alt.ar ? activity.logo.alt.ar : activity.logo.alt.en}
+                width={activity.logo.width}
+                height={activity.logo.height}
                 className="mt-8 h-24 w-24 rounded-xl bg-white object-contain p-2"
               />
             )}
           </div>
 
           {hero && (
-            <div className="relative mx-auto w-full max-w-md overflow-hidden rounded-2xl border border-neutral-900/80 bg-neutral-900 shadow-2xl">
-              <img src={hero.src} alt={heroAlt} className="aspect-[4/5] w-full object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-            </div>
+            <figure className="event-detail-media bg-[var(--page-surface-raised)] lg:col-span-7">
+              <img src={hero.src} alt={heroAlt} width={hero.width} height={hero.height} fetchPriority="high" className="h-full w-full object-cover" />
+            </figure>
           )}
         </section>
       </ScrollReveal>

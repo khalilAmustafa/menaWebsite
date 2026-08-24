@@ -15,12 +15,14 @@ import { ACTIVITIES } from '../content/activities';
 export default function ActivitiesPage() {
   const { isArabic } = useSiteContext();
   useDocumentTitle(
-    'Activities | MENA',
-    "MENA's ongoing programs and community activities in STEM and youth engagement.",
+    isArabic ? 'الأنشطة والبرامج | مِنا' : 'Activities | MENA',
+    isArabic
+      ? 'برامج وأنشطة مِنا المستمرة في مجالات العلوم والتقنية والمجتمع.'
+      : "MENA's ongoing programs and community activities in STEM and youth engagement.",
   );
 
   return (
-    <PageContainer className="pt-32 pb-20">
+    <PageContainer className="pb-24 pt-32">
       <ScrollReveal variant="clip">
         <PageHeader
           eyebrow={isArabic ? 'الأنشطة' : 'ACTIVITIES'}
@@ -33,7 +35,7 @@ export default function ActivitiesPage() {
         />
       </ScrollReveal>
 
-      <div className="mt-2 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="activity-index">
         {ACTIVITIES.map((activity) => {
           const title = isArabic && activity.title.ar ? activity.title.ar : activity.title.en;
           const summary = activity.summary
@@ -53,7 +55,7 @@ export default function ActivitiesPage() {
             <Link
               key={activity.id}
               to={`/activities/${activity.slug}`}
-              className="group flex h-full flex-col overflow-hidden rounded-2xl border border-neutral-900/80 bg-neutral-900/25 shadow-xl transition-all duration-300 hover:border-brand-teal/40 hover:bg-neutral-900/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal/50"
+              className="program-entry group flex h-full flex-col overflow-hidden border transition-[background-color,border-color,color,transform] duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal/50"
             >
               {activity.image && (
                 /*
@@ -63,12 +65,14 @@ export default function ActivitiesPage() {
                 */
                 <div
                   className={`aspect-[16/9] w-full overflow-hidden ${
-                    activity.imageFit === 'contain' ? 'bg-white' : 'bg-neutral-900'
+                    activity.imageFit === 'contain' ? 'bg-white' : 'bg-[var(--page-surface-raised)]'
                   }`}
                 >
                   <img
                     src={activity.image.src}
                     alt={imgAlt}
+                    width={activity.image.width}
+                    height={activity.image.height}
                     loading="lazy"
                     className={`h-full w-full object-center ${
                       activity.imageFit === 'contain' ? 'object-contain p-3' : 'object-cover'
@@ -82,11 +86,11 @@ export default function ActivitiesPage() {
                     {period}
                   </span>
                 )}
-                <h2 className="font-display text-base font-bold leading-tight tracking-tight text-white transition-colors group-hover:text-brand-teal sm:text-lg">
+                <h2 className="font-display text-2xl font-semibold uppercase leading-none tracking-tight text-[var(--page-ink)] transition-colors group-hover:text-brand-teal sm:text-3xl">
                   {title}
                 </h2>
                 {summary && (
-                  <p className="mt-2 font-sans text-xs leading-relaxed text-neutral-400">{summary}</p>
+                  <p className="mt-3 font-sans text-sm leading-7 text-[var(--page-muted)]">{summary}</p>
                 )}
               </div>
             </Link>

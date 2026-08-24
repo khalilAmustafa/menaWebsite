@@ -13,7 +13,9 @@ export default function TeamMemberPage() {
   const { isArabic } = useSiteContext();
   const member = slug ? getTeamMemberBySlug(slug) : undefined;
 
-  useDocumentTitle(member ? `${member.fullName} | MENA` : 'Team member not found | MENA');
+  const memberName = member ? (isArabic && member.fullNameAr ? member.fullNameAr : member.fullName) : '';
+
+  useDocumentTitle(member ? `${memberName} | MENA` : (isArabic ? 'عضو الفريق غير موجود | مِنا' : 'Team member not found | MENA'));
 
   // ── Team-specific not-found state (stays inside SiteLayout, never redirects) ──────────
   if (!member) {
@@ -57,7 +59,8 @@ export default function TeamMemberPage() {
     ? isArabic && member.photo.alt.ar
       ? member.photo.alt.ar
       : member.photo.alt.en
-    : member.fullName;
+    : memberName;
+  const isRaedKhalil = member.slug === 'raed-khalil';
   const more = TEAM_MEMBERS.filter((m) => m.id !== member.id)
     .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
     .slice(0, 4);
@@ -67,7 +70,7 @@ export default function TeamMemberPage() {
       <Breadcrumbs
         items={[
           { label: isArabic ? 'الفريق' : 'Team', to: '/team' },
-          { label: member.fullName },
+          { label: memberName },
         ]}
       />
 
@@ -76,10 +79,16 @@ export default function TeamMemberPage() {
         <ScrollReveal variant="clip" className="md:col-span-1">
           <div className="aspect-[4/5] w-full max-w-sm overflow-hidden rounded-2xl border border-neutral-900/80 bg-neutral-900">
             {member.photo ? (
-              <img src={member.photo.src} alt={alt} className="h-full w-full object-cover object-top" />
+              <img
+                src={member.photo.src}
+                alt={alt}
+                width={member.photo.width}
+                height={member.photo.height}
+                className={`h-full w-full object-cover ${isRaedKhalil ? 'origin-[50%_18%] scale-[1.06] object-[50%_18%]' : 'object-top'}`}
+              />
             ) : (
               <div className="flex h-full w-full items-center justify-center font-display text-5xl font-bold text-neutral-700">
-                {member.fullName.charAt(0)}
+                {memberName.charAt(0)}
               </div>
             )}
           </div>
@@ -90,10 +99,10 @@ export default function TeamMemberPage() {
           <span className="mb-3 block font-mono text-xs font-bold uppercase tracking-widest text-brand-teal">
             {isArabic ? 'الفريق' : 'TEAM'}
           </span>
-          <h1 className="font-display text-3xl font-medium leading-tight tracking-tight text-white sm:text-4xl">
-            {member.fullName}
+          <h1 className="font-display text-5xl font-medium uppercase leading-[0.9] tracking-tight text-[var(--page-ink)] sm:text-7xl">
+            {memberName}
           </h1>
-          {role && <p className="mt-4 font-sans text-base text-neutral-300">{role}</p>}
+          {role && <p className="mt-5 font-sans text-base text-[var(--page-muted)]">{role}</p>}
           {dept && (
             <p className="mt-2 font-mono text-[11px] uppercase tracking-wider text-neutral-500">
               {isArabic ? dept.ar : dept.en}
@@ -105,10 +114,10 @@ export default function TeamMemberPage() {
       {/* More of the team (real members only; current excluded) */}
       {more.length > 0 && (
         <section className="mt-16">
-          <h2 className="mb-6 font-display text-xl font-medium uppercase tracking-tight text-white">
+          <h2 className="mb-6 font-display text-3xl font-semibold uppercase tracking-tight text-[var(--page-ink)]">
             {isArabic ? 'المزيد من الفريق' : 'More of the Team'}
           </h2>
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="team-continuation">
             {more.map((m) => (
               <TeamMemberCard key={m.id} member={m} isArabic={isArabic} />
             ))}

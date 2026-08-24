@@ -11,9 +11,9 @@ interface HomeProgramsProps {
  * OUR PROGRAMS — the homepage's only card-based section, which is where cards genuinely
  * belong: each card is a real content unit linking to its own page.
  *
- * Renders every verified activity in the repository (currently three). Two of them have
- * no confirmed summary, so their cards simply show name + year + image; no descriptive
- * filler is generated for them.
+ * Renders every verified activity in the repository (currently two: SYSTEM and the
+ * ملتقى الصناع forum, whose 2024 and 2025 editions are one record). Any activity without a
+ * confirmed summary simply shows name + period + image; no descriptive filler is invented.
  */
 export default function HomePrograms({ isArabic }: HomeProgramsProps) {
   return (
@@ -40,7 +40,8 @@ export default function HomePrograms({ isArabic }: HomeProgramsProps) {
           </div>
         </ScrollReveal>
 
-        <div className="program-archive program-archive--compact">
+        {/* Two programs fill the row as halves; three or more use the compact thirds. */}
+        <div className={`program-archive program-archive--compact${ACTIVITIES.length === 2 ? ' program-archive--pair' : ''}`}>
           {ACTIVITIES.map((activity, index) => {
             const title = isArabic && activity.title.ar ? activity.title.ar : activity.title.en;
             const summary = activity.summary

@@ -1133,6 +1133,15 @@ div.light-mode {
   grid-column: span 4;
 }
 
+/* Two-card variant of the compact grid. With only two verified programs, span 6 each so the
+   row fills instead of leaving an empty third column. Placed before the mobile media query
+   so the single-column stack below 768px still wins. */
+.program-archive--pair > *,
+.program-archive--pair > :first-child,
+.program-archive--pair > :nth-child(2) {
+  grid-column: span 6;
+}
+
 /* Approved partner strip — real marks on a neutral plate, no fake logo treatments. */
 .partner-grid {
   display: flex;

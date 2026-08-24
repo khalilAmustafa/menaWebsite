@@ -110,33 +110,35 @@ export const ACTIVITIES: Activity[] = [
     order: 1,
   },
   {
-    id: 'act-makers-forum-2025',
-    slug: 'makers-forum-2025',
-    title: { en: 'ملتقى الصناع 2025', ar: 'ملتقى الصناع 2025' },
-    year: 2025,
+    // The 2024 and 2025 occurrences are two editions of ONE recurring forum, so they are a
+    // single record with one page rather than two near-empty ones. Both years are confirmed
+    // by the source filenames; the 2025 photo leads and the 2024 photo follows in the
+    // gallery, each keeping its own verified alt text. No description, location, attendance
+    // or outcome is asserted, because none was ever supplied.
+    id: 'act-makers-forum',
+    slug: 'makers-forum',
+    title: { en: 'ملتقى الصناع', ar: 'ملتقى الصناع' },
+    period: '2024–2025',
     image: {
       id: 'makers-forum-2025',
       type: 'image',
       src: 'images/activities/maker-forum-2025.jpg',
       alt: { en: 'Participants at ملتقى الصناع (Makers Forum) 2025', ar: 'مشاركون في ملتقى الصناع 2025' },
+      caption: { en: 'ملتقى الصناع 2025', ar: 'ملتقى الصناع 2025' },
       width: 1600,
       height: 900,
     },
+    gallery: [
+      {
+        id: 'makers-forum-2024',
+        type: 'image',
+        src: 'images/activities/maker-forum-2024.jpg',
+        alt: { en: 'Participants at ملتقى الصناع (Makers Forum) 2024', ar: 'مشاركون في ملتقى الصناع 2024' },
+        caption: { en: 'ملتقى الصناع 2024', ar: 'ملتقى الصناع 2024' },
+        width: 600,
+        height: 451,
+      },
+    ],
     order: 2,
-  },
-  {
-    id: 'act-makers-forum-2024',
-    slug: 'makers-forum-2024',
-    title: { en: 'ملتقى الصناع 2024', ar: 'ملتقى الصناع 2024' },
-    year: 2024,
-    image: {
-      id: 'makers-forum-2024',
-      type: 'image',
-      src: 'images/activities/maker-forum-2024.jpg',
-      alt: { en: 'Participants at ملتقى الصناع (Makers Forum) 2024', ar: 'مشاركون في ملتقى الصناع 2024' },
-      width: 600,
-      height: 451,
-    },
-    order: 3,
   },
 ];

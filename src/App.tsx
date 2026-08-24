@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
 import SiteLayout from './components/SiteLayout';
 import ScrollToTop from './components/ScrollToTop';
@@ -91,6 +91,10 @@ export default function App() {
 
           {/* Phase 6 — real Activities page */}
           <Route path="/activities" element={<ActivitiesPage />} />
+          {/* The two ملتقى الصناع editions were merged into one record; keep the old
+              per-year URLs working rather than letting shared links 404. */}
+          <Route path="/activities/makers-forum-2025" element={<Navigate to="/activities/makers-forum" replace />} />
+          <Route path="/activities/makers-forum-2024" element={<Navigate to="/activities/makers-forum" replace />} />
           <Route path="/activities/:slug" element={<ActivityDetailPage />} />
           {/* Phase 4 — real Team pages */}
           <Route path="/team" element={<TeamPage />} />

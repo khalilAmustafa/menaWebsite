@@ -10,10 +10,18 @@ import {defineConfig, type UserConfig} from 'vite';
 // page renders completely unstyled. Nothing in the build can down-level that away.
 const SAFARI_15_4 = (15 << 16) | (4 << 8);
 
+const normalizeBasePath = (value?: string) => {
+  if (!value || value === '/') return '/';
+  return `/${value.replace(/^\/+|\/+$/g, '')}/`;
+};
+
 // The explicit UserConfig return type keeps `css.transformer` from widening to `string`,
 // which `npm run lint` (tsc --noEmit) rejects.
 export default defineConfig((): UserConfig => {
   return {
+    // GitHub Pages hosts project sites below /<repository>/. The Pages workflow
+    // supplies that path while local development continues to use the domain root.
+    base: normalizeBasePath(process.env.VITE_BASE_PATH),
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {

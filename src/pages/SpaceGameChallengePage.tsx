@@ -1,9 +1,8 @@
-import { Link } from 'react-router-dom';
 import { Gamepad2, Hammer, Trophy, Users, GraduationCap, Presentation, Award } from 'lucide-react';
 import PageContainer from '../components/PageContainer';
 import Breadcrumbs from '../components/Breadcrumbs';
-import ScrollReveal from '../components/ScrollReveal';
 import EventGallery from '../components/events/EventGallery';
+import EventHero from '../components/events/EventHero';
 import { useSiteContext } from '../components/SiteLayout';
 import { useDocumentTitle } from '../lib/useDocumentTitle';
 import { getEventBySlug } from '../lib/events';
@@ -19,22 +18,18 @@ import { getEventBySlug } from '../lib/events';
 export default function SpaceGameChallengePage() {
   const { isArabic } = useSiteContext();
   useDocumentTitle(
-    'MENA Space Game Challenge | MENA',
-    'A 48-hour space gaming hackathon where participants create, build, and compete.',
+    isArabic ? 'تحدي مِنا لألعاب الفضاء | مِنا' : 'MENA Space Game Challenge | MENA',
+    isArabic
+      ? 'هاكاثون لألعاب الفضاء يمتد 48 ساعة، يطوّر خلاله المشاركون أفكارهم ويبنونها ويتنافسون بها.'
+      : 'A 48-hour space gaming hackathon where participants create, build, and compete.',
   );
 
   const event = getEventBySlug('space-game-challenge-2026');
   if (!event) return null; // record is guaranteed to exist; guard for type-safety only
 
-  const title = event.title.en;
-  const summary = event.summary ? (isArabic && event.summary.ar ? event.summary.ar : event.summary.en) : '';
+  const title = isArabic && event.title.ar ? event.title.ar : event.title.en;
   const gallery = event.gallery ?? [];
   const journey = [...(event.journey ?? [])].sort((a, b) => a.order - b.order);
-  const heroAlt = event.hero
-    ? isArabic && event.hero.alt.ar
-      ? event.hero.alt.ar
-      : event.hero.alt.en
-    : title;
 
   // Confirmed, NON-numeric highlights only (format + tagline + confirmed journey shape).
   // No statistics are shown because none are confirmed.
@@ -59,46 +54,7 @@ export default function SpaceGameChallengePage() {
         ]}
       />
 
-      {/* 1. HERO — split layout (portrait event image + title). No fake date/location. */}
-      <ScrollReveal variant="clip">
-        <section className="mb-16 grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-12">
-          <div>
-            <span className="mb-3 block font-mono text-xs font-bold uppercase tracking-widest text-brand-teal">
-              {isArabic ? 'فعالية · 2026' : 'EVENT · 2026'}
-            </span>
-            <h1 className="font-display text-3xl font-medium leading-tight tracking-tight text-white sm:text-5xl">
-              {title}
-            </h1>
-            {summary && (
-              <p className="mt-5 max-w-md font-sans text-sm leading-relaxed text-neutral-300 sm:text-base">
-                {summary}
-              </p>
-            )}
-            <div className="mt-6 flex flex-wrap gap-2 font-mono text-[10px] uppercase tracking-widest text-brand-teal">
-              <span className="rounded-lg border border-brand-teal/30 bg-brand-teal/5 px-3 py-1.5">
-                {isArabic ? 'ابتكر' : 'Create'}
-              </span>
-              <span className="rounded-lg border border-brand-teal/30 bg-brand-teal/5 px-3 py-1.5">
-                {isArabic ? 'اصنع' : 'Build'}
-              </span>
-              <span className="rounded-lg border border-brand-teal/30 bg-brand-teal/5 px-3 py-1.5">
-                {isArabic ? 'نافس' : 'Compete'}
-              </span>
-            </div>
-          </div>
-
-          {event.hero && (
-            <div className="relative mx-auto w-full max-w-sm overflow-hidden rounded-2xl border border-neutral-900/80 bg-neutral-900 shadow-2xl lg:max-w-md">
-              <img
-                src={event.hero.src}
-                alt={heroAlt}
-                className="aspect-[4/5] w-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-            </div>
-          )}
-        </section>
-      </ScrollReveal>
+      <EventHero event={event} isArabic={isArabic} />
 
       {/* 2. ABOUT THE EVENT */}
       <section className="mb-16 max-w-3xl">
@@ -163,22 +119,7 @@ export default function SpaceGameChallengePage() {
         </ol>
       </section>
 
-      {/* 5. WINNERS — restrained pending state (identities not confirmed; never inferred) */}
-      <section className="mb-16">
-        <h2 className="mb-6 font-display text-xl font-medium uppercase tracking-tight text-white sm:text-2xl">
-          {sectionLabel('Winners', 'الفائزون')}
-        </h2>
-        <div className="rounded-2xl border border-neutral-900/80 bg-neutral-900/20 px-6 py-10 text-center">
-          <Trophy className="mx-auto mb-4 h-8 w-8 text-brand-teal/70" />
-          <p className="mx-auto max-w-xl font-sans text-sm leading-relaxed text-neutral-400">
-            {isArabic
-              ? 'اختُتمت الفعالية بحفل جوائز. سيتم نشر السجلات الرسمية للفائزين (أسماء الفرق والمشاريع والمراكز) بمجرد تأكيدها.'
-              : 'The event concluded with an award ceremony. Official winner records — team names, projects, and placements — will be published once confirmed.'}
-          </p>
-        </div>
-      </section>
-
-      {/* 6. MEDIA GALLERY — real curated event photography */}
+      {/* MEDIA GALLERY — real curated event photography */}
       {gallery.length > 0 && (
         <section className="mb-16">
           <h2 className="mb-6 font-display text-xl font-medium uppercase tracking-tight text-white sm:text-2xl">
@@ -188,39 +129,15 @@ export default function SpaceGameChallengePage() {
         </section>
       )}
 
-      {/* 7. PARTNERS & SPONSORS — restrained pending (association seen, classification unconfirmed) */}
-      <section className="mb-16">
-        <h2 className="mb-6 font-display text-xl font-medium uppercase tracking-tight text-white sm:text-2xl">
-          {sectionLabel('Partners & Sponsors', 'الشركاء والرعاة')}
+      <section className="pending-record">
+        <h2 className="font-display text-3xl font-semibold uppercase text-[var(--page-ink)] sm:text-4xl">
+          {sectionLabel('Records pending confirmation', 'سجلات قيد التأكيد')}
         </h2>
-        <div className="rounded-2xl border border-neutral-900/80 bg-neutral-900/20 px-6 py-10 text-center">
-          <Users className="mx-auto mb-4 h-8 w-8 text-brand-teal/70" />
-          <p className="mx-auto max-w-xl font-sans text-sm leading-relaxed text-neutral-400">
-            {isArabic
-              ? 'تفاصيل الشركاء والرعاة الرسميين لهذه الفعالية قيد التأكيد وسيتم نشرها قريبًا.'
-              : 'The official partners and sponsors for this event are being confirmed and will be published soon.'}
-          </p>
-        </div>
-      </section>
-
-      {/* 8. EVENT IMPACT — restrained pending (no invented metrics) */}
-      <section>
-        <h2 className="mb-6 font-display text-xl font-medium uppercase tracking-tight text-white sm:text-2xl">
-          {sectionLabel('Event Impact', 'أثر الفعالية')}
-        </h2>
-        <div className="rounded-2xl border border-neutral-900/80 bg-neutral-900/20 px-6 py-10 text-center">
-          <p className="mx-auto max-w-xl font-sans text-sm leading-relaxed text-neutral-400">
-            {isArabic
-              ? 'سيتم نشر تفاصيل أثر الفعالية ونتائجها بمجرد تأكيد الأرقام الرسمية.'
-              : 'A summary of the event’s impact and outcomes will be published once official figures are confirmed.'}
-          </p>
-          <Link
-            to="/achievements"
-            className="mt-6 inline-block rounded font-mono text-[11px] uppercase tracking-widest text-brand-teal transition-colors hover:text-brand-teal-bright focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal/50"
-          >
-            {isArabic ? 'استكشف إنجازات مِنا ←' : "Explore MENA's achievements →"}
-          </Link>
-        </div>
+        <p>
+          {isArabic
+            ? 'ستُنشر أسماء الفرق والمشاريع والمراكز الفائزة، وقائمة الشركاء والرعاة، وملخص أثر الفعالية بعد تأكيد السجلات الرسمية.'
+            : 'Winning teams, projects and placements, the partner and sponsor list, and an impact summary will be published after the official records are confirmed.'}
+        </p>
       </section>
     </PageContainer>
   );

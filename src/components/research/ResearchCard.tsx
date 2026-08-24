@@ -16,30 +16,38 @@ interface ResearchCardProps {
  * and the detail page. Light/dark come from the shared theme tokens.
  */
 export default function ResearchCard({ paper, isArabic = false }: ResearchCardProps) {
-  const authors = paper.authors.map((author) => author.name).join(', ');
+  const title = isArabic && paper.title.ar ? paper.title.ar : paper.title.en;
+  const authors = paper.authors
+    .map((author) => isArabic && author.nameAr ? author.nameAr : author.name)
+    .join(isArabic ? '، ' : ', ');
+  const conferenceName = paper.conference
+    ? isArabic && paper.conference.nameAr
+      ? paper.conference.nameAr
+      : paper.conference.name
+    : '';
 
   return (
     <Link
       to={`/research/${paper.slug}`}
-      className="group relative flex h-full flex-col justify-between rounded-2xl border border-neutral-900/80 bg-neutral-900/25 p-6 shadow-xl transition-all duration-300 hover:border-brand-teal/30 hover:bg-neutral-900/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal/50"
+      className="research-entry group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal/50"
     >
       <div>
         <span className="mb-3 block font-mono text-[9px] font-bold uppercase tracking-widest text-brand-teal">
           {isArabic ? 'ورقة بحثية مقبولة' : 'Accepted Paper'}
         </span>
         <h3
-          title={paper.title.en}
-          className="mb-4 line-clamp-4 font-display text-base font-bold leading-snug tracking-tight text-white transition-colors group-hover:text-brand-teal sm:text-lg"
+          title={title}
+          className="font-display text-xl font-semibold uppercase leading-tight tracking-tight text-[var(--page-ink)] transition-colors group-hover:text-brand-teal sm:text-2xl"
         >
-          {paper.title.en}
+          {title}
         </h3>
       </div>
 
-      <div className="mt-auto space-y-1.5">
-        <p className="font-sans text-xs leading-relaxed text-neutral-400">{authors}</p>
+      <div className="space-y-1.5">
+        <p className="font-sans text-xs leading-relaxed text-[var(--page-muted)]">{authors}</p>
         {paper.conference && (
-          <p className="font-mono text-[10px] tracking-wide text-neutral-500">
-            {paper.conference.name}
+          <p className="font-mono text-[10px] tracking-wide text-[var(--page-subtle)]">
+            {conferenceName}
             {paper.conference.year ? ` · ${paper.conference.year}` : ''}
           </p>
         )}

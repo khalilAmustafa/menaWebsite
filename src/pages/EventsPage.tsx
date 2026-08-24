@@ -15,25 +15,25 @@ export default function EventsPage() {
   const { isArabic } = useSiteContext();
   // Description reuses the page's own published intro copy — no new claims.
   useDocumentTitle(
-    'Events | MENA',
-    'Hackathons, missions, and events organized or hosted by MENA Space Organization.',
+    isArabic ? 'الفعاليات | مِنا' : 'Events | MENA',
+    isArabic ? 'بعثات وهاكاثونات وفعاليات موثّقة في أرشيف مِنا.' : 'Missions, hackathons, and events documented in MENA’s archive.',
   );
 
   return (
-    <PageContainer className="pt-32 pb-20">
+    <PageContainer className="pb-24 pt-32">
       <ScrollReveal variant="clip">
         <PageHeader
           eyebrow={isArabic ? 'الفعاليات' : 'EVENTS'}
           title={isArabic ? 'الفعاليات' : 'Events'}
           description={
             isArabic
-              ? 'الفعاليات والهاكاثونات والبعثات التي نظّمتها أو استضافتها مؤسسة مِنا للفضاء.'
-              : 'Hackathons, missions, and events organized or hosted by MENA Space Organization.'
+              ? 'بعثات وهاكاثونات وفعاليات موثّقة في أرشيف مِنا.'
+              : 'Missions, hackathons, and events documented in MENA’s archive.'
           }
         />
       </ScrollReveal>
 
-      <div className="mt-2 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="event-index">
         {EVENTS.map((event) => (
           <EventCard key={event.id} event={event} isArabic={isArabic} />
         ))}

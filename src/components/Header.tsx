@@ -1,518 +1,158 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { motion, AnimatePresence } from 'motion/react';
-import { Menu, X, Globe, Radio, Sun, Moon, ChevronDown } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
+import { Globe, Heart, Menu, Moon, Sun, X } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
 import MenaLogo from './MenaLogo';
-import { scrollToSection } from '../lib/scrollToSection';
 
 interface HeaderProps {
   isArabic: boolean;
-  setIsArabic: (val: boolean) => void;
-  activeSection: string;
+  setIsArabic: (value: boolean) => void;
   isLightMode: boolean;
-  setIsLightMode: (val: boolean) => void;
+  setIsLightMode: (value: boolean) => void;
 }
 
-export default function Header({ isArabic, setIsArabic, activeSection, isLightMode, setIsLightMode }: HeaderProps) {
-  const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const [utcTime, setUtcTime] = useState('');
-  const [programsDropdownOpen, setProgramsDropdownOpen] = useState(false);
-  const [teamDropdownOpen, setTeamDropdownOpen] = useState(false);
-  const [mobileProgramsOpen, setMobileProgramsOpen] = useState(false);
-  const [mobileTeamOpen, setMobileTeamOpen] = useState(false);
+/**
+ * Primary navigation, now organization-level and fully route-based:
+ *
+ *   HOME | ABOUT | TEAM | PROGRAMS | ACHIEVEMENTS | CONTACT   (+ the Donate pill)
+ *
+ * The previous homepage-anchor items (Analog Mars, Field archive) and the two dropdowns
+ * are gone; they described one mission rather than the organization. Nothing became
+ * unreachable — Events and the analog mission live in the footer, "Programs" points at the
+ * existing /activities page, and Contact is now a real /contact route.
+ *
+ * Active state comes from the pathname rather than a scroll observer. The mobile drawer's
+ * behaviour (height animation, scroll lock, Escape, resize-to-desktop) is unchanged.
+ */
 
-  const navigate = useNavigate();
-  const routerLocation = useLocation();
+interface NavItem {
+  to: string;
+  en: string;
+  ar: string;
+  /** Match nested routes too (e.g. /team/:slug should still light up TEAM). */
+  nested?: boolean;
+}
 
-  // Update UTC time indicator at top right
+const NAV_ITEMS: NavItem[] = [
+  { to: '/', en: 'Home', ar: 'الرئيسية' },
+  { to: '/about', en: 'About', ar: 'من نحن' },
+  { to: '/team', en: 'Team', ar: 'الفريق', nested: true },
+  { to: '/activities', en: 'Programs', ar: 'البرامج', nested: true },
+  { to: '/achievements', en: 'Achievements', ar: 'الإنجازات', nested: true },
+  { to: '/contact', en: 'Contact', ar: 'تواصل' },
+];
+
+export default function Header({ isArabic, setIsArabic, isLightMode, setIsLightMode }: HeaderProps) {
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const location = useLocation();
+  const reduceMotion = useReducedMotion();
+
+  const foreground = isLightMode ? 'text-[#4e4039] hover:text-[#261b16]' : 'text-neutral-300 hover:text-white';
+  const chrome = isLightMode
+    ? 'border-[#49352a]/15 bg-[#f3f3f1]/92 shadow-[0_14px_45px_rgba(58,44,38,.12)]'
+    : 'border-white/10 bg-[#100c0a]/88 shadow-[0_18px_55px_rgba(0,0,0,.34)]';
+
+  const isActive = (item: NavItem) =>
+    item.nested ? location.pathname.startsWith(item.to) : location.pathname === item.to;
+
   useEffect(() => {
-    const updateTime = () => {
-      const now = new Date();
-      setUtcTime(now.toUTCString().replace('GMT', 'UTC'));
+    setMobileOpen(false);
+  }, [location.pathname, location.hash]);
+
+  useEffect(() => {
+    const closeMenus = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setMobileOpen(false);
     };
-    updateTime();
-    const interval = setInterval(updateTime, 1000);
-    return () => clearInterval(interval);
+    window.addEventListener('keydown', closeMenus);
+    return () => window.removeEventListener('keydown', closeMenus);
   }, []);
 
-  // Monitor scroll height to trigger glass background
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 40);
+    if (!mobileOpen) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    const closeAtDesktop = () => {
+      if (window.innerWidth >= 1024) setMobileOpen(false);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    window.addEventListener('resize', closeAtDesktop);
 
-  // `to` marks a routed page (React Router link) rather than an in-page anchor scroll.
-  const navLinks: { id: string; label: string; arabic: string; to?: string }[] = [
-    // 'About' removed — the homepage About section was deleted (unsupported institutional
-    // claims), so this nav item had no destination left to scroll to.
-    // Arabic copy review: was 'مهمة مارز' — "مارز" is a bare transliteration of "Mars" where
-    // every other Arabic string on the site correctly uses "المريخ" (Hero, Analog section,
-    // gallery). Aligned to the site's own terminology.
-    { id: 'mission', label: 'Analog Mars', arabic: 'محاكاة المريخ' },
-    { id: 'gallery', label: 'Gallery', arabic: 'أرشيف الصور' },
-    { id: 'programs', label: 'Programs', arabic: 'برامجنا التدريبية' },
-    { id: 'achievements', label: 'Achievements', arabic: 'الإنجازات', to: '/achievements' },
-    { id: 'events', label: 'Events', arabic: 'الفعاليات', to: '/events' },
-    { id: 'team', label: 'Team', arabic: 'فريق العمل' },
-    { id: 'contact', label: 'Contact', arabic: 'تواصل معنا' }
-  ];
-
-  const handleScrollTo = (id: string) => {
-    setIsOpen(false);
-    if (routerLocation.pathname === '/') {
-      // Already on the homepage — scroll to the section (fixed-header clearance comes
-      // from the shared helper, which reads `scroll-padding-top`).
-      scrollToSection(id);
-    } else {
-      // On another route — navigate to the homepage with the target hash; HomePage
-      // scrolls to the section once it has rendered.
-      navigate(`/#${id}`);
-    }
-  };
-
-  const handleProgramClick = (action: string) => {
-    setIsOpen(false);
-    setProgramsDropdownOpen(false);
-    // Phase 7: the fabricated per-program modals were removed. The dropdown now only scrolls to
-    // the homepage Programs & Activities teaser; real activity detail lives on /activities.
-    if (action === 'overview') {
-      handleScrollTo('programs');
-    }
-  };
-
-  // Phase 8: the per-department branches were removed along with the fabricated department
-  // menu entries. They dispatched an 'open-team' CustomEvent that nothing in the app has ever
-  // subscribed to, so they were dead code behind dead navigation.
-  const handleTeamClick = (action: string) => {
-    setIsOpen(false);
-    setTeamDropdownOpen(false);
-    if (action === 'overview') {
-      handleScrollTo('teams');
-    }
-  };
-
-  // On routed sub-pages the header stays in its compact state (like the scrolled state on
-  // the homepage) so the tall unscrolled logo doesn't overlap top-aligned page content.
-  const compact = scrolled || routerLocation.pathname !== '/';
-
-  const headerBg = isLightMode
-    ? (compact ? 'bg-[#fbf4ea] border-[#e0d2bd] shadow-lg shadow-[#3a2c26]/10' : 'bg-transparent border-slate-200/0')
-    : (compact ? 'bg-neutral-950 border-white/[0.08] shadow-2xl shadow-black/50' : 'bg-transparent border-white/0');
-
-  const headerLayout = compact
-    ? 'top-4 w-[90%] max-w-none rounded-2xl py-2.5 border'
-    : 'top-0 w-full max-w-none rounded-none py-5 border-b border-t-transparent border-x-transparent';
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener('resize', closeAtDesktop);
+    };
+  }, [mobileOpen]);
 
   return (
-    <header className={`fixed left-1/2 -translate-x-1/2 z-50 transition-all duration-300 ${headerLayout} ${headerBg} overflow-visible`}>
-      <div className="w-full px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-        
-        {/* Logo and Brand */}
-        <div
-          onClick={() => {
-            if (routerLocation.pathname === '/') {
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            } else {
-              navigate('/');
-            }
-          }}
-          className="flex items-center cursor-pointer group select-none"
-        >
-          <div className={`flex-shrink-0 transition-all duration-300 group-hover:scale-105 ${
-            compact ? 'w-14 h-16' : 'w-28 h-32'
-          }`}>
-            <MenaLogo color="var(--color-brand-teal)" />
-          </div>
-        </div>
+    <header className={`site-header fixed left-1/2 top-3 z-50 w-[94%] max-w-[1320px] -translate-x-1/2 rounded-xl border backdrop-blur-xl transition-colors ${chrome}`}>
+      <div className="site-header__bar flex min-h-[68px] items-center justify-between gap-3 px-3 sm:px-5">
+        <Link to="/" aria-label={isArabic ? 'مِنا — الصفحة الرئيسية' : 'MENA — home'} className="flex min-h-11 min-w-11 items-center">
+          <span className="block h-14 w-12"><MenaLogo color="var(--color-brand-teal)" /></span>
+        </Link>
 
-        {/* Center Navigation Links (Desktop) */}
-        <nav className="hidden lg:flex items-center space-x-1">
-          {navLinks.map((link) => {
-            const isActive = activeSection === link.id;
-
-            if (link.to) {
-              return (
-                <Link
-                  key={link.id}
-                  to={link.to}
-                  className="px-3 py-1.5 rounded-lg font-display text-xs tracking-wider uppercase transition-all duration-200 relative cursor-pointer text-neutral-400 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal/50"
-                >
-                  <span>{isArabic ? link.arabic : link.label}</span>
-                </Link>
-              );
-            }
-
-            if (link.id === 'programs') {
-              return (
-                <div
-                  key={link.id}
-                  className="relative"
-                  onMouseEnter={() => setProgramsDropdownOpen(true)}
-                  onMouseLeave={() => setProgramsDropdownOpen(false)}
-                >
-                  <button
-                    onClick={() => handleScrollTo('programs')}
-                    className={`px-3 py-1.5 rounded-lg font-display text-xs tracking-wider uppercase transition-all duration-200 relative cursor-pointer flex items-center gap-1 ${
-                      isActive 
-                      ? 'text-white font-bold' 
-                      : 'text-neutral-400 hover:text-white'
-                    }`}
-                  >
-                    <span>{isArabic ? link.arabic : link.label}</span>
-                    <ChevronDown className={`w-3 h-3 transition-transform duration-250 ${programsDropdownOpen ? 'rotate-180' : 'rotate-0'}`} />
-                    {isActive && (
-                      <motion.span 
-                        layoutId="header-active-line"
-                        className="absolute bottom-0 left-2.5 right-2.5 h-[2px] bg-brand-teal"
-                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                      />
-                    )}
-                  </button>
-
-                  {/* Dropdown Card panel */}
-                  <AnimatePresence>
-                    {programsDropdownOpen && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                        transition={{ duration: 0.15 }}
-                        className="absolute left-1/2 -translate-x-1/2 mt-1 w-64 rounded-2xl bg-space-deep border border-neutral-900 shadow-2xl p-2 z-[60] overflow-hidden"
-                      >
-                        <div className="py-1 flex flex-col gap-0.5">
-                          {/* Main Header acting as clickable link to center Programs */}
-                          <button
-                            onClick={() => handleProgramClick('overview')}
-                            className="w-full text-left rtl:text-right px-3 py-2 text-[10px] font-mono tracking-widest text-brand-teal bg-neutral-900/45 hover:bg-neutral-900 uppercase font-bold transition-all rounded-lg block border-b border-neutral-900/80 mb-1"
-                          >
-                            {isArabic ? "البرامج والأنشطة" : "PROGRAMS & ACTIVITIES"}
-                          </button>
-
-                          <Link
-                            to="/activities"
-                            onClick={() => setProgramsDropdownOpen(false)}
-                            className="w-full text-left rtl:text-right px-3 py-2 text-xs text-neutral-400 hover:text-white hover:bg-space-dark hover:border-l-2 rtl:hover:border-l-0 rtl:hover:border-r-2 hover:border-brand-teal/80 transition-all rounded-lg block font-sans"
-                          >
-                            {isArabic ? 'كل الأنشطة والبرامج' : 'All Activities & Programs'}
-                          </Link>
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-              );
-            }
-
-            if (link.id === 'team') {
-              return (
-                <div
-                  key={link.id}
-                  className="relative"
-                  onMouseEnter={() => setTeamDropdownOpen(true)}
-                  onMouseLeave={() => setTeamDropdownOpen(false)}
-                >
-                  <button
-                    onClick={() => handleScrollTo('teams')}
-                    className={`px-3 py-1.5 rounded-lg font-display text-xs tracking-wider uppercase transition-all duration-200 relative cursor-pointer flex items-center gap-1 ${
-                      isActive 
-                      ? 'text-white font-bold' 
-                      : 'text-neutral-400 hover:text-white'
-                    }`}
-                  >
-                    <span>{isArabic ? link.arabic : link.label}</span>
-                    <ChevronDown className={`w-3 h-3 transition-transform duration-250 ${teamDropdownOpen ? 'rotate-180' : 'rotate-0'}`} />
-                    {isActive && (
-                      <motion.span 
-                        layoutId="header-active-line"
-                        className="absolute bottom-0 left-2.5 right-2.5 h-[2px] bg-brand-teal"
-                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                      />
-                    )}
-                  </button>
-
-                  {/* Dropdown Card panel */}
-                  <AnimatePresence>
-                    {teamDropdownOpen && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                        transition={{ duration: 0.15 }}
-                        className="absolute left-1/2 -translate-x-1/2 mt-1 w-72 rounded-2xl bg-space-deep border border-neutral-900 shadow-2xl p-2 z-[60] overflow-hidden"
-                      >
-                        <div className="py-1 flex flex-col gap-0.5">
-                          {/* Route link to the dedicated Team page */}
-                          <Link
-                            to="/team"
-                            onClick={() => setTeamDropdownOpen(false)}
-                            className="w-full text-left rtl:text-right px-3 py-2 text-[10px] font-mono tracking-widest text-brand-teal bg-neutral-900/45 hover:bg-neutral-900 uppercase font-bold transition-all rounded-lg block mb-1"
-                          >
-                            {isArabic ? 'صفحة الفريق' : 'OUR TEAM'}
-                          </Link>
-                          {/* Main Header acting as clickable link to center Teams list */}
-                          {/*
-                            Phase 8: the 9 remaining department entries were REMOVED. They came
-                            from the fabricated DEPARTMENTS org-chart that Phase 4.5 already
-                            deleted from the homepage, and each one dispatched an 'open-team'
-                            CustomEvent that NO component has ever listened for — so they only
-                            scrolled to #teams while appearing to open a specific department.
-                            Dead navigation over invented data. The dropdown now offers the two
-                            real destinations only.
-                          */}
-                          <button
-                            onClick={() => handleTeamClick('overview')}
-                            className="w-full text-left rtl:text-right px-3 py-2 text-[10px] font-mono tracking-widest text-brand-teal bg-neutral-900/45 hover:bg-neutral-900 uppercase font-bold transition-all rounded-lg block"
-                          >
-                            {isArabic ? 'رؤساء الفرق' : 'TEAM HEADS'}
-                          </button>
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-              );
-            }
-
+        <nav className="site-header__nav hidden items-center lg:flex" aria-label={isArabic ? 'التنقل الرئيسي' : 'Primary navigation'}>
+          {NAV_ITEMS.map((item) => {
+            const active = isActive(item);
             return (
-              <button
-                key={link.id}
-                onClick={() => handleScrollTo(link.id)}
-                className={`px-3 py-1.5 rounded-lg font-display text-xs tracking-wider uppercase transition-all duration-200 relative cursor-pointer ${
-                  isActive 
-                  ? 'text-white font-bold' 
-                  : 'text-neutral-400 hover:text-white'
-                }`}
+              <Link
+                key={item.to}
+                to={item.to}
+                aria-current={active ? 'page' : undefined}
+                className={`relative flex min-h-11 items-center px-2.5 font-sans text-[0.7rem] font-bold uppercase tracking-[0.08em] transition-colors ${active ? 'text-brand-teal' : foreground}`}
               >
-                <span>{isArabic ? link.arabic : link.label}</span>
-                {isActive && (
-                  <motion.span 
-                    layoutId="header-active-line"
-                    className="absolute bottom-0 left-2.5 right-2.5 h-[2px] bg-brand-teal"
-                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                  />
-                )}
-              </button>
+                {isArabic ? item.ar : item.en}
+                {active && <span className="absolute inset-x-2.5 bottom-1 h-px bg-brand-teal" aria-hidden="true" />}
+              </Link>
             );
           })}
+          <Link to="/donate" className="micro-button ml-1 flex min-h-11 items-center gap-1.5 rounded-md bg-brand-teal px-3 text-[0.7rem] font-bold uppercase tracking-[0.08em] text-[#21150f] transition-colors hover:bg-brand-teal-bright">
+            <Heart className="h-3.5 w-3.5" aria-hidden="true" />
+            {isArabic ? 'تبرّع' : 'Donate'}
+          </Link>
         </nav>
 
-        {/* Right Interactions */}
-        <div className="hidden lg:flex items-center space-x-4">
-          
-          {/* Language Selector Switch */}
-          <button
-            onClick={() => setIsArabic(!isArabic)}
-            className="flex items-center space-x-1.5 px-3 py-1.5 text-xs text-neutral-300 hover:text-white font-mono bg-neutral-950 border border-neutral-800 rounded-lg transition-all cursor-pointer hover:border-brand-teal/50"
-          >
-            <Globe className="w-3.5 h-3.5 text-brand-teal" />
-            <span>{isArabic ? "ENG" : "عربي"}</span>
+        <div className="site-header__controls flex items-center gap-1.5">
+          <button type="button" onClick={() => setIsArabic(!isArabic)} className={`micro-button flex h-11 min-w-11 items-center justify-center gap-1.5 rounded-md border border-current/15 px-2.5 text-xs font-bold ${foreground}`} aria-label={isArabic ? 'التبديل إلى الإنجليزية' : 'Switch to Arabic'}>
+            <Globe className="h-4 w-4 text-brand-teal" aria-hidden="true" />
+            <span className="hidden sm:inline">{isArabic ? 'EN' : 'عربي'}</span>
           </button>
-
-          {/* Light/Dark Mode Switch */}
-          <button
-            onClick={() => setIsLightMode(!isLightMode)}
-            id="theme-mode-toggle"
-            className="flex items-center space-x-1.5 px-3 py-1.5 text-xs text-neutral-300 hover:text-white font-mono bg-neutral-950 border border-neutral-800 rounded-lg transition-all cursor-pointer hover:border-brand-teal/50"
-            title={isArabic ? "تبديل المظهر" : "Toggle Theme"}
-          >
-            {isLightMode ? (
-              <>
-                <Moon className="w-3.5 h-3.5 text-brand-teal" />
-                <span>{isArabic ? "داكن" : "DARK"}</span>
-              </>
-            ) : (
-              <>
-                <Sun className="w-3.5 h-3.5 text-brand-teal" />
-                <span>{isArabic ? "فاتح" : "LIGHT"}</span>
-              </>
-            )}
+          <button id="theme-mode-toggle" type="button" onClick={() => setIsLightMode(!isLightMode)} className={`micro-button flex h-11 min-w-11 items-center justify-center rounded-md border border-current/15 ${foreground}`} aria-label={isLightMode ? (isArabic ? 'استخدم النمط الداكن' : 'Use dark theme') : (isArabic ? 'استخدم النمط الفاتح' : 'Use light theme')}>
+            {isLightMode ? <Moon className="h-4 w-4 text-brand-teal" aria-hidden="true" /> : <Sun className="h-4 w-4 text-brand-teal" aria-hidden="true" />}
+          </button>
+          <button type="button" onClick={() => setMobileOpen(!mobileOpen)} className={`micro-button flex h-11 min-w-11 items-center justify-center rounded-md border border-current/15 lg:hidden ${foreground}`} aria-expanded={mobileOpen} aria-controls="mobile-navigation" aria-label={mobileOpen ? (isArabic ? 'إغلاق القائمة' : 'Close menu') : (isArabic ? 'فتح القائمة' : 'Open menu')}>
+            {mobileOpen ? <X className="h-5 w-5" aria-hidden="true" /> : <Menu className="h-5 w-5" aria-hidden="true" />}
           </button>
         </div>
-
-        {/* Mobile controls */}
-        <div className="flex items-center space-x-3 lg:hidden">
-          {/* Lang switcher on mobile */}
-          <button
-            onClick={() => setIsArabic(!isArabic)}
-            className="flex items-center space-x-1.5 px-2.5 py-1 text-[11px] text-neutral-300 font-mono bg-neutral-905 border border-neutral-800 rounded-lg transition-all cursor-pointer hover:border-brand-teal"
-          >
-            <Globe className="w-3.5 h-3.5 text-brand-teal" />
-            <span>{isArabic ? "ENG" : "عربي"}</span>
-          </button>
-
-          {/* Theme switcher on mobile */}
-          <button
-            onClick={() => setIsLightMode(!isLightMode)}
-            id="theme-mode-toggle-mobile"
-            className="flex items-center space-x-1.5 px-2.5 py-1 text-[11px] text-neutral-300 font-mono bg-neutral-905 border border-neutral-800 rounded-lg transition-all cursor-pointer hover:border-brand-teal"
-            title={isArabic ? "تبديل المظهر" : "Toggle Theme"}
-          >
-            {isLightMode ? (
-              <>
-                <Moon className="w-3 h-3 text-brand-teal" />
-                <span>{isArabic ? "داكن" : "DARK"}</span>
-              </>
-            ) : (
-              <>
-                <Sun className="w-3 h-3 text-brand-teal" />
-                <span>{isArabic ? "فاتح" : "LIGHT"}</span>
-              </>
-            )}
-          </button>
-
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="p-1 text-neutral-400 hover:text-white transition-colors cursor-pointer"
-          >
-            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
-        </div>
-
       </div>
 
-      {/* Mobile Menu Panel */}
       <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
+        {mobileOpen && (
+          <motion.nav
+            id="mobile-navigation"
+            aria-label={isArabic ? 'التنقل على الهاتف' : 'Mobile navigation'}
+            initial={reduceMotion ? false : { opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.25 }}
-            className="lg:hidden bg-neutral-950 border-t border-neutral-900 overflow-hidden"
+            className="site-header__mobile-nav overflow-x-hidden border-t border-current/10 px-3 pb-4 lg:hidden"
           >
-            <div className="px-5 pt-3 pb-6 space-y-1">
-              {navLinks.map((link) => {
-                const isActive = activeSection === link.id;
-
-                if (link.to) {
-                  return (
-                    <Link
-                      key={link.id}
-                      to={link.to}
-                      onClick={() => setIsOpen(false)}
-                      className="block w-full text-left rtl:text-right py-2 px-3 rounded-lg text-sm font-display tracking-widest uppercase transition-colors text-neutral-400 hover:bg-neutral-900/60 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal/50"
-                    >
-                      {isArabic ? link.arabic : link.label}
-                    </Link>
-                  );
-                }
-
-                if (link.id === 'programs') {
-                  return (
-                    <div key={link.id} className="space-y-1 py-1">
-                      <button
-                        onClick={() => setMobileProgramsOpen(!mobileProgramsOpen)}
-                        className={`w-full text-left rtl:text-right py-2 px-3 rounded-lg text-sm font-display tracking-widest uppercase transition-all font-bold text-brand-teal flex items-center justify-between cursor-pointer`}
-                      >
-                        <span>{isArabic ? "البرامج والأنشطة" : "PROGRAMS & ACTIVITIES"}</span>
-                        <ChevronDown className={`w-4 h-4 transition-transform duration-200 text-neutral-400 ${mobileProgramsOpen ? 'rotate-180 text-brand-teal' : 'rotate-0'}`} />
-                      </button>
-
-                      <AnimatePresence initial={false}>
-                        {mobileProgramsOpen && (
-                          <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: 'auto', opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.2, ease: "easeInOut" }}
-                            className="overflow-hidden pl-4 rtl:pr-4 border-l rtl:border-l-0 rtl:border-r border-neutral-800/80 space-y-1 my-1"
-                          >
-                            <button
-                              onClick={() => {
-                                handleScrollTo('programs');
-                                setMobileProgramsOpen(false);
-                              }}
-                              className="block w-full text-left rtl:text-right py-2 px-3 rounded-lg text-[11px] font-mono uppercase tracking-wider text-brand-teal hover:text-white hover:bg-neutral-900/40 transition-all font-bold"
-                            >
-                              • {isArabic ? "عرض الكل" : "VIEW OVERVIEW"}
-                            </button>
-                            <Link
-                              to="/activities"
-                              onClick={() => {
-                                setMobileProgramsOpen(false);
-                                setIsOpen(false);
-                              }}
-                              className="block w-full text-left rtl:text-right py-2 px-3 rounded-lg text-[11px] font-mono uppercase tracking-wider text-neutral-400 hover:text-white hover:bg-neutral-900/40 transition-all animate-fade-in"
-                            >
-                              • {isArabic ? 'كل الأنشطة والبرامج' : 'All Activities & Programs'}
-                            </Link>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </div>
-                  );
-                }
-
-                if (link.id === 'team') {
-                  return (
-                    <div key={link.id} className="space-y-1 py-1">
-                      <button
-                        onClick={() => setMobileTeamOpen(!mobileTeamOpen)}
-                        className={`w-full text-left rtl:text-right py-2 px-3 rounded-lg text-sm font-display tracking-widest uppercase transition-all font-bold text-brand-teal flex items-center justify-between cursor-pointer`}
-                      >
-                        <span>{isArabic ? 'فريق العمل' : 'TEAM'}</span>
-                        <ChevronDown className={`w-4 h-4 transition-transform duration-200 text-neutral-400 ${mobileTeamOpen ? 'rotate-180 text-brand-teal' : 'rotate-0'}`} />
-                      </button>
-
-                      <AnimatePresence initial={false}>
-                        {mobileTeamOpen && (
-                          <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: 'auto', opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.2, ease: "easeInOut" }}
-                            className="overflow-hidden pl-4 rtl:pr-4 border-l rtl:border-l-0 rtl:border-r border-neutral-800/80 space-y-1 my-1 grid grid-cols-1 gap-0.5"
-                          >
-                            <Link
-                              to="/team"
-                              onClick={() => {
-                                setMobileTeamOpen(false);
-                                setIsOpen(false);
-                              }}
-                              className="block w-full text-left rtl:text-right py-2 px-3 rounded-lg text-[11px] font-mono uppercase tracking-wider text-brand-teal hover:text-white hover:bg-neutral-900/40 transition-all font-bold"
-                            >
-                              • {isArabic ? "صفحة الفريق" : "OUR TEAM"}
-                            </Link>
-                            {/* Phase 8: kept in lock-step with the desktop dropdown above —
-                                same two real destinations, no fabricated departments. */}
-                            <button
-                              onClick={() => {
-                                handleScrollTo('teams');
-                                setMobileTeamOpen(false);
-                                setIsOpen(false);
-                              }}
-                              className="block w-full text-left rtl:text-right py-2 px-3 rounded-lg text-[11px] font-mono uppercase tracking-wider text-brand-teal hover:text-white hover:bg-neutral-900/40 transition-all font-bold"
-                            >
-                              • {isArabic ? 'رؤساء الفرق' : 'TEAM HEADS'}
-                            </button>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </div>
-                  );
-                }
-
-                return (
-                  <button
-                    key={link.id}
-                    onClick={() => handleScrollTo(link.id)}
-                    className={`block w-full text-left rtl:text-right py-2 px-3 rounded-lg text-sm font-display tracking-widest uppercase transition-colors ${
-                      isActive 
-                      ? 'bg-neutral-900 text-white font-bold border-l-2 rtl:border-l-0 rtl:border-r-2 border-brand-teal' 
-                      : 'text-neutral-400 hover:bg-neutral-900/60 hover:text-white'
-                    }`}
-                  >
-                    {isArabic ? link.arabic : link.label}
-                  </button>
-                );
-              })}
-
-            </div>
-          </motion.div>
+            {NAV_ITEMS.map((item) => {
+              const active = isActive(item);
+              return (
+                <Link
+                  key={item.to}
+                  to={item.to}
+                  aria-current={active ? 'page' : undefined}
+                  className={`flex min-h-12 items-center border-b border-current/10 text-sm font-bold ${active ? 'text-brand-teal' : foreground}`}
+                >
+                  {isArabic ? item.ar : item.en}
+                </Link>
+              );
+            })}
+            <Link to="/donate" className="mission-button mt-3 w-full">
+              <Heart className="h-4 w-4" aria-hidden="true" />
+              {isArabic ? 'ادعم مِنا' : 'Support MENA'}
+            </Link>
+          </motion.nav>
         )}
       </AnimatePresence>
     </header>

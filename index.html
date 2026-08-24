@@ -1,9 +1,11 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <base href="%BASE_URL%" />
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/images/Mena-logo-icon.png" />
+    <link rel="icon" type="image/png" href="%BASE_URL%images/Mena-logo-icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#100c0a" />
     <title>MENA Space Organization</title>
 
     <!-- Moved out of src/index.css: Lightning CSS cannot inline a remote @import, and a
@@ -12,7 +14,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700&family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap"
     />
 
     <!--
@@ -46,11 +48,53 @@
       property="og:description"
       content="Events, activities and programs, research papers, achievements, and the 2026 team of MENA Space Organization."
     />
-    <meta property="og:image" content="/images/Mena-logo-icon.png" />
+    <meta property="og:image" content="%BASE_URL%images/Mena-logo-icon.png" />
     <meta name="twitter:card" content="summary" />
   </head>
   <body>
     <div id="root"></div>
+
+    <noscript>
+      <div style="max-width: 560px; margin: 15vh auto; padding: 24px; font-family: Arial, sans-serif; line-height: 1.6">
+        This website requires JavaScript. Enable JavaScript, then reload the page.
+      </div>
+    </noscript>
+
+    <!-- The repository's index.html is Vite source, not a standalone compiled page. -->
+    <div id="file-protocol-notice" style="display: none" role="alert">
+      <div style="max-width: 560px; margin: 12vh auto 0">
+        <p style="margin: 0 0 10px; color: #946039; font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase">
+          MENA website
+        </p>
+        <h1 style="margin: 0 0 16px; color: #241813; font-size: 28px; line-height: 1.2">
+          Open the published website
+        </h1>
+        <p style="margin: 0 0 18px; color: #5d5049; font-size: 16px; line-height: 1.65">
+          This source file cannot run by double-clicking it. The React application must be compiled by Vite.
+        </p>
+        <a
+          href="https://rka14406.github.io/mena-website/"
+          style="display: inline-block; margin: 0 0 22px; border-radius: 8px; background: #d9ad7c; color: #241813; padding: 12px 18px; font-weight: 700; text-decoration: none"
+        >Open the live website</a>
+        <p style="margin: 0; color: #74665e; font-size: 14px; line-height: 1.65">
+          For local development, open a terminal in the project folder and run<br>
+          <code style="color: #241813">npm install</code><br>
+          <code style="color: #241813">npm run dev</code>
+        </p>
+      </div>
+    </div>
+    <script>
+      (function () {
+        if (window.location.protocol !== 'file:') return;
+        document.getElementById('root').style.display = 'none';
+        document.getElementById('file-protocol-notice').setAttribute(
+          'style',
+          'display:block;position:fixed;inset:0;z-index:10000;overflow:auto;' +
+            'box-sizing:border-box;background:#f5f1eb;padding:24px;font-family:' +
+            '-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;'
+        );
+      })();
+    </script>
 
     <!--
       Below the supported floor the page previously rendered as a blank white screen: a
@@ -89,7 +133,7 @@
           'Software Update</strong> and install the latest iOS, then try again.</p>' +
           '<p style="font-size:15px;line-height:1.6;margin:0">' +
           'If your device cannot update, please reach us by email at ' +
-          '<a href="mailto:info@menaspace.org" style="color:#cbad8e">info@menaspace.org</a>' +
+          '<a href="mailto:contact@menaorg.com" style="color:#cbad8e">contact@menaorg.com</a>' +
           '.</p></div>';
       })();
     </script>

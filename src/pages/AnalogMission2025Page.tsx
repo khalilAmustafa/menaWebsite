@@ -16,7 +16,10 @@ export default function AnalogMission2025Page() {
   const { isArabic } = useSiteContext();
   const event = getEventBySlug('analog-mission-2025');
   // Description is the event record's own confirmed summary — single source of truth.
-  useDocumentTitle('MENA Mars Analog Mission — Wadi Rum | MENA', event?.summary?.en);
+  useDocumentTitle(
+    isArabic ? 'بعثة مِنا لمحاكاة المريخ — وادي رم | مِنا' : 'MENA Mars Analog Mission — Wadi Rum | MENA',
+    event?.summary ? (isArabic && event.summary.ar ? event.summary.ar : event.summary.en) : undefined,
+  );
 
   if (!event) return null;
 
@@ -48,7 +51,7 @@ export default function AnalogMission2025Page() {
         <p className="font-sans text-sm leading-relaxed text-neutral-300 sm:text-base">
           {isArabic
             ? 'بعثة محاكاة للمريخ نُفّذت في صحراء وادي رم بالأردن، حيث نفّذ الطاقم مهام خروج ميدانية ببدلات الفضاء وعمليات داخل الموئل وأنشطة ميدانية في تضاريس شبيهة بالمريخ.'
-            : 'A Mars analog mission carried out in Jordan’s Wadi Rum desert — one of Earth’s closest visual analogs to Martian terrain. Participants conducted spacesuit EVAs, habitat operations, and field activities.'}
+            : 'A Mars analog mission carried out in Jordan’s Wadi Rum desert. Participants conducted spacesuit EVAs, habitat operations, and field activities in Mars-like terrain.'}
         </p>
       </section>
 
@@ -86,17 +89,9 @@ export default function AnalogMission2025Page() {
       )}
 
       {/* Partners & Sponsors — restrained pending (logos on materials, classification unconfirmed) */}
-      <section>
-        <h2 className="mb-6 font-display text-xl font-medium uppercase tracking-tight text-white sm:text-2xl">
-          {sectionLabel('Partners & Sponsors', 'الشركاء والرعاة')}
-        </h2>
-        <div className="rounded-2xl border border-neutral-900/80 bg-neutral-900/20 px-6 py-10 text-center">
-          <p className="mx-auto max-w-xl font-sans text-sm leading-relaxed text-neutral-400">
-            {isArabic
-              ? 'تفاصيل الشركاء والرعاة الرسميين لهذه البعثة قيد التأكيد وسيتم نشرها قريبًا.'
-              : 'The official partners and sponsors for this mission are being confirmed and will be published soon.'}
-          </p>
-        </div>
+      <section className="pending-record">
+        <h2 className="font-display text-3xl font-semibold uppercase text-[var(--page-ink)] sm:text-4xl">{sectionLabel('Partner record pending', 'سجل الشركاء قيد التأكيد')}</h2>
+        <p>{isArabic ? 'ستُنشر قائمة الشركاء والرعاة بعد تأكيد السجلات الرسمية.' : 'The partner and sponsor list will be published after the official record is confirmed.'}</p>
       </section>
     </PageContainer>
   );

@@ -3,6 +3,7 @@ import Header from './Header';
 import Footer from './Footer';
 import Chatbot from './Chatbot';
 import Starfield from './Starfield';
+import SiteIntro from './SiteIntro';
 
 /**
  * Shared state threaded from <App/> to every routed page via the router Outlet.
@@ -14,8 +15,6 @@ export interface SiteContext {
   setIsArabic: (value: boolean) => void;
   isLightMode: boolean;
   setIsLightMode: (value: boolean) => void;
-  activeSection: string;
-  setActiveSection: (value: string) => void;
 }
 
 /** Typed accessor for page components rendered inside <SiteLayout/>'s <Outlet/>. */
@@ -39,32 +38,23 @@ export default function SiteLayout({
   setIsArabic,
   isLightMode,
   setIsLightMode,
-  activeSection,
-  setActiveSection,
 }: SiteLayoutProps) {
   const context: SiteContext = {
     isArabic,
     setIsArabic,
     isLightMode,
     setIsLightMode,
-    activeSection,
-    setActiveSection,
   };
 
   return (
     <div
-      className="min-h-screen bg-black text-neutral-100 selection:bg-brand-teal selection:text-black font-sans relative overflow-x-hidden"
+      className="site-shell relative min-h-screen overflow-x-hidden font-sans selection:bg-brand-teal selection:text-[#21150f]"
       dir={isArabic ? 'rtl' : 'ltr'}
     >
-      {/* Absolute Ambient Background Starfield with brand accents */}
-      <div
-        className={`absolute inset-0 ${
-          isLightMode
-            ? 'bg-[radial-gradient(ellipse_at_top,rgba(203,173,142,0.10),#f9fafb)]'
-            : 'bg-[radial-gradient(ellipse_at_top,rgba(203,173,142,0.06),transparent)]'
-        } pointer-events-none z-0`}
-      />
-
+      <SiteIntro />
+      <a href="#main-content" className="skip-link">
+        {isArabic ? 'انتقل إلى المحتوى' : 'Skip to content'}
+      </a>
       {/* Scroll-aware background star field matching astronomy simulation ambient */}
       <Starfield />
 
@@ -72,13 +62,12 @@ export default function SiteLayout({
       <Header
         isArabic={isArabic}
         setIsArabic={setIsArabic}
-        activeSection={activeSection}
         isLightMode={isLightMode}
         setIsLightMode={setIsLightMode}
       />
 
       {/* Single primary content landmark — routed page renders here */}
-      <main className="relative z-10">
+      <main id="main-content" className="relative z-10" tabIndex={-1}>
         <Outlet context={context} />
       </main>
 

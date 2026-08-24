@@ -51,7 +51,7 @@ export default function Chatbot({ isArabic }: ChatbotProps) {
   // Load knowledge base
   useEffect(() => {
     if (isOpen && !kb) {
-      fetch('/mena_kb.txt')
+      fetch(`${import.meta.env.BASE_URL}mena_kb.txt`)
         .then((res) => {
           if (!res.ok) throw new Error('Failed to load KB');
           return res.text();
@@ -112,8 +112,8 @@ export default function Chatbot({ isArabic }: ChatbotProps) {
           id: Math.random().toString(),
           sender: 'bot',
           text: isArabic
-            ? 'المساعد الذكي غير متاح حالياً. يسعدنا تلقي سؤالك عبر البريد الإلكتروني: INFO@MENASPACE.ORG'
-            : "The AI assistant isn't available right now. We'd be glad to answer your question by email: INFO@MENASPACE.ORG",
+            ? 'المساعد الذكي غير متاح حالياً. يسعدنا تلقي سؤالك عبر البريد الإلكتروني: contact@menaorg.com'
+            : "The AI assistant isn't available right now. We'd be glad to answer your question by email: contact@menaorg.com",
           timestamp: new Date(),
         },
       ]);
@@ -196,8 +196,8 @@ Assistant:`;
           sender: 'bot',
           // Phase 8: no longer asserts the cause is the visitor's connection — we don't know that.
           text: isArabic
-            ? 'عذراً، تعذّر الوصول إلى المساعد الذكي حالياً. يمكنك مراسلتنا على INFO@MENASPACE.ORG'
-            : "Sorry, I couldn't reach the AI service just now. You can email us at INFO@MENASPACE.ORG",
+            ? 'عذراً، تعذّر الوصول إلى المساعد الذكي حالياً. يمكنك مراسلتنا على contact@menaorg.com'
+            : "Sorry, I couldn't reach the AI service just now. You can email us at contact@menaorg.com",
           timestamp: new Date()
         }
       ]);
@@ -220,7 +220,7 @@ Assistant:`;
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 font-sans flex flex-col items-end">
+    <div className="chatbot-shell fixed bottom-3 right-3 z-50 flex flex-col items-end font-sans sm:bottom-6 sm:right-6">
       
       {/* Floating Chat Window */}
       <AnimatePresence>
@@ -230,7 +230,7 @@ Assistant:`;
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 50, scale: 0.9 }}
             transition={{ duration: 0.3 }}
-            className="w-[360px] sm:w-[400px] h-[550px] bg-neutral-950/95 border border-brand-teal/20 rounded-2xl shadow-[0_12px_40px_rgba(0,0,0,0.8),0_0_20px_rgba(203,173,142,0.1)] flex flex-col overflow-hidden backdrop-blur-lg mb-4 text-left rtl:text-right"
+            className="chatbot-panel mb-3 flex h-[min(550px,calc(100dvh-6rem))] w-[calc(100vw-1.5rem)] max-w-[400px] flex-col overflow-hidden rounded-xl border border-brand-teal/20 bg-neutral-950/95 text-left shadow-[0_12px_40px_rgba(0,0,0,0.8),0_0_20px_rgba(203,173,142,0.1)] backdrop-blur-lg rtl:text-right sm:mb-4 sm:rounded-2xl"
           >
             {/* Header */}
             <div className="bg-neutral-900 border-b border-brand-teal/10 px-4 py-3 flex items-center justify-between">
@@ -258,13 +258,15 @@ Assistant:`;
                 <button
                   onClick={handleReset}
                   title={isArabic ? "إعادة بدء المحادثة" : "Reset Chat"}
-                  className="p-1.5 rounded-lg text-neutral-400 hover:text-white hover:bg-neutral-800 transition-colors"
+                  className="grid h-11 w-11 place-items-center rounded-lg text-neutral-400 transition-colors hover:bg-neutral-800 hover:text-white"
+                  aria-label={isArabic ? 'إعادة بدء المحادثة' : 'Reset chat'}
                 >
                   <RotateCcw className="w-3.5 h-3.5" />
                 </button>
                 <button
                   onClick={() => setIsOpen(false)}
-                  className="p-1.5 rounded-lg text-neutral-400 hover:text-white hover:bg-neutral-800 transition-colors"
+                  className="grid h-11 w-11 place-items-center rounded-lg text-neutral-400 transition-colors hover:bg-neutral-800 hover:text-white"
+                  aria-label={isArabic ? 'إغلاق المحادثة' : 'Close chat'}
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -316,7 +318,7 @@ Assistant:`;
                       <button
                         key={i}
                         onClick={() => handleSend(sug.query)}
-                        className="text-[10px] bg-neutral-900 hover:bg-brand-teal/10 hover:border-brand-teal/30 border border-neutral-800 text-neutral-300 hover:text-white px-2.5 py-1.5 rounded-lg transition-all text-left rtl:text-right cursor-pointer"
+                        className="min-h-10 rounded-lg border border-neutral-800 bg-neutral-900 px-2.5 py-1.5 text-left text-[10px] text-neutral-300 transition-colors hover:border-brand-teal/30 hover:bg-brand-teal/10 hover:text-white rtl:text-right"
                       >
                         {sug.text}
                       </button>
@@ -348,20 +350,24 @@ Assistant:`;
             >
               <input
                 type="text"
+                name="chat-message"
+                autoComplete="off"
+                aria-label={isArabic ? 'رسالة المساعد' : 'Chat message'}
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder={
                   isArabic
-                    ? "اسأل عن مهام مِنا الفضائية..."
-                    : "Ask about MENA missions..."
+                    ? "اسأل عن مهام مِنا الفضائية…"
+                    : "Ask about MENA missions…"
                 }
-                className="flex-1 bg-neutral-950 border border-neutral-850 hover:border-brand-teal/20 focus:border-brand-teal/60 focus:ring-0 focus:outline-none rounded-2xl px-3 py-2 text-xs text-white placeholder-neutral-500 font-sans transition-all"
+                className="min-w-0 flex-1 rounded-2xl border border-neutral-850 bg-neutral-950 px-3 py-2 font-sans text-xs text-white placeholder-neutral-500 transition-colors hover:border-brand-teal/20 focus:border-brand-teal/60 focus:outline-none focus:ring-0"
                 disabled={isLoading}
               />
               <button
                 type="submit"
+                aria-label={isArabic ? 'إرسال الرسالة' : 'Send message'}
                 disabled={isLoading || !input.trim()}
-                className="p-2 rounded-2xl bg-brand-teal text-black hover:bg-brand-teal/80 disabled:bg-neutral-800 disabled:text-neutral-600 transition-colors cursor-pointer"
+                className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-brand-teal text-black transition-colors hover:bg-brand-teal/80 disabled:bg-neutral-800 disabled:text-neutral-600"
               >
                 <Send className="w-3.5 h-3.5" />
               </button>
@@ -376,7 +382,7 @@ Assistant:`;
         whileTap={{ scale: 0.95 }}
         onClick={() => setIsOpen(!isOpen)}
         className="w-14 h-14 bg-gradient-to-tr from-brand-teal to-brand-teal-hover text-black rounded-full shadow-[0_4px_20px_rgba(203,173,142,0.4)] flex items-center justify-center cursor-pointer border border-brand-teal/20 relative group"
-        aria-label="Toggle Chatbot"
+        aria-label={isOpen ? (isArabic ? 'إخفاء مساعد مِنا' : 'Hide MENA assistant') : (isArabic ? 'فتح مساعد مِنا' : 'Open MENA assistant')}
       >
         <AnimatePresence mode="wait">
           {isOpen ? (

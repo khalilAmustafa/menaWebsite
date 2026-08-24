@@ -9,7 +9,7 @@ import { RESEARCH_PAPERS } from '../content/researchPapers';
 
 export default function ResearchPapersPage() {
   const { isArabic } = useSiteContext();
-  useDocumentTitle('Research Papers | MENA');
+  useDocumentTitle(isArabic ? 'الأوراق البحثية | مِنا' : 'Research Papers | MENA');
 
   const count = RESEARCH_PAPERS.length; // derived from real data, never hardcoded
 
@@ -34,7 +34,7 @@ export default function ResearchPapersPage() {
         />
       </ScrollReveal>
 
-      <div className="mt-2 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="research-list">
         {RESEARCH_PAPERS.map((paper) => (
           <ResearchCard key={paper.id} paper={paper} isArabic={isArabic} />
         ))}

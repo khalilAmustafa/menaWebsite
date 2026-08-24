@@ -47,13 +47,16 @@ export interface MediaItem {
  */
 export interface ResearchAuthor {
   name: string;
+  nameAr?: string;
   teamMemberId?: string;
 }
 
 export interface ConferenceInfo {
   name: string;
+  nameAr?: string;
   edition?: string;
   location?: string;
+  locationAr?: string;
   year?: number;
 }
 
@@ -187,6 +190,7 @@ export interface TeamMember {
   id: string;
   slug: string;
   fullName: string;
+  fullNameAr?: string;
   role?: LocalizedText;
   departmentId?: string;
   photo?: MediaItem;

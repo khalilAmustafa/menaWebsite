@@ -15,19 +15,14 @@ export default function PageHeader({ eyebrow, title, description }: PageHeaderPr
   // Intentionally a <div>, not a <header>, so the only banner landmark on the page
   // remains the site navigation <header>.
   return (
-    <div className="text-center max-w-3xl mx-auto mb-12">
-      {eyebrow && (
-        <span className="font-mono text-xs text-brand-teal font-bold tracking-widest uppercase block mb-3">
-          {eyebrow}
-        </span>
-      )}
-      <h1 className="font-display font-medium text-3xl sm:text-5xl text-white tracking-tight uppercase">
-        {title}
-      </h1>
-      <div className="h-0.5 w-16 bg-brand-teal mx-auto mt-6" />
-      {description && (
-        <p className="font-sans text-sm text-neutral-400 mt-6 leading-relaxed">{description}</p>
-      )}
+    <div className="page-intro">
+      <div className="page-intro__grid">
+        <div>
+          {eyebrow && <span className="section-index mb-5">{eyebrow}</span>}
+          <h1>{title}</h1>
+        </div>
+        {description && <p>{description}</p>}
+      </div>
     </div>
   );
 }

@@ -16,6 +16,9 @@ import AnalogMission2025Page from './pages/AnalogMission2025Page';
 import NasaSpaceAppsPage from './pages/NasaSpaceAppsPage';
 import ActivitiesPage from './pages/ActivitiesPage';
 import ActivityDetailPage from './pages/ActivityDetailPage';
+import DonatePage from './pages/DonatePage';
+import AboutPage from './pages/AboutPage';
+import ContactPage from './pages/ContactPage';
 
 /**
  * App owns the shared theme + language state (unchanged from the previous single-page
@@ -26,10 +29,10 @@ import ActivityDetailPage from './pages/ActivityDetailPage';
  * deleted, so any future unbuilt route should get a real page rather than a placeholder.
  */
 export default function App() {
-  const [isArabic, setIsArabic] = useState<boolean>(false);
-  // Default was 'about'; that section no longer exists, so the header would have highlighted a
-  // nav item that isn't there. 'mission' is now the first homepage section.
-  const [activeSection, setActiveSection] = useState<string>('mission');
+  const [isArabic, setIsArabic] = useState<boolean>(() => {
+    if (typeof window !== 'undefined') return localStorage.getItem('site-language') === 'ar';
+    return false;
+  });
   const [isLightMode, setIsLightMode] = useState<boolean>(() => {
     if (typeof window !== 'undefined') {
       return localStorage.getItem('theme-mode') === 'light';
@@ -39,6 +42,12 @@ export default function App() {
 
   // Keep light-mode body classes synchronized reactively (source of light-mode styling).
   useEffect(() => {
+    document.documentElement.lang = isArabic ? 'ar' : 'en';
+    document.documentElement.dir = isArabic ? 'rtl' : 'ltr';
+    localStorage.setItem('site-language', isArabic ? 'ar' : 'en');
+  }, [isArabic]);
+
+  useEffect(() => {
     if (isLightMode) {
       document.body.classList.add('light-mode');
       localStorage.setItem('theme-mode', 'light');
@@ -46,6 +55,7 @@ export default function App() {
       document.body.classList.remove('light-mode');
       localStorage.setItem('theme-mode', 'dark');
     }
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', isLightMode ? '#f3f3f1' : '#100c0a');
   }, [isLightMode]);
 
   return (
@@ -59,13 +69,14 @@ export default function App() {
               setIsArabic={setIsArabic}
               isLightMode={isLightMode}
               setIsLightMode={setIsLightMode}
-              activeSection={activeSection}
-              setActiveSection={setActiveSection}
             />
           }
         >
           {/* Existing complete homepage */}
           <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/donate" element={<DonatePage />} />
 
           {/* Phase 3 — real Achievements + Research pages */}
           <Route path="/achievements" element={<AchievementsPage />} />

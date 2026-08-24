@@ -17,13 +17,14 @@ import { TeamDepartment } from './types';
  */
 
 export const IMAGES = {
-  hero: '/images/Hero.jpg',
+  heroLight: 'images/hero/mena-hero-light.webp',
+  heroDark: 'images/hero/mena-hero-dark.webp',
 };
 
 /**
  * Department display names only. These are used solely by `getDepartmentName()` (src/lib/team.ts)
  * to label the three real 2026 heads whose department mapping is confirmed. No leads, head counts,
- * or capability claims — none of that was ever verified. See contentGaps TEAM entries.
+ * or capability claims are inferred.
  */
 export const DEPARTMENTS: TeamDepartment[] = [
   { id: 'dept-board', name: 'Board of Trustees & Founders', arabicName: 'مجلس الأمناء والمؤسسين' },

@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { motion } from 'motion/react';
+import { motion, useReducedMotion } from 'motion/react';
 
 interface ScrollRevealProps {
   children: ReactNode;
@@ -23,6 +23,7 @@ export default function ScrollReveal({
   className = '',
   id
 }: ScrollRevealProps) {
+  const reduceMotion = useReducedMotion();
   const getVariants = () => {
     switch (variant) {
       case 'fade':
@@ -76,8 +77,9 @@ export default function ScrollReveal({
   return (
     <motion.div
       id={id}
-      initial="hidden"
-      whileInView="visible"
+      initial={false}
+      whileInView={reduceMotion ? undefined : "visible"}
+      animate={reduceMotion ? "visible" : undefined}
       viewport={{ once, amount: threshold }}
       variants={getVariants()}
       transition={{

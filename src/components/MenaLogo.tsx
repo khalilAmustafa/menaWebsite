@@ -1,6 +1,6 @@
 import React from 'react';
 // Web-optimized copy (512×768, ~45 KB) of the 1024×1536 / ~2.09 MB master
-// `Mena-logo.png`, which is retained untouched alongside it as the source of truth.
+// Both optimized variants are official marks prepared for their respective themes.
 // The logo renders at most 112 CSS px wide (Header/Footer `w-28`), so 512 px still
 // covers 4x-DPR displays.
 import menaLogoSrc from '../assets/images/Mena-logo-web.png';
@@ -36,9 +36,9 @@ export default function MenaLogo({ className = '', color = 'currentColor', size 
 
   return (
     <>
-      <img src={menaLogoSrc} alt="MENA Space Organization Logo" className={`mena-logo--dark ${className}`} style={style} />
+      <img src={menaLogoSrc} alt="MENA Space Organization Logo" width={512} height={768} className={`mena-logo--dark ${className}`} style={style} />
       {/* Decorative duplicate: the variant above already carries the accessible name. */}
-      <img src={menaLogoLightSrc} alt="" aria-hidden="true" className={`mena-logo--light ${className}`} style={style} />
+      <img src={menaLogoLightSrc} alt="" aria-hidden="true" width={512} height={768} className={`mena-logo--light ${className}`} style={style} />
     </>
   );
 }

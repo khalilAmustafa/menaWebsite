@@ -1,291 +1,210 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import { Mail, MapPin, Send, CheckCircle2 } from 'lucide-react';
+import { useState, type FormEvent } from 'react';
+import { Check, Clipboard, ExternalLink, Mail, MapPin, MessageCircle, Send } from 'lucide-react';
 
 interface ContactProps {
   isArabic: boolean;
+  /**
+   * Suppresses the in-component section header. Set false by /contact, where the routed
+   * page already supplies the <h1>; the mechanisms below are otherwise untouched.
+   */
+  showHeader?: boolean;
 }
 
-/** Single source of truth for the address shown in the panel and used by the mailto: hand-off. */
-const CONTACT_EMAIL = 'INFO@MENASPACE.ORG';
+type ContactChannel = 'whatsapp' | 'email';
+type CopiedValue = 'email' | 'message' | null;
 
-export default function Contact({ isArabic }: ContactProps) {
+const CONTACT_EMAIL = 'contact@menaorg.com';
+const WHATSAPP_URL = 'https://wa.me/962790607949';
+const VOLUNTEER_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSe6XrNbP3hm6Q_To_Ex1ryC4Rv21AQ-PJ3Acb9sgfAuGzE0GA/viewform';
+
+const TOPICS = [
+  { value: 'programs', en: 'Programs & activities', ar: 'البرامج والأنشطة' },
+  { value: 'volunteering', en: 'Volunteering', ar: 'التطوّع' },
+  { value: 'research', en: 'Research collaboration', ar: 'التعاون البحثي' },
+  { value: 'partnerships', en: 'Partnerships & sponsorship', ar: 'الشراكات والرعاية' },
+  { value: 'missions', en: 'Analog missions', ar: 'بعثات المحاكاة' },
+] as const;
+
+export default function Contact({ isArabic, showHeader = true }: ContactProps) {
+  const [channel, setChannel] = useState<ContactChannel>('whatsapp');
+  const [copied, setCopied] = useState<CopiedValue>(null);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    roleType: 'volunteer', // volunteer or partner
-    interestDept: 'engineering',
-    comments: ''
+    interest: 'programs',
+    message: '',
   });
-  const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
-  /**
-   * Phase 8 — TRUTHFULNESS FIX. This form previously sent nothing at all: handleSubmit only
-   * flipped a boolean, then displayed a success panel claiming the message had been "synced
-   * to Amman Center core" with a promised response time. Nothing was ever transmitted, so
-   * every submission silently vanished while telling the visitor it had arrived.
-   *
-   * There is no backend in this project and Phase 8 must not add one, so the form now hands
-   * off to the visitor's own mail client via a mailto: link built from the fields they filled
-   * in. That is a real, working delivery path, and the confirmation copy below describes only
-   * what actually happened — the message is NOT sent until the visitor sends it themselves.
-   */
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!formData.name || !formData.email) return;
+  const selectedTopic = TOPICS.find((topic) => topic.value === formData.interest) ?? TOPICS[0];
+  const topicLabel = isArabic ? selectedTopic.ar : selectedTopic.en;
+  const subject = isArabic ? `استفسار من الموقع — ${topicLabel}` : `Website inquiry — ${topicLabel}`;
+  const preparedMessage = isArabic
+    ? [
+        'مرحباً فريق مِنا،',
+        '',
+        `الاسم: ${formData.name}`,
+        `البريد الإلكتروني: ${formData.email}`,
+        `موضوع التواصل: ${topicLabel}`,
+        '',
+        formData.message,
+      ].join('\n')
+    : [
+        'Hello MENA team,',
+        '',
+        `Name: ${formData.name}`,
+        `Email: ${formData.email}`,
+        `Contact topic: ${topicLabel}`,
+        '',
+        formData.message,
+      ].join('\n');
+  const mailtoHref = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(preparedMessage)}`;
+  const whatsappHref = `${WHATSAPP_URL}?text=${encodeURIComponent(preparedMessage)}`;
 
-    const subject = `Website inquiry — ${formData.roleType} — ${formData.name}`;
-    const body = [
-      `Name: ${formData.name}`,
-      `Email: ${formData.email}`,
-      `Inquiry type: ${formData.roleType}`,
-      `Area of interest: ${formData.interestDept}`,
-      '',
-      formData.comments,
-    ].join('\n');
-
-    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    setIsSubmitted(true);
+  const copyText = async (value: string, kind: Exclude<CopiedValue, null>) => {
+    try {
+      await navigator.clipboard.writeText(value);
+    } catch {
+      const textarea = document.createElement('textarea');
+      textarea.value = value;
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy');
+      textarea.remove();
+    }
+    setCopied(kind);
+    window.setTimeout(() => setCopied(null), 2200);
   };
 
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    window.location.href = channel === 'whatsapp' ? whatsappHref : mailtoHref;
+  };
+
+  const fieldClass = 'min-h-12 w-full rounded-md border border-[var(--page-border)] bg-[var(--page-bg)] px-3.5 text-sm text-[var(--page-ink)] outline-none transition-colors placeholder:text-[var(--page-subtle)] focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/20';
+  const labelClass = 'mb-2 block text-xs font-bold text-[var(--page-muted)]';
+
   return (
-    <section id="contact" className="relative bg-transparent py-12 sm:py-16">
-      
-      {/* Bottom transition overlays to land seamlessly into the black footer */}
-      <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black via-black/85 to-transparent pointer-events-none z-10" />
-      <div className="absolute inset-x-0 bottom-0 h-8 bg-black pointer-events-none z-10" />
-      
-      {/* Background radial lights */}
-      <div className="absolute bottom-0 right-0 w-80 h-80 rounded-full bg-brand-teal/[0.02] blur-3xl pointer-events-none" />
-
-      <div className="w-[90%] mx-auto relative z-10">
-        
-        {/* Section title */}
-        <div className="text-center max-w-3xl mx-auto mb-20">
-          <span className="font-mono text-xs text-brand-teal block mb-3 font-bold tracking-widest uppercase">
-            {isArabic ? "طلب تسجيل وتنسيق التعاون" : "JOIN THE TELEMETRY"}
-          </span>
-          <h2 className="font-display font-medium text-3xl sm:text-5xl text-white tracking-tight uppercase">
-            {isArabic ? (
-              <>
-                قدّم الآن <span className="text-brand-teal italic font-black">للمشاركة والتدريب</span>
-              </>
-            ) : (
-              <>
-                Let’s Collaborate & <span className="text-brand-teal font-black">Train Together</span>
-              </>
-            )}
-          </h2>
-          <div className="h-0.5 w-16 bg-brand-teal mx-auto mt-6" />
-        </div>
-
-        {/* Form and info split */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 sm:gap-16">
-          
-          {/* Left panel: Info + WhatsApp shortcut */}
-          <div className="lg:col-span-5 space-y-8 text-left">
+    <section id="contact" className={`section-block contact-dossier${showHeader ? '' : ' contact-dossier--headless'}`}>
+      <div className="site-container">
+        {showHeader && (
+          <div className="mission-gallery-header mb-12">
             <div>
-              <h3 className="font-display font-bold text-lg text-white uppercase tracking-wider mb-3">
-                {isArabic ? "معلومات التواصل والربط" : "MISSION COORDINATES"}
-              </h3>
-              <p className="font-sans text-xs text-neutral-400 leading-relaxed">
-                {/*
-                  Arabic copy review: the AR text invited universities to take part in
-                  "تحدي روفر بترا" (the "Petra Rover Challenge") — a fabricated programme, kin to
-                  the "Petra-1" rover and "Jordan Mars Rover Challenge" already deleted as
-                  invented. It survived because it existed ONLY in Arabic. The EN text separately
-                  offered to "book analog trials in Wadi Rum", implying a bookable service that
-                  is not established anywhere. Both replaced with a neutral, accurate invitation.
-                */}
-                {isArabic ? (
-                  'يسعدنا تلقّي استفسارات الجامعات والفرق البحثية والطلبة المهتمين ببعثات مِنا وبرامجها.'
-                ) : (
-                  'We welcome inquiries from universities, research teams, and students interested in MENA’s missions and programs.'
-                )}
+              <span className="section-index">{isArabic ? '09 · تواصل' : '09 · Contact'}</span>
+              <h2 className="section-title mt-5">{isArabic ? 'لنتحدّث' : 'Let’s talk'}</h2>
+            </div>
+            <p className="section-copy">
+              {isArabic
+                ? 'اختر الطريقة التي تناسبك. يمكنك مراسلة فريق مِنا مباشرة عبر واتساب أو البريد، أو فتح نموذج التطوّع الرسمي.'
+                : 'Choose the route that fits. Message the MENA team directly on WhatsApp or by email, or open the official volunteer application.'}
+            </p>
+          </div>
+        )}
+
+        <div className="grid gap-8 border-t border-[var(--page-border)] pt-10 lg:grid-cols-[minmax(280px,.72fr)_minmax(0,1.28fr)] lg:gap-12">
+          <aside className="space-y-3">
+            <h3 className="mb-5 font-display text-2xl font-semibold text-[var(--page-ink)]">
+              {isArabic ? 'قنوات التواصل الرسمية' : 'Official contact routes'}
+            </h3>
+
+            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="contact-route group">
+              <span className="contact-route__icon"><MessageCircle aria-hidden="true" /></span>
+              <span className="min-w-0 flex-1">
+                <strong>{isArabic ? 'واتساب' : 'WhatsApp'}</strong>
+                <small>{isArabic ? 'محادثة مباشرة مع فريق مِنا' : 'Chat directly with the MENA team'}</small>
+              </span>
+              <ExternalLink className="h-4 w-4 shrink-0 text-[var(--page-subtle)] transition-colors group-hover:text-brand-teal" aria-hidden="true" />
+            </a>
+
+            <div className="contact-route">
+              <span className="contact-route__icon"><Mail aria-hidden="true" /></span>
+              <span className="min-w-0 flex-1">
+                <strong>{isArabic ? 'البريد الإلكتروني' : 'Email'}</strong>
+                <a dir="ltr" href={`mailto:${CONTACT_EMAIL}`} className="block truncate text-start text-xs text-[var(--page-muted)] hover:text-brand-teal">{CONTACT_EMAIL}</a>
+              </span>
+              <button type="button" onClick={() => copyText(CONTACT_EMAIL, 'email')} className="grid h-11 w-11 shrink-0 place-items-center rounded-md border border-[var(--page-border)] text-[var(--page-muted)] hover:border-brand-teal hover:text-brand-teal" aria-label={isArabic ? 'نسخ البريد الإلكتروني' : 'Copy email address'}>
+                {copied === 'email' ? <Check className="h-4 w-4" aria-hidden="true" /> : <Clipboard className="h-4 w-4" aria-hidden="true" />}
+              </button>
+            </div>
+
+            <a href={VOLUNTEER_FORM_URL} target="_blank" rel="noopener noreferrer" className="contact-route group">
+              <span className="contact-route__icon"><ExternalLink aria-hidden="true" /></span>
+              <span className="min-w-0 flex-1">
+                <strong>{isArabic ? 'طلب التطوّع' : 'Volunteer application'}</strong>
+                <small>{isArabic ? 'افتح النموذج الرسمي في تبويب جديد' : 'Open the official form in a new tab'}</small>
+              </span>
+              <ExternalLink className="h-4 w-4 shrink-0 text-[var(--page-subtle)] transition-colors group-hover:text-brand-teal" aria-hidden="true" />
+            </a>
+
+            <p className="flex items-start gap-3 pt-3 text-xs leading-6 text-[var(--page-subtle)]">
+              <MapPin className="mt-1 h-4 w-4 shrink-0 text-brand-teal" aria-hidden="true" />
+              <span>{isArabic ? 'الموقع الميداني: وادي رم، الأردن' : 'Field site: Wadi Rum, Jordan'}</span>
+            </p>
+          </aside>
+
+          <div className="rounded-xl border border-[var(--page-border)] bg-[var(--page-surface)] p-5 sm:p-8">
+            <div className="mb-6">
+              <h3 className="font-display text-3xl font-semibold text-[var(--page-ink)]">{isArabic ? 'حضّر رسالتك' : 'Prepare your message'}</h3>
+              <p className="mt-2 text-sm leading-7 text-[var(--page-muted)]">
+                {isArabic ? 'سنفتح القناة التي تختارها مع رسالة جاهزة للمراجعة والإرسال.' : 'We’ll open your chosen channel with a ready-to-review message.'}
               </p>
             </div>
 
-            <div className="space-y-4 font-mono text-xs text-neutral-300">
-              <div className="flex items-center space-x-3.5 p-3.5 bg-neutral-900/30 rounded-lg border border-neutral-900/80">
-                <MapPin className="w-4 h-4 text-brand-teal flex-shrink-0" />
-                <span>
-                  {isArabic ? "ميدان الأبحاث: وادي رم، العقبة، الأردن" : "FIELD: Wadi Rum Reserve, Aqaba, Jordan"}
-                </span>
-              </div>
+            <form onSubmit={handleSubmit} className="space-y-5">
+              <fieldset>
+                <legend className={labelClass}>{isArabic ? 'طريقة الإرسال' : 'Send with'}</legend>
+                <div className="grid grid-cols-2 gap-2 rounded-md bg-[var(--page-bg)] p-1.5">
+                  {(['whatsapp', 'email'] as ContactChannel[]).map((option) => (
+                    <button key={option} type="button" aria-pressed={channel === option} onClick={() => setChannel(option)} className={`min-h-11 rounded px-3 text-xs font-bold transition-colors ${channel === option ? 'bg-brand-teal text-[#21150f]' : 'text-[var(--page-muted)] hover:text-[var(--page-ink)]'}`}>
+                      {option === 'whatsapp' ? (isArabic ? 'واتساب' : 'WhatsApp') : (isArabic ? 'البريد الإلكتروني' : 'Email')}
+                    </button>
+                  ))}
+                </div>
+              </fieldset>
 
-              <div className="flex items-center space-x-3.5 p-3.5 bg-neutral-900/30 rounded-lg border border-neutral-900/80">
-                <Mail className="w-4 h-4 text-brand-red flex-shrink-0" />
-                <a href={`mailto:${CONTACT_EMAIL}`} className="hover:text-brand-teal transition-colors">
-                  {CONTACT_EMAIL}
-                </a>
-              </div>
-            </div>
-          </div>
-
-          {/* Right panel: Form Registry */}
-          <div className="lg:col-span-7 bg-neutral-900/10 border border-neutral-900/80 p-6 sm:p-10 rounded-2xl relative">
-            <h3 className="font-display font-medium text-lg text-white uppercase tracking-wider mb-6">
-              {isArabic ? "نموذج الطلب والترشح" : "COLLABORATION & SQUAD INQUIRY"}
-            </h3>
-
-            <form onSubmit={handleSubmit} className="space-y-4 font-sans text-xs">
-              
-              {/* Toggle Role Select */}
-              <div className="grid grid-cols-2 gap-3 mb-6 bg-neutral-950 p-1.5 rounded-lg border border-neutral-900/80">
-                <button
-                  type="button"
-                  onClick={() => setFormData({ ...formData, roleType: 'volunteer' })}
-                  className={`py-2 px-4 rounded-lg font-mono text-[10px] tracking-widest uppercase cursor-pointer transition-all ${
-                    formData.roleType === 'volunteer' 
-                    ? 'bg-neutral-900 border border-neutral-800 text-white font-bold' 
-                    : 'text-neutral-500 hover:text-neutral-300'
-                  }`}
-                >
-                  {isArabic ? "كـ متطوع علمي" : "APPLY AS VOLUNTEER"}
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setFormData({ ...formData, roleType: 'partner' })}
-                  className={`py-2 px-4 rounded-lg font-mono text-[10px] tracking-widest uppercase cursor-pointer transition-all ${
-                    formData.roleType === 'partner' 
-                    ? 'bg-neutral-900 border border-neutral-800 text-white font-bold' 
-                    : 'text-neutral-500 hover:text-neutral-300'
-                  }`}
-                >
-                  {isArabic ? "كـ شريك وجامعة" : "PARTNERSHIP INQUIRY"}
-                </button>
-              </div>
-
-              {/* Name */}
-              <div className="space-y-1.5">
-                <label className="font-mono text-brand-red text-[10px] uppercase block tracking-wider font-semibold">
-                  {isArabic ? "الاسم الكامل للمرشح أو المؤسسة" : "FULL NAME / CORPORATE NAME"}
+              <div className="grid gap-5 sm:grid-cols-2">
+                <label>
+                  <span className={labelClass}>{isArabic ? 'الاسم أو اسم المؤسسة' : 'Name or organization'}</span>
+                  <input required name="name" type="text" autoComplete="name" value={formData.name} onChange={(event) => setFormData({ ...formData, name: event.target.value })} className={fieldClass} />
                 </label>
-                <input
-                  type="text"
-                  required
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  placeholder={isArabic ? "مثال: م. سارة العبادي" : "e.g. Eng. Sarah Abbadi / Hashemite University"}
-                  className="w-full bg-black text-neutral-200 border border-neutral-900/80 hover:border-neutral-850 rounded-lg px-3.5 py-3 font-mono text-[11px] focus:outline-none focus:border-brand-red transition-all"
-                />
+                <label>
+                  <span className={labelClass}>{isArabic ? 'بريدك الإلكتروني' : 'Your email'}</span>
+                  <input required name="email" type="email" autoComplete="email" spellCheck={false} dir="ltr" value={formData.email} onChange={(event) => setFormData({ ...formData, email: event.target.value })} className={`${fieldClass} text-start`} />
+                </label>
               </div>
 
-              {/* Email */}
-              <div className="space-y-1.5">
-                <label className="font-mono text-brand-teal text-[10px] uppercase block tracking-wider font-semibold">
-                  {isArabic ? "البريد الإلكتروني المعتمد" : "EMAIL ADDRESS"}
-                </label>
-                <input
-                  type="email"
-                  required
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  placeholder="name@aerospace.org"
-                  className="w-full bg-black text-neutral-200 border border-neutral-900/80 hover:border-neutral-850 rounded-lg px-3.5 py-3 font-mono text-[11px] focus:outline-none focus:border-brand-teal transition-all"
-                />
-              </div>
-
-              {/* Interest department */}
-              <div className="space-y-1.5">
-                <label className="font-mono text-neutral-500 text-[10px] uppercase block tracking-wider">
-                  {isArabic ? "القسم ذو الاهتمام المتطابق" : "PREFFERED FUNCTIONAL DIVISION"}
-                </label>
-                <select
-                  value={formData.interestDept}
-                  onChange={(e) => setFormData({ ...formData, interestDept: e.target.value })}
-                  className="w-full bg-black text-neutral-400 border border-neutral-900/80 rounded-lg px-3.5 py-3 font-mono text-[11px] focus:outline-none focus:border-neutral-800"
-                >
-                  <option value="engineering">{isArabic ? "تطوير البدلات واللوجستيات الهندسية" : "Spacesuit Fabrications"}</option>
-                  {/*
-                    Phase 8.2: was "AMMAN Mission Controls" / "أنظمة الاتصال في غرفة عمليات عمان",
-                    which implied MENA operates a mission-control/operations room in Amman — an
-                    unverified facility claim. Replaced with a neutral description of the KIND of
-                    inquiry, naming no facility.
-                  */}
-                  <option value="mission-operations">
-                    {isArabic ? 'استفسارات تقنية وعمليات البعثات' : 'Technical & Mission Operations Inquiry'}
-                  </option>
-                  <option value="astrobiology">{isArabic ? "أبحاث الأحيائية والتربة البركانية" : "Astrobiology R&D labs"}</option>
-                  <option value="donation">{isArabic ? "بوابة الرعاية والشراكة التمويلية" : "Donation & Sponsorship Channels"}</option>
+              <label>
+                <span className={labelClass}>{isArabic ? 'موضوع التواصل' : 'Contact topic'}</span>
+                <select name="interest" value={formData.interest} onChange={(event) => setFormData({ ...formData, interest: event.target.value })} className={fieldClass}>
+                  {TOPICS.map((topic) => <option key={topic.value} value={topic.value}>{isArabic ? topic.ar : topic.en}</option>)}
                 </select>
-              </div>
+              </label>
 
-              {/* Message Comments */}
-              <div className="space-y-1.5">
-                <label className="font-mono text-neutral-500 text-[10px] uppercase block tracking-wider">
-                  {/* Arabic copy review: was "…في عقيدتكم" — "in your creed/doctrine", a
-                      machine-translation artefact that made no sense in context. */}
-                  {isArabic ? 'تفاصيل التعاون المقترح' : 'PROPOSED ENGAGEMENT SCOPE'}
-                </label>
-                <textarea
-                  rows={4}
-                  value={formData.comments}
-                  onChange={(e) => setFormData({ ...formData, comments: e.target.value })}
-                  placeholder={isArabic ? "اخبرنا عن مهاراتك الهندسية أو رغبتك في توجيه عينات الأبحاث..." : "Briefly articulate details of your skills, student body count, or target material sponsorship scope."}
-                  className="w-full bg-black text-neutral-200 border border-neutral-900/80 hover:border-neutral-850 rounded-lg px-3.5 py-3 font-mono text-[11px] focus:outline-none focus:border-neutral-800"
-                />
-              </div>
+              <label>
+                <span className={labelClass}>{isArabic ? 'رسالتك' : 'Your message'}</span>
+                <textarea required name="message" rows={4} value={formData.message} onChange={(event) => setFormData({ ...formData, message: event.target.value })} className={`${fieldClass} resize-y py-3`} />
+              </label>
 
-              <div className="pt-4">
-                <button
-                  type="submit"
-                  className="w-full bg-brand-teal hover:bg-brand-teal-hover text-white py-3.5 rounded-lg font-display font-semibold text-xs font-bold tracking-widest uppercase flex items-center justify-center gap-1.5 cursor-pointer shadow-lg shadow-brand-teal/10 active:scale-[0.99] transition-all"
-                >
-                  <Send className="w-3.5 h-3.5" />
-                  {isArabic ? "طرح وإرسال تفاصيل التوثيق" : "SUBMIT TELEMETRY REGISTRY"}
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+                <button type="submit" className="mission-button sm:min-w-48">
+                  {channel === 'whatsapp' ? <MessageCircle className="h-4 w-4" aria-hidden="true" /> : <Send className="h-4 w-4" aria-hidden="true" />}
+                  {channel === 'whatsapp'
+                    ? (isArabic ? 'افتح واتساب' : 'Open WhatsApp')
+                    : (isArabic ? 'افتح البريد' : 'Open email')}
+                </button>
+                <button type="button" onClick={() => copyText(preparedMessage, 'message')} className="mission-button-secondary">
+                  {copied === 'message' ? <Check className="h-4 w-4" aria-hidden="true" /> : <Clipboard className="h-4 w-4" aria-hidden="true" />}
+                  {copied === 'message' ? (isArabic ? 'تم النسخ' : 'Copied') : (isArabic ? 'انسخ الرسالة' : 'Copy message')}
                 </button>
               </div>
-
+              <p role="status" aria-live="polite" className="min-h-5 text-xs text-[var(--page-subtle)]">
+                {copied === 'email' && (isArabic ? 'تم نسخ البريد الإلكتروني.' : 'Email address copied.')}
+                {copied === 'message' && (isArabic ? 'تم نسخ الرسالة؛ يمكنك لصقها في أي تطبيق.' : 'Message copied; paste it into any app.')}
+              </p>
             </form>
-
-            {/* Success Submission Dialog view */}
-            <AnimatePresence>
-              {isSubmitted && (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="absolute inset-0 bg-space-dark flex flex-col items-center justify-center text-center p-8 rounded-2xl relative z-10"
-                >
-                  <motion.div 
-                    initial={{ scale: 0.8 }}
-                    animate={{ scale: 1 }}
-                    className="p-3 bg-emerald-950 text-emerald-400 border border-emerald-500/20 rounded-full mb-5"
-                  >
-                    <CheckCircle2 className="w-8 h-8 animate-pulse" />
-                  </motion.div>
-                  
-                  {/*
-                    Phase 8: this panel used to announce a successful transmission that never
-                    happened, name a coordinator ("م. العبادي") who exists nowhere in any
-                    source material, and promise a response time. All three were removed. The
-                    copy now states only the verifiable fact: the visitor's mail client was
-                    opened, and the message is not sent until they send it.
-                  */}
-                  <h4 className="font-display font-black text-base sm:text-lg text-white uppercase tracking-widest mb-2">
-                    {isArabic ? 'تم فتح بريدك الإلكتروني' : 'YOUR EMAIL APP IS OPEN'}
-                  </h4>
-                  <p className="font-mono text-xs text-neutral-400 max-w-sm mb-6 leading-relaxed">
-                    {isArabic
-                      ? `فتحنا رسالة جاهزة في تطبيق البريد لديك. لن تصلنا رسالتك حتى ترسلها من هناك. إذا لم يفتح أي تطبيق، راسلنا مباشرة على ${CONTACT_EMAIL}`
-                      : `We've opened a pre-filled message in your email app. Your message isn't sent until you send it from there. If nothing opened, write to us directly at ${CONTACT_EMAIL}`}
-                  </p>
-
-                  <button
-                    onClick={() => setIsSubmitted(false)}
-                    className="px-6 py-2 bg-neutral-900 border border-neutral-800 rounded-lg font-mono text-[10px] text-brand-teal tracking-widest uppercase transition-colors cursor-pointer hover:bg-neutral-850"
-                  >
-                    {isArabic ? "تحرير وثيقة جديدة" : "NEW TRANSMISSION"}
-                  </button>
-                </motion.div>
-              )}
-            </AnimatePresence>
-
           </div>
-
         </div>
-
       </div>
     </section>
   );
